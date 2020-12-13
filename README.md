@@ -1,6 +1,6 @@
 **Things I'm doing**
 
-* [Advent of Code](github.com/ecumene/advent_of_code)
+* [Advent of Code](https://github.com/ecumene/advent_of_code)
 * [Undergrad @ MUN](https://www.mun.ca/)
 * [Dev @ Colab](https://www.colabsoftware.com/)
 
