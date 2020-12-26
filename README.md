@@ -1,12 +1,13 @@
 **Things I'm doing**
 
-* [Advent of Code](https://github.com/ecumene/advent_of_code)
+* [Rust C Compiler](https://github.com/ecumene/rust-c-compiler)
 * [Undergrad @ MUN](https://www.mun.ca/)
 * [Dev @ Colab](https://www.colabsoftware.com/)
 
 **Things I done did**
 
 * [Soth-CLI: Help me hit 500 stars 🌟](https://github.com/ecumene/rust-sloth)
+* [Advent of Code](https://github.com/ecumene/advent_of_code)
 * [Chrome Dino Game Clone](https://github.com/ecumene/rust-fast-ferris)
 * [MOL (Molecule) File Web Viewer](https://github.com/ecumene/colco-rs)
 * [RD-KIT as a service](https://github.com/ecumene/rdkit-aas)
