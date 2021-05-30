@@ -1,5 +1,6 @@
 use crate::parser::parse;
 use crate::structs::Post;
+
 use std::fs;
 use std::fs::DirEntry;
 

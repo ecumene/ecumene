@@ -13,6 +13,7 @@ pub struct Author<'a> {
 
 #[derive(Default, Deserialize, Serialize)]
 pub struct PostFrontMatter {
+    pub slug: String,
     pub title: String,
     pub authors: Vec<String>,
     pub created_date: String,
