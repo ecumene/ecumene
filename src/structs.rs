@@ -22,13 +22,8 @@ pub struct PostFrontMatter {
 #[derive(Default, Deserialize, Serialize)]
 pub struct Post {
     pub meta: PostFrontMatter,
+    pub content_markdown: String,
     pub content_html: String,
-}
-
-impl Post {
-    pub fn new(meta: PostFrontMatter, content_html: String) -> Post {
-        Post { meta, content_html }
-    }
 }
 
 #[derive(Default, Deserialize, Serialize)]
@@ -39,10 +34,10 @@ pub struct Site<'a> {
 }
 
 impl<'a> Site<'a> {
-    pub fn new() -> Site<'a> {
-        Site {
-            authors: authors::fetch(),
-            posts: posts::fetch(),
-        }
+    pub fn load_all() -> crate::error::Result<Site<'a>> {
+        Ok(Site {
+            authors: authors::fetch()?,
+            posts: posts::fetch()?,
+        })
     }
 }
