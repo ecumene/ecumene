@@ -1,19 +1,25 @@
 mod authors;
 mod builder;
+mod date;
 mod error;
 mod parser;
 mod posts;
 mod structs;
+mod templating;
 mod writer;
 
 use crate::structs::Site;
+use builder::{Build, BuiltSite};
+use writer::Write;
 
 fn main() -> crate::error::Result<()> {
     let site = Site::load_all()?;
 
-    let j = serde_json::to_string(&site)?;
+    let mut built_site = BuiltSite::default();
 
-    writer::write(site)?;
+    site.build(&mut built_site)?;
+
+    built_site.write()?;
 
     Ok(())
 }

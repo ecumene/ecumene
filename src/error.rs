@@ -1,12 +1,19 @@
 #[derive(Debug)]
 pub enum Error {
     Reqwest(reqwest::Error),
+    Tera(tera::Error),
     Io(std::io::Error),
     Json(serde_json::Error),
     Toml(toml::de::Error),
 }
 
 pub type Result<T> = std::result::Result<T, Error>;
+
+impl From<tera::Error> for Error {
+    fn from(error: tera::Error) -> Error {
+        Error::Tera(error)
+    }
+}
 
 impl From<reqwest::Error> for Error {
     fn from(error: reqwest::Error) -> Error {

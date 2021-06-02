@@ -1,0 +1,16 @@
+{% extends "base.html" %}
+{% block title %}fogo.sh - {{ title }}{% endblock title %}
+{% block head %}
+    <meta name="author" content="{% for author in authors %}{{ author }},{% endfor %}">
+{% endblock head %}
+{% block content %}
+    {{ super() }}
+    <div class="details">
+        <div class="authors">Hello world: {% for author in authors %}
+            <a href="https://github.com/{{author}}">github.com/{{author}}</a>{% endfor %}
+        </div>
+        <div class="createdOn">Created on: {{ created_date }}</div>
+        <div class="lastModifiedDate">Last Modified On: {{ last_modified_date }}</div>
+    </div>
+    {{ html | safe }}
+{% endblock content %}

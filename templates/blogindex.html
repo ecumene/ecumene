@@ -1,0 +1,12 @@
+{% extends "base.html" %}
+{% block title %}fogo.sh blog{% endblock title %}
+{% block content %}
+    {{ super() }}
+    <div class="posts">
+    {% for post in posts %}
+        <div class="post">
+            {{post.meta.title}}
+        </div>
+    {% endfor %}
+    </div>
+{% endblock content %}

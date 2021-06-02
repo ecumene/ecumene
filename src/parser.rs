@@ -1,6 +1,4 @@
 use comrak::{markdown_to_html, ComrakOptions};
-use std::fs;
-use std::path::Path;
 use toml;
 
 use crate::structs::{Post, PostFrontMatter};

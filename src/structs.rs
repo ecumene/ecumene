@@ -1,5 +1,8 @@
+use chrono::{DateTime, Utc};
+
 use serde::{Deserialize, Serialize};
 
+use crate::date::fogo_date;
 use crate::{authors, posts};
 
 #[derive(Default, Deserialize, Serialize)]
@@ -11,16 +14,20 @@ pub struct Author<'a> {
     pub about_markdown: &'a str,
 }
 
-#[derive(Default, Deserialize, Serialize)]
+pub type Authors = Vec<String>;
+
+#[derive(Deserialize, Serialize)]
 pub struct PostFrontMatter {
     pub slug: String,
     pub title: String,
-    pub authors: Vec<String>,
-    pub created_date: String,
-    pub last_modified_date: String,
+    pub authors: Authors,
+    #[serde(with = "fogo_date")]
+    pub created_date: DateTime<Utc>,
+    #[serde(with = "fogo_date")]
+    pub last_modified_date: DateTime<Utc>,
 }
 
-#[derive(Default, Deserialize, Serialize)]
+#[derive(Deserialize, Serialize)]
 pub struct Post {
     pub meta: PostFrontMatter,
     pub content_markdown: String,
