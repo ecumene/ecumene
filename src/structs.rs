@@ -2,8 +2,9 @@ use chrono::{DateTime, Utc};
 
 use serde::{Deserialize, Serialize};
 
+use crate::builder::Asset;
 use crate::date::fogo_date;
-use crate::{authors, posts};
+use crate::{authors, inventory};
 
 #[derive(Default, Deserialize, Serialize)]
 pub struct Author<'a> {
@@ -39,13 +40,15 @@ pub struct Site<'a> {
     #[serde(borrow)]
     pub authors: Vec<Author<'a>>,
     pub posts: Vec<Post>,
+    pub assets: Vec<Asset>,
 }
 
 impl<'a> Site<'a> {
     pub fn load_all() -> crate::error::Result<Site<'a>> {
         Ok(Site {
             authors: authors::fetch()?,
-            posts: posts::fetch()?,
+            posts: inventory::fetch_posts()?,
+            assets: inventory::fetch_assets()?,
         })
     }
 }

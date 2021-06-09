@@ -3,11 +3,20 @@
     <head>
         {% block head %}
         <meta charset="utf-8">
+        <link rel="stylesheet" href="/index.css"/>
         <title>{% block title %}{% endblock title %}</title>
         {% endblock head %}
     </head>
     <body>
+        {% block header %}
+        <header>
+            <div class="title">fogo.sh</div>
+            <div class="tagline">no engineer is an island</div>
+        </header>
+        {% endblock header %}
         {% block content %}
+        <main>
+        </main>
         {% endblock content %}
     </body>
 </html>

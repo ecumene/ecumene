@@ -2,25 +2,25 @@ use crate::date::fogo_date::fmt_date;
 use crate::error::Result;
 use crate::structs::{Post, PostFrontMatter, Site};
 use crate::templating::TEMPLATES;
+use serde::{Deserialize, Serialize};
 
 use std::path::PathBuf;
 use tera::Context;
 
-#[derive(Debug)]
+#[derive(Serialize, Deserialize, Debug)]
 pub enum Asset {
-    CSS(MoveFile),
     HTML(BuildArtifact),
-    JS(MoveFile),
+    Other(CopyFile),
 }
 
-#[derive(Debug)]
+#[derive(Serialize, Deserialize, Debug)]
 pub struct BuildArtifact {
     pub path: PathBuf,
     pub content: String,
 }
 
-#[derive(Debug)]
-pub struct MoveFile {
+#[derive(Serialize, Deserialize, Debug)]
+pub struct CopyFile {
     pub path: PathBuf,
 }
 
@@ -34,7 +34,7 @@ pub trait Build {
 }
 
 fn format_slug(slug: &str) -> String {
-    format!("public/{}.html", slug)
+    format!("public/blog/{}.html", slug)
 }
 
 fn format_html(meta: &PostFrontMatter, html: String) -> Result<String> {
@@ -69,6 +69,7 @@ pub fn index_blog<'a>(site: &Site<'a>) -> Result<Asset> {
 impl<'a> Build for Site<'a> {
     fn build(self, site: &mut BuiltSite) -> Result<()> {
         site.assets.push(index_blog(&self)?);
+        site.assets.extend(self.assets);
         self.posts
             .into_iter()
             .map(|post| post.build(site))

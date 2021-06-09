@@ -1,8 +1,8 @@
 pub mod fogo_date {
-    use chrono::{DateTime, TimeZone, Utc};
+    use chrono::{DateTime, NaiveDate, Utc};
     use serde::{self, Deserialize, Deserializer, Serializer};
 
-    pub const FORMAT: &'static str = "%Y-%m-%d %H:%M:%S";
+    pub const FORMAT: &'static str = "%Y-%m-%d";
 
     pub fn fmt_date(date: &DateTime<Utc>) -> String {
         format!("{}", date.format(FORMAT))
@@ -21,7 +21,8 @@ pub mod fogo_date {
         D: Deserializer<'de>,
     {
         let s = String::deserialize(deserializer)?;
-        Utc.datetime_from_str(&s, FORMAT)
+        NaiveDate::parse_from_str(&s, "%Y-%m-%d")
+            .map(|val| DateTime::<Utc>::from_utc(val.and_hms(0, 0, 0), Utc))
             .map_err(serde::de::Error::custom)
     }
 }
