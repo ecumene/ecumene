@@ -7,12 +7,11 @@ use crate::date::fogo_date;
 use crate::{authors, inventory};
 
 #[derive(Default, Deserialize, Serialize)]
-pub struct Author<'a> {
-    pub github_username: &'a str,
-    pub name: &'a str,
-    pub website: &'a str,
-    pub image_url: &'a str,
-    pub about_markdown: &'a str,
+pub struct Author {
+    pub login: String,
+    pub name: String,
+    pub blog: String,
+    pub avatar_url: String,
 }
 
 pub type Authors = Vec<String>;
@@ -36,15 +35,14 @@ pub struct Post {
 }
 
 #[derive(Default, Deserialize, Serialize)]
-pub struct Site<'a> {
-    #[serde(borrow)]
-    pub authors: Vec<Author<'a>>,
+pub struct Site {
+    pub authors: Vec<Author>,
     pub posts: Vec<Post>,
     pub assets: Vec<Asset>,
 }
 
-impl<'a> Site<'a> {
-    pub fn load_all() -> crate::error::Result<Site<'a>> {
+impl Site {
+    pub fn load_all() -> crate::error::Result<Site> {
         Ok(Site {
             authors: authors::fetch()?,
             posts: inventory::fetch_posts()?,

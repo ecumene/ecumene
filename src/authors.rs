@@ -1,6 +1,8 @@
+use crate::error::Result;
 use crate::structs::Author;
+use reqwest::blocking::Response;
 
-fn fetch_author(username: &str) -> reqwest::Result<Author> {
+fn fetch_author(username: &str) -> Result<Response> {
   let client = reqwest::blocking::Client::builder()
     .user_agent("Site/1.0.0 (https://github.com/fogo-sh/fogo.sh)")
     .build()?;
@@ -8,15 +10,12 @@ fn fetch_author(username: &str) -> reqwest::Result<Author> {
     .get(format!("https://api.github.com/users/{}", username))
     .send()?;
 
-  let text = response.text()?;
-
-  println!("{}", text);
-
-  Ok(Author::default())
+  Ok(response)
 }
 
-pub fn fetch<'a>() -> reqwest::Result<Vec<Author<'a>>> {
-  let author = fetch_author("jackharrhy")?;
+pub fn fetch() -> Result<Vec<Author>> {
+  let author_response = fetch_author("jackharrhy")?.text()?;
+  let author = serde_json::from_str(&author_response)?;
 
   Ok(vec![author])
 }

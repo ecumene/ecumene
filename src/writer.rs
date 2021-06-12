@@ -29,6 +29,7 @@ impl Write for Asset {
     fn write(self) -> io::Result<()> {
         match self {
             Asset::HTML(artifact) => fs::write(artifact.path, artifact.content),
+            Asset::XML(artifact) => fs::write(artifact.path, artifact.content),
             Asset::Other(copy_data) => {
                 fs::copy(&copy_data.path, to_local_path(&copy_data.path)?).map(|_| {})
             }

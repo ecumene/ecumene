@@ -10,6 +10,7 @@ use tera::Context;
 #[derive(Serialize, Deserialize, Debug)]
 pub enum Asset {
     HTML(BuildArtifact),
+    XML(BuildArtifact),
     Other(CopyFile),
 }
 
@@ -57,7 +58,7 @@ impl Build for Post {
     }
 }
 
-pub fn index_blog<'a>(site: &Site<'a>) -> Result<Asset> {
+pub fn index_blog(site: &Site) -> Result<Asset> {
     let mut context = Context::new();
     context.insert("posts", &site.posts);
     Ok(Asset::HTML(BuildArtifact {
@@ -66,9 +67,19 @@ pub fn index_blog<'a>(site: &Site<'a>) -> Result<Asset> {
     }))
 }
 
-impl<'a> Build for Site<'a> {
+pub fn sitemap(site: &Site) -> Result<Asset> {
+    let mut context = Context::new();
+    context.insert("posts", &site.posts);
+    Ok(Asset::XML(BuildArtifact {
+        path: PathBuf::from("public/sitemap.xml"),
+        content: TEMPLATES.render("sitemap.xml", &context)?,
+    }))
+}
+
+impl Build for Site {
     fn build(self, site: &mut BuiltSite) -> Result<()> {
         site.assets.push(index_blog(&self)?);
+        site.assets.push(sitemap(&self)?);
         site.assets.extend(self.assets);
         self.posts
             .into_iter()
