@@ -45,7 +45,7 @@ fn format_html(meta: &PostFrontMatter, html: String) -> Result<String> {
     context.insert("authors", &meta.authors);
     context.insert("created_date", &fmt_date(&meta.created_date));
     context.insert("last_modified_date", &fmt_date(&meta.last_modified_date));
-    Ok(TEMPLATES.render("blogpost.html", &context)?)
+    Ok(TEMPLATES.render("blog/post.html", &context)?)
 }
 
 impl Build for Post {
@@ -63,7 +63,16 @@ pub fn index_blog(site: &Site) -> Result<Asset> {
     context.insert("posts", &site.posts);
     Ok(Asset::HTML(BuildArtifact {
         path: PathBuf::from("public/blog/index.html"),
-        content: TEMPLATES.render("blogindex.html", &context)?,
+        content: TEMPLATES.render("blog/index.html", &context)?,
+    }))
+}
+
+pub fn index(site: &Site) -> Result<Asset> {
+    let mut context = Context::new();
+    context.insert("authors", &site.authors);
+    Ok(Asset::HTML(BuildArtifact {
+        path: PathBuf::from("public/index.html"),
+        content: TEMPLATES.render("index.html", &context)?,
     }))
 }
 
@@ -79,6 +88,7 @@ pub fn sitemap(site: &Site) -> Result<Asset> {
 impl Build for Site {
     fn build(self, site: &mut BuiltSite) -> Result<()> {
         site.assets.push(index_blog(&self)?);
+        site.assets.push(index(&self)?);
         site.assets.push(sitemap(&self)?);
         site.assets.extend(self.assets);
         self.posts

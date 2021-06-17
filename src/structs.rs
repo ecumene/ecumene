@@ -4,14 +4,15 @@ use serde::{Deserialize, Serialize};
 
 use crate::builder::Asset;
 use crate::date::fogo_date;
-use crate::{authors, inventory};
+use crate::inventory;
 
-#[derive(Default, Deserialize, Serialize)]
-pub struct Author {
-    pub login: String,
+#[derive(Deserialize, Serialize)]
+pub struct AuthorFrontMatter {
+    pub tagline: String,
+    pub username: String,
     pub name: String,
-    pub blog: String,
-    pub avatar_url: String,
+    #[serde(with = "fogo_date")]
+    pub created_date: DateTime<Utc>,
 }
 
 pub type Authors = Vec<String>;
@@ -28,11 +29,14 @@ pub struct PostFrontMatter {
 }
 
 #[derive(Deserialize, Serialize)]
-pub struct Post {
-    pub meta: PostFrontMatter,
+pub struct Markdown<T> {
+    pub meta: T,
     pub content_markdown: String,
     pub content_html: String,
 }
+
+pub type Post = Markdown<PostFrontMatter>;
+pub type Author = Markdown<AuthorFrontMatter>;
 
 #[derive(Default, Deserialize, Serialize)]
 pub struct Site {
@@ -44,7 +48,7 @@ pub struct Site {
 impl Site {
     pub fn load_all() -> crate::error::Result<Site> {
         Ok(Site {
-            authors: authors::fetch()?,
+            authors: inventory::fetch_authors()?,
             posts: inventory::fetch_posts()?,
             assets: inventory::fetch_assets()?,
         })
