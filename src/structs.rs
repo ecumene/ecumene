@@ -7,12 +7,20 @@ use crate::date::fogo_date;
 use crate::inventory;
 
 #[derive(Deserialize, Serialize)]
+pub struct GithubAuthor {
+    pub avatar_url: String,
+    pub followers: String,
+    pub login: String,
+    pub name: String,
+    #[serde(with = "fogo_date")]
+    pub created_at: DateTime<Utc>,
+}
+
+#[derive(Deserialize, Serialize)]
 pub struct AuthorFrontMatter {
     pub tagline: String,
     pub username: String,
-    pub name: String,
-    #[serde(with = "fogo_date")]
-    pub created_date: DateTime<Utc>,
+    pub github: Option<GithubAuthor>,
 }
 
 pub type Authors = Vec<String>;

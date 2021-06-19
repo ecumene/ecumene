@@ -1,0 +1,25 @@
+{% extends "base.html" %}
+{% block title %}fogo.sh - {{ username }}{% endblock title %}
+{% block head %}
+    {{ super() }}
+    <meta name="author" content="{{username}}">
+{% endblock head %}
+{% block content %}
+    {{ super() }}
+    <h1>{{name}}</h1>
+    <div class="details">
+        <div class="col">
+            Github:<br/>
+            Created On:<br/>
+        </div>
+        <div class="col">
+            <div class="authors">
+                <a href="https://github.com/{{username}}">github.com/{{username}}</a>
+            </div>
+            <div class="createdOn">{{ created_date }}</div>
+        </div>
+    </div>
+    <div class="content">
+    {{ html | safe }}
+    </div>
+{% endblock content %}

@@ -47,6 +47,22 @@ impl Write for BuiltSite {
             }
             Ok(_) => {}
         }
+        match fs::create_dir("./public/blog") {
+            Err(error) => {
+                if error.kind() != io::ErrorKind::AlreadyExists {
+                    return Err(error);
+                }
+            }
+            Ok(_) => {}
+        }
+        match fs::create_dir("./public/author") {
+            Err(error) => {
+                if error.kind() != io::ErrorKind::AlreadyExists {
+                    return Err(error);
+                }
+            }
+            Ok(_) => {}
+        }
         for asset in self.assets {
             asset.write()?;
         }

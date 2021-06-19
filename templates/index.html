@@ -13,7 +13,9 @@
     </div>
     {% for author in authors %}
     <div class="author">
-        <a href="name">{{ author.meta.name }}</a>
+        <a href="/author/{{ author.meta.username }}.html">{% if author.meta.github is not empty %}
+            {{ author.meta.github.name }}
+        {% endif %}</a>
     </div>
     {% endfor %}
 {% endblock content %}
