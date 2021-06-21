@@ -66,6 +66,8 @@ impl FillTemplate for Author {
         let mut context = Context::new();
         context.insert("username", &meta.username);
         context.insert("name", &github.name);
+        context.insert("tagline", &meta.tagline);
+        context.insert("avatar_url", &github.avatar_url);
         context.insert("html", &content_html);
         context.insert("created_date", &fmt_date(&github.created_at));
         Ok(TEMPLATES.render("team/author.html", &context)?)

@@ -6,7 +6,13 @@
 {% endblock head %}
 {% block content %}
     {{ super() }}
-    <h1>{{name}}</h1>
+    <div class="profile">
+        <img alt="{{ name }}'s avatar" src="{{ avatar_url }}" class="pic"></img>
+        <div class="nametag">
+            <h1>{{name}}</h1>
+            <h2>{{tagline}}</h2>
+        </div>
+    </div>
     <div class="details">
         <div class="col">
             Github:<br/>

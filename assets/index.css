@@ -116,3 +116,22 @@ input[type="checkbox"]:checked:after {
   gap: 1rem;
   justify-content: center;
 }
+
+.profile {
+  display: flex;
+}
+
+.profile > .nametag {
+  display: flex;
+  justify-content: center;
+  flex-direction: column;
+}
+
+.nametag > h1,
+.nametag > h2 {
+  margin: 0;
+}
+
+.profile > .pic {
+  width: 8rem;
+}

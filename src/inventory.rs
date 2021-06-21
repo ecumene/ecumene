@@ -19,7 +19,6 @@ fn fetch_user(author: &mut Author) -> Result<GithubAuthor> {
         .send()?;
 
     let response_text = &response.text()?;
-    println!("{}", response_text);
     Ok(serde_json::from_str(response_text)?)
 }
 

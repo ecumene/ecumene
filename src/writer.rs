@@ -55,7 +55,7 @@ impl Write for BuiltSite {
             }
             Ok(_) => {}
         }
-        match fs::create_dir("./public/author") {
+        match fs::create_dir("./public/team") {
             Err(error) => {
                 if error.kind() != io::ErrorKind::AlreadyExists {
                     return Err(error);
