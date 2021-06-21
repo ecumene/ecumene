@@ -3,16 +3,16 @@ use chrono::{DateTime, Utc};
 use serde::{Deserialize, Serialize};
 
 use crate::builder::Asset;
-use crate::date::fogo_date;
+use crate::date::{fogo_date, proper_date};
 use crate::inventory;
 
 #[derive(Deserialize, Serialize)]
 pub struct GithubAuthor {
     pub avatar_url: String,
-    pub followers: String,
+    pub followers: u8,
     pub login: String,
     pub name: String,
-    #[serde(with = "fogo_date")]
+    #[serde(with = "proper_date")]
     pub created_at: DateTime<Utc>,
 }
 

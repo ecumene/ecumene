@@ -1,4 +1,3 @@
-mod authors;
 mod builder;
 mod date;
 mod error;

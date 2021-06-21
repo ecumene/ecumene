@@ -1,10 +1,27 @@
 use crate::parser::parse;
-use crate::structs::{Author, Post};
+use crate::structs::{Author, GithubAuthor, Post};
 
 use crate::builder::{Asset, CopyFile};
+use crate::error::Result;
 use std::fs;
 use std::fs::DirEntry;
 use std::io;
+
+fn fetch_user(author: &mut Author) -> Result<GithubAuthor> {
+    let client = reqwest::blocking::Client::builder()
+        .user_agent("Site/1.0.0 (https://github.com/fogo-sh/fogo.sh)")
+        .build()?;
+    let response = client
+        .get(format!(
+            "https://api.github.com/users/{}",
+            author.meta.username
+        ))
+        .send()?;
+
+    let response_text = &response.text()?;
+    println!("{}", response_text);
+    Ok(serde_json::from_str(response_text)?)
+}
 
 fn load_and_parse_post(dir_entry: std::io::Result<DirEntry>) -> crate::error::Result<Post> {
     let entry = dir_entry?;
@@ -36,9 +53,13 @@ pub fn fetch_posts() -> crate::error::Result<Vec<Post>> {
 }
 
 pub fn fetch_authors() -> crate::error::Result<Vec<Author>> {
-    fs::read_dir("./authors")?
+    let mut authors = fs::read_dir("./authors")?
         .map(load_and_parse_author)
-        .collect()
+        .collect::<Result<Vec<Author>>>()?;
+    for mut author in &mut authors {
+        author.meta.github = Some(fetch_user(&mut author)?);
+    }
+    Ok(authors)
 }
 
 pub fn fetch_assets() -> crate::error::Result<Vec<Asset>> {
