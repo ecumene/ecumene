@@ -85,7 +85,7 @@ impl Build for Post {
 impl Build for Author {
     fn build(self, site: &mut BuiltSite) -> Result<()> {
         site.assets.push(Asset::HTML(BuildArtifact {
-            path: PathBuf::from(format!("public/author/{}.html", &self.meta.username)),
+            path: PathBuf::from(format!("public/team/{}.html", &self.meta.username)),
             content: self.fill()?,
         }));
         Ok(())
