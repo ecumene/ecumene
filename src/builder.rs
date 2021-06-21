@@ -101,12 +101,12 @@ pub fn index_blog(site: &Site) -> Result<Asset> {
     }))
 }
 
-pub fn index(site: &Site) -> Result<Asset> {
+pub fn index_authors(site: &Site) -> Result<Asset> {
     let mut context = Context::new();
     context.insert("authors", &site.authors);
     Ok(Asset::HTML(BuildArtifact {
-        path: PathBuf::from("public/index.html"),
-        content: TEMPLATES.render("index.html", &context)?,
+        path: PathBuf::from("public/team/index.html"),
+        content: TEMPLATES.render("team/index.html", &context)?,
     }))
 }
 
@@ -122,7 +122,7 @@ pub fn sitemap(site: &Site) -> Result<Asset> {
 impl Build for Site {
     fn build(self, site: &mut BuiltSite) -> Result<()> {
         site.assets.push(index_blog(&self)?);
-        site.assets.push(index(&self)?);
+        site.assets.push(index_authors(&self)?);
         site.assets.push(sitemap(&self)?);
         site.assets.extend(self.assets);
         self.posts
