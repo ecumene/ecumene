@@ -1,35 +1,21 @@
 ---
-slug = "poggers"
-title = "Test"
-authors = ["ecumene", "jackharrhy"]
+slug = "hello-world"
+title = "Hello world."
+authors = ["ecumene"]
 description = "Hello world"
 created_date = "2021-05-29"
 last_modified_date = "2021-05-29"
 ---
 
-# Poggers
+# Where am I?
 
-## Poggers
+You're on a statically generated site written in Rust.
 
----
+# How?
 
-### Poggers
+- [x] comrak
+- [x] toml frontmatter
+- [x] github api
+- [ ] Care
 
-#### Poggers
-
-`poggers`
-
-```
-when the yeet is Poggers
-```
-
-_pogggers_
-**poggers**
-
-- poggers
-- poggers
-
-- [ ] foo
-- [x] bar
-
-[poggers](poggers)
+[cool!](https://www.youtube.com/watch?v=GxBSyx85Kp8)
