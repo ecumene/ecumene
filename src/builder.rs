@@ -94,21 +94,13 @@ impl Build for Author {
     }
 }
 
-pub fn index_blog(site: &Site) -> Result<Asset> {
+pub fn index(site: &Site, folder: &str) -> Result<Asset> {
     let mut context = Context::new();
     context.insert("posts", &site.posts);
-    Ok(Asset::HTML(BuildArtifact {
-        path: PathBuf::from("public/blog/index.html"),
-        content: TEMPLATES.render("blog/index.html", &context)?,
-    }))
-}
-
-pub fn index_authors(site: &Site) -> Result<Asset> {
-    let mut context = Context::new();
     context.insert("authors", &site.authors);
     Ok(Asset::HTML(BuildArtifact {
-        path: PathBuf::from("public/team/index.html"),
-        content: TEMPLATES.render("team/index.html", &context)?,
+        path: PathBuf::from(format!("public/{}index.html", folder)),
+        content: TEMPLATES.render(&format!("{}index.html", folder), &context)?,
     }))
 }
 
@@ -132,8 +124,9 @@ pub fn feed(site: &Site) -> Result<Asset> {
 
 impl Build for Site {
     fn build(self, site: &mut BuiltSite) -> Result<()> {
-        site.assets.push(index_blog(&self)?);
-        site.assets.push(index_authors(&self)?);
+        site.assets.push(index(&self, "")?);
+        site.assets.push(index(&self, "blog/")?);
+        site.assets.push(index(&self, "team/")?);
         site.assets.push(feed(&self)?);
         site.assets.push(sitemap(&self)?);
         site.assets.extend(self.assets);

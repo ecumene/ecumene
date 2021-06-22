@@ -27,7 +27,7 @@ fn load_and_parse_post(dir_entry: std::io::Result<DirEntry>) -> Result<Post> {
     if entry.file_type()?.is_dir() {
         return Err(io::Error::from(io::ErrorKind::InvalidInput).into());
     }
-    parse(&fs::read_to_string(&entry.path())?).map_err(|err| Error::Toml(err))
+    parse(&fs::read_to_string(&entry.path())?).map_err(Error::Toml)
 }
 
 fn load_and_parse_author(dir_entry: std::io::Result<DirEntry>) -> Result<Author> {
@@ -35,7 +35,7 @@ fn load_and_parse_author(dir_entry: std::io::Result<DirEntry>) -> Result<Author>
     if entry.file_type()?.is_dir() {
         return Err(io::Error::from(io::ErrorKind::InvalidInput).into());
     }
-    parse(&fs::read_to_string(&entry.path())?).map_err(|err| Error::Toml(err))
+    parse(&fs::read_to_string(&entry.path())?).map_err(Error::Toml)
 }
 
 fn collect_others(dir_entry: std::io::Result<DirEntry>) -> Result<Asset> {
