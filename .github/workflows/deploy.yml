@@ -1,0 +1,26 @@
+on:
+  push:
+    branches:
+      - cargo-init
+
+name: CI
+
+jobs:
+  deploy:
+    name: Deploy
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v2
+      - uses: actions-rs/toolchain@v1
+        with:
+          toolchain: stable
+      - name: Run
+        uses: actions-rs/cargo@v1
+        with:
+          command: run
+          args: --release
+      - name: Deploy
+        uses: JamesIves/github-pages-deploy-action@4.1.4
+        with:
+          branch: gh-pages
+          folder: build
