@@ -52,6 +52,11 @@ main {
 
 footer {
   font-style: italic;
+  opacity: 0.5;
+}
+
+footer:hover {
+  opacity: 1;
 }
 
 input[type="checkbox"] {
@@ -103,7 +108,9 @@ input[type="checkbox"]:checked:after {
 }
 
 .logo {
-  padding: 2rem 8rem;
+  display: flex;
+  justify-content: center;
+  padding: 2rem;
 }
 
 .logo img {
