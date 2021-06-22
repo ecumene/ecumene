@@ -1,0 +1,28 @@
+on:
+  push:
+    branches:
+      - master
+
+name: Deploy Site.
+
+jobs:
+  deploy:
+    name: Compile/Deploy
+    runs-on: ubuntu-latest
+    steps:
+      - name: 🔍
+        uses: actions/checkout@v2
+      - name: 🛠️
+        uses: actions-rs/toolchain@v1
+        with:
+          toolchain: stable
+      - name: 🏃
+        uses: actions-rs/cargo@v1
+        with:
+          command: run
+          args: --release
+      - name: 📚
+        uses: JamesIves/github-pages-deploy-action@4.1.4
+        with:
+          branch: gh-pages
+          folder: public

@@ -1,0 +1,31 @@
+<!DOCTYPE html>
+<html lang="en-US">
+    <head>
+        {% block head %}
+        <meta charset="utf-8">
+        <link rel="stylesheet" href="/index.css"/>
+        <title>{% block title %}{% endblock title %}</title>
+        {% endblock head %}
+    </head>
+    <body>
+        {% block header %}
+        <header>
+            <div class="title">fogo.sh</div>
+            <div class="tagline">no engineer is an island</div>
+            <a href="/">Go home</a>
+        </header>
+        {% endblock header %}
+        <main>
+        {% block content %}
+        {% endblock content %}
+        </main>
+        {% block footer %}
+        <hr>
+        <footer>
+            Da-da-da-dat's all folks.
+            <b>Copyright 2021 Fogo.sh.</b> Any and all opinions listed here are our own and not representative of our employers; future, past and present.
+            Written in Rust 🦀 with 💖. <a href="https://github.com/fogo-sh/fogo.sh"> Clone the source.</a>
+        </footer>
+        {% endblock footer %}
+    </body>
+</html>

@@ -1,0 +1,23 @@
+{% extends "base.html" %}
+{% block title %}fogo.sh{% endblock title %}
+{% block header %}
+{% endblock header %}
+{% block content %}
+    {{ super() }}
+    <div class="logo">
+        <img alt="Fogo.sh Logo" src="logo.gif"/>
+    </div>
+    <div class="links">
+        <a href="https://github.com/fogo-sh">github</a>
+        <a href="/blog/">blogposts</a>
+    </div>
+    {% for author in authors %}
+    <div class="author">
+        <a href="/author/{{ author.meta.username }}.html">
+            {{ author.meta.github.name }}
+        </a>
+    </div>
+    {% endfor %}
+{% endblock content %}
+{% block footer %}
+{% endblock footer %}
