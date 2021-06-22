@@ -108,7 +108,7 @@ input[type="checkbox"]:checked:after {
 
 .logo img {
   width: 100%;
-  image-rendering: pixelated;
+  image-rendering: crisp-edges;
 }
 
 .links {
