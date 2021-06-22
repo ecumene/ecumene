@@ -1,25 +1,27 @@
 on:
   push:
     branches:
-      - cargo-init
+      - master
 
-name: CI
+name: Deploy Site.
 
 jobs:
   deploy:
-    name: Deploy
+    name: Compile/Deploy
     runs-on: ubuntu-latest
     steps:
-      - uses: actions/checkout@v2
-      - uses: actions-rs/toolchain@v1
+      - name: 🔍
+        uses: actions/checkout@v2
+      - name: 🛠️
+        uses: actions-rs/toolchain@v1
         with:
           toolchain: stable
-      - name: Run
+      - name: 🏃
         uses: actions-rs/cargo@v1
         with:
           command: run
           args: --release
-      - name: Deploy
+      - name: 📚
         uses: JamesIves/github-pages-deploy-action@4.1.4
         with:
           branch: gh-pages
