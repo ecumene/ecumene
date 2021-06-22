@@ -4,6 +4,7 @@ use serde::{Deserialize, Serialize};
 
 use crate::builder::Asset;
 use crate::date::fogo_date;
+use crate::error::Result;
 use crate::inventory;
 
 #[derive(Deserialize, Serialize)]
@@ -28,6 +29,7 @@ pub type Authors = Vec<String>;
 pub struct PostFrontMatter {
     pub slug: String,
     pub title: String,
+    pub description: String,
     pub authors: Authors,
     #[serde(with = "fogo_date")]
     pub created_date: DateTime<Utc>,
@@ -53,7 +55,7 @@ pub struct Site {
 }
 
 impl Site {
-    pub fn load_all() -> crate::error::Result<Site> {
+    pub fn load_all() -> Result<Site> {
         Ok(Site {
             authors: inventory::fetch_authors()?,
             posts: inventory::fetch_posts()?,

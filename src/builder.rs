@@ -121,10 +121,20 @@ pub fn sitemap(site: &Site) -> Result<Asset> {
     }))
 }
 
+pub fn feed(site: &Site) -> Result<Asset> {
+    let mut context = Context::new();
+    context.insert("posts", &site.posts);
+    Ok(Asset::XML(BuildArtifact {
+        path: PathBuf::from("public/feed.xml"),
+        content: TEMPLATES.render("rss.xml", &context)?,
+    }))
+}
+
 impl Build for Site {
     fn build(self, site: &mut BuiltSite) -> Result<()> {
         site.assets.push(index_blog(&self)?);
         site.assets.push(index_authors(&self)?);
+        site.assets.push(feed(&self)?);
         site.assets.push(sitemap(&self)?);
         site.assets.extend(self.assets);
         self.posts
