@@ -12,8 +12,11 @@
         {% block header %}
         <header>
             <div class="title">fogo.sh</div>
-            <div class="tagline">no engineer is an island</div>
-            <a href="/">Go home</a>
+            <div class="links">
+                <a href="/">go home</a> |
+                <a href="https://github.com/fogo-sh">github</a> -
+                <a href="/blog/">blogposts</a>
+            </div>
         </header>
         {% endblock header %}
         <main>
@@ -23,8 +26,7 @@
         {% block footer %}
         <hr>
         <footer>
-            Da-da-da-dat's all folks.
-            <b>Copyright 2021 Fogo.sh.</b> Any and all opinions listed here are our own and not representative of our employers; future, past and present.
+            <b>Copyright 2021 fogo.sh.</b> Any and all opinions listed here are our own and not representative of our employers; past, present, and future.
             Written in Rust 🦀 with 💖. <a href="https://github.com/fogo-sh/fogo.sh"> Clone the source.</a>
         </footer>
         {% endblock footer %}
