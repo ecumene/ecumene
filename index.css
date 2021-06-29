@@ -1,4 +1,4 @@
-@import url("https://fonts.googleapis.com/css2?family=Source+Sans+Pro:ital,wght@0,400;0,600;1,400;1,600&display=swap");
+@import url("https://fonts.googleapis.com/css2?family=Cutive+Mono&display=swap");
 
 :root {
   --text-color: #fff;
@@ -20,6 +20,7 @@
 
 a {
   color: var(--link);
+  text-decoration: none;
 }
 
 a:visited {
@@ -28,7 +29,7 @@ a:visited {
 
 html {
   font-size: 1.25rem;
-  font-family: "Source Sans Pro", sans-serif;
+  font-family: "Cutive Mono", monospace;
   background-color: var(--bg-color);
   color: var(--text-color);
   max-width: 50em;
@@ -42,7 +43,7 @@ header {
 
 hr {
   border: 0;
-  border-top: 2px dashed var(--details-border-color);
+  border-top: 2px solid var(--details-border-color);
   margin: 2rem 0;
 }
 
@@ -91,7 +92,7 @@ input[type="checkbox"]:checked:after {
 }
 
 .details {
-  border: 2px dashed var(--details-border-color);
+  border: 2px solid var(--details-border-color);
   padding: 1rem;
   margin: 1rem 0;
   background-color: var(--bg-contrast);
@@ -116,12 +117,13 @@ input[type="checkbox"]:checked:after {
 .logo img {
   width: 100%;
   image-rendering: pixelated;
+  image-rendering: -moz-crisp-edges;
+  image-rendering: crisp-edges;
 }
 
 .links {
   display: flex;
-  gap: 1rem;
-  justify-content: center;
+  gap: 0.5rem;
 }
 
 .profile {
