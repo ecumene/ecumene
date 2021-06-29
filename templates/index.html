@@ -1,16 +1,16 @@
 {% extends "base.html" %}
 {% block title %}fogo.sh{% endblock title %}
 {% block header %}
+<div class="title">fogo.sh</div>
+<div class="links">
+    <a href="https://github.com/fogo-sh">github</a> -
+    <a href="/blog/">blogposts</a>
+</div>
 {% endblock header %}
 {% block content %}
     {{ super() }}
     <div class="logo">
         <img alt="Fogo.sh Logo" src="logo.gif"/>
-    </div>
-    <div class="links">
-        Just for fun.
-        <a href="https://github.com/fogo-sh">github</a> |
-        <a href="/blog/">blogposts</a>
     </div>
     <b>Members:</b>
     {% for author in authors %}
