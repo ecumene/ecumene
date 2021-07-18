@@ -6,7 +6,7 @@
 
 **Things I done did**
 
-* [Soth-CLI: Help me hit 500 stars 🌟](https://github.com/ecumene/rust-sloth)
+* [Soth-CLI: Help me hit 600 stars 🌟](https://github.com/ecumene/rust-sloth)
 * [Advent of Code](https://github.com/ecumene/advent_of_code)
 * [Chrome Dino Game Clone](https://github.com/ecumene/rust-fast-ferris)
 * [MOL (Molecule) File Web Viewer](https://github.com/ecumene/colco-rs)
