@@ -1,23 +1,19 @@
 {% extends "base.html" %}
-{% block title %}fogo.sh - {{ title }}{% endblock title %}
+{% block title %}mitchellhynes.com - {{ title }}{% endblock title %}
 {% block head %}
     {{ super() }}
-    <meta name="author" content="{% for author in authors %}{{ author }},{% endfor %}">
+    <meta name="author" content="Mitchell Hynes">
 {% endblock head %}
 {% block content %}
     {{ super() }}
     <h1>{{ title }}</h1>
-    <a href="/blog/">.. Back to posts</a>
+    <a href="/blog/">👈 Other projects</a>
     <div class="details">
         <div class="col">
-            Written By:<br/>
             Created On:<br/>
             Last Modified On:<br/>
         </div>
         <div class="col">
-            <div class="authors">{% for author in authors %}
-                <a href="/team/{{author}}.html">{{author}}</a>{% endfor %}
-            </div>
             <div class="createdOn">{{ created_date }}</div>
             <div class="lastModifiedDate">{{ last_modified_date }}</div>
         </div>

@@ -1,14 +1,15 @@
 @import url("https://fonts.googleapis.com/css2?family=Cutive+Mono&display=swap");
 
 :root {
-  --text-color: #fff;
-  --bg-color: #263238;
-  --tagline-color: #89ddff;
-  --details-border-color: #89ddff;
-  --bg-contrast: #1e272c;
-  --link: #82aaff;
-  --check: #82aaff;
-  --link-visited: #c792ea;
+  --text-color: #2b2d42;
+  --title-text-color: #d90429;
+  --bg-color: #edf2f4;
+  --tagline-color: #6b7585;
+  --details-border-color: #ee9b00;
+  --bg-contrast: #e9d8a6;
+  --link: #005f73;
+  --check: #f71735;
+  --link-visited: #0a9396;
   --select-bg-color: #546e7a;
   --select-text-color: #ffffff;
 }
@@ -35,10 +36,6 @@ html {
   max-width: 50em;
   margin: 0 auto;
   padding: 1rem;
-}
-
-header {
-  padding: 1rem 0;
 }
 
 hr {
@@ -100,8 +97,75 @@ input[type="checkbox"]:checked:after {
   gap: 1rem;
 }
 
-.title {
+.bpack {
+  user-select: none;
   font-size: 2rem;
+}
+
+@keyframes shake {
+  0% {
+    transform: translateX(0);
+  }
+  10% {
+    transform: translateX(-2px);
+  }
+  20% {
+    transform: translateX(2px);
+  }
+  30% {
+    transform: translateX(-2px);
+  }
+  40% {
+    transform: translateX(2px);
+  }
+  50% {
+    transform: translateX(-2px);
+  }
+  60% {
+    transform: translateX(2px);
+  }
+  70% {
+    transform: translateX(-2px);
+  }
+  80% {
+    transform: translateX(2px);
+  }
+  90% {
+    transform: translateX(-2px);
+  }
+  100% {
+    transform: translateX(0);
+  }
+}
+
+.bpack:hover {
+  animation: shake 0.5s infinite;
+}
+
+.title {
+  color: var(--title-text-color);
+  font-size: 2rem;
+}
+
+@media screen and (max-width: 600px) {
+  .intro {
+    flex-direction: column;
+  }
+}
+
+.intro {
+  display: flex;
+  padding: 0.5rem;
+  border: 2px solid var(--details-border-color);
+  background-color: var(--bg-contrast);
+}
+
+.intro-readme {
+  padding: 1rem;
+}
+
+main {
+  margin: 1rem 0;
 }
 
 .tagline {
@@ -136,9 +200,10 @@ input[type="checkbox"]:checked:after {
   flex-direction: column;
 }
 
-.nametag > h1,
-.nametag > h2 {
-  margin: 0 1rem;
+h1,
+h2,
+h3 {
+  margin: 0 0.25rem;
 }
 
 .profile > .pic {

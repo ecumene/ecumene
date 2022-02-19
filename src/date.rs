@@ -1,4 +1,4 @@
-pub mod fogo_date {
+pub mod mitch_date {
     use chrono::{DateTime, NaiveDate, Utc};
     use serde::{self, Deserialize, Deserializer, Serializer};
 

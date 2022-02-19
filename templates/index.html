@@ -1,25 +1,24 @@
 {% extends "base.html" %}
-{% block title %}fogo.sh{% endblock title %}
+{% block title %}mitchellhynes.com{% endblock title %}
 {% block header %}
-<div class="title">fogo.sh</div>
 <div class="links">
-    <a href="https://github.com/fogo-sh">github</a> -
-    <a href="/blog/">blogposts</a>
+    <a href="https://github.com/fogo-sh">github</a> |
+    <a href="/blog/">projects</a>
 </div>
 {% endblock header %}
 {% block content %}
-    {{ super() }}
-    <div class="logo">
-        <img alt="Fogo.sh Logo" src="logo.gif"/>
+    <div class="intro">
+        <div>
+            <div class="bpack">🎒</div>
+        </div>
+        <div>
+            <h1>mitchell hynes</h1>
+            <h3>Full-Stack Engineer, Coach, Student</h3>
+            <div class="intro-readme">
+                {{ readme | safe }}
+            </div>
+        </div>
     </div>
-    <b>Members:</b>
-    {% for author in authors %}
-    <div class="author">
-        <a href="/team/{{ author.meta.username }}.html">
-            {{ author.meta.github.name }}
-        </a>
-    </div>
-    {% endfor %}
 {% endblock content %}
 {% block footer %}
 {% endblock footer %}

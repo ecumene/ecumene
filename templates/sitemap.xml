@@ -1,13 +1,13 @@
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
     <url>
-        <loc>https://fogo.sh/</loc>
+        <loc>https://mitchellhynes.com/</loc>
     </url>
     <url>
-        <loc>https://fogo.sh/blog/</loc>
+        <loc>https://mitchellhynes.com/blog/</loc>
     </url>
     {% for post in posts %}
     <url>
-        <loc>https://fogo.sh/blog/{{ post.meta.slug }}.html</loc>
+        <loc>https://mitchellhynes.com/blog/{{ post.meta.slug }}.html</loc>
     </url>
     {% endfor %}
 </urlset>

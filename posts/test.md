@@ -1,7 +1,6 @@
 ---
 slug = "hello-world"
-title = "Hello world."
-authors = ["ecumene"]
+title = "This site"
 description = "Hello world"
 created_date = "2021-05-29"
 last_modified_date = "2021-05-29"

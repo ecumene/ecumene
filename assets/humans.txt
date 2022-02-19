@@ -1,1 +1,1 @@
-See https://github.com/fogo-sh/fogo.sh .
+See https://github.com/ecumene/ecumene .
