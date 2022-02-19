@@ -1,17 +1,17 @@
-**Projects**
+**What I'm up to now**
 
-* [withtraintrack.app](https://withtraintrack.app)
-* [Undergrad @ MUN](https://www.mun.ca/)
-* [Dev @ ReportMate](https://www.reportmate.ca/)
+* [👨‍💻 Dev @ ReportMate](https://www.reportmate.ca/)
+* [👨‍🏫 Coach @ GetCoding](https://get-coding.ca/)
 
-**Past Projects**
+**Past Stuff**
 
-* [Static Site Generator with WASM Plugins](https://github.com/fogo-sh/gutenbuild)
-* [Rust C Compiler](https://github.com/ecumene/rust-c-compiler)
-* [Soth-CLI: Help me hit 600 stars 🌟](https://github.com/ecumene/rust-sloth)
-* [Advent of Code](https://github.com/ecumene/advent_of_code)
-* [Chrome Dino Game Clone](https://github.com/ecumene/rust-fast-ferris)
-* [MOL (Molecule) File Web Viewer](https://github.com/ecumene/colco-rs)
-* [RD-KIT as a service](https://github.com/ecumene/rdkit-aas)
-* [Unbeatable TikTakToe](https://github.com/ecumene/rust-tic-tac-oh)
-* [Gamepad Support for Minecraft Java Edition, Abandoned](https://github.com/ecumene/couchcraft)
+* [🚀 Formerly @ Colab Software](https://www.colabsoftware.com/)
+* [🦥 Sloth: Render 3D in the terminal](https://github.com/ecumene/rust-sloth)
+* [🧬 .mol File Web Viewer](https://github.com/ecumene/colco-rs)
+* [🎮 Gamepad Mod for Minecraft Java Edition](https://github.com/ecumene/couchcraft)
+* [❄️ Advent of Code](https://github.com/ecumene/advent_of_code)
+* [🦀 Static Site Generator with WASM Plugins](https://github.com/fogo-sh/gutenbuild)
+* [🦀 Rust C Compiler](https://github.com/ecumene/rust-c-compiler)
+* [🦕 Chrome Dino Game Clone](https://github.com/ecumene/rust-fast-ferris)
+* [🔬 RD-KIT as a service](https://github.com/ecumene/rdkit-aas)
+* [🎲 Unbeatable TikTakToe](https://github.com/ecumene/rust-tic-tac-oh)

@@ -68,24 +68,6 @@ lazy_static! {
     };
 }
 
-pub struct Mitch<'a> {
-    name: &'a str,
-    email: &'a str,
-    twitter: &'a str,
-    location: &'a str,
-}
-
-lazy_static! {
-    pub static ref PROFILE: Mitch<'static> = {
-        Mitch {
-            name: "Mitch",
-            email: "me@mitchellhynes.com",
-            twitter: "hates_bitcoin",
-            location: "newfoundland",
-        }
-    };
-}
-
 #[derive(Deserialize, Serialize)]
 pub struct PostFrontMatter {
     pub slug: String,

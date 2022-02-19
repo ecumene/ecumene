@@ -1,11 +1,7 @@
 {% extends "base.html" %}
 {% block title %}mitchellhynes.com{% endblock title %}
-{% block header %}
-<div class="links">
-    <a href="https://github.com/ecumene">github</a> |
-    <a href="/blog/">projects</a>
-</div>
-{% endblock header %}
+{% block home_button %}
+{% endblock home_button %}
 {% block content %}
     <div class="intro">
         <div>
@@ -13,7 +9,7 @@
         </div>
         <div>
             <h1>mitchell hynes</h1>
-            <h3>Full-Stack Engineer, Coach, Student</h3>
+            <h3>Full-Stack Engineer, Coach</h3>
             <div class="intro-readme">
                 {{ readme | safe }}
             </div>

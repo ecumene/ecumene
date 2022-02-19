@@ -13,9 +13,15 @@
         {% block header %}
         <header>
             <div class="links">
+                {% block home_button %}
                 <a href="/">go home</a> |
+                {% endblock home_button %}
                 <a href="https://github.com/ecumene">github</a> |
                 <a href="/blog/">projects</a>
+                <div class="socials">
+                    <a href="https://twitter.com/hates_bitcoin">twitter</a> |
+                    <a href="https://linkedin.com/in/mitchell-hynes/">linkedin</a>
+                </div>
             </div>
         </header>
         {% endblock header %}

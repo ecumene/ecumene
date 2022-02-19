@@ -28,8 +28,12 @@ a:visited {
   color: var(--link-visited);
 }
 
+.socials {
+  margin-left: auto;
+}
+
 html {
-  font-size: 1.25rem;
+  font-size: 1rem;
   font-family: "Cutive Mono", monospace;
   background-color: var(--bg-color);
   color: var(--text-color);
@@ -162,6 +166,11 @@ input[type="checkbox"]:checked:after {
 
 .intro-readme {
   padding: 1rem;
+}
+
+.intro ul {
+  list-style-type: none;
+  padding-left: 0;
 }
 
 main {
