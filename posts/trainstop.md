@@ -21,12 +21,12 @@ Nobody is salaried and that makes the program a great value for the
 students and a great value for the coaches who get a hiring pool of potential
 references. I highly recommend it to aspiring students and coaches.
 
-## Habbits are important
+## Habits are important
 
 It takes a lot of soft-skills to be a good developer. I make that clear during
 my sessions with students. However there is one soft-skill that can make the
 difference between a hirable and not-so hirable developer and that's their
-ability to form good habbits. A little bit of work every day snowballs into
+ability to form good habits. A little bit of work every day snowballs into
 results that are desirable to talent managers. Whether that be reading every
 night before bed or committing every day (stay with me I'm getting there).
 
@@ -36,7 +36,7 @@ As much as I loove 🟩🟩🟩 **I don't** think the sole reason some people ge
 hired is because of their contribution graph. I think it could be a good
 indicator of grit. For example if someone has a consistent graph with little
 spikes here and there, they're more likely to stand out because of their
-habbits. There are many other factors hiring managers look for like followers,
+habits. There are many other factors hiring managers look for like followers,
 location, language, and repository stats but if you're looking for something
 to add on top of all of that a nice green chart is good to have.
 
@@ -62,7 +62,7 @@ myself and others to risks when they use my stuff. Instead I statically
 generate wherever I can and use minimal Javascript. This frees so much hassle
 with any project if you can get away with it.
 
-Students contributions are counted from the start of the year. If you have a
+Student contributions are counted from the start of the year. If you have a
 streak of 7 days in a row, you get a MitchBuck! This can be used to cash in
 [at the MitchShop](https://trainstop.mitchellhynes.com/shop) for lots of stuff.
 To spend this, you must trigger a new website build via the `config.toml`:
@@ -76,7 +76,7 @@ for = "timmies10"
 
 The site is also rebuilt daily via Github Actions so I don't need to update it
 at all. Building the site daily and when you buy something means that the site
-is completly portable. If you wanted to host this somewhere, it would just need
+is completely portable. If you wanted to host this somewhere, it would just need
 
 - [x] A CD System
 - [x] A way to host static files
@@ -92,7 +92,7 @@ setting up an API would be costly, so I do that during the build step and bake
 user data into the HTML. When the Javascript loads, the only next step is to
 bootstrap Svelte and it's very fast.
 
-![A diagram of how trainstop gets built. It starts with a list of users (T.O.M.L.) then gets passed to a deno script that gets a response from github. Then that github data gets fed to Svelte (the frontend build process) through a list of users, which finally gets baked into an H.T.M.L. cake for the frontend to consume.](/blog-assets/trainstop2.png)
+![A diagram of how Trainstop gets built. It starts with a list of users (T.O.M.L.) then gets passed to a deno script that gets a response from github. Then that github data gets fed to Svelte (the frontend build process) through a list of users, which finally gets baked into an H.T.M.L. cake for the frontend to consume.](/blog-assets/trainstop2.png)
 
 **Svelte** is comparable to SSR except you can change what's on the page after it
 has loaded. You might say that's a lot like Next.js/Remix and you'd be right!
@@ -103,7 +103,7 @@ makes it somewhat superior in situations where the content does not really
 change from user to user.
 
 **Deno** grabs the user data during build. I'm a Deno sceptic, but in this case it
-served me well and I would use it again for something similar. Deno excells in
+served me well and I would use it again for something similar. Deno excels in
 one-off scripts. The fact that you can have a `.ts` file and not have to `npm i`
 is really liberating. It makes Javascript feel like a real programming
 language with a `std` library and everything! I'm not sure about using Deno as
@@ -126,6 +126,6 @@ creative selectors using general/adjacent sibling (you should be _ashamed_.)
 ## Conclusion
 
 Trainstop was a fun project to build, and in the few months it's been in use
-it's motivated some of my students to get into good habbits like working on
+it's motivated some of my students to get into good habits like working on
 something every day. The project is also very easy to host yourself and I
 encourage others to do so.
