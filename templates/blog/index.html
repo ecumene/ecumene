@@ -1,16 +1,12 @@
-{% extends "base.html" %}
-{% block title %}mitchellhynes.com projects{% endblock title %}
-{% block content %}
-    {{ super() }}
-    <div class="posts">
-    <h2>Projects</h2>
-    {% for post in posts %}
-    <div class="post">
-        - 
-        {{post.meta.created_date | date(format="%Y-%m-%d") }}
-        -
-        <a href="./{{ post.meta.slug }}.html">{{ post.meta.title }}</a>
-    </div>
-    {% endfor %}
-    </div>
+{% extends "base.html" %} {% block title %}mitchellhynes.com projects{% endblock
+title %} {% block content %} {{ super() }}
+<div class="posts">
+  <h2>Projects</h2>
+  {% for post in posts %}
+  <div class="post">
+    - {{post.meta.created_date | date(format="%Y-%m-%d") }} -
+    <a href="./{{ post.meta.slug }}">{{ post.meta.title }}</a>
+  </div>
+  {% endfor %}
+</div>
 {% endblock content %}
