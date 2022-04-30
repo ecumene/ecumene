@@ -1,5 +1,5 @@
 ---
-slug = "trainstop"
+slug = "[Trainstop](https://trainstop.mitchellhynes.com)"
 title = "Trading Contributions for Timmies"
 description = "Certified Pavlov Moment"
 created_date = "2022-04-30"
@@ -42,11 +42,11 @@ to add on top of all of that a nice green chart is good to have.
 
 ![A GitHub contribution graph going from very few to a lot of commits](/blog-assets/good-contrib-graph.png)
 
-## Trainstop
+## [Trainstop](https://trainstop.mitchellhynes.com)
 
-![A screenshot of Trainstop](/blog-assets/trainstop1.png)
+![A screenshot of [Trainstop](https://trainstop.mitchellhynes.com)](/blog-assets/trainstop1.png)
 
-I made Trainstop to motivate my students a little more by giving them a
+I made [Trainstop](https://trainstop.mitchellhynes.com) to motivate my students a little more by giving them a
 currency whenever they completed a full week of committing. They can cash in
 that money on the same website for gift cards for coffee or food. The majority
 of my students immediately jumped on this and so did coaches.
@@ -64,7 +64,7 @@ with any project if you can get away with it.
 
 Student contributions are counted from the start of the year. If you have a
 streak of 7 days in a row, you get a MitchBuck! This can be used to cash in
-[at the MitchShop](https://trainstop.mitchellhynes.com/shop) for lots of stuff.
+[at the MitchShop](<https://[Trainstop](https://trainstop.mitchellhynes.com).mitchellhynes.com/shop>) for lots of stuff.
 To spend this, you must trigger a new website build via the `config.toml`:
 
 ```toml
@@ -82,7 +82,7 @@ is completely portable. If you wanted to host this somewhere, it would just need
 - [x] A way to host static files
 - [x] A way for users to modify the code
 
-In fact forking the project is enough to make your own Trainstop for your
+In fact forking the project is enough to make your own [Trainstop](https://trainstop.mitchellhynes.com) for your
 own students. Just don't forget to merge any fixes upstream please ;)
 
 The frontend is written in Svelte, a framework not too dissimilar from React,
@@ -92,7 +92,7 @@ setting up an API would be costly, so I do that during the build step and bake
 user data into the HTML. When the Javascript loads, the only next step is to
 bootstrap Svelte and it's very fast.
 
-![A diagram of how Trainstop gets built. It starts with a list of users (T.O.M.L.) then gets passed to a deno script that gets a response from github. Then that github data gets fed to Svelte (the frontend build process) through a list of users, which finally gets baked into an H.T.M.L. cake for the frontend to consume.](/blog-assets/trainstop2.png)
+![A diagram of how [Trainstop](https://trainstop.mitchellhynes.com) gets built. It starts with a list of users (T.O.M.L.) then gets passed to a deno script that gets a response from github. Then that github data gets fed to Svelte (the frontend build process) through a list of users, which finally gets baked into an H.T.M.L. cake for the frontend to consume.](/blog-assets/trainstop2.png)
 
 **Svelte** is comparable to SSR except you can change what's on the page after it
 has loaded. You might say that's a lot like Next.js/Remix and you'd be right!
@@ -125,7 +125,7 @@ creative selectors using general/adjacent sibling (you should be _ashamed_.)
 
 ## Conclusion
 
-Trainstop was a fun project to build, and in the few months it's been in use
+[Trainstop](https://trainstop.mitchellhynes.com) was a fun project to build, and in the few months it's been in use
 it's motivated some of my students to get into good habits like working on
 something every day. The project is also very easy to host yourself and I
 encourage others to do so.
