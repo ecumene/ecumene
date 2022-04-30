@@ -5,7 +5,6 @@ use comrak::{markdown_to_html, ComrakOptions};
 use lazy_static::lazy_static;
 use serde::{Deserialize, Serialize};
 use tera::Tera;
-use toml;
 
 lazy_static! {
     pub static ref COMRAK_OPTIONS: ComrakOptions = {
@@ -23,7 +22,7 @@ pub struct Markdown<T> {
     pub content_html: String,
 }
 
-const FRONTMATTER_DELIMITER: &'static str = "---";
+const FRONTMATTER_DELIMITER: &str = "---";
 
 pub fn parse_frontmatter<'de, T>(post: &'de str) -> Option<Result<T, toml::de::Error>>
 where

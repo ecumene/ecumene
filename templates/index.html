@@ -1,20 +1,13 @@
-{% extends "base.html" %}
-{% block title %}mitchellhynes.com{% endblock title %}
-{% block home_button %}
-{% endblock home_button %}
-{% block content %}
-    <div class="intro">
-        <div>
-            <div class="bpack">🎒</div>
-        </div>
-        <div>
-            <h1>mitchell hynes</h1>
-            <h3>Full-Stack Engineer, Coach</h3>
-            <div class="intro-readme">
-                {{ readme | safe }}
-            </div>
-        </div>
-    </div>
-{% endblock content %}
-{% block footer %}
-{% endblock footer %}
+{% extends "base.html" %} {% block title %}mitchellhynes.com{% endblock title %}
+{% block home_button %} {% endblock home_button %} {% block content %}
+<div class="intro">
+  <div>
+    <div class="bpack">🎒</div>
+  </div>
+  <div>
+    <h1>Mitchell Hynes</h1>
+    <h3>St. John's Newfoundland</h3>
+  </div>
+</div>
+<div class="intro-readme">{{ readme | safe }}</div>
+{% endblock content %} {% block footer %} {% endblock footer %}
