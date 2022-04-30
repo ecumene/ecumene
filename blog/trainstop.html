@@ -17,12 +17,11 @@
     <header>
       <div class="links">
         <div>
-          
-          <a href="/">go home</a> | 
-          <a href="https://github.com/ecumene">github</a> |
+          <a href="/">home</a> |
           <a href="/blog/">projects</a>
         </div>
         <div class="socials">
+          <a href="https://github.com/ecumene">github</a> |
           <a href="https://twitter.com/hates_bitcoin">twitter</a> |
           <a href="https://linkedin.com/in/mitchell-hynes/">linkedin</a>
         </div>
@@ -47,10 +46,11 @@
     <h2>I coach for Get Coding</h2>
 <p><a href="get-coding.ca">Get Coding</a> is not a bootcamp. I don't really like the
 bootcamp style of teaching because people get left behind. Instead Get Coding
-is a 1-on-1 system where a student is paired with a coach for a module and upon
-completion of that module the student moves on to a new coach. This networks
-students with coaches around the city and gives them diverse experience. It
-ends up being cheaper than a bootcamp, because coaches have jobs outside of the
+is a 1-on-1 system where a student is paired with a coach for a module (such as
+HTML / CSS / JavaScript), in which the goal is to produce a fleshed out project
+by the end and then the student moves on to a new coach. This networks students
+with coaches around the city and gives them diverse experience. It ends up
+being better value than a bootcamp, because coaches have jobs outside of the
 dojo.</p>
 <p>Nobody is salaried and that makes the program a great value for the
 students and a great value for the coaches who get a hiring pool of potential
@@ -104,6 +104,39 @@ is completly portable. If you wanted to host this somewhere, it would just need<
 </ul>
 <p>In fact forking the project is enough to make your own Trainstop for your
 own students. Just don't forget to merge any fixes upstream please ;)</p>
+<p>The frontend is written in Svelte, a framework not too dissimilar from React,
+except the work React would normally do on the client side is baked into the
+app including data if you'd like. Since I use Github data, using a token or
+setting up an API would be costly, so I do that during the build step and bake
+user data into the HTML. When the Javascript loads, the only next step is to
+bootstrap Svelte and it's very fast.</p>
+<p><img src="/blog-assets/trainstop2.png" alt="A diagram of how trainstop gets built. It starts with a list of users (T.O.M.L.) then gets passed to a deno script that gets a response from github. Then that github data gets fed to Svelte (the frontend build process) through a list of users, which finally gets baked into an H.T.M.L. cake for the frontend to consume." /></p>
+<p><strong>Svelte</strong> is comparable to SSR except you can change what's on the page after it
+has loaded. You might say that's a lot like Next.js/Remix and you'd be right!
+But Svelte separates itself from React on the server by compiling its
+components to HTML before it even leaves the server. React based tools have to
+do a lot of logic to get to a final state where it can commit to the DOM. This
+makes it somewhat superior in situations where the content does not really
+change from user to user.</p>
+<p><strong>Deno</strong> grabs the user data during build. I'm a Deno sceptic, but in this case it
+served me well and I would use it again for something similar. Deno excells in
+one-off scripts. The fact that you can have a <code>.ts</code> file and not have to <code>npm i</code>
+is really liberating. It makes Javascript feel like a real programming
+language with a <code>std</code> library and everything! I'm not sure about using Deno as
+the base for a real-life &quot;production&quot; application but for little things like
+this it is nice.</p>
+<p><strong>Tailwind</strong> is also a project I was not keen on using in the beginning, but I
+really tried to humble myself here. Tailwind gives you opinionated CSS
+defaults. These are in the form of classnames for everything you could think of
+from <code>.justify-center</code> to <code>.w-100</code>. This is megabytes of CSS, but their tools
+only generate what you need so when you ship code it's nice and small. If I was
+using this in real life, I would use it along with some kind of atomic CSS so
+like classnames are grouped together. I wasn't eager to use it because I'm
+pretty good at CSS. However Tailwind does make you faster not just because you
+don't have to write styles, but also because you don't go down rabbit holes
+of variables, breakpoints, animations... It has defaults for those out of the
+box so there's no chance of you (or your colleague) thinking of making any
+creative selectors using general/adjacent sibling (you should be <em>ashamed</em>.)</p>
 <h2>Conclusion</h2>
 <p>Trainstop was a fun project to build, and in the few months it's been in use
 it's motivated some of my students to get into good habbits like working on
