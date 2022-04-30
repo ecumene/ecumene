@@ -78,7 +78,7 @@ fn outline<
 pub fn write_outline<P: AsRef<Path>>(path_in: P, path_out: P) -> Result<(), Error> {
     let buffer = ImageReader::open(path_in)?.decode()?;
     let (width, height) = buffer.dimensions();
-    let gutters = (width as f32 * 0.005).floor() as u32;
+    let gutters = (width as f32 * 0.01).floor() as u32;
     let mut input: RgbaImage = ImageBuffer::new(width + gutters * 4, height + gutters * 4);
     overlay(&mut input, &buffer, gutters.into(), gutters.into());
     let mut output: RgbaImage = ImageBuffer::new(width + gutters * 4, height + gutters * 4);

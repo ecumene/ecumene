@@ -10,10 +10,11 @@ last_modified_date = "2022-04-30"
 
 [Get Coding](get-coding.ca) is not a bootcamp. I don't really like the
 bootcamp style of teaching because people get left behind. Instead Get Coding
-is a 1-on-1 system where a student is paired with a coach for a module and upon
-completion of that module the student moves on to a new coach. This networks
-students with coaches around the city and gives them diverse experience. It
-ends up being cheaper than a bootcamp, because coaches have jobs outside of the
+is a 1-on-1 system where a student is paired with a coach for a module (such as
+HTML / CSS / JavaScript), in which the goal is to produce a fleshed out project
+by the end and then the student moves on to a new coach. This networks students
+with coaches around the city and gives them diverse experience. It ends up
+being better value than a bootcamp, because coaches have jobs outside of the
 dojo.
 
 Nobody is salaried and that makes the program a great value for the
@@ -83,6 +84,44 @@ is completly portable. If you wanted to host this somewhere, it would just need
 
 In fact forking the project is enough to make your own Trainstop for your
 own students. Just don't forget to merge any fixes upstream please ;)
+
+The frontend is written in Svelte, a framework not too dissimilar from React,
+except the work React would normally do on the client side is baked into the
+app including data if you'd like. Since I use Github data, using a token or
+setting up an API would be costly, so I do that during the build step and bake
+user data into the HTML. When the Javascript loads, the only next step is to
+bootstrap Svelte and it's very fast.
+
+![A diagram of how trainstop gets built. It starts with a list of users (T.O.M.L.) then gets passed to a deno script that gets a response from github. Then that github data gets fed to Svelte (the frontend build process) through a list of users, which finally gets baked into an H.T.M.L. cake for the frontend to consume.](/blog-assets/trainstop2.png)
+
+**Svelte** is comparable to SSR except you can change what's on the page after it
+has loaded. You might say that's a lot like Next.js/Remix and you'd be right!
+But Svelte separates itself from React on the server by compiling its
+components to HTML before it even leaves the server. React based tools have to
+do a lot of logic to get to a final state where it can commit to the DOM. This
+makes it somewhat superior in situations where the content does not really
+change from user to user.
+
+**Deno** grabs the user data during build. I'm a Deno sceptic, but in this case it
+served me well and I would use it again for something similar. Deno excells in
+one-off scripts. The fact that you can have a `.ts` file and not have to `npm i`
+is really liberating. It makes Javascript feel like a real programming
+language with a `std` library and everything! I'm not sure about using Deno as
+the base for a real-life "production" application but for little things like
+this it is nice.
+
+**Tailwind** is also a project I was not keen on using in the beginning, but I
+really tried to humble myself here. Tailwind gives you opinionated CSS
+defaults. These are in the form of classnames for everything you could think of
+from `.justify-center` to `.w-100`. This is megabytes of CSS, but their tools
+only generate what you need so when you ship code it's nice and small. If I was
+using this in real life, I would use it along with some kind of atomic CSS so
+like classnames are grouped together. I wasn't eager to use it because I'm
+pretty good at CSS. However Tailwind does make you faster not just because you
+don't have to write styles, but also because you don't go down rabbit holes
+of variables, breakpoints, animations... It has defaults for those out of the
+box so there's no chance of you (or your colleague) thinking of making any
+creative selectors using general/adjacent sibling (you should be _ashamed_.)
 
 ## Conclusion
 

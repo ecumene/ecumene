@@ -9,5 +9,8 @@
     <h3>St. John's Newfoundland</h3>
   </div>
 </div>
-<div class="intro-readme">{{ readme | safe }}</div>
+<div class="intro-readme">
+  <div class="intro-me"><img src="/me.png" /></div>
+  {{ readme | safe }}
+</div>
 {% endblock content %} {% block footer %} {% endblock footer %}
