@@ -1,5 +1,5 @@
 ---
-slug = "[Trainstop](https://trainstop.mitchellhynes.com)"
+slug = "trainstop"
 title = "Trading Contributions for Timmies"
 description = "Certified Pavlov Moment"
 created_date = "2022-04-30"
@@ -44,7 +44,7 @@ to add on top of all of that a nice green chart is good to have.
 
 ## [Trainstop](https://trainstop.mitchellhynes.com)
 
-![A screenshot of [Trainstop](https://trainstop.mitchellhynes.com)](/blog-assets/trainstop1.png)
+![A screenshot of Trainstop](/blog-assets/trainstop1.png)
 
 I made [Trainstop](https://trainstop.mitchellhynes.com) to motivate my students a little more by giving them a
 currency whenever they completed a full week of committing. They can cash in
@@ -64,7 +64,7 @@ with any project if you can get away with it.
 
 Student contributions are counted from the start of the year. If you have a
 streak of 7 days in a row, you get a MitchBuck! This can be used to cash in
-[at the MitchShop](<https://[Trainstop](https://trainstop.mitchellhynes.com).mitchellhynes.com/shop>) for lots of stuff.
+[at the MitchShop](https://trainstop.mitchellhynes.com/shop) for lots of stuff.
 To spend this, you must trigger a new website build via the `config.toml`:
 
 ```toml
@@ -92,7 +92,7 @@ setting up an API would be costly, so I do that during the build step and bake
 user data into the HTML. When the Javascript loads, the only next step is to
 bootstrap Svelte and it's very fast.
 
-![A diagram of how [Trainstop](https://trainstop.mitchellhynes.com) gets built. It starts with a list of users (T.O.M.L.) then gets passed to a deno script that gets a response from github. Then that github data gets fed to Svelte (the frontend build process) through a list of users, which finally gets baked into an H.T.M.L. cake for the frontend to consume.](/blog-assets/trainstop2.png)
+![A diagram of how Trainstop gets built. It starts with a list of users (T.O.M.L.) then gets passed to a deno script that gets a response from github. Then that github data gets fed to Svelte (the frontend build process) through a list of users, which finally gets baked into an H.T.M.L. cake for the frontend to consume.](/blog-assets/trainstop2.png)
 
 **Svelte** is comparable to SSR except you can change what's on the page after it
 has loaded. You might say that's a lot like Next.js/Remix and you'd be right!

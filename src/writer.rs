@@ -22,7 +22,7 @@ impl Write for Asset {
                 std::fs::create_dir_all(to_local_path(
                     copy_data.path.parent().expect("Path does not have parent."),
                 )?)
-                .unwrap();
+                .expect("msg: &star");
 
                 if let Some(ext) = copy_data.path.extension() {
                     if ext == "jpg" || ext == "png" || ext == "jpeg" {
