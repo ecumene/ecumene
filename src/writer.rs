@@ -16,8 +16,22 @@ fn to_local_path(path: &Path) -> io::Result<PathBuf> {
 impl Write for Asset {
     fn write(self) -> io::Result<()> {
         match self {
-            Asset::HTML(artifact) => fs::write(artifact.path, artifact.content),
-            Asset::XML(artifact) => fs::write(artifact.path, artifact.content),
+            Asset::Html(artifact) => {
+                if let Some(ext) = artifact.path.extension() {
+                    if ext == "html" {
+                        fs::write(artifact.path, artifact.content)
+                    } else {
+                        unreachable!();
+                    }
+                } else {
+                    fs::create_dir_all(&artifact.path)?;
+                    fs::write(
+                        artifact.path.to_owned().join("index.html"),
+                        artifact.content,
+                    )
+                }
+            }
+            Asset::Xml(artifact) => fs::write(artifact.path, artifact.content),
             Asset::Other(copy_data) => {
                 std::fs::create_dir_all(to_local_path(
                     copy_data.path.parent().expect("Path does not have parent."),

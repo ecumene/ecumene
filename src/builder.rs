@@ -10,8 +10,8 @@ use tera::Context;
 
 #[derive(Serialize, Deserialize, Debug)]
 pub enum Asset {
-    HTML(BuildArtifact),
-    XML(BuildArtifact),
+    Html(BuildArtifact),
+    Xml(BuildArtifact),
     Other(CopyFile),
 }
 
@@ -57,8 +57,8 @@ impl FillTemplate for Post {
 
 impl Build for Post {
     fn build(self, site: &mut BuiltSite) -> Result<()> {
-        site.assets.push(Asset::HTML(BuildArtifact {
-            path: PathBuf::from(format!("public/blog/{}.html", &self.meta.slug)),
+        site.assets.push(Asset::Html(BuildArtifact {
+            path: PathBuf::from(format!("public/blog/{}", &self.meta.slug)),
             content: self.fill()?,
         }));
         Ok(())
@@ -69,7 +69,7 @@ pub fn index(site: &Site, folder: &str) -> Result<Asset> {
     let mut context = Context::new();
     context.insert("posts", &site.posts);
     context.insert("readme", &site.readme);
-    Ok(Asset::HTML(BuildArtifact {
+    Ok(Asset::Html(BuildArtifact {
         path: PathBuf::from(format!("public/{}index.html", folder)),
         content: TEMPLATES.render(&format!("{}index.html", folder), &context)?,
     }))
@@ -78,7 +78,7 @@ pub fn index(site: &Site, folder: &str) -> Result<Asset> {
 pub fn sitemap(site: &Site) -> Result<Asset> {
     let mut context = Context::new();
     context.insert("posts", &site.posts);
-    Ok(Asset::XML(BuildArtifact {
+    Ok(Asset::Xml(BuildArtifact {
         path: PathBuf::from("public/sitemap.xml"),
         content: TEMPLATES.render("sitemap.xml", &context)?,
     }))
@@ -87,7 +87,7 @@ pub fn sitemap(site: &Site) -> Result<Asset> {
 pub fn feed(site: &Site) -> Result<Asset> {
     let mut context = Context::new();
     context.insert("posts", &site.posts);
-    Ok(Asset::XML(BuildArtifact {
+    Ok(Asset::Xml(BuildArtifact {
         path: PathBuf::from("public/feed.xml"),
         content: TEMPLATES.render("rss.xml", &context)?,
     }))
