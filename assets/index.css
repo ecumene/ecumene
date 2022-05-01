@@ -187,6 +187,7 @@ input[type="checkbox"]:checked:after {
 }
 
 .intro-me {
+  z-index: -1;
   position: absolute;
   opacity: 0.6;
   bottom: 0;
