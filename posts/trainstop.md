@@ -30,7 +30,7 @@ ability to form good habits. A little bit of work every day snowballs into
 results that are desirable to talent managers. Whether that be reading every
 night before bed or committing every day (stay with me I'm getting there).
 
-## 🟩 Green Square's aren't everything
+## 🟩 Green Squares aren't everything
 
 As much as I loove 🟩🟩🟩 **I don't** think the sole reason some people get
 hired is because of their contribution graph. I think it could be a good
