@@ -7,15 +7,15 @@ use spin_sdk::{
 use std::path::Path;
 use std::{fs::File, io::Read};
 
-/// A Spin HTTP component that reads and returns a static asset.
 #[http_component]
 fn serve(req: Request) -> Result<Response> {
     let path = req.headers().get("spin-path-info").unwrap().to_str()?;
+    let mime = guess_mime(path).expect("Couldn't get mime");
 
     match read(path) {
-        Ok((mime, body)) => Ok(http::Response::builder()
+        Ok(body) => Ok(http::Response::builder()
             .status(200)
-            .header("Content-Type", mime)
+            .header("Content-Type", mime.essence_str())
             .body(Some(body))?),
         Err(err) => {
             eprintln!("Error: {}", err);
@@ -24,26 +24,25 @@ fn serve(req: Request) -> Result<Response> {
     }
 }
 
-const TEXT_PLAIN: &'static str = "text/html";
-
-/// Open the file given its path and return its content.
-fn read(path: &str) -> Result<(String, Bytes)> {
-    let path_obj = Path::new(path);
-    let mut file = if path_obj.is_dir() {
-        File::open(path_obj.join("index.html"))
-            .with_context(|| anyhow!("tried directory index {}", path))?
+fn guess_mime<T: AsRef<Path>>(path: T) -> Option<mime_guess::mime::Mime> {
+    let path_ref = path.as_ref();
+    if path_ref.is_dir() {
+        Some(mime_guess::mime::TEXT_HTML)
     } else {
-        File::open(path_obj).with_context(|| anyhow!("cannot open {}", path))?
+        mime_guess::from_path(path_ref).first()
+    }
+}
+
+fn read<T: AsRef<Path>>(path: T) -> Result<Bytes> {
+    let path = path.as_ref();
+    let mut file = if path.is_dir() {
+        File::open(path.join("index.html")).with_context(|| anyhow!("tried directory index"))?
+    } else {
+        File::open(path).with_context(|| anyhow!("cannot open"))?
     };
 
     let mut buf = vec![];
     file.read_to_end(&mut buf)?;
 
-    Ok((
-        mime_guess::from_path(path_obj)
-            .first()
-            .map(|mime| mime.essence_str().to_owned())
-            .unwrap_or(TEXT_PLAIN.to_owned()),
-        buf.into(),
-    ))
+    Ok(buf.into())
 }

@@ -42,7 +42,7 @@ struct Output<'a> {
 }
 
 fn value_contains_uuid(value: &[u8], uuid: &[u8]) -> bool {
-    value.chunks(37).any(|chunk| {
+    value.chunks(13).any(|chunk| {
         uuid.iter()
             .zip(chunk.iter())
             .any(|(value1, value2)| value1 == value2)
@@ -105,17 +105,17 @@ fn get_token() -> String {
     let since_the_epoch = start
         .duration_since(UNIX_EPOCH)
         .expect("Time went backwards");
-    claims.insert("iat", since_the_epoch.as_secs().to_string());
+    claims.insert("iat", since_the_epoch.as_millis().to_string());
     claims.sign_with_key(&key).expect("Failed to create token")
 }
 
-fn is_valid(token: &str) -> bool {
+fn is_valid(token: &str) -> Option<String> {
     let secret = std::env::var(JWT_SECRET).expect("Couldn't find JWT env.");
     let key: Hmac<Sha256> = Hmac::new_from_slice(secret.as_bytes()).unwrap();
     let claim_try: Result<BTreeMap<String, String>, jwt::Error> = token.verify_with_key(&key);
     match claim_try {
-        Ok(claim) => claim.get("iat").is_some(),
-        Err(_) => false,
+        Ok(claim) => claim.get("iat").map(|string| string.clone()),
+        Err(_) => None,
     }
 }
 
@@ -141,12 +141,17 @@ fn handle_post(req: Request) -> Result<Response> {
                         .status(201)
                         .body(None)
                         .map_err(|e| e.into());
-                } else if !is_valid(value) {
+                }
+
+                let iat = is_valid(value);
+                if iat.is_none() {
                     return http::Response::builder()
                         .status(401)
                         .body(message("Invalid token.")?)
                         .map_err(|e| e.into());
                 }
+                let iat = iat.unwrap();
+                let iat = iat.as_bytes();
 
                 let sites = get_sitemap();
                 let payload: Payload = match serde_json::from_str(body_parsed) {
@@ -183,14 +188,14 @@ fn handle_post(req: Request) -> Result<Response> {
 
                 if path == "/like_page" {
                     let mut previous = redis::get(&address, payload.url).unwrap_or_default();
-                    if value_contains_uuid(&previous, value.as_bytes()) {
+                    if value_contains_uuid(&previous, &iat) {
                         return http::Response::builder()
                             .status(400)
                             .body(message("Already liked.")?)
                             .map_err(|e| e.into());
                     }
 
-                    let mut new_value = value.as_bytes().to_vec().clone();
+                    let mut new_value = iat.to_vec();
                     new_value.push(b','); // uuid,uuid,uuid,
                     previous.extend(new_value);
 
@@ -225,8 +230,6 @@ fn handle_post(req: Request) -> Result<Response> {
                 .map_err(|e| e.into())
         }
     } else {
-        redis::set(&address, &get_token(), &[0])
-            .map_err(|_| anyhow!("Error executing Redis command"))?;
         http::Response::builder()
             .status(200)
             .header("Set-Cookie", format!("token={}; HttpOnly", &get_token()))
