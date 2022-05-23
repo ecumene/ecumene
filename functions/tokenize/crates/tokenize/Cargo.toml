@@ -1,10 +1,9 @@
 [package]
-name = "like_page"
+name = "tokenize"
 version = "0.1.0"
 edition = "2021"
 
-[lib]
-crate-type = [ "cdylib" ]
+# See more keys and their definitions at https://doc.rust-lang.org/cargo/reference/manifest.html
 
 [dependencies]
 anyhow = "1"
@@ -14,13 +13,7 @@ spin-sdk = { git = "https://github.com/fermyon/spin" }
 wit-bindgen-rust = { git = "https://github.com/bytecodealliance/wit-bindgen", rev = "2f46ce4cc072107153da0cefe15bdc69aa5b84d0" }
 cookie = "0.16"
 serde = { version = "1", features = ["derive"] }
-tokenize = { path = "crates/tokenize" }
 serde_json = "1"
 jwt = "0.16.0"
 hmac = "0.12.0"
 sha2 = "0.10.2"
-
-[workspace]
-members = [
-    "crates/tokenize"
-]

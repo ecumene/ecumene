@@ -1,10 +1,5 @@
 use anyhow::{anyhow, Result};
-use cookie::Cookie;
-use hmac::{Hmac, Mac};
-use jwt::{SignWithKey, VerifyWithKey};
-use sha2::Sha256;
-use std::collections::BTreeMap;
-use std::time::{SystemTime, UNIX_EPOCH};
+use tokenize::{get_token, with_authentication};
 
 use serde::{Deserialize, Serialize};
 use spin_sdk::{
@@ -24,7 +19,6 @@ const HEADER_SPIN_ROUTE: &str = "spin-raw-component-route";
 
 const REDIS_ADDRESS_ENV: &str = "REDIS_ADDRESS";
 const REDIS_CHANNEL_ENV: &str = "REDIS_CHANNEL";
-const JWT_SECRET: &str = "JWT_SECRET";
 
 #[derive(Serialize, Deserialize)]
 struct Payload<'a> {
@@ -97,28 +91,6 @@ fn message(message: &str) -> Result<Option<bytes::Bytes>> {
     Ok(Some(serde_json::to_vec(&Output { message })?.into()))
 }
 
-fn get_token() -> String {
-    let secret = std::env::var(JWT_SECRET).expect("Couldn't find JWT env.");
-    let key: Hmac<Sha256> = Hmac::new_from_slice(secret.as_bytes()).unwrap();
-    let mut claims = BTreeMap::new();
-    let start = SystemTime::now();
-    let since_the_epoch = start
-        .duration_since(UNIX_EPOCH)
-        .expect("Time went backwards");
-    claims.insert("iat", since_the_epoch.as_millis().to_string());
-    claims.sign_with_key(&key).expect("Failed to create token")
-}
-
-fn is_valid(token: &str) -> Option<String> {
-    let secret = std::env::var(JWT_SECRET).expect("Couldn't find JWT env.");
-    let key: Hmac<Sha256> = Hmac::new_from_slice(secret.as_bytes()).unwrap();
-    let claim_try: Result<BTreeMap<String, String>, jwt::Error> = token.verify_with_key(&key);
-    match claim_try {
-        Ok(claim) => claim.get("iat").map(|string| string.clone()),
-        Err(_) => None,
-    }
-}
-
 fn handle_post(req: Request) -> Result<Response> {
     let address = std::env::var(REDIS_ADDRESS_ENV).expect("Couldn't find REDIS addr");
     let channel = std::env::var(REDIS_CHANNEL_ENV).expect("Couldn't find REDIS channel");
@@ -129,111 +101,92 @@ fn handle_post(req: Request) -> Result<Response> {
         .ok_or_else(|| anyhow::anyhow!("Missing component route."))?
         .to_str()
         .map_err(|_| anyhow::anyhow!("Error parsing path."))?;
-    if let Some(cookie_str) = headers.get("cookie") {
-        let cookie = cookie_str.to_str()?;
-        if let Some(body_str) = body {
-            let body_parsed = std::str::from_utf8(body_str)?;
-            let cookie = Cookie::parse(cookie)?;
-            let (key, value) = cookie.name_value();
-            if key == "token" {
-                if path == "/authenticate" {
-                    return http::Response::builder()
-                        .status(201)
-                        .body(None)
-                        .map_err(|e| e.into());
-                }
 
-                let iat = is_valid(value);
-                if iat.is_none() {
-                    return http::Response::builder()
-                        .status(401)
-                        .body(message("Invalid token.")?)
-                        .map_err(|e| e.into());
-                }
-                let iat = iat.unwrap();
-                let iat = iat.as_bytes();
+    let heelo = http::Response::builder()
+        .status(200)
+        .header("Set-Cookie", format!("token={}; HttpOnly", &get_token()))
+        .body(message("Cookie set.")?)
+        .map_err(|e| e.into());
 
-                let sites = get_sitemap();
-                let payload: Payload = match serde_json::from_str(body_parsed) {
-                    Ok(body) => body,
-                    Err(_) => {
-                        return http::Response::builder()
-                            .status(400)
-                            .body(message("Missing body.")?)
-                            .map_err(|e| e.into())
-                    }
-                };
+    if let Some((iat, value)) = with_authentication(req)? {}
 
-                if !sites.iter().any(|i| i == payload.url) {
-                    return http::Response::builder()
-                        .status(404)
-                        .body(message("Site not found. Please specify a valid `url`")?)
-                        .map_err(|e| e.into());
-                }
+    if let Some(body_str) = body {
+        let body_parsed = std::str::from_utf8(body_str)?;
+        if path == "/authenticate" {
+            return http::Response::builder()
+                .status(201)
+                .body(None)
+                .map_err(|e| e.into());
+        }
 
-                if path == "/get_likes" {
-                    let payload = redis::get(&address, payload.url)
-                        .map_err(|_| anyhow!("Error querying Redis"))?;
-
-                    return match redis::publish(&address, &channel, &payload) {
-                        Ok(()) => Ok(http::Response::builder().status(200).body(Some(
-                            serde_json::to_vec(&LikedPagesResponse {
-                                number: payload.iter().filter(|item| **item == b',').count(),
-                            })?
-                            .into(),
-                        ))?),
-                        Err(_e) => internal_server_error(),
-                    };
-                }
-
-                if path == "/like_page" {
-                    let mut previous = redis::get(&address, payload.url).unwrap_or_default();
-                    if value_contains_uuid(&previous, &iat) {
-                        return http::Response::builder()
-                            .status(400)
-                            .body(message("Already liked.")?)
-                            .map_err(|e| e.into());
-                    }
-
-                    let mut new_value = iat.to_vec();
-                    new_value.push(b','); // uuid,uuid,uuid,
-                    previous.extend(new_value);
-
-                    redis::set(&address, payload.url, &previous)
-                        .map_err(|_| anyhow!("Error executing Redis command"))?;
-
-                    let payload =
-                        redis::get(&address, value).map_err(|_| anyhow!("Error querying Redis"))?;
-
-                    return match redis::publish(&address, &channel, &payload) {
-                        Ok(()) => Ok(http::Response::builder()
-                            .status(200)
-                            .body(message("Liked message")?)?),
-                        Err(_e) => internal_server_error(),
-                    };
-                }
-
-                http::Response::builder()
+        let sites = get_sitemap();
+        let payload: Payload = match serde_json::from_str(body_parsed) {
+            Ok(body) => body,
+            Err(_) => {
+                return http::Response::builder()
                     .status(400)
-                    .body(message("Missing payload.")?)
-                    .map_err(|e| e.into())
-            } else {
-                http::Response::builder()
-                    .status(400)
-                    .body(message("Missing payload.")?)
+                    .body(message("Missing body.")?)
                     .map_err(|e| e.into())
             }
-        } else {
-            http::Response::builder()
-                .status(400)
-                .body(message("Missing cookie.")?)
-                .map_err(|e| e.into())
+        };
+
+        if !sites.iter().any(|i| i == payload.url) {
+            return http::Response::builder()
+                .status(404)
+                .body(message("Site not found. Please specify a valid `url`")?)
+                .map_err(|e| e.into());
         }
+
+        if path == "/get_likes" {
+            let payload =
+                redis::get(&address, payload.url).map_err(|_| anyhow!("Error querying Redis"))?;
+
+            return match redis::publish(&address, &channel, &payload) {
+                Ok(()) => Ok(http::Response::builder().status(200).body(Some(
+                    serde_json::to_vec(&LikedPagesResponse {
+                        number: payload.iter().filter(|item| **item == b',').count(),
+                    })?
+                    .into(),
+                ))?),
+                Err(_e) => internal_server_error(),
+            };
+        }
+
+        if path == "/like_page" {
+            let mut previous = redis::get(&address, payload.url).unwrap_or_default();
+            if value_contains_uuid(&previous, iat) {
+                return http::Response::builder()
+                    .status(400)
+                    .body(message("Already liked.")?)
+                    .map_err(|e| e.into());
+            }
+
+            let mut new_value = iat.to_vec();
+            new_value.push(b','); // uuid,uuid,uuid,
+            previous.extend(new_value);
+
+            redis::set(&address, payload.url, &previous)
+                .map_err(|_| anyhow!("Error executing Redis command"))?;
+
+            let payload =
+                redis::get(&address, value).map_err(|_| anyhow!("Error querying Redis"))?;
+
+            return match redis::publish(&address, &channel, &payload) {
+                Ok(()) => Ok(http::Response::builder()
+                    .status(200)
+                    .body(message("Liked message")?)?),
+                Err(_e) => internal_server_error(),
+            };
+        }
+
+        http::Response::builder()
+            .status(400)
+            .body(message("Missing payload.")?)
+            .map_err(|e| e.into())
     } else {
         http::Response::builder()
-            .status(200)
-            .header("Set-Cookie", format!("token={}; HttpOnly", &get_token()))
-            .body(message("Cookie set.")?)
+            .status(400)
+            .body(message("Missing payload.")?)
             .map_err(|e| e.into())
     }
 }
@@ -245,7 +198,6 @@ fn handle_get() -> Result<Response> {
         .map_err(|e| e.into())
 }
 
-/// A simple Spin HTTP component.
 #[http_component]
 fn hello_world(req: Request) -> Result<Response> {
     if req.method() == "GET" {
