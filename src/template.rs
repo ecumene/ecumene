@@ -44,8 +44,8 @@ pub fn parse<'de, T>(source: &'de str) -> Result<Markdown<T>, toml::de::Error>
 where
     T: serde::Deserialize<'de>,
 {
-    let html = markdown_to_html(&source, &COMRAK_OPTIONS);
-    let meta = parse_frontmatter(&source).expect("No frontmatter for source");
+    let html = markdown_to_html(source, &COMRAK_OPTIONS);
+    let meta = parse_frontmatter(source).expect("No frontmatter for source");
 
     Ok(Markdown {
         meta: meta?,

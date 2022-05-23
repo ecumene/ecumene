@@ -102,8 +102,7 @@ impl<'a> Build for Site {
         site.assets.extend(self.assets);
         self.posts
             .into_iter()
-            .map(|post| post.build(site))
-            .collect::<Result<()>>()?;
+            .try_for_each(|post| post.build(site))?;
         Ok(())
     }
 }
