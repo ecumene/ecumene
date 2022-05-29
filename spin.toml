@@ -20,8 +20,6 @@ id = "authenticate"
 source = "functions/tokenize/target/wasm32-wasi/release/tokenize.wasm"
 [component.trigger]
 route = "/authenticate"
-[component.build]
-command = "cd functions/tokenize && cargo build --target wasm32-wasi --release"
 
 [[component]]
 environment = { JWT_SECRET = "bababoey", REDIS_ADDRESS = "redis://127.0.0.1:6379", REDIS_CHANNEL = "messages" }
@@ -30,8 +28,6 @@ id = "get_likes"
 source = "functions/tokenize/target/wasm32-wasi/release/tokenize.wasm"
 [component.trigger]
 route = "/get_likes"
-[component.build]
-command = "cd functions/tokenize && cargo build --target wasm32-wasi --release"
 
 [[component]]
 environment = { JWT_SECRET = "bababoey", REDIS_ADDRESS = "redis://127.0.0.1:6379", REDIS_CHANNEL = "messages" }
@@ -40,5 +36,3 @@ id = "like_page"
 source = "functions/tokenize/target/wasm32-wasi/release/tokenize.wasm"
 [component.trigger]
 route = "/like_page"
-[component.build]
-command = "cd functions/tokenize && cargo build --target wasm32-wasi --release"
