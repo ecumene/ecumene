@@ -23,6 +23,6 @@ jobs:
         with:
           builder: ${{ steps.builder.outputs.name }}
           push: true
-          platforms: linux/x86_64
+          platforms: linux/amd64
           tags: ecumene/spin:latest
 
