@@ -1,4 +1,4 @@
-FROM alpine
+FROM --platform=linux/x86_64 alpine
 
 MAINTAINER Mitchell Hynes, me@mitchellhynes.com
 
