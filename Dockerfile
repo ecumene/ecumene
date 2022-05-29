@@ -23,7 +23,7 @@ RUN tar -xf ./spin-v0.2.0-linux-amd64.tar.gz -C ./spin
 RUN mv ./spin/spin /usr/local/bin
 
 WORKDIR /usr/app/
-COPY --from=builder public .
+COPY --from=builder /usr/app/public /usr/app/public
 COPY --from=builder /usr/app/functions/static/target/wasm32-wasi/release/static.wasm functions/static/target/wasm32-wasi/release/static.wasm
 COPY --from=builder /usr/app/functions/tokenize/target/wasm32-wasi/release/tokenize.wasm functions/static/target/wasm32-wasi/release/tokenize.wasm
 
