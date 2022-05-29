@@ -1,4 +1,4 @@
-FROM rust:1.60
+FROM rust:1.60 as builder
 
 MAINTAINER Mitchell Hynes, me@mitchellhynes.com
 
