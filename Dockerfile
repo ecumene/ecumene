@@ -4,7 +4,7 @@ MAINTAINER Mitchell Hynes, me@mitchellhynes.com
 
 WORKDIR /usr/app/
 
-COPY crates/ .
+COPY . .
 
 RUN rustup target add wasm32-wasi
 
