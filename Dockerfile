@@ -6,6 +6,8 @@ WORKDIR /usr/app/
 
 COPY . .
 
+RUN rustup target add wasm32-wasi
+
 RUN wget https://github.com/casey/just/releases/download/1.1.3/just-1.1.3-x86_64-unknown-linux-musl.tar.gz
 RUN mkdir ./just
 RUN tar -xf ./just-1.1.3-x86_64-unknown-linux-musl.tar.gz -C ./just
