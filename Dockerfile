@@ -25,6 +25,6 @@ RUN mv ./spin/spin /usr/local/bin
 WORKDIR /usr/app/
 COPY --from=builder /usr/app/public /usr/app/public
 COPY --from=builder /usr/app/functions/static/target/wasm32-wasi/release/static.wasm functions/static/target/wasm32-wasi/release/static.wasm
-COPY --from=builder /usr/app/functions/tokenize/target/wasm32-wasi/release/tokenize.wasm functions/static/target/wasm32-wasi/release/tokenize.wasm
+COPY --from=builder /usr/app/functions/tokenize/target/wasm32-wasi/release/tokenize.wasm functions/tokenize/target/wasm32-wasi/release/tokenize.wasm
 
 ENTRYPOINT ["spin"]
