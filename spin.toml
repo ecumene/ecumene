@@ -1,38 +1,25 @@
-spin_version = "1"
 authors = ["Mitchell Hynes <me@mitchellhynes.com>"]
 name = "backend"
-trigger = { type = "http", base = "/" }
+spin_version = "1"
+trigger = {type = "http", base = "/"}
 version = "1.0.0"
 
+[config]
+redis_address = {default = "", required = true}
+
 [[component]]
+files = [{source = "public/", destination = "/"}]
 id = "static"
 source = "functions/static/target/wasm32-wasi/release/static.wasm"
-files = [{ source = "public/", destination = "/" }]
 [component.trigger]
 route = "/..."
 [component.build]
 command = "cargo run && cd functions/static && cargo build --target wasm32-wasi --release"
 
 [[component]]
-environment = { JWT_SECRET = "bababoey", REDIS_ADDRESS = "redis://127.0.0.1:6379", REDIS_CHANNEL = "messages" }
-allowed_http_hosts = [ "https://mitchellhynes.com/" ]
-id = "authenticate"
+allowed_http_hosts = ["https://mitchellhynes.com/"]
+environment = {JWT_SECRET = "bababoey", REDIS_ADDRESS = "{{ redis_address }}", REDIS_CHANNEL = "messages"}
+id = "likes"
 source = "functions/tokenize/target/wasm32-wasi/release/tokenize.wasm"
 [component.trigger]
-route = "/authenticate"
-
-[[component]]
-environment = { JWT_SECRET = "bababoey", REDIS_ADDRESS = "redis://127.0.0.1:6379", REDIS_CHANNEL = "messages" }
-allowed_http_hosts = [ "https://mitchellhynes.com/" ]
-id = "get_likes"
-source = "functions/tokenize/target/wasm32-wasi/release/tokenize.wasm"
-[component.trigger]
-route = "/get_likes"
-
-[[component]]
-environment = { JWT_SECRET = "bababoey", REDIS_ADDRESS = "redis://127.0.0.1:6379", REDIS_CHANNEL = "messages" }
-allowed_http_hosts = [ "https://mitchellhynes.com/" ]
-id = "like_page"
-source = "functions/tokenize/target/wasm32-wasi/release/tokenize.wasm"
-[component.trigger]
-route = "/like_page"
+route = "/likes"

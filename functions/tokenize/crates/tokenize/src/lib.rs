@@ -35,7 +35,7 @@ fn is_valid(token: &str) -> Option<String> {
 
 type IAT<'a> = &'a [u8];
 type IATStr<'a> = &'a str;
-pub fn with_authentication<'a>(req: Headers) -> Result<Option<(IAT<'a>, IATStr<'a>)>> {
+pub fn with_authentication<'a>(req: Request) -> Result<Option<(IAT<'a>, IATStr<'a>)>> {
     let cookie_str = req.headers().get("cookie").context("No cookie found.")?;
 
     let cookie = cookie_str.to_str()?;

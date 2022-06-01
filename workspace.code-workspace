@@ -1,9 +1,12 @@
 {
   "folders": [
-	{
-		"path": "."
-	}
-],
+    {
+      "path": "."
+    },
+    {
+      "path": "functions/tokenize"
+    }
+  ],
   "settings": {
     "liveServer.settings.port": 5502
   }

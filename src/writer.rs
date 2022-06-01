@@ -1,16 +1,10 @@
 use crate::builder::{Asset, BuiltSite};
+use crate::to_local_path;
 use std::fs;
 use std::io;
-use std::path::{Path, PathBuf};
 
 pub trait Write {
     fn write(self) -> io::Result<()>;
-}
-
-const CANT_PARSE: &str = "That's not unicode, can't parse path.";
-
-fn to_local_path(path: &Path) -> io::Result<PathBuf> {
-    Ok(PathBuf::from("./public").join(path.strip_prefix("assets").expect(CANT_PARSE)))
 }
 
 impl Write for Asset {

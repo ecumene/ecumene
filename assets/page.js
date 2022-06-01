@@ -1,28 +1,25 @@
+const getLikeCount = async () => {
+  const likeCount = document.querySelector("#like-count");
+  const resp = await (await fetch(`${window.location.origin}/likes`)).json();
+  likeCount.textContent = `${parseInt(resp.number)}`;
+  return resp;
+};
+
 // ${window.location}
 (async () => {
-  const likeCount = document.querySelector("#like-count");
-  await fetch(`${window.location.origin}/authenticate`, { method: "POST" });
-
-  const resp = await (
-    await fetch(`${window.location.origin}/get_likes`, {
-      method: "POST",
-      body: JSON.stringify({
-        url: `https://mitchellhynes.com${window.location.pathname}`,
-      }),
-    })
-  ).json();
-  likeCount.textContent = `${parseInt(resp.number)}`;
-
+  const { has_liked } = await getLikeCount();
   const likeButton = document.querySelector("#like-button");
+  likeButton.checked = has_liked;
 
   likeButton.addEventListener("change", async (e) => {
-    await fetch(`${window.location.origin}/like_page`, {
-      method: "POST",
-      body: JSON.stringify({
-        url: `https://mitchellhynes.com${window.location.pathname}`,
-      }),
+    let response = await fetch(`${window.location.origin}/likes`, {
+      method: e.target.checked ? "POST" : "DELETE",
     });
-    likeCount.textContent = `${parseInt(likeCount.textContent) + 1}`;
-    e.target.disabled = true;
+
+    if (response.ok) {
+      const { has_liked } = await getLikeCount();
+      e.target.checked = has_liked;
+      likeButton.checked = has_liked;
+    }
   });
 })();
