@@ -282,11 +282,15 @@ h4 {
   width: 8rem;
 }
 
+header {
+  margin-bottom: 2rem;
+}
+
 svg {
   cursor: pointer;
   overflow: visible;
-  width: 60px;
-  margin: 20px;
+  width: 40px;
+  margin: 10px;
 }
 
 svg #heart {
@@ -304,9 +308,18 @@ svg #main-circ {
 
 .like-container {
   position: absolute;
-  top: 0;
+  display: flex;
+  gap: 0.25rem;
+  align-items: center;
+  top: 2rem;
   right: 0;
   color: var(--text-color);
+}
+
+@media only screen and (min-width: 1058px) {
+  .like-container {
+    top: 0;
+  }
 }
 
 .like-button:checked + label svg #heart {

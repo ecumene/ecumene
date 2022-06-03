@@ -5,10 +5,7 @@
     <meta charset="utf-8" />
     <link rel="stylesheet" href="/index.css" />
     <link rel="shortcut icon" type="image/ico" href="/favicon.ico" />
-    <meta
-      name="viewport"
-      content="width=device-width, initial-scale=1, minimum-scale=1"
-    />
+    <meta content="width=device-width, initial-scale=1" name="viewport" />
     <title>{% block title %}{% endblock title %}</title>
     {% endblock head %}
   </head>
@@ -20,6 +17,8 @@
           <a href="/">home</a> |
           <a href="/blog/">projects</a>
           <div class="like-container">
+            <div id="like-count">0</div>
+            likes
             <input type="checkbox" class="like-button" id="like-button" />
             <label class="like-button-label" for="like-button">
               <svg
@@ -84,8 +83,6 @@
                 </g>
               </svg>
             </label>
-            <div id="like-count">0</div>
-            likes
           </div>
         </div>
         <div class="socials">

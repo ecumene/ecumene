@@ -109,7 +109,7 @@ pub fn is_authenticated(req: &Request) -> Result<AuthResult> {
             .get("referer")
             .expect("Expected referer header.")
             .to_str()?;
-        let referer = if referer == "http://localhost:3000/" {
+        let referer = if referer.contains("http://localhost:3000/") {
             str::replace(
                 referer,
                 "http://localhost:3000/",
