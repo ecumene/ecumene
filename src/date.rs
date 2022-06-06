@@ -2,7 +2,7 @@ pub mod mitch_date {
     use chrono::{DateTime, NaiveDate, Utc};
     use serde::{self, Deserialize, Deserializer, Serializer};
 
-    pub const FORMAT: &'static str = "%Y-%m-%d";
+    pub const FORMAT: &str = "%Y-%m-%d";
 
     pub fn fmt_date(date: &DateTime<Utc>) -> String {
         format!("{}", date.format(FORMAT))
