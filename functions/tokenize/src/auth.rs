@@ -110,7 +110,7 @@ pub fn is_authenticated(req: &Request) -> Result<AuthResult> {
             .expect("Expected referer header.")
             .to_str()?
             .to_owned();
-        if &referer[..1] != "/" {
+        if !referer.ends_with('/') {
             referer.push('/');
         }
         if referer.starts_with("http://localhost:3000/") {

@@ -130,6 +130,14 @@ input[type="checkbox"]:checked:after {
   gap: 1rem;
 }
 
+.post {
+  font-family: "Cutive Mono", monospace;
+}
+
+.footnote-definition {
+  display: flex;
+}
+
 .bpack {
   user-select: none;
   font-size: 2rem;
@@ -248,7 +256,7 @@ fieldset {
   padding-left: 0;
 }
 
-p {
+content > p {
   margin-top: 2rem;
 }
 
