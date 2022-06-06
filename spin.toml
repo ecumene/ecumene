@@ -23,3 +23,9 @@ id = "likes"
 source = "functions/tokenize/target/wasm32-wasi/release/tokenize.wasm"
 [component.trigger]
 route = "/likes"
+
+[[component]]
+id = "splain"
+source = "functions/splain/target/wasm32-wasi/release/splain.wasm"
+[component.trigger]
+route = "/splain"

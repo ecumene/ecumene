@@ -3,6 +3,7 @@ build:
 
   cd functions/static && cargo build --target wasm32-wasi --release;
   cd functions/tokenize && cargo build --target wasm32-wasi --release;
+  cd functions/splain && cargo build --target wasm32-wasi --release;
 
 spin-up:
   spin up --follow-all -e SPIN_APP_REDIS_ADDRESS=redis://127.0.0.1:6379

@@ -2,3 +2,4 @@
 
 !functions/static/target/wasm32-wasi/release/
 !functions/tokenize/target/wasm32-wasi/release/
+!functions/splain/target/wasm32-wasi/release/
