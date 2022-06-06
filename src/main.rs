@@ -4,7 +4,6 @@ mod template;
 mod writer;
 
 use anyhow::Result;
-use comrak::markdown_to_html;
 use std::fs;
 use walkdir::WalkDir;
 
@@ -14,7 +13,7 @@ use std::path::{Path, PathBuf};
 
 use crate::builder::*;
 use crate::builder::{Asset, CopyFile};
-use crate::template::{parse, Post, COMRAK_OPTIONS};
+use crate::template::{parse, Post};
 use crate::writer::*;
 
 const CANT_PARSE: &str = "That's not unicode, can't parse path.";
@@ -23,10 +22,9 @@ pub fn to_local_path(path: &Path) -> io::Result<PathBuf> {
 }
 
 fn load_readme<P: AsRef<Path>>(path: P) -> Result<String> {
-    Ok(markdown_to_html(
-        &fs::read_to_string(path)?,
-        &COMRAK_OPTIONS,
-    ))
+    Ok(template::custom_markdown_to_html(&fs::read_to_string(
+        path,
+    )?))
 }
 
 fn load_and_parse_post(dir_entry: std::io::Result<DirEntry>) -> Result<Post> {

@@ -1,5 +1,4 @@
 use crate::key_value::filter_for_uuid;
-use crate::key_value::value_contains_uuid;
 use crate::Output;
 
 use anyhow::{anyhow, Result};

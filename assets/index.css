@@ -4,6 +4,9 @@
   --text-color: #fbfaf8;
   --title-text-color: #d90429;
   --bg-color: #0a122a;
+  --text-code: #dcd9d3;
+  --bg-code: #13111a;
+  --bg-code-border: #2b273a;
   --tagline-color: #0a122a;
   --details-border-color: #ba1200;
   --bg-contrast: #fbfaf8;
@@ -22,7 +25,7 @@
 }
 
 * {
-  transition: all 0.5s ease;
+  transition: all 0.25s ease;
 }
 
 a {
@@ -49,8 +52,22 @@ html {
   padding: 1rem;
 }
 
+:not(pre) > code {
+  padding: 0.2rem 0.45rem;
+  color: var(--text-code);
+  border: var(--bg-code-border) 1px solid;
+  background: var(--bg-code);
+  border-radius: 0.25rem;
+}
+
 pre {
   font-family: "Cutive Mono", monospace;
+  overflow: auto;
+  background: var(--bg-code);
+  color: var(--text-code);
+  padding: 0.5rem 1rem;
+  border: var(--bg-code-border) 1px solid;
+  border-radius: 0.5rem;
 }
 
 hr {
@@ -163,7 +180,7 @@ input[type="checkbox"]:checked:after {
   font-size: 2rem;
 }
 
-@media only screen and (max-device-width: 784px) {
+@media only screen and (max-width: 784px) {
   .intro {
     flex-direction: column;
   }
@@ -198,7 +215,29 @@ input[type="checkbox"]:checked:after {
   width: 100%;
 }
 
-@media only screen and (max-device-width: 784px) {
+legend {
+  transform: rotate(-5deg);
+  transition: all none;
+  transition-delay: 2s;
+  font-weight: 700;
+  background-color: var(--bg-contrast);
+  color: var(--details-border-color);
+  padding: 0.15rem 0.25rem;
+}
+
+fieldset {
+  transition: none;
+  background-position: right;
+  background-image: url(/me.png);
+  background-size: 4rem;
+  background-repeat: no-repeat;
+  padding-right: 4rem;
+  background-blend-mode: luminosity;
+  background-color: var(--tagline-color);
+  border-color: var(--details-border-color);
+}
+
+@media only screen and (max-width: 784px) {
   .intro-me img {
     opacity: 0.1;
   }
@@ -207,6 +246,10 @@ input[type="checkbox"]:checked:after {
 .intro ul {
   list-style-type: none;
   padding-left: 0;
+}
+
+p {
+  margin-top: 2rem;
 }
 
 p img {
@@ -221,7 +264,7 @@ p img {
   margin: 0 0 1rem 0;
 }
 
-@media only screen and (max-device-width: 784px) {
+@media only screen and (max-width: 784px) {
   .content {
     margin: 0;
   }

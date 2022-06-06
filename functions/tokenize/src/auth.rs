@@ -105,19 +105,23 @@ pub fn is_authenticated(req: &Request) -> Result<AuthResult> {
         let cookie = cookie_str.to_str()?;
         let cookie = Cookie::parse(cookie)?;
         let (key, user_id) = cookie.name_value();
-        let referer = headers
+        let mut referer = headers
             .get("referer")
             .expect("Expected referer header.")
-            .to_str()?;
-        let referer = if referer.contains("http://localhost:3000/") {
-            str::replace(
-                referer,
+            .to_str()?
+            .to_owned();
+        if &referer[..1] != "/" {
+            referer.push('/');
+        }
+        if referer.starts_with("http://localhost:3000/") {
+            referer = str::replace(
+                &referer,
                 "http://localhost:3000/",
                 "https://mitchellhynes.com/",
             )
-        } else {
-            referer.to_string()
         };
+        println!("{}", referer);
+
         if key == "token" {
             if !is_valid(user_id) {
                 return Ok(AuthResult::Unauthorized);

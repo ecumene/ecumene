@@ -22,7 +22,7 @@ pub fn value_contains_uuid(value: &[u8], uuid: &[u8]) -> bool {
     false
 }
 
-pub fn filter_for_uuid<'a>(value: &[u8], uuid: &[u8]) -> Vec<u8> {
+pub fn filter_for_uuid(value: &[u8], uuid: &[u8]) -> Vec<u8> {
     let mut throwaway = false;
     let mut uuid_iter = uuid.iter();
     let mut buffer = vec![];
