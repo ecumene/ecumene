@@ -1,7 +1,9 @@
-on:
-  push:
-    branches:
-      - master
+# TODO: Bless the rains down in Africa
+
+# on:
+#   push:
+#     branches:
+#       - master
 
 name: Deploy Site.
 
