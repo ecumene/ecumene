@@ -19,7 +19,10 @@ pub fn handler(user_id: &str, payload: &str) -> Result<Response> {
     let address =
         std::env::var(crate::key_value::REDIS_ADDRESS_ENV).expect("Couldn't find REDIS addr");
 
-    let mut previous = redis::get(&address, payload).unwrap_or_default();
+    let formatted_name = format!("likes:{}", payload);
+    let localized_name = &formatted_name.as_str();
+
+    let mut previous = redis::get(&address, localized_name).unwrap_or_default();
     if value_contains_uuid(&previous, user_id.as_bytes()) {
         return http::Response::builder()
             .status(400)
@@ -31,7 +34,7 @@ pub fn handler(user_id: &str, payload: &str) -> Result<Response> {
     new_value.push(b','); // uuid,uuid,uuid,
     previous.extend(new_value);
 
-    redis::set(&address, payload, &previous)
+    redis::set(&address, localized_name, &previous)
         .map_err(|_| anyhow!("Error executing Redis command"))?;
 
     http::Response::builder()

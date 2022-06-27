@@ -13,10 +13,13 @@ pub fn handler(user_id: &str, payload: &str) -> Result<Response> {
     let address =
         std::env::var(crate::key_value::REDIS_ADDRESS_ENV).expect("Couldn't find REDIS addr");
 
-    let previous = redis::get(&address, payload).unwrap_or_default();
+    let formatted_name = format!("likes:{}", payload);
+    let localized_name = &formatted_name.as_str();
+    let previous = redis::get(&address, localized_name).unwrap_or_default();
     let has_liked = value_contains_uuid(&previous, user_id.as_bytes());
 
-    let payload = redis::get(&address, payload).map_err(|_| anyhow!("Error querying Redis"))?;
+    let payload =
+        redis::get(&address, localized_name).map_err(|_| anyhow!("Error querying Redis"))?;
 
     http::Response::builder()
         .status(200)

@@ -120,7 +120,6 @@ pub fn is_authenticated(req: &Request) -> Result<AuthResult> {
                 "https://mitchellhynes.com/",
             )
         };
-        println!("{}", referer);
 
         if key == "token" {
             if !is_valid(user_id) {
@@ -133,7 +132,6 @@ pub fn is_authenticated(req: &Request) -> Result<AuthResult> {
             if !sites.iter().any(|i| i == &payload) {
                 return Ok(AuthResult::SiteNotFound);
             }
-            println!("{}", user_id);
 
             Ok(AuthResult::Ok {
                 user_id: user_id.to_owned(),

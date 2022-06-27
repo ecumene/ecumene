@@ -5,9 +5,12 @@ trigger = {type = "http", base = "/"}
 version = "1.0.0"
 
 [config]
+discord_bot_token = {required = true}
+discord_pub_key = {required = true}
 redis_address = {default = "", required = true}
 
 [[component]]
+description = "Serves the statically built content"
 files = [{source = "public/", destination = "/"}]
 id = "static"
 source = "functions/static/target/wasm32-wasi/release/static.wasm"
@@ -18,6 +21,7 @@ command = "cargo run && cd functions/static && cargo build --target wasm32-wasi 
 
 [[component]]
 allowed_http_hosts = ["https://mitchellhynes.com/"]
+description = "Like/Unlike a page"
 environment = {JWT_SECRET = "bababoey", REDIS_ADDRESS = "{{ redis_address }}", REDIS_CHANNEL = "messages"}
 id = "likes"
 source = "functions/tokenize/target/wasm32-wasi/release/tokenize.wasm"
@@ -25,6 +29,16 @@ source = "functions/tokenize/target/wasm32-wasi/release/tokenize.wasm"
 route = "/likes"
 
 [[component]]
+allowed_http_hosts = ["https://discord.com/api/v10/applications"]
+description = "A discord bot"
+environment = {DISCORD_PUB_KEY = "{{discord_pub_key}}", DISCORD_BOT_TOKEN = "{{discord_bot_token}}"}
+id = "bot"
+source = "functions/bot/target/wasm32-wasi/release/bot.wasm"
+[component.trigger]
+route = "/api/interactions"
+
+[[component]]
+description = "A fun microservice that 'splains'"
 id = "splain"
 source = "functions/splain/target/wasm32-wasi/release/splain.wasm"
 [component.trigger]
