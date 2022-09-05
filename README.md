@@ -1,9 +1,8 @@
-_Updated: April 30th, 2022_
+_Updated: Sept 4, 2022_
 
 **What I'm up to now**
 
-- ⚔️ Completing Elden Ring
-- [👨‍💻 Dev @ ReportMate](https://www.reportmate.ca/)
+- [👨‍💻 Dev @ ~ReportMate~ Siftmed](https://www.reportmate.ca/)
 - [👨‍🏫 Coach @ GetCoding](https://get-coding.ca/)
 
 **Past Stuff**

@@ -12,7 +12,7 @@ bytes = "1"
 cookie = "0.16"
 http = "0.2"
 serde = {version = "1", features = ["derive"]}
-spin-sdk = {git = "https://github.com/fermyon/spin"}
+spin-sdk = {git = "https://github.com/fermyon/spin", tag = "v0.5.0"}
 wit-bindgen-rust = {git = "https://github.com/bytecodealliance/wit-bindgen", rev = "2f46ce4cc072107153da0cefe15bdc69aa5b84d0"}
 # tokenize = { path = "crates/tokenize" }
 hmac = "0.12.0"

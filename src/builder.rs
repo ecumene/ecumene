@@ -93,7 +93,7 @@ pub fn feed(site: &Site) -> Result<Asset> {
     }))
 }
 
-impl<'a> Build for Site {
+impl Build for Site {
     fn build(self, site: &mut BuiltSite) -> Result<()> {
         site.assets.push(index(&self, "")?);
         site.assets.push(index(&self, "blog/")?);

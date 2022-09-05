@@ -13,6 +13,8 @@ pub fn handler(user_id: &str, payload: &str) -> Result<Response> {
     let address =
         std::env::var(crate::key_value::REDIS_ADDRESS_ENV).expect("Couldn't find REDIS addr");
 
+    println!("address {}", address);
+
     let formatted_name = format!("likes:{}", payload);
     let localized_name = &formatted_name.as_str();
     let previous = redis::get(&address, localized_name).unwrap_or_default();

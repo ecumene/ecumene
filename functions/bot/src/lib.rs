@@ -28,7 +28,7 @@ struct DiscordInteraction<'a> {
     application_id: &'a Snowflake,
     #[serde(rename = "type")]
     command_type: u8,
-    data: InteractionData<'a>,
+    data: Option<InteractionData<'a>>,
     token: &'a str,
 }
 
@@ -159,7 +159,7 @@ pub fn send_command(app_id: &str, command: DiscordCommand) -> Result<String> {
                 .header("Authorization", format!("Bot {}", bot_token))
                 .header("Content-Type", "application/json")
                 .uri(format!(
-                    "https://discord.com/api/v10/applications/{}/commands",
+                    "https://discord.com/api/v10/applications/{}/guilds/497544520695808000/commands",
                     app_id
                 ))
                 .body(Some(bytes))
@@ -220,7 +220,8 @@ fn handle_interaction(req: Request) -> Result<Response> {
                 );
             }
             2 => {
-                let quote_option = event.data.options.get(0).expect("No quote.");
+                let data = event.data.as_ref().expect("No options?");
+                let quote_option = data.options.get(0).expect("No quote.");
                 redis::set(
                     &address,
                     format!("mitchsaid:{}", quote_option.value).as_str(),
