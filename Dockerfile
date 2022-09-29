@@ -2,9 +2,9 @@ FROM --platform=linux/amd64 debian
 
 RUN apt-get update && apt-get install -y wget
 
-RUN wget https://github.com/fermyon/spin/releases/download/v0.2.0/spin-v0.2.0-linux-amd64.tar.gz
+RUN wget https://github.com/fermyon/spin/releases/download/v0.5.0/spin-v0.5.0-linux-amd64.tar.gz
 RUN mkdir ./spin
-RUN tar -xf ./spin-v0.2.0-linux-amd64.tar.gz -C ./spin
+RUN tar -xf ./spin-v0.5.0-linux-amd64.tar.gz -C ./spin
 RUN mv ./spin/spin /usr/local/bin
 
 WORKDIR /usr/app/
