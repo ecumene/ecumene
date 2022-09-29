@@ -1,15 +1,22 @@
 const getLikeCount = async () => {
   const likeCount = document.querySelector("#like-count");
-  const resp = await (await fetch(`${window.location.origin}/likes`)).json();
-  likeCount.textContent = `${parseInt(resp.number)}`;
-  return resp;
+  const response = await fetch(`${window.location.origin}/likes`);
+  const json = await response.json();
+  if (response.ok) {
+    likeCount.textContent = `${parseInt(json.number)}`;
+  } else {
+    likeCount.textContent = "???";
+    const likeButton = document.querySelector("#like-button");
+    likeButton.disabled = true;
+  }
+  return json;
 };
 
 // ${window.location}
 (async () => {
-  const { has_liked } = await getLikeCount();
+  const { has_liked: hasLiked } = await getLikeCount();
   const likeButton = document.querySelector("#like-button");
-  likeButton.checked = has_liked;
+  likeButton.checked = hasLiked;
 
   likeButton.addEventListener("change", async (e) => {
     let response = await fetch(`${window.location.origin}/likes`, {
@@ -17,9 +24,9 @@ const getLikeCount = async () => {
     });
 
     if (response.ok) {
-      const { has_liked } = await getLikeCount();
-      e.target.checked = has_liked;
-      likeButton.checked = has_liked;
+      const { has_liked: hasLiked } = await getLikeCount();
+      e.target.checked = hasLiked;
+      likeButton.checked = hasLiked;
     }
   });
 })();

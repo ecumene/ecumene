@@ -2,7 +2,7 @@ _Updated: Sept 4, 2022_
 
 **What I'm up to now**
 
-- [👨‍💻 Dev @ ~ReportMate~ Siftmed](https://www.reportmate.ca/)
+- [👨‍💻 Dev @ Siftmed](https://www.reportmate.ca/)
 - [👨‍🏫 Coach @ GetCoding](https://get-coding.ca/)
 
 **Past Stuff**

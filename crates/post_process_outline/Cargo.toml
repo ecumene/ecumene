@@ -1,7 +1,7 @@
 [package]
+edition = "2021"
 name = "mitch-outline"
 version = "0.1.0"
-edition = "2021"
 
 [lib]
 name = "mitch_outline"
@@ -10,5 +10,5 @@ path = "src/lib.rs"
 # See more keys and their definitions at https://doc.rust-lang.org/cargo/reference/manifest.html
 
 [dependencies]
-image = "0.24.2"
 anyhow = "1.0.0"
+image = "0.24.2"

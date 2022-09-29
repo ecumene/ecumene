@@ -42,7 +42,6 @@ a:visited {
 }
 
 html {
-  transition: all 0 ease;
   font-size: 1rem;
   font-family: "Inter", sans-serif;
   background-color: var(--bg-color);
@@ -188,12 +187,6 @@ input[type="checkbox"]:checked:after {
   font-size: 2rem;
 }
 
-@media only screen and (max-width: 784px) {
-  .intro {
-    flex-direction: column;
-  }
-}
-
 .intro {
   display: flex;
   padding: 0.5rem;
@@ -234,6 +227,7 @@ legend {
 }
 
 fieldset {
+  margin: 2rem 0;
   transition: none;
   background-position: right;
   background-image: url(/me.png);
@@ -256,8 +250,8 @@ fieldset {
   padding-left: 0;
 }
 
-content > p {
-  margin-top: 2rem;
+.content > p {
+  margin: 3rem 0;
 }
 
 p img {
