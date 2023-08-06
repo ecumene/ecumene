@@ -2,8 +2,7 @@ import { ImageResponse } from "next/server";
 
 export const runtime = "edge";
 
-export default async function handler(...args) {
-  console.log(args);
+export default async function handler() {
   const ebGaramond = await fetch(
     new URL("../lib/fonts/EBGaramond-Regular.ttf", import.meta.url)
   ).then((res) => res.arrayBuffer());
@@ -31,7 +30,7 @@ export default async function handler(...args) {
             right: "0",
             top: "100px",
           }}
-          src="http://localhost:3000/head.png"
+          src="https://d371ln91aaqayo.cloudfront.net/head.png"
           alt="My face"
           width={680}
           height={907}
