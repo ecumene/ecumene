@@ -10,9 +10,7 @@ module.exports = {
   theme: {
     fontFamily: {
       // font-family: 'EB Garamond', serif;
-      // font-family: 'Permanent Marker', cursive;
       serif: ["EB Garamond", "serif"],
-      sans: ["Permanent Marker", "cursive"],
     },
     container: {
       center: true,
