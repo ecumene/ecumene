@@ -1,0 +1,5 @@
+title = "Rust Sloth"
+description = "Rust Library and CLI for generating ASCII art from 3D Models"
+link = "https://github.com/ecumene/rust-sloth"
+image = "https://github.com/ecumene/rust-sloth/raw/master/models/demo/pikachu.gif"
+tags = ["rust", "700 stars", "cli"]

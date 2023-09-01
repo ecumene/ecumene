@@ -1,6 +1,2 @@
-**/target/**
-
-!functions/static/target/wasm32-wasi/release/
-!functions/tokenize/target/wasm32-wasi/release/
-!functions/splain/target/wasm32-wasi/release/
-!functions/bot/target/wasm32-wasi/release/
+node_modules/
+.sst/
