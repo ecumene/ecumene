@@ -26,7 +26,7 @@ export default function Shape(props: JSX.IntrinsicElements["svg"]) {
           gradientUnits="userSpaceOnUse"
         >
           <stop stopColor="currentColor" />
-          <stop offset="1" stop-color="currentColor" />
+          <stop offset="1" stopColor="currentColor" />
         </linearGradient>
         <clipPath id="clip0_1_6">
           <rect width="1440" height={props.height || "1024"} fill="white" />

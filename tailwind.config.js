@@ -9,8 +9,8 @@ module.exports = {
   ],
   theme: {
     fontFamily: {
-      // font-family: 'EB Garamond', serif;
       serif: ["EB Garamond", "serif"],
+      mono: ["Inconsolata", "monospace"],
     },
     container: {
       center: true,

@@ -1,4 +1,4 @@
-@import url('https://fonts.googleapis.com/css2?family=EB+Garamond:wght@400;500;600;700&family=Permanent+Marker');
+@import url('https://fonts.googleapis.com/css2?family=EB+Garamond:wght@400;700&family=Inconsolata:wght@400;500&display=swap');
 
 @tailwind base;
 @tailwind components;
@@ -7,7 +7,7 @@
 @layer base {
   :root {
     --background: 32.5833333 31% 94%;
-    --foreground: 222.2 84% 4.9%;
+    --foreground: 2text-white;
  
     --muted: 210 40% 96.1%;
     --muted-foreground: 215.4 16.3% 46.9%;
@@ -78,4 +78,84 @@
   body {
     @apply bg-background text-foreground;
   }
+}
+
+.post-content h1 {
+  @apply text-3xl font-bold mb-4 mt-16;
+}
+
+.post-content h2 {
+  @apply text-2xl font-bold mb-4 mt-12;
+}
+
+.post-content h3 {
+  @apply text-xl font-bold mb-4 mt-10;
+}
+
+.post-content h4 {
+  @apply text-lg font-bold mb-4 mt-8;
+}
+
+.post-content h5 {
+  @apply font-bold mb-4;
+}
+
+.post-content h6 {
+  @apply text-base font-bold mb-4;
+}
+
+.post-content p {
+  @apply mb-4 mt-4;
+}
+
+.post-content pre {
+  @apply overflow-auto;
+}
+
+.post-content code * {
+  @apply font-mono;
+}
+
+.post-content a {
+  @apply text-primary underline;
+}
+
+.post-content a:hover {
+  @apply text-blue-400;
+}
+
+.post-content ul {
+  @apply list-disc list-inside mb-4 mt-4;
+}
+
+.post-content ol {
+  @apply list-decimal list-inside mb-4 mt-4;
+}
+
+.post-content li {
+  @apply mb-2 mt-2;
+}
+
+.post-content blockquote {
+  @apply border-l-4 border-primary pl-4 mb-4;
+}
+
+.post-content details {
+  @apply border-l-4 border-primary pl-4 mb-4 mt-4;
+}
+
+.post-content details summary {
+  @apply cursor-pointer;
+}
+
+.post-content pre {
+  @apply bg-muted text-muted-foreground rounded px-2 py-1;
+}
+
+.post-content hr {
+  @apply border-0 border-t border-border my-4;
+}
+
+.excalidraw-background-hack svg rect {
+  display: none;
 }
