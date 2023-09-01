@@ -11,6 +11,7 @@ module.exports = {
     fontFamily: {
       serif: ["EB Garamond", "serif"],
       mono: ["Inconsolata", "monospace"],
+      sms: ["Helvetica Neue", "Helvetica", "Arial", "sans-serif"],
     },
     container: {
       center: true,

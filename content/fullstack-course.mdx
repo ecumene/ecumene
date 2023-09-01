@@ -3,6 +3,19 @@ title = "New Website"
 ---
 
 import Webpage from "../components/ui/webpage";
+import MitchSplain from "../components/ui/splain";
+
+<div className="flex flex-row items-start">
+  <div className="flex-1">
+    <img src="/underconstruct.gif" alt="Under Construction"/>
+
+    This page is an Open Source, living reference for my GetCoding students doing the NodeJS module. If you'd like to
+    edit the content on this page, submit a PR to the <a href="https://github.com/ecumene/ecumene/blob/master/content/fullstack-course.mdx">markdown file</a> on GitHub.
+
+  </div>
+
+  <MitchSplain text="This is a part of a series of tutorials I'm making to make GetCoding easier." />
+</div>
 
 # Anatomy of a Full-Stack App
 
@@ -311,11 +324,11 @@ Relations are established between tables by matching data in columns. This is do
 
 First, always bet on SQL. It has been here since the 70s and will be here for much longer. As will the relational model. It is a proven technology that has been used by millions of developers for decades.
 
-Splain: Look into CODASYL DBTG. It was a Network Database that was also around when the first Relational Model was proposed. It used XML instead of JSON. It was also very bad because to query data you had to handle a cursor yourself in code. It was replaced by Relational Databases because they were much easier to use. I belive the same thing will happen to NoSQL databases.
+<MitchSplain text="Look into CODASYL DBTG. It was a Network Database that was also around when the first Relational Model was proposed. It used XML instead of JSON. It was also very bad because to query data you had to handle a cursor yourself in code. It was replaced by Relational Databases because they were much easier to use. I belive the same thing will happen to NoSQL databases." />
 
 Second, NoSQL databases have no schema. This means that you can store any data in any format in any table. This makes it very hard to query the data. It also makes it very hard to maintain the data. This is why NoSQL databases are not used in production.
 
-Splain: Yes, Mongoose does exist. But you must realise that breaks sharding, so your webscale app will not be webscale.
+<MitchSplain text="Yes, Mongoose does exist. But you must realise that breaks sharding, so your webscale app will not be webscale." />
 
 </details>
 
@@ -350,7 +363,7 @@ If that doesn't work, install a better Distro or Google it.
 
 PlanetScale has a great [MySQL for Developers course](https://planetscale.com/learn/courses/mysql-for-developers) that you can follow to learn MySQL. It's free and it's the best resource I've found for beginners learning MySQL. It gently introduces you to MySQL and even dives into advanced topics near the end.
 
-If you learn even half of the course, you will be very productive with MySQL. If you learn the whole course, you will be far ahead of most developers I've worked with.
+<MitchSplain text="If you learn even half of the course, you will be very productive with MySQL. If you learn the whole course, you will be far ahead of most developers I've worked with." />
 
 ### 3.4. MySQL Hello World
 

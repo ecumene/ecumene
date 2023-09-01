@@ -121,7 +121,7 @@
 }
 
 .post-content a:hover {
-  @apply text-blue-400;
+  @apply text-blue-400
 }
 
 .post-content ul {
