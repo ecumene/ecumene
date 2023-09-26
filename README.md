@@ -1,4 +1,4 @@
-# [Mitchell Hynes](mitchellhynes.com)
+# [Mitchell Hynes](https://mitchellhynes.com)
 
 Full-Stack Developer at [Jungle Scout]( https://junglescout.com ), Coach at [GetCoding](https://getcoding.ca)
 
