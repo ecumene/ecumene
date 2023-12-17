@@ -1,4 +1,4 @@
-# [Mitchell Hynes](mitchellhynes.com)
+# [Mitchell Hynes](https://mitchellhynes.com)
 
 Full-Stack Developer at [Jungle Scout]( https://junglescout.com ), Coach at [GetCoding](https://getcoding.ca)
 
@@ -6,6 +6,7 @@ Previously: [Colab Software](https://colabsoftware.com), [SiftMed](https://siftm
 
 **Projects**
 
+- [📦 (For-Fun Side-business) Faber.gg: Generate 3D models in seconds using AI](https://faber.gg/)
 - [🦥 Sloth: Render 3D in the terminal](https://github.com/ecumene/rust-sloth)
 - [🧬 .mol File Web Viewer](https://github.com/ecumene/colco-rs)
 - [🎮 Gamepad Mod for Minecraft Java Edition](https://github.com/ecumene/couchcraft)
