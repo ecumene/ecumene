@@ -19,13 +19,24 @@ export default function Home() {
         <div className="absolute top-[-50px] md:top-[-200px] left-0 bg-sky-100">
           <Shape className="text-rose-800 w-screen h-auto max-w-full" />
         </div>
-        <Image
-          src="/head.png"
-          alt="My face"
-          width={680}
-          height={907}
-          className="absolute w-[47vw] right-[20px] top-[0px]"
-        />
+        <div className="absolute right-[20px] top-[0px]">
+          <div className="relative w-[47vw]">
+            <Image
+              src="/head.svg"
+              alt="My face"
+              width={680}
+              height={907}
+              className="w-full h-auto"
+            />
+            <Image
+              src="/head.png"
+              alt="My face"
+              width={680}
+              height={907}
+              className="absolute top-[0px] w-full h-auto"
+            />
+          </div>
+        </div>
         <Shape className="text-background absolute top-0 left-0 w-screen h-auto max-w-full" />
       </div>
 
