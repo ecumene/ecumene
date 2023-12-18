@@ -1,4 +1,4 @@
-title = "Step Functions Visualizer"
+title = "SFN Visualizer"
 description = "Visualize Step Functions running Locally"
 link = "https://github.com/ecumene/sfn-vis"
 image = "/sfn-vis.png"

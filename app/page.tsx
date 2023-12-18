@@ -46,8 +46,8 @@ export default function Home() {
             <Image
               src="/background.png"
               alt="White paint background"
-              width={618}
-              height={429}
+              width={337}
+              height={234}
               className="absolute top-[50%] -translate-y-1/2 left-0"
             />
             <p className="text-md md:text-2xl relative z-10 font-bold">
