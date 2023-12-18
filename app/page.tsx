@@ -43,9 +43,11 @@ export default function Home() {
       <div className="absolute flex flex-col items-center justify-between p-4 md:p-24 w-screen max-w-full aspect-video gap-10 lg:gap-32">
         <div className="text-center gap-2 flex flex-col mt-40 md:m-0 w-full flex-1 justify-end">
           <div className="md:w-1/2 p-8 border-dashed relative py-40">
-            <img
+            <Image
               src="/background.png"
-              alt="Background"
+              alt="White paint background"
+              width={618}
+              height={429}
               className="absolute top-[50%] -translate-y-1/2 left-0"
             />
             <p className="text-md md:text-2xl relative z-10 font-bold">
@@ -53,7 +55,7 @@ export default function Home() {
             </p>
             <div className="text-2xl lg:text-5xl text-red-700">
               <Image
-                src="/logo.png"
+                src="/signature.svg"
                 alt="Logo"
                 width={1571}
                 height={432}

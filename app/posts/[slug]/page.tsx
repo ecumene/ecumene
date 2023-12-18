@@ -26,7 +26,7 @@ export default function Page({ params }: Props) {
         <div className="max-w-2xl m-auto px-2 sm:px-0 py-6">
           <Link href="/">
             <Image
-              src="/logo.png"
+              src="/signature.svg"
               alt="Logo"
               width={1571}
               height={432}

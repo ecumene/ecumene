@@ -12,6 +12,7 @@ export default {
     app.stack(function Site({ stack }) {
       const bucket = new Bucket(stack, "paintings");
       const site = new NextjsSite(stack, "site", {
+        warm: 10,
         customDomain: "mitchellhynes.com",
         bind: [bucket],
       });
