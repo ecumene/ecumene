@@ -51,6 +51,6 @@
     "@types/jsdom-global": "^3.0.4",
     "aws-cdk-lib": "2.84.0",
     "constructs": "10.1.156",
-    "sst": "^2.23.1"
+    "sst": "^2.38.7"
   }
 }

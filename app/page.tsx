@@ -11,6 +11,8 @@ import {
 } from "@mitch/components/ui/card";
 import portolio from "@mitch/portfolio";
 import Image from "next/image";
+import MyHead from "@mitch/components/icons/MyHead";
+import MySignature from "@mitch/components/icons/MySignature";
 
 export default function Home() {
   return (
@@ -21,12 +23,10 @@ export default function Home() {
         </div>
         <div className="absolute right-[20px] top-[0px]">
           <div className="relative w-[47vw]">
-            <Image
-              src="/head.svg"
-              alt="My face"
-              width={680}
-              height={907}
-              className="w-full h-auto"
+            <MyHead
+              width="680"
+              height="907"
+              className="absolute top-[0px] w-full h-auto"
             />
             <Image
               src="/head.png"
@@ -48,20 +48,16 @@ export default function Home() {
               alt="White paint background"
               width={337}
               height={234}
-              className="absolute top-[50%] -translate-y-1/2 left-0"
+              className="w-full absolute top-[50%] -translate-y-1/2 left-0"
             />
             <p className="text-md md:text-2xl relative z-10 font-bold">
               Full-Stack Developer
             </p>
-            <div className="text-2xl lg:text-5xl text-red-700">
-              <Image
-                src="/signature.svg"
-                alt="Logo"
-                width={1571}
-                height={432}
-                className="relative z-10 w-1/2 mx-auto"
-              />
-            </div>
+            <MySignature
+              width="1571"
+              height="432"
+              className="relative z-10 w-1/2 h-auto mx-auto"
+            />
             <ul className="flex flex-row flex-wrap lg:w-1/2 mx-auto justify-center gap-2 mt-2 z-10 relative text-xl">
               <li>
                 <a href="https://junglescout.com">Jungle Scout</a>
