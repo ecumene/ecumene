@@ -1,5 +1,0 @@
-title = "Faber.gg"
-description = "Create 3D models and other game assets using AI"
-link = "https://faber.gg/"
-image = "/fabergg.png"
-tags = ["nextjs", "serverless", "ai"]
