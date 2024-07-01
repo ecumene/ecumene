@@ -1,5 +1,3 @@
-import React from "react";
-
 export default function Shape(props: JSX.IntrinsicElements["svg"]) {
   return (
     <svg
