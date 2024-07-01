@@ -12,8 +12,7 @@ import fs from "fs";
 import path from "path";
 import { parse } from "csv-parse/sync";
 
-const __dirname = path.dirname(new URL(import.meta.url).pathname);
-const csvFilePath = path.resolve(__dirname, "../content/sheets/projects.csv");
+const csvFilePath = path.resolve("./src/content/sheets/projects.csv");
 const fileContent = fs.readFileSync(csvFilePath, { encoding: "utf-8" });
 
 const projects = parse(fileContent, {
