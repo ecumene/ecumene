@@ -1,6 +1,6 @@
 import { motion } from "framer-motion";
 
-export default function JestersPrivilidge() {
+export default function JestersPrivilege() {
   return (
     <motion.a
       href="https://jestersprivilege.ca"
@@ -13,7 +13,7 @@ export default function JestersPrivilidge() {
         className="relative"
         variants={{ hover: { y: -20, scale: 1.1 }, rest: { y: 0 } }}
       >
-        Read Jester's Privilidge
+        Read Jester's Privilege
       </motion.div>
       <motion.svg
         height="244.640"
