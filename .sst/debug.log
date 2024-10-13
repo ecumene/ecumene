@@ -1,6 +1,0 @@
-2024-06-28T00:52:25.435Z  +3229ms [debug] Config loaded {"version":"2.43.3","cdkVersion":"2.142.1","constructsVersion":"10.3.0","config":{"name":"ecumene","region":"us-east-1","stage":"mitchellhynes","ssmPrefix":"/sst/ecumene/mitchellhynes/"},"metafile":{"inputs":{"sst.config.ts":{"bytes":219,"imports":[{"path":"sst","kind":"import-statement","external":true},{"path":"sst/constructs","kind":"import-statement","external":true}],"format":"esm"}},"outputs":{".sst.config.1719535942215.mjs":{"imports":[],"exports":["default"],"entryPoint":"sst.config.ts","inputs":{"sst.config.ts":{"bytesInOutput":122}},"bytes":304}}},"paths":{"config":"/Users/mitchellhynes/work/ecumene/sst.config.ts","root":"/Users/mitchellhynes/work/ecumene","out":"/Users/mitchellhynes/work/ecumene/.sst","artifacts":"/Users/mitchellhynes/work/ecumene/.sst/artifacts"}}
-2024-06-28T00:52:26.261Z   +826ms [debug] Using AWS profile 
-2024-06-28T00:52:26.263Z     +2ms [debug] Created AWS client IoTClient
-2024-06-28T00:52:26.263Z     +0ms [debug] Getting IoT endpoint
-2024-06-28T00:52:26.268Z     +5ms [debug] Synthesizing stacks...
-2024-06-28T00:52:26.273Z     +5ms [debug] Created AWS client STSClient
