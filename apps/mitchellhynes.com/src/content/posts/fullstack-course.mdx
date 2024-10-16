@@ -5,7 +5,7 @@ card: "heart_2"
 pubDate: "Jul 30 2024"
 ---
 
-import { Webpage, MitchSplain } from "@ecumene/ui/src/index";
+import { WebpageDisplay, IOSMessageDisplay } from "@ecumene/ui/src/index";
 
 <div className="lex flex-row items-start">
   <div className="flex-1">
@@ -16,7 +16,7 @@ import { Webpage, MitchSplain } from "@ecumene/ui/src/index";
 
   </div>
 
-  <MitchSplain text="This is a part of a series of tutorials I'm making to make GetCoding easier." />
+  <IOSMessageDisplay text="This is a part of a series of tutorials I'm making to make GetCoding easier." />
 </div>
 
 # Anatomy of a Full-Stack App
@@ -56,9 +56,9 @@ npm run dev
 
 3. Open your browser and go to `http://localhost:3000/`. This should show a basic react webpage.
 
-<Webpage address="https://localhost:3000" language="HTML">
+<WebpageDisplay address="https://localhost:3000" language="HTML">
   Hello world Vite.
-</Webpage>
+</WebpageDisplay>
 
 </details>
 
@@ -261,9 +261,9 @@ node index.js
 
 4. Open your browser and go to `http://localhost:3000/`. This should print `Hello world` in your browser.
 
-<Webpage address="https://localhost:3000" language="HTML">
+<WebpageDisplay address="https://localhost:3000" language="HTML">
   Hello World
-</Webpage>
+</WebpageDisplay>
 
 <details>
     <summary>What is a route?</summary>
@@ -326,11 +326,11 @@ Relations are established between tables by matching data in columns. This is do
 
 First, always bet on SQL. It has been here since the 70s and will be here for much longer. As will the relational model. It is a proven technology that has been used by millions of developers for decades.
 
-<MitchSplain text="Look into CODASYL DBTG. It was a Network Database that was also around when the first Relational Model was proposed. It used XML instead of JSON. It was also very bad because to query data you had to handle a cursor yourself in code. It was replaced by Relational Databases because they were much easier to use. I belive the same thing will happen to NoSQL databases." />
+<IOSMessageDisplay text="Look into CODASYL DBTG. It was a Network Database that was also around when the first Relational Model was proposed. It used XML instead of JSON. It was also very bad because to query data you had to handle a cursor yourself in code. It was replaced by Relational Databases because they were much easier to use. I belive the same thing will happen to NoSQL databases." />
 
 Second, NoSQL databases have no schema. This means that you can store any data in any format in any table. This makes it very hard to query the data. It also makes it very hard to maintain the data. This is why NoSQL databases are not used in production.
 
-<MitchSplain text="Yes, Mongoose does exist. But you must realise that breaks sharding, so your webscale app will not be webscale." />
+<IOSMessageDisplay text="Yes, Mongoose does exist. But you must realise that breaks sharding, so your webscale app will not be webscale." />
 
 </details>
 
@@ -365,7 +365,7 @@ If that doesn't work, install a better Distro or Google it.
 
 PlanetScale has a great [MySQL for Developers course](https://planetscale.com/learn/courses/mysql-for-developers) that you can follow to learn MySQL. It's free and it's the best resource I've found for beginners learning MySQL. It gently introduces you to MySQL and even dives into advanced topics near the end.
 
-<MitchSplain text="If you learn even half of the course, you will be very productive with MySQL. If you learn the whole course, you will be far ahead of most developers I've worked with." />
+<IOSMessageDisplay text="If you learn even half of the course, you will be very productive with MySQL. If you learn the whole course, you will be far ahead of most developers I've worked with." />
 
 ### 3.4. MySQL Hello World
 
@@ -570,13 +570,13 @@ A JSON response is an HTTP response that is used to send arbitrary JSON data to 
 
     HTML is used to send a webpage to the client.
 
-    <Webpage address="https://localhost:3000" language="HTML">
+    <WebpageDisplay address="https://localhost:3000" language="HTML">
     ```html
     <html>
       <h1>Hello World</h1>
     </html>
     ```
-    </Webpage>
+    </WebpageDisplay>
 
   </div>
 
@@ -585,13 +585,13 @@ A JSON response is an HTTP response that is used to send arbitrary JSON data to 
 
     JSON is used to send data to the client.
 
-    <Webpage address="https://localhost:3000" language="JSON">
+    <WebpageDisplay address="https://localhost:3000" language="JSON">
     ```json
     {
       "message": "Hello World"
     }
     ```
-    </Webpage>
+    </WebpageDisplay>
     </div>
 
   </div>
