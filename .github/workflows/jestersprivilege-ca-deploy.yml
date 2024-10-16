@@ -28,7 +28,7 @@ jobs:
           package-manager: yarn
 
       - name: Deploy to S3
-        run: aws s3 sync --delete ./apps/jestersprivilege.ca/dist/ s3://${{ secrets.BUCKET_ID }}
+        run: aws s3 sync --delete ./apps/jestersprivilege.ca/dist/ s3://${{ secrets.JP_BUCKET_ID }}
 
       - name: Create CloudFront invalidation
-        run: aws cloudfront create-invalidation --distribution-id ${{ secrets.DISTRIBUTION_ID }} --paths "/*"
+        run: aws cloudfront create-invalidation --distribution-id ${{ secrets.JP_DISTRIBUTION_ID }} --paths "/*"
