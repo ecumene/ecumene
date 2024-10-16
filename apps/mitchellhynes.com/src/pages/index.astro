@@ -1,0 +1,126 @@
+---
+import BaseHead from "../components/BaseHead.astro";
+import { Shape, MyHead, MySignature, CardFan, JesterButton, ProjectTable } from "@ecumene/ui/src/index";
+import { SITE_TITLE, SITE_DESCRIPTION } from "../consts";
+
+import fs from "fs";
+import path from "path";
+import { parse } from "csv-parse/sync";
+
+const csvFilePath = path.resolve("./src/content/sheets/projects.csv");
+const fileContent = fs.readFileSync(csvFilePath, { encoding: "utf-8" });
+
+const projects = parse(fileContent, {
+  columns: true,
+  skip_empty_lines: true,
+}).sort(
+  (a: any, b: any) => new Date(b.date).getTime() - new Date(a.date).getTime()
+);
+---
+
+<!doctype html>
+<html lang="en">
+  <head>
+    <BaseHead title={SITE_TITLE} description={SITE_DESCRIPTION} />
+  </head>
+  <body>
+    <main class="relative">
+      <div class="absolute w-screen max-w-full aspect-video overflow-hidden">
+        <div class="absolute top-[-50px] md:top-[-200px] left-0 bg-sky-100">
+          <Shape className="text-rose-800 w-screen h-auto max-w-full" />
+        </div>
+        <div class="absolute right-[20px] top-[0px]">
+          <div class="relative w-[47vw]">
+            <MyHead
+              width="680"
+              height="907"
+              className="absolute top-[0px] w-full h-auto"
+            />
+            <img
+              src="/head.png"
+              alt="My face"
+              width={680}
+              height={907}
+              class="absolute top-[0px] w-full h-auto"
+            />
+          </div>
+        </div>
+        <Shape
+          className="text-background absolute top-0 left-0 w-screen h-auto max-w-full"
+        />
+      </div>
+
+      <div
+        class="absolute flex flex-col items-center justify-between p-4 md:p-24 w-screen max-w-full aspect-video gap-10 lg:gap-32"
+      >
+        <div
+          class="text-center gap-2 flex flex-col mt-40 md:m-0 w-full flex-1 justify-end"
+        >
+          <div class="md:w-1/2 p-8 border-dashed relative py-40">
+            <img
+              src="/background.png"
+              alt="White paint background"
+              width={337}
+              height={234}
+              class="w-full absolute top-[50%] -translate-y-1/2 left-0"
+            />
+            <CardFan client:only="react" className="z-10 mt-[-12rem] mb-10" />
+            <MySignature
+              width="1571"
+              height="432"
+              className="relative z-10 w-1/2 h-auto mx-auto"
+            />
+            <p class="text-lg mt-4 md:text-2xl relative z-10 font-bold">
+              Full-Stack Software Developer
+            </p>
+            <ul
+              class="flex flex-row mb-8 flex-wrap lg:w-1/2 mx-auto justify-center gap-2 mt-2 z-10 relative text-md md:text-xl"
+            >
+              <li>
+                <a href="https://spellbook.legal"
+                  >Computing law at Spellbook.legal</a
+                >
+              </li>
+            </ul>
+          </div>
+        </div>
+      </div>
+
+      {/** Hugh Mungus Spacer */}
+      <div class="aspect-video w-screen max-w-full"></div>
+
+      <div
+        class="w-screen max-w-full flex flex-col-reverse md:flex-row px-4 md:mx-0 items-center md:items-start justify-center gap-8 md:mt-0 mt-96 pb-32"
+      >
+        <div class="flex flex-col text-center">
+          <JesterButton client:only="react" />
+        </div>
+        <div class="flex flex-col">
+          <h1 class="text-4xl font-bold mb-4">Who am I</h1>
+          <p class="max-w-sm">
+            I'm a Full-Stack Software Developer at&nbsp;<a
+              class="text-rose-800 font-bold px-0"
+              href="https://spellbook.legal">Spellbook</a
+            >. I like learning new things and solving problems. I'm passionate
+            about ancient books, rock music, cuban cigars and healthy tasty
+            food. I live in St. John's, Canada with my Fiancee and our two cats.
+          </p>
+          <p class="max-w-sm mt-4">
+            I have a blog called&nbsp;<a
+              class="text-rose-800 font-bold px-0"
+              href="https://jestersprivilege.ca">Jester's Privilege</a
+            >
+          </p>
+        </div>
+      </div>
+
+      <div class="max-w-xl mx-auto">
+        <h1 class="text-4xl font-bold mb-4">Projects</h1>
+      </div>
+
+      <div class="max-w-4xl mx-auto mt-8 mb-32">
+        <ProjectTable projects={projects} />
+      </div>
+    </main>
+  </body>
+</html>

@@ -1,8 +1,10 @@
-name: Deploy to GitHub Pages
+name: Deploy mitchellhynes.com to GitHub Pages
 
 on:
   push:
     branches: [main]
+    paths:
+      - "apps/mitchellhynes.com/**"
   workflow_dispatch:
 
 # Allow this job to clone the repo and create a page deployment
@@ -19,6 +21,9 @@ jobs:
         uses: actions/checkout@v4
       - name: Install, build, and upload your site
         uses: withastro/action@v2
+        with:
+          path: ./apps/mitchellhynes.com
+          package-manager: yarn
 
   deploy:
     needs: build
