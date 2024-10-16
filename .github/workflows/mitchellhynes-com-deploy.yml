@@ -5,6 +5,7 @@ on:
     branches: [main]
     paths:
       - "apps/mitchellhynes.com/**"
+      - "packages/**"
   workflow_dispatch:
 
 # Allow this job to clone the repo and create a page deployment
