@@ -1,4 +1,5 @@
 import MyHead from "./icons/MyHead";
+import MitchSplain from "./ui/splain";
 import MySignature from "./icons/MySignature";
 import Shape from "./icons/Shape";
 import CardFan from "./ui/cardFan";
@@ -9,6 +10,7 @@ import Webpage from "./ui/webpage";
 
 export {
   MyHead,
+  MitchSplain,
   MySignature,
   CardFan,
   ProjectTable,
