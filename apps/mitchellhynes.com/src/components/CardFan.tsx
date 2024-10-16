@@ -1,4 +1,5 @@
 import { motion } from "framer-motion";
+import Card from "@ecumene/ui/src/ui/Card";
 
 const cards = [
   "heart_5",
@@ -30,14 +31,7 @@ export default function CardFan({ className }: { className?: string }) {
           }}
           transition={{ duration: 0.1, delay: (cards.length - index) * 0.1 }}
         >
-          <svg
-            className="lg:w-48 lg:h-60 w-28 h-32"
-            viewBox="0 0 169.075 244.640"
-            xmlns="http://www.w3.org/2000/svg"
-            xmlnsXlink="http://www.w3.org/1999/xlink"
-          >
-            <use href={`svg-cards.svg#${card}`}></use>
-          </svg>
+          <Card cardName={card} />
         </motion.div>
       ))}
     </div>

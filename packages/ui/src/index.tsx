@@ -1,21 +1,7 @@
-import MyHead from "./icons/MyHead";
-import MitchSplain from "./ui/splain";
-import MySignature from "./icons/MySignature";
-import Shape from "./icons/Shape";
-import CardFan from "./ui/cardFan";
-import JesterButton from "./ui/jesterbutton";
+import JesterButton from "./ui/AnimatedJesterButton";
 import ProjectTable from "./ui/projectTable";
-import Skeleton from "./ui/splain";
-import Webpage from "./ui/webpage";
+import IOSMessageDisplay from "./ui/IOSMessageDisplay";
+import Card from "./ui/Card";
+import WebpageDisplay from "./ui/WebpageDisplay";
 
-export {
-  MyHead,
-  MitchSplain,
-  MySignature,
-  CardFan,
-  ProjectTable,
-  JesterButton,
-  Skeleton,
-  Webpage,
-  Shape,
-};
+export { ProjectTable, JesterButton, IOSMessageDisplay, WebpageDisplay, Card };

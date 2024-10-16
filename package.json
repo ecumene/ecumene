@@ -12,10 +12,6 @@
     "mitchellhynes.com:dev": "cd apps/mitchellhynes.com && yarn dev",
     "mitchellhynes.com:preview": "cd apps/mitchellhynes.com && yarn preview"
   },
-  "dependencies": {
-    "astro": "^3.0.0"
-  },
-  "devDependencies": {
-    "@astrojs/react": "^3.0.0"
-  }
+  "dependencies": {},
+  "devDependencies": {}
 }

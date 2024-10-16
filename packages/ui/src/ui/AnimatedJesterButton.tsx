@@ -1,3 +1,4 @@
+import { cards } from "./Card";
 import { motion } from "framer-motion";
 
 export default function JestersPrivilege() {
@@ -63,7 +64,7 @@ export default function JestersPrivilege() {
                   translateY: 500,
                 },
               }}
-              href="svg-cards.svg#joker"
+              href={`${cards.src}#joker`}
               x="0"
               y="0"
               width="100%"
@@ -79,7 +80,7 @@ export default function JestersPrivilege() {
                   scale: 1.5,
                 },
               }}
-              href="svg-cards.svg#heart"
+              href={`${cards.src}#heart`}
               x="0"
               y="0"
               width="100%"
@@ -96,7 +97,7 @@ export default function JestersPrivilege() {
                   translateY: 100,
                 },
               }}
-              href="svg-cards.svg#diamond"
+              href={`${cards.src}#diamond`}
               x="0"
               y="0"
               width="100%"
@@ -112,7 +113,7 @@ export default function JestersPrivilege() {
                   translateY: 180,
                 },
               }}
-              href="svg-cards.svg#club"
+              href={`${cards.src}#club`}
               x="0"
               y="0"
               width="100%"
@@ -129,7 +130,7 @@ export default function JestersPrivilege() {
                   translateY: 80,
                 },
               }}
-              href="svg-cards.svg#spade"
+              href={`${cards.src}#spade`}
               x="0"
               y="0"
               width="100%"
