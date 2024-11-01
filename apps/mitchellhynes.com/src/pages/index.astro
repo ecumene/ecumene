@@ -1,11 +1,13 @@
 ---
 import BaseHead from "../components/BaseHead.astro";
-import {  JesterButton, ProjectTable } from "@ecumene/ui/src/index";
+import { JesterButton } from "@ecumene/ui/src/index";
+import ProjectCard from "../components/ProjectCard";
 import Shape from '../vectorDisplays/Shape';
 import MyHead from '../vectorDisplays/MyHead';
 import MySignature from '../vectorDisplays/MySignature';
 import CardFan from '../components/CardFan';
 import { SITE_TITLE, SITE_DESCRIPTION } from "../consts";
+import type { Project } from "../types";
 
 import fs from "fs";
 import path from "path";
@@ -14,7 +16,7 @@ import { parse } from "csv-parse/sync";
 const csvFilePath = path.resolve("./src/content/sheets/projects.csv");
 const fileContent = fs.readFileSync(csvFilePath, { encoding: "utf-8" });
 
-const projects = parse(fileContent, {
+const projects: Project[] = parse(fileContent, {
   columns: true,
   skip_empty_lines: true,
 }).sort(
@@ -122,8 +124,10 @@ const projects = parse(fileContent, {
         <h1 class="text-4xl font-bold mb-4">Projects</h1>
       </div>
 
-      <div class="max-w-4xl mx-auto mt-8 mb-32">
-        <ProjectTable projects={projects} />
+      <div class="max-w-xl mx-auto mt-8 mb-32 flex flex-col gap-4">
+        {projects.map((project) => (
+          <ProjectCard project={project} />
+        ))}
       </div>
     </main>
   </body>
