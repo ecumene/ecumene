@@ -1,36 +1,45 @@
 ---
-import Jester from '../../public/jester1.svg';
-import Head from '../../public/ornaments/head.svg';
-import HeaderOrnament from '../../public/ornaments/header.svg';
-import BaseHead from '../components/BaseHead.astro';
-import Header from '../components/Header.astro';
-import Footer from '../components/Footer.astro';
-import { SITE_TITLE, SITE_DESCRIPTION } from '../consts';
+import Jester from "../../public/jester1.svg";
+import Head from "../../public/ornaments/head.svg";
+import HeaderOrnament from "../../public/ornaments/header.svg";
+import BaseHead from "../components/BaseHead.astro";
+import Header from "../components/Header.astro";
+import Footer from "../components/Footer.astro";
+import { SITE_TITLE, SITE_DESCRIPTION } from "../consts";
 ---
 
 <!doctype html>
 <html lang="en">
-	<head>
-		<BaseHead title={SITE_TITLE} description={SITE_DESCRIPTION} />
-	</head>
-	<body>
-		<Header />
-		<main class="flex flex-col items-center gap-9 max-w-screen-sm mx-auto my-32">
-			<h1 class="font-display text-[4rem] flex items-center gap-4">
-			<img alt="Jester" class="w-24" {...Jester} />
-				Jester's Privilege</h1>
-			<p class="text-[1.6rem] border-l-4 border-emerald-600 pl-4">
-				<i>noun.</i> the ability and right of a jester to talk and mock freely without being punished; for nothing he says seems to matter.
-			</p>
-			<a href="https://mitchellhynes.com" class="text-emerald-600">By Mitchell Hynes</a>
-		</main>
-		<div class="w-full font-display text-[2rem] text-cream-100 h-32 bg-repeat object-contain bg-contain flex justify-center items-center" style={`background-image: url(${HeaderOrnament.src})`}>
-			<img alt="Head Ornament" class="h-[77px]" {...Head} />
-			Essays
-		</div>
-		<div class="max-w-screen-sm mx-auto my-12">	
-			[Nothing to read here yet.]
-		</div>
-		<Footer />
-	</body>
+  <head>
+    <BaseHead title={SITE_TITLE} description={SITE_DESCRIPTION} />
+  </head>
+  <body>
+    <Header />
+    <main
+      class="flex flex-col items-center gap-9 max-w-screen-sm mx-auto my-32"
+    >
+      <h1
+        class="font-display text-[4rem] flex items-center flex-col sm:flex-row gap-4 text-center"
+      >
+        <img alt="Jester" class="w-24" {...Jester} />
+        Jester's Privilege
+      </h1>
+      <p class="text-[1.6rem] border-l-4 border-emerald-600 pl-4">
+        <i>noun.</i> the ability and right of a jester to talk and mock freely without
+        being punished; for nothing he says seems to matter.
+      </p>
+      <a href="https://mitchellhynes.com" class="text-emerald-600"
+        >By Mitchell Hynes</a
+      >
+    </main>
+    <div
+      class="w-full font-display text-[2rem] text-cream-100 h-32 bg-repeat object-contain bg-contain flex justify-center items-center"
+      style={`background-image: url(${HeaderOrnament.src})`}
+    >
+      <img alt="Head Ornament" class="h-[77px]" {...Head} />
+      Essays
+    </div>
+    <div class="max-w-screen-sm mx-auto my-12">[Nothing to read here yet.]</div>
+    <Footer />
+  </body>
 </html>
