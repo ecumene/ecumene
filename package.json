@@ -10,7 +10,11 @@
     "mitchellhynes.com:build": "cd apps/mitchellhynes.com && yarn build",
     "mitchellhynes.com:start": "cd apps/mitchellhynes.com && yarn start",
     "mitchellhynes.com:dev": "cd apps/mitchellhynes.com && yarn dev",
-    "mitchellhynes.com:preview": "cd apps/mitchellhynes.com && yarn preview"
+    "mitchellhynes.com:preview": "cd apps/mitchellhynes.com && yarn preview",
+    "jestersprivilege.ca:build": "cd apps/jestersprivilege.ca && yarn build",
+    "jestersprivilege.ca:start": "cd apps/jestersprivilege.ca && yarn start",
+    "jestersprivilege.ca:dev": "cd apps/jestersprivilege.ca && yarn dev",
+    "jestersprivilege.ca:preview": "cd apps/jestersprivilege.ca && yarn preview"
   },
   "dependencies": {},
   "devDependencies": {}
