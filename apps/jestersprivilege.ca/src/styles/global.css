@@ -9,7 +9,7 @@ body {
 	text-align: left;
 	word-wrap: break-word;
 	overflow-wrap: break-word;
-	@apply text-gray-800;
+	@apply text-blue-100;
 	font-size: 20px;
 	line-height: 1.7;
 }
