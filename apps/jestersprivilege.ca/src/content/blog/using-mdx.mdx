@@ -1,31 +1,54 @@
 ---
-title: 'Using MDX'
-description: 'Lorem ipsum dolor sit amet'
-pubDate: 'Jun 01 2024'
-heroImage: '/blog-placeholder-5.jpg'
+title: "Bringing Guilty Spark to Life"
+description: "Lorem ipsum dolor sit amet"
+pubDate: "Jun 01 2024"
+heroImage: "/guilty-spark.webp"
 ---
 
-This theme comes with the [@astrojs/mdx](https://docs.astro.build/en/guides/integrations-guide/mdx/) integration installed and configured in your `astro.config.mjs` config file. If you prefer not to use MDX, you can disable support by removing the integration from your config file.
+I'm the kinda guy that reads a book and it becomes their personality. Snowcrash was a recent revelation for me. Not because it coined the term "Metaverse" but because of its deep chapters on the Sumerian language and culture. The main character, a hacker ninja honestly named first name "Hiro" last name "Protagonist" has this AI persona he chats with in VR while toying with a hyper-realistic realtime-satelite photographed globe. Chatting with AI in VR is a Sci-fi thing thats unimaginable in the 90s when Snowcrash was written but entirely practical today.
 
-## Why MDX?
+## The Rise of AI Personas
 
-MDX is a special flavor of Markdown that supports embedded JavaScript & JSX syntax. This unlocks the ability to [mix JavaScript and UI Components into your Markdown content](https://docs.astro.build/en/guides/markdown-content/#mdx-features) for things like interactive charts or alerts.
+At Spellbook I build Agents for Legal but AI personas are still facinating. I'm not the only one, CharacterAI (ChatGPT but chatting with Video Game, Movie or Book characters) has 28 million active users. Why? Because LLMs are capable of answering deeper questions than a search engine. It's helped me do IT at our office, pick a good floor cleaner for linoleum, choose books to read so I can better help my friends, it's just amazing.
 
-If you have existing content authored in MDX, this integration will hopefully make migrating to Astro a breeze.
+## Realtime Voice vs Voice Mode
 
-## Example
+I use Realtime Voice in ChatGPT daily. Realtime Voice is so much more immersive than texting because it conveys tone and listens to you. It can quickly switch from an impartial teacher to a chummy bar buddy. At this point if you haven't tried it you're missing out. We're probably pretty far from a CharacterAI-like service from spinning up Realtime Voice personalities. What's the difference between Realtime Voice and Voice Mode? Voice Mode uses Speech to Text to lossy-transcribe your words to text (removing tone), passes that to an LLM to complete to text, then reads that text back with Text to Speech. Realtime Voice is a model that encodes the audio you say directly to tokens. It can sense when you're agitated and can indicate frustration too. It's end-to-end voice. CharacterAI has a Voice Mode but it only kind-of sounds emotional when it wants to since the AI is just transcribing, writing, and speaking. It's not end-to-end with audio, yet.
 
-Here is how you import and use a UI component inside of MDX.  
-When you open this page in the browser, you should see the clickable button below.
+## Implementing OpenAI's Realtime Audio in VR
 
-import HeaderLink from '../../components/HeaderLink.astro';
+How would we bring Realtime Audio from OpenAI into VR? Well, first off there's a Realtime Voice API. It's simple: you specify which model and prompt you want to use just as any other model but you also give it new parameters that are distinct from other OpenAI APIs like Turn Detection for letting the server decide when the user has stopped speaking. You also must connect using either Websockets or WebRTC instead of HTTP like other APIs use. Once you're connected to a session, you send your raw mono 16-bit PCM at a 24kHz sample rate in socket messages and the server responds with Tool Calls, Call Transcriptions, and of course, model-generated audio. You append that audio to a buffer and read it. Ooh-rah!
 
-<HeaderLink href="#" onclick="alert('clicked!')">
-	Embedded component in MDX
-</HeaderLink>
+## Unity Implementation
 
-## More Links
+Once I got all this working in C# I moved my code over to Unity. It worked using NAudio but I wanted my code to be cross-platform by using built-in Unity audio.
 
-- [MDX Syntax Documentation](https://mdxjs.com/docs/what-is-mdx)
-- [Astro Usage Documentation](https://docs.astro.build/en/guides/markdown-content/#markdown-and-mdx-pages)
-- **Note:** [Client Directives](https://docs.astro.build/en/reference/directives-reference/#client-directives) are still required to create interactive components. Otherwise, all components in your MDX will render as static HTML (no JavaScript) by default.
+### Recording in Unity
+
+[Details about implementing 24kHz PCM16 recording in Unity]
+
+### Audio Playback
+
+[Details about implementing procedural audio playback in Unity]
+
+### Audio Effects
+
+[Details about implementing low-pass filters and robotic voice effects]
+
+## Visual Effects
+
+### Terrain and Environment
+
+[Details about implementing Halo terrain and foliage]
+
+### Lighting and Sky
+
+[Details about implementing skybox, emission textures, and custom sun]
+
+### Special Effects
+
+[Details about implementing lens flares and their modulation with Fourier analysis]
+
+### Shaders
+
+[Details about implementing Halo shader]

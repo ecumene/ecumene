@@ -1,11 +1,12 @@
 ---
 import Jester from "../../public/jester1.svg";
-import Head from "../../public/ornaments/head.svg";
-import HeaderOrnament from "../../public/ornaments/header.svg";
 import BaseHead from "../components/BaseHead.astro";
 import Header from "../components/Header.astro";
 import Footer from "../components/Footer.astro";
 import { SITE_TITLE, SITE_DESCRIPTION } from "../consts";
+import EssayCard from "../components/EssayCard.astro";
+import { getCollection } from "astro:content";
+const posts = await getCollection("blog");
 ---
 
 <!doctype html>
@@ -16,7 +17,7 @@ import { SITE_TITLE, SITE_DESCRIPTION } from "../consts";
   <body>
     <Header />
     <main
-      class="flex flex-col items-center gap-9 max-w-screen-sm mx-auto my-32"
+      class="flex flex-col items-center gap-9 max-w-screen-sm mx-auto my-52"
     >
       <h1
         class="font-display text-[4rem] flex items-center flex-col sm:flex-row gap-4 text-center"
@@ -32,14 +33,19 @@ import { SITE_TITLE, SITE_DESCRIPTION } from "../consts";
         >By Mitchell Hynes</a
       >
     </main>
-    <div
-      class="w-full font-display text-[2rem] text-cream-100 h-32 bg-repeat object-contain bg-contain flex justify-center items-center"
-      style={`background-image: url(${HeaderOrnament.src})`}
-    >
-      <img alt="Head Ornament" class="h-[77px]" {...Head} />
-      Essays
+    <div class="max-w-screen-sm mx-auto my-12">
+      {
+        posts.map((post) => (
+          <EssayCard
+            title={post.data.title}
+            description={post.data.description}
+            date={post.data.pubDate}
+            slug={post.slug}
+            image={post.data.heroImage}
+          />
+        ))
+      }
     </div>
-    <div class="max-w-screen-sm mx-auto my-12">[Nothing to read here yet.]</div>
     <Footer />
   </body>
 </html>

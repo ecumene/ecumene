@@ -1,7 +1,6 @@
 @import url('https://fonts.googleapis.com/css2?family=EB+Garamond:ital,wght@0,400..800;1,400..800&family=UnifrakturCook:wght@700&display=swap');
 
 body {
-	background: #FBFAE9;
 	font-family: "EB Garamond", serif;
 	font-weight: 400;
 	margin: 0;
@@ -9,9 +8,7 @@ body {
 	text-align: left;
 	word-wrap: break-word;
 	overflow-wrap: break-word;
-	@apply text-blue-100;
-	font-size: 20px;
-	line-height: 1.7;
+	@apply text-blue-100 text-lg leading-relaxed;
 }
 h1,
 h2,
@@ -19,27 +16,26 @@ h3,
 h4,
 h5,
 h6 {
-	margin: 0 0 0.5rem 0;
-	line-height: 1.2;
+	@apply mb-2 leading-tight;
 }
 h1 {
-	font-size: 3.052em;
+	@apply text-5xl;
 }
 h2 {
-	font-size: 2.441em;
+	@apply text-4xl;
 }
 h3 {
-	font-size: 1.953em;
+	@apply text-3xl;
 }
 h4 {
-	font-size: 1.563em;
+	@apply text-2xl;
 }
 h5 {
-	font-size: 1.25em;
+	@apply text-xl;
 }
 strong,
 b {
-	font-weight: 700;
+	@apply font-bold;
 }
 a {
 	@apply text-emerald-600;
@@ -48,17 +44,16 @@ a:hover {
 	@apply text-emerald-800;
 }
 p {
-	margin-bottom: 1em;
+	@apply mb-4;
 }
 .prose p {
-	margin-bottom: 2em;
+	@apply mb-8 indent-8;
 }
 textarea {
-	width: 100%;
-	font-size: 16px;
+	@apply w-full text-base;
 }
 input {
-	font-size: 16px;
+	@apply text-base;
 }
 table {
 	width: 100%;
@@ -75,10 +70,7 @@ pre > code {
 	all: unset;
 }
 blockquote {
-	@apply border-l-4 border-emerald-600;
-	padding: 0 0 0 20px;
-	margin: 0px;
-	font-size: 1.333em;
+	@apply border-l-4 border-emerald-600 pl-5 m-0 text-xl;
 }
 hr {
 	border: none;
@@ -86,10 +78,10 @@ hr {
 }
 @media (max-width: 720px) {
 	body {
-		font-size: 18px;
+		@apply text-base;
 	}
 	main {
-		padding: 1em;
+		@apply p-4;
 	}
 }
 

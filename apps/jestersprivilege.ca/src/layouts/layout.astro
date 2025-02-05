@@ -1,0 +1,18 @@
+---
+import { ClientRouter } from "astro:transitions";
+
+import BaseHead from "../components/BaseHead.astro";
+import { SITE_TITLE, SITE_DESCRIPTION } from "../consts";
+---
+
+<!doctype html>
+<html lang="en">
+  <head>
+    <BaseHead title={SITE_TITLE} description={SITE_DESCRIPTION} />
+    <ClientRouter /></head
+  >;
+
+  <body>
+    <slot />
+  </body>
+</html>
