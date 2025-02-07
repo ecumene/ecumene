@@ -4,7 +4,7 @@ import Header from "../components/Header.astro";
 import Footer from "../components/Footer.astro";
 import EssayCard from "../components/EssayCard.astro";
 import { getCollection } from "astro:content";
-const posts = await getCollection("blog");
+const posts = await getCollection("blog", ({ data }) => !data.draft);
 import Layout from "../layouts/layout.astro";
 ---
 
@@ -27,15 +27,21 @@ import Layout from "../layouts/layout.astro";
   </main>
   <div class="max-w-screen-sm mx-auto my-12">
     {
-      posts.map((post) => (
-        <EssayCard
-          title={post.data.title}
-          description={post.data.description}
-          date={post.data.pubDate}
-          slug={post.slug}
-          image={post.data.heroImage}
-        />
-      ))
+      posts.length === 0 ? (
+        <p class="text-center text-gray-500 italic">
+          No posts yet. Check back soon!
+        </p>
+      ) : (
+        posts.map((post) => (
+          <EssayCard
+            title={post.data.title}
+            description={post.data.description}
+            date={post.data.pubDate}
+            slug={post.slug}
+            image={post.data.heroImage}
+          />
+        ))
+      )
     }
   </div>
   <Footer />
