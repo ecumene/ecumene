@@ -55,6 +55,13 @@ export default function JestersPrivilege() {
           <g transform="matrix(0.203,0,0,0.203,441.265,911.431)">
             <motion.use
               variants={{
+                rest: {
+                  scale: 1,
+                  rotateY: 0,
+                  rotateZ: 0,
+                  translateX: 0,
+                  translateY: 0,
+                },
                 hover: {
                   scale: 2.5,
                   rotateY: 180,
@@ -63,6 +70,7 @@ export default function JestersPrivilege() {
                   translateY: 500,
                 },
               }}
+              initial={false}
               href="svg-cards.svg#joker"
               x="0"
               y="0"
