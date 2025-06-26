@@ -1,0 +1,104 @@
+@import url('https://fonts.googleapis.com/css2?family=EB+Garamond:ital,wght@0,400..800;1,400..800&family=UnifrakturCook:wght@700&display=swap');
+
+body {
+	font-family: "EB Garamond", serif;
+	font-weight: 400;
+	margin: 0;
+	padding: 0;
+	text-align: left;
+	word-wrap: break-word;
+	overflow-wrap: break-word;
+	@apply text-blue-100 text-lg leading-relaxed;
+}
+h1,
+h2,
+h3,
+h4,
+h5,
+h6 {
+	@apply mb-2 leading-tight;
+}
+h1 {
+	@apply text-5xl;
+}
+h2 {
+	@apply text-4xl;
+}
+h3 {
+	@apply text-3xl;
+}
+h4 {
+	@apply text-2xl;
+}
+h5 {
+	@apply text-xl;
+}
+strong,
+b {
+	@apply font-bold;
+}
+a {
+	@apply text-emerald-600;
+}
+a:hover {
+	@apply text-emerald-800;
+}
+p {
+	@apply mb-4;
+}
+.prose p {
+	@apply mb-8 indent-8;
+}
+textarea {
+	@apply w-full text-base;
+}
+input {
+	@apply text-base;
+}
+table {
+	width: 100%;
+}
+code {
+	padding: 2px 5px;
+	border-radius: 2px;
+}
+pre {
+	padding: 1.5em;
+	border-radius: 8px;
+}
+pre > code {
+	all: unset;
+}
+blockquote {
+	@apply border-l-4 border-emerald-600 pl-5 m-0 text-xl;
+}
+hr {
+	border: none;
+	@apply border-t border-gray-200;
+}
+@media (max-width: 720px) {
+	body {
+		@apply text-base;
+	}
+	main {
+		@apply p-4;
+	}
+}
+
+.sr-only {
+	border: 0;
+	padding: 0;
+	margin: 0;
+	position: absolute !important;
+	height: 1px;
+	width: 1px;
+	overflow: hidden;
+	/* IE6, IE7 - a 0 height clip, off to the bottom right of the visible 1px box */
+	clip: rect(1px 1px 1px 1px);
+	/* maybe deprecated but we need to support legacy browsers */
+	clip: rect(1px, 1px, 1px, 1px);
+	/* modern browsers, clip-path works inwards from each corner */
+	clip-path: inset(50%);
+	/* added line to stop words getting smushed together (as they go onto separate lines and some screen readers do not understand line feeds as a space */
+	white-space: nowrap;
+}

@@ -1,0 +1,49 @@
+{
+  "name": "@ecumene/ui",
+  "version": "1.0.0",
+  "description": "UI components for ecumene",
+  "type": "module",
+  "main": "./src/index.tsx",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "clean": "rm -rf dist",
+    "build": "tsc",
+    "format": "prettier --check",
+    "format:fix": "prettier --write",
+    "lint": "eslint --max-warnings 0",
+    "lint:fix": "eslint --max-warnings 0 --fix",
+    "package": "yarn clean && yarn build && yarn pack --out ./dist/%s-%v.tgz",
+    "publish": "yarn clean && yarn build && yarn npm publish"
+  },
+  "dependencies": {
+    "react": "18.3.1",
+    "react-dom": "18.3.1",
+    "astro": "4.11.3"
+  },
+  "devDependencies": {
+    "@astrojs/check": "0.7.0",
+    "@astrojs/mdx": "3.1.2",
+    "@astrojs/react": "3.6.0",
+    "@astrojs/rss": "4.0.7",
+    "@astrojs/sitemap": "3.1.6",
+    "@astrojs/tailwind": "5.1.0",
+    "@types/react": "18.3.3",
+    "@types/react-dom": "18.3.0",
+    "@eslint/js": "9.8.0",
+    "@tsconfig/node18": "18.2.4",
+    "@tsconfig/strictest": "2.0.5",
+    "@types/eslint-config-prettier": "6.11.3",
+    "@types/eslint__js": "8.42.3",
+    "@types/node": "18.19.0",
+    "@typescript-eslint/eslint-plugin": "7.18.0",
+    "@typescript-eslint/parser": "7.18.0",
+    "eslint": "9.6.0",
+    "eslint-config-prettier": "9.1.0",
+    "eslint-plugin-import": "2.29.1",
+    "eslint-plugin-simple-import-sort": "12.0.0",
+    "prettier": "3.2.5",
+    "tslib": "2.4.0",
+    "typescript": "5.5.2",
+    "typescript-eslint": "7.16.0"
+  }
+}

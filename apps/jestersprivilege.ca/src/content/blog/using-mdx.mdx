@@ -1,0 +1,55 @@
+---
+title: "BLAM! Engine assets in Unity"
+description: "Porting Halo CE assets to Unity3D for fun and profit"
+pubDate: "Jun 01 2024"
+heroImage: "/guilty-spark.webp"
+draft: true
+---
+
+I'm the kinda guy that reads a book and it becomes their personality. Snowcrash was a recent revelation for me. Not because it coined the term "Metaverse" but because of its deep chapters on the Sumerian language and culture. The main character, a hacker ninja honestly named first name "Hiro" last name "Protagonist" has this AI persona he chats with in VR while toying with a hyper-realistic realtime-satelite photographed globe. Chatting with AI in VR is a Sci-fi thing thats unimaginable in the 90s when Snowcrash was written but entirely practical today.
+
+## AI Personas
+
+At Spellbook I build Agents for Legal but AI personas are still facinating. I'm not the only one, CharacterAI (ChatGPT but chatting with Video Game, Movie or Book characters) has 28 million active users. Why? Because LLMs are capable of answering deeper questions than a search engine. It's helped me do IT at our office, pick a good floor cleaner for linoleum, choose books to read so I can better help my friends, it's just amazing.
+
+## Realtime Voice vs Voice Mode
+
+I use Realtime Voice in ChatGPT daily. Realtime Voice is so much more immersive than texting because it conveys tone and listens to you. It can quickly switch from an impartial teacher to a chummy bar buddy. At this point if you haven't tried it you're missing out. We're probably pretty far from a CharacterAI-like service from spinning up Realtime Voice personalities. What's the difference between Realtime Voice and Voice Mode? Voice Mode uses Speech to Text to lossy-transcribe your words to text (removing tone), passes that to an LLM to complete to text, then reads that text back with Text to Speech. Realtime Voice is a model that encodes the audio you say directly to tokens. It can sense when you're agitated and can indicate frustration too. It's end-to-end voice. CharacterAI has a Voice Mode but it only kind-of sounds emotional when it wants to since the AI is just transcribing, writing, and speaking. It's not end-to-end with audio, yet.
+
+## Implementing OpenAI's Realtime Audio in VR
+
+How would we bring Realtime Audio from OpenAI into VR? Well, first off there's a Realtime Voice API. It's simple: you specify which model and prompt you want to use just as any other model but you also give it new parameters that are distinct from other OpenAI APIs like Turn Detection for letting the server decide when the user has stopped speaking. You also must connect using either Websockets or WebRTC instead of HTTP like other APIs use. Once you're connected to a session, you send your raw mono 16-bit PCM at a 24kHz sample rate in socket messages and the server responds with Tool Calls, Call Transcriptions, and of course, model-generated audio. You append that audio to a buffer and read it. Ooh-rah!
+
+## Unity Implementation
+
+Once I got all this working in C# I moved my code over to Unity. It worked using NAudio but I wanted my code to be cross-platform by using built-in Unity audio.
+
+### Recording in Unity
+
+[Details about implementing 24kHz PCM16 recording in Unity]
+
+### Audio Playback
+
+[Details about implementing procedural audio playback in Unity]
+
+### Audio Effects
+
+[Details about implementing low-pass filters and robotic voice effects]
+
+## Visual Effects
+
+### Terrain and Environment
+
+[Details about implementing Halo terrain and foliage]
+
+### Lighting and Sky
+
+[Details about implementing skybox, emission textures, and custom sun]
+
+### Special Effects
+
+[Details about implementing lens flares and their modulation with Fourier analysis]
+
+### Shaders
+
+[Details about implementing Halo shader]

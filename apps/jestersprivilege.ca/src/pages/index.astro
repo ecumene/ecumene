@@ -1,0 +1,48 @@
+---
+import Jester from "../../public/jester1.svg";
+import Header from "../components/Header.astro";
+import Footer from "../components/Footer.astro";
+import EssayCard from "../components/EssayCard.astro";
+import { getCollection } from "astro:content";
+const posts = await getCollection("blog", ({ data }) => !data.draft);
+import Layout from "../layouts/layout.astro";
+---
+
+<Layout>
+  <Header />
+  <main class="flex flex-col items-center gap-9 max-w-screen-sm mx-auto my-52">
+    <h1
+      class="font-display text-[4rem] flex items-center flex-col sm:flex-row gap-4 text-center"
+    >
+      <img alt="Jester" transition:name="jester" class="w-24" {...Jester} />
+      Jester's Privilege
+    </h1>
+    <p class="text-[1.6rem] border-l-4 border-emerald-600 pl-4">
+      <i>noun.</i> the ability and right of a jester to talk and mock freely without
+      being punished; for nothing he says seems to matter.
+    </p>
+    <a href="https://mitchellhynes.com" class="text-emerald-600"
+      >By Mitchell Hynes</a
+    >
+  </main>
+  <div class="max-w-screen-sm mx-auto my-12">
+    {
+      posts.length === 0 ? (
+        <p class="text-center text-gray-500 italic">
+          No posts yet. Check back soon!
+        </p>
+      ) : (
+        posts.map((post) => (
+          <EssayCard
+            title={post.data.title}
+            description={post.data.description}
+            date={post.data.pubDate}
+            slug={post.slug}
+            image={post.data.heroImage}
+          />
+        ))
+      )
+    }
+  </div>
+  <Footer />
+</Layout>

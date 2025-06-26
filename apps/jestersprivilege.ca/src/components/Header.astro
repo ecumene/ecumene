@@ -1,0 +1,31 @@
+---
+import HeaderLink from "./HeaderLink.astro";
+import Jester from "../../public/jester1.svg";
+import { Image } from "astro:assets";
+
+const isIndex = Astro.url.pathname === "/";
+---
+
+<header>
+  <nav>
+    <div class="italic p-8 flex gap-4 justify-between items-center">
+      {
+        !isIndex && (
+          <a href="/" class="absolute">
+            <Image
+              alt="Jester"
+              transition:name="jester"
+              class="w-12"
+              loading="eager"
+              src={Jester}
+            />
+          </a>
+        )
+      }
+      <div class="flex gap-4 ml-auto">
+        <HeaderLink href="/">Blog</HeaderLink>
+        <HeaderLink href="https://mitchellhynes.com">My Website</HeaderLink>
+      </div>
+    </div>
+  </nav>
+</header>

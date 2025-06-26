@@ -1,36 +1,21 @@
 {
   "name": "ecumene",
-  "type": "module",
-  "version": "0.0.1",
+  "version": "1.0.0",
+  "private": true,
+  "workspaces": [
+    "packages/*",
+    "apps/*"
+  ],
   "scripts": {
-    "dev": "astro dev",
-    "start": "astro dev",
-    "build": "astro check && astro build",
-    "preview": "astro preview",
-    "astro": "astro"
+    "mitchellhynes.com:build": "cd apps/mitchellhynes.com && yarn build",
+    "mitchellhynes.com:start": "cd apps/mitchellhynes.com && yarn start",
+    "mitchellhynes.com:dev": "cd apps/mitchellhynes.com && yarn dev",
+    "mitchellhynes.com:preview": "cd apps/mitchellhynes.com && yarn preview",
+    "jestersprivilege.ca:build": "cd apps/jestersprivilege.ca && yarn build",
+    "jestersprivilege.ca:start": "cd apps/jestersprivilege.ca && yarn start",
+    "jestersprivilege.ca:dev": "cd apps/jestersprivilege.ca && yarn dev",
+    "jestersprivilege.ca:preview": "cd apps/jestersprivilege.ca && yarn preview"
   },
-  "dependencies": {
-    "@astrojs/check": "^0.7.0",
-    "@astrojs/mdx": "^3.1.2",
-    "@astrojs/react": "^3.6.0",
-    "@astrojs/rss": "^4.0.7",
-    "@astrojs/sitemap": "^3.1.6",
-    "@astrojs/tailwind": "^5.1.0",
-    "@types/react": "^18.3.3",
-    "@types/react-dom": "^18.3.0",
-    "astro": "^4.11.3",
-    "csv-parse": "^5.5.6",
-    "framer-motion": "^11.2.12",
-    "lucide-react": "^0.399.0",
-    "react": "^18.3.1",
-    "react-dom": "^18.3.1",
-    "tailwindcss": "^3.4.4",
-    "typescript": "^5.5.2"
-  },
-  "devDependencies": {
-    "@typescript-eslint/eslint-plugin": "^7.14.1",
-    "@typescript-eslint/parser": "^7.14.1",
-    "eslint": "^9.6.0",
-    "eslint-plugin-react": "^7.34.3"
-  }
+  "dependencies": {},
+  "devDependencies": {}
 }

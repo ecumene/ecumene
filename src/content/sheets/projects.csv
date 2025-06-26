@@ -1,8 +1,0 @@
-date,projectName,description,link,technologies
-"Jan 2024","dutch-blitz-js","Multiplayer dutch blitz in your browser","https://mitch-blitz.vercel.app","Reflect.net, React, Typescript"
-"July 2022","dagster-pydantic","Pydantic Runtime Type Validation between Dagster Ops","https://github.com/ecumene/dagster-pydantic","Python, Dagster, Pypi"
-"June 2019","Rust Sloth","Rust Library and CLI for generating ASCII art from 3D Models","https://github.com/ecumene/rust-sloth","Rust, OBJ"
-"April 2022","SFN Vis","Visualize Step Functions running Locally","https://mitchellhynes.com/","Rust, Typescript, Docker"
-"March 2019","Colco-rs","A 3D molecule viewer written with glow-rs","https://mitchellhynes.com/","Crates.io, Rust, WebGL"
-"Feb 2023","MaryCode","Automatically do your Mary Browns TellMary","https://github.com/ecumene/marycode","Vercel, Typescript"
-"Jan 2022","Faber.gg","Create 3D models in seconds using AI","https://faber.gg/","Vercel, Typescript, Runpod"
