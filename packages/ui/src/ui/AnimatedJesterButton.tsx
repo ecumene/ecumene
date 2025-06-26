@@ -55,14 +55,8 @@ export default function JestersPrivilege() {
         <g id="joker_full" transform="translate(1.25,-736.02999)">
           <g transform="matrix(0.203,0,0,0.203,441.265,911.431)">
             <motion.use
+              key={cards.src}
               variants={{
-                rest: {
-                  scale: 1,
-                  rotateY: 0,
-                  rotateZ: 0,
-                  translateX: 0,
-                  translateY: 0,
-                },
                 hover: {
                   scale: 2.5,
                   rotateY: 180,
@@ -71,7 +65,6 @@ export default function JestersPrivilege() {
                   translateY: 500,
                 },
               }}
-              initial={false}
               href={`${cards.src}#joker`}
               x="0"
               y="0"
@@ -81,6 +74,7 @@ export default function JestersPrivilege() {
           </g>
           <g transform="matrix(0.91,0.415,0.415,-0.91,45.691,911.1)">
             <motion.use
+              key={cards.src}
               variants={{
                 hover: {
                   translateX: -10,
@@ -97,6 +91,7 @@ export default function JestersPrivilege() {
           </g>
           <g transform="matrix(0.968,-0.249,-0.249,-0.968,57.447,931.033)">
             <motion.use
+              key={cards.src}
               variants={{
                 hover: {
                   scale: 1.5,
@@ -114,6 +109,7 @@ export default function JestersPrivilege() {
           </g>
           <g transform="matrix(0.875,0.485,0.485,-0.875,80.395,932.899)">
             <motion.use
+              key={cards.src}
               variants={{
                 hover: {
                   scale: 1.5,
@@ -130,6 +126,7 @@ export default function JestersPrivilege() {
           </g>
           <g transform="matrix(0.961,-0.277,-0.277,-0.961,56.06,885.779)">
             <motion.use
+              key={cards.src}
               variants={{
                 hover: {
                   scale: 1.5,
