@@ -4,6 +4,8 @@ import { useEffect, useState } from "react";
 export default function JestersPrivilege() {
   const [svgLoaded, setSvgLoaded] = useState(false);
 
+  // HACK: The animation won't play on slow connections without this,
+  // because the measurements are wrong until the SVG is loaded.
   useEffect(() => {
     const img = new Image();
     img.onload = () => setSvgLoaded(true);
