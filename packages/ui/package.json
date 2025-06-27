@@ -4,6 +4,12 @@
   "description": "UI components for ecumene",
   "type": "module",
   "main": "./src/index.tsx",
+  "exports": {
+    ".": "./src/index.tsx",
+    "./src": "./src/index.tsx",
+    "./src/*": "./src/*",
+    "./package.json": "./package.json"
+  },
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
     "clean": "rm -rf dist",

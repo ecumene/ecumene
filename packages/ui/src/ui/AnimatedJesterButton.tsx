@@ -1,7 +1,19 @@
-import { cards } from "./Card";
 import { motion } from "framer-motion";
+import { useEffect, useState } from "react";
 
 export default function JestersPrivilege() {
+  const [svgLoaded, setSvgLoaded] = useState(false);
+
+  useEffect(() => {
+    const img = new Image();
+    img.onload = () => setSvgLoaded(true);
+    img.src = "/cards.svg";
+  }, []);
+
+  if (!svgLoaded) {
+    return null;
+  }
+
   return (
     <motion.a
       href="https://jestersprivilege.ca"
@@ -55,7 +67,6 @@ export default function JestersPrivilege() {
         <g id="joker_full" transform="translate(1.25,-736.02999)">
           <g transform="matrix(0.203,0,0,0.203,441.265,911.431)">
             <motion.use
-              key={cards.src}
               variants={{
                 hover: {
                   scale: 2.5,
@@ -65,7 +76,7 @@ export default function JestersPrivilege() {
                   translateY: 500,
                 },
               }}
-              href={`${cards.src}#joker`}
+              href={`/cards.svg#joker`}
               x="0"
               y="0"
               width="100%"
@@ -74,7 +85,6 @@ export default function JestersPrivilege() {
           </g>
           <g transform="matrix(0.91,0.415,0.415,-0.91,45.691,911.1)">
             <motion.use
-              key={cards.src}
               variants={{
                 hover: {
                   translateX: -10,
@@ -82,7 +92,7 @@ export default function JestersPrivilege() {
                   scale: 1.5,
                 },
               }}
-              href={`${cards.src}#heart`}
+              href={`/cards.svg#heart`}
               x="0"
               y="0"
               width="100%"
@@ -91,7 +101,6 @@ export default function JestersPrivilege() {
           </g>
           <g transform="matrix(0.968,-0.249,-0.249,-0.968,57.447,931.033)">
             <motion.use
-              key={cards.src}
               variants={{
                 hover: {
                   scale: 1.5,
@@ -100,7 +109,7 @@ export default function JestersPrivilege() {
                   translateY: 100,
                 },
               }}
-              href={`${cards.src}#diamond`}
+              href={`/cards.svg#diamond`}
               x="0"
               y="0"
               width="100%"
@@ -109,7 +118,6 @@ export default function JestersPrivilege() {
           </g>
           <g transform="matrix(0.875,0.485,0.485,-0.875,80.395,932.899)">
             <motion.use
-              key={cards.src}
               variants={{
                 hover: {
                   scale: 1.5,
@@ -117,7 +125,7 @@ export default function JestersPrivilege() {
                   translateY: 180,
                 },
               }}
-              href={`${cards.src}#club`}
+              href={`/cards.svg#club`}
               x="0"
               y="0"
               width="100%"
@@ -126,7 +134,6 @@ export default function JestersPrivilege() {
           </g>
           <g transform="matrix(0.961,-0.277,-0.277,-0.961,56.06,885.779)">
             <motion.use
-              key={cards.src}
               variants={{
                 hover: {
                   scale: 1.5,
@@ -135,7 +142,7 @@ export default function JestersPrivilege() {
                   translateY: 80,
                 },
               }}
-              href={`${cards.src}#spade`}
+              href={`/cards.svg#spade`}
               x="0"
               y="0"
               width="100%"

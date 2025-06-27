@@ -4,6 +4,8 @@
     "baseUrl": ".",
     "paths": {
       "@components/*": ["src/components/*"],
+      "@ecumene/ui": ["../../packages/ui/src/index.tsx"],
+      "@ecumene/ui/*": ["../../packages/ui/src/*"]
     },
     "strictNullChecks": true,
     "jsx": "react-jsx",

@@ -1,11 +1,11 @@
 ---
 import BaseHead from "../components/BaseHead.astro";
-import { JesterButton } from "@ecumene/ui/src/index";
+import { JesterButton } from "@ecumene/ui";
 import ProjectCard from "../components/ProjectCard";
-import Shape from '../vectorDisplays/Shape';
-import MyHead from '../vectorDisplays/MyHead';
-import MySignature from '../vectorDisplays/MySignature';
-import CardFan from '../components/CardFan';
+import Shape from "../vectorDisplays/Shape";
+import MyHead from "../vectorDisplays/MyHead";
+import MySignature from "../vectorDisplays/MySignature";
+import CardFan from "../components/CardFan";
 import { SITE_TITLE, SITE_DESCRIPTION } from "../consts";
 import type { Project } from "../types";
 
@@ -109,7 +109,7 @@ const projects: Project[] = parse(fileContent, {
               href="https://spellbook.legal">Spellbook</a
             >. I like learning new things and solving problems. I'm passionate
             about ancient books, rock music, cuban cigars and healthy tasty
-            food. I live in St. John's, Canada with my Fiancee and our two cats.
+            food. I live in St. John's, Canada with my Fiancée and our two cats.
           </p>
           <p class="max-w-sm mt-4">
             I have a blog called&nbsp;<a
@@ -125,9 +125,7 @@ const projects: Project[] = parse(fileContent, {
       </div>
 
       <div class="max-w-xl mx-auto mt-8 mb-32 flex flex-col gap-4">
-        {projects.map((project) => (
-          <ProjectCard project={project} />
-        ))}
+        {projects.map((project) => <ProjectCard project={project} />)}
       </div>
     </main>
   </body>
