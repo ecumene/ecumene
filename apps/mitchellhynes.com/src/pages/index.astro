@@ -19,9 +19,7 @@ const fileContent = fs.readFileSync(csvFilePath, { encoding: "utf-8" });
 const projects: Project[] = parse(fileContent, {
   columns: true,
   skip_empty_lines: true,
-}).sort(
-  (a: any, b: any) => new Date(b.date).getTime() - new Date(a.date).getTime()
-);
+});
 ---
 
 <!doctype html>

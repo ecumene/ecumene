@@ -1,12 +1,12 @@
 # [Mitchell Hynes](https://mitchellhynes.com)
 
-Full-Stack Developer at [Spellbook]( https://spellbook.legal ), Coach at [GetCoding](https://getcoding.ca)
+Full-Stack Developer at [Spellbook](https://spellbook.legal), Coach at [GetCoding](https://getcoding.ca)
 
 Previously: [Jungle Scout](https://junglescout.com), [Colab Software](https://colabsoftware.com), [SiftMed](https://siftmed.ca)
 
 **Projects**
 
-- [📦 (For-Fun Side-business) Faber.gg: Generate 3D models in seconds using AI](https://faber.gg/)
+- [📦 Faber.gg: Generate 3D models in seconds using AI](https://faber.gg/)
 - [🦥 Sloth: Render 3D in the terminal](https://github.com/ecumene/rust-sloth)
 - [🧬 .mol File Web Viewer](https://github.com/ecumene/colco-rs)
 - [🎮 Gamepad Mod for Minecraft Java Edition](https://github.com/ecumene/couchcraft)
