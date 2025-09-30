@@ -1,0 +1,40 @@
+---
+title: "Rust Sloth"
+description: "Rust Library and CLI for generating ASCII art from 3D Models"
+link: "https://github.com/ecumene/rust-sloth"
+technologies: "Rust, OBJ"
+pubDate: "June 2019"
+video: "/videos/pikachu.webm"
+---
+
+# Rendering 3D Graphics in Your Terminal (Because Why Not?)
+
+Sometimes you look at your terminal and think "you know what this needs? Spinning 3D models." Rust Sloth was born from that exact moment of questionable judgment. I wanted to see if I could build a proper 3D renderer that runs entirely in text mode, turning triangles and vertices into ASCII characters. Spoiler alert: you absolutely can, and it's simultaneously awesome and completely impractical.
+
+# What I Built
+
+Rust Sloth is a command-line 3D software rasterizer written in Rust. It takes OBJ files (the bread and butter of 3D modeling) and renders them directly in your terminal using ASCII characters. No OpenGL, no graphics cards, just pure software rendering with the power of Unicode box-drawing characters.
+
+The renderer implements a proper graphics pipeline: it parses OBJ files with the `tobj` crate, handles 3D transformations with `nalgebra`, and then rasterizes triangles pixel by pixel into a terminal buffer. It supports vertex colors, real-time rotation, and even exports to static images or JavaScript for web deployment.
+
+The coolest part? It's fast enough for real-time animation. You can watch a 3D Pikachu spinning in your terminal at 30fps while you pretend to be working. I even added support for multiple models, so you can render entire scenes composed of different OBJ files.
+
+# The Rasterization Reality Check
+
+The biggest challenge was implementing triangle rasterization from scratch. Turns out, going from "I want to draw a triangle" to actually having pixels on screen involves a lot of math I'd conveniently forgotten since computer graphics class. Barycentric coordinates, z-buffering, perspective projection - suddenly I was neck-deep in linear algebra.
+
+Getting the math right was one thing, but making it work in a terminal was another beast entirely. Terminal characters aren't pixels - they're rectangular cells with specific aspect ratios that vary between terminal emulators. A "pixel" in my renderer might be represented by a `#` character, but that character takes up way more horizontal space than vertical space.
+
+Performance was also brutal initially. Software rasterization is inherently expensive, and doing it in an interpreted terminal environment made everything sluggish. Early versions took multiple seconds to render a single frame of even simple models.
+
+# Embracing the Terminal's Quirks
+
+I solved the aspect ratio problem by implementing a terminal-aware coordinate system. Instead of treating the terminal like a square grid, I accounted for the actual character dimensions and adjusted the projection matrix accordingly. This made circles actually look round instead of stretched ovals.
+
+For performance, I went full Rust optimization mode. I used unsafe code for the hot paths, implemented custom memory pools to avoid allocations during rendering, and added multi-threading for triangle rasterization. The result was a renderer that could hit smooth 30fps on decent hardware.
+
+The real breakthrough was discovering that different Unicode characters could represent different "brightness" levels. Instead of just using `#` for pixels, I created a gradient from spaces to full blocks, effectively giving me grayscale rendering in the terminal. Combined with ANSI color codes, I could render surprisingly detailed 3D scenes.
+
+The JavaScript export feature was the cherry on top - I could generate self-contained HTML files with the 3D animation baked in. This meant you could render a model in your terminal, export it to the web, and share your ASCII art 3D masterpiece with the world.
+
+Looking back, Rust Sloth taught me that constraints breed creativity. When you can't rely on GPUs and fancy graphics APIs, you get really creative about what's possible with simple text characters. Plus, there's something deeply satisfying about watching a complex 3D model spin majestically in the place where you usually just run `ls` and wonder where your life went wrong.

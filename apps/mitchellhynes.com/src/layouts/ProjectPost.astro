@@ -1,0 +1,83 @@
+---
+import type { CollectionEntry } from "astro:content";
+import BaseHead from "../components/BaseHead.astro";
+import Header from "../components/Header.astro";
+import Footer from "../components/Footer.astro";
+import FormattedDate from "../components/FormattedDate.astro";
+
+type Props = CollectionEntry<"projects">["data"];
+
+const { title, description, pubDate, technologies, video, link } = Astro.props;
+---
+
+<html lang="en">
+  <head>
+    <BaseHead title={title} description={description} />
+  </head>
+
+  <body>
+    <Header />
+    <main>
+      <article>
+        <div
+          class="max-w-xl mx-auto px-4 md:px-0 py-6 md:py-10 text-foreground"
+        >
+          <div class="mb-4 md:mb-6">
+            <div class="text-sm text-gray-500 mb-2">
+              <FormattedDate date={pubDate} />
+            </div>
+            <div class="flex flex-wrap gap-2 mb-4">
+              {
+                technologies
+                  .split(",")
+                  .map((tech) => (
+                    <span class="px-2 py-1 bg-rose-100 rounded text-sm text-rose-800 font-bold">
+                      {tech.trim()}
+                    </span>
+                  ))
+              }
+            </div>
+            <h1 class="text-3xl md:text-4xl font-bold mb-4">
+              <a
+                href={link}
+                target="_blank"
+                rel="noopener noreferrer"
+                class="inline-flex items-center gap-2 hover:text-rose-800 transition-colors"
+              >
+                {title}
+                <svg
+                  xmlns="http://www.w3.org/2000/svg"
+                  class="h-6 w-6 md:h-8 md:w-8"
+                  fill="none"
+                  viewBox="0 0 24 24"
+                  stroke="currentColor"
+                >
+                  <path
+                    stroke-linecap="round"
+                    stroke-linejoin="round"
+                    stroke-width="2"
+                    d="M10 6H6a2 2 0 00-2 2v10a2 2 0 002 2h10a2 2 0 002-2v-4M14 4h6m0 0v6m0-6L10 14"
+                  ></path>
+                </svg>
+              </a>
+            </h1>
+            <hr class="border-0 border-t border-border my-4" />
+          </div>
+          <div class="mb-6 w-full overflow-hidden rounded-lg bg-gray-100">
+            <video
+              src={video}
+              autoplay
+              loop
+              muted
+              playsinline
+              class="w-full h-64 object-cover"></video>
+          </div>
+          <div class="post-content">
+            <slot />
+          </div>
+        </div>
+      </article>
+    </main>
+    <Footer />
+  </body>
+</html>

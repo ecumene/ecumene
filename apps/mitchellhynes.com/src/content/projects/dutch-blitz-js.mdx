@@ -1,0 +1,38 @@
+---
+title: "Dutch Blitz JS"
+description: "Multiplayer dutch blitz in your browser"
+link: "https://mitch-blitz.vercel.app"
+technologies: "Reflect.net, React, Typescript"
+pubDate: "Jan 2024"
+video: "/videos/blitz.webm"
+---
+
+# Real-Time Multiplayer Without the Headaches
+
+Building multiplayer games used to mean diving deep into WebSocket hell, managing connection states, and crying into your coffee when things inevitably desync. Dutch Blitz JS taught me that sometimes the best solution is to let someone else handle the hard parts. Enter Reflect.net - a service that makes real-time multiplayer feel like magic.
+
+# What I Built
+
+Dutch Blitz is this chaotic card game where everyone plays simultaneously - think Solitaire but everyone's competing for the same center piles and losing their minds trying to be fastest. Perfect for turning into a web game where people can lose their minds together from different continents.
+
+I built the whole thing in TypeScript with React for the UI. The game state management was the interesting part - every card movement, every pile change, every player action needed to sync instantly across all players. With Reflect.net handling the networking layer, I could focus on the game logic instead of reinventing WebSocket infrastructure.
+
+The game features real-time card animations, drag-and-drop mechanics, and most importantly, that frantic energy that makes Dutch Blitz addictive. Players can create rooms, join games, and watch their carefully laid plans get destroyed by someone being 0.1 seconds faster to a center pile.
+
+# The State Synchronization Puzzle
+
+The biggest challenge wasn't the networking - Reflect.net handled that beautifully. The real problem was designing a game state that could handle the chaos of simultaneous play. In Dutch Blitz, multiple players can try to play cards to the same pile at the exact same moment. Who wins? How do you handle conflicts without making the game feel laggy?
+
+I initially tried optimistic updates where each client would immediately show their move and then reconcile with the server. This worked great until two players tried to play the same card at the same time, creating this bizarre quantum state where cards existed in multiple places until the server decided reality.
+
+The UI was another nightmare. Cards needed to animate smoothly during moves, but also snap back if the server rejected the move. Getting the drag-and-drop to feel responsive while still maintaining game integrity was like threading a needle while riding a roller coaster.
+
+# Embracing Authoritative Game State
+
+I solved the conflict resolution by implementing a strict turn-based micro-system within the real-time framework. Sounds contradictory, but hear me out: players can initiate actions anytime, but the server processes them in a deterministic order with microsecond timestamps. First request wins, others get rejected gracefully.
+
+For the UI, I implemented a two-phase animation system. Optimistic moves play immediately with a "pending" visual state, then either commit or smoothly revert based on server response. Players see their actions instantly but understand when they've been out-maneuvered.
+
+Reflect.net's built-in state reconciliation made this possible without me having to build custom CRDT systems or operational transforms. I could focus on making the game fun instead of becoming a distributed systems PhD.
+
+The result? A game that feels as snappy as local play but works perfectly with players across the globe. Watching four people frantically clicking cards while trash-talking in the chat was exactly the chaotic energy I was going for. Plus, I learned that sometimes the best architecture decision is choosing the right tools and getting out of their way.

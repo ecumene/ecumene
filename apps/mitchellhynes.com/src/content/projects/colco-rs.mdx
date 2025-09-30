@@ -1,0 +1,50 @@
+---
+title: "Colco-rs"
+description: "A 3D molecule viewer written with glow-rs"
+link: "https://github.com/ecumene/colco-rs/"
+technologies: "Crates.io, Rust, WebGL"
+pubDate: "March 2019"
+video: "/videos/colco.webm"
+---
+
+# WebGL Molecular Visualization in the Browser's Dark Ages
+
+Back in 2019, WebAssembly was still the new hotness and everyone was trying to figure out what you could actually do with it. I decided to find out by building a 3D molecular viewer that runs entirely in the browser using Rust compiled to WASM. Colcothar (the chemical name for rust - get it?) was my dive into the deep end of browser-based scientific visualization.
+
+# What I Built
+
+Colco-rs is a WebGL-powered 3D molecule viewer that runs as a single WASM binary in your browser. It takes molecular data files (specifically .mol files from RDKit), parses the atomic structure, and renders interactive 3D visualizations using sphere-and-stick models. The entire rendering pipeline is written in Rust using glow-rs for WebGL bindings.
+
+The viewer supports the same UX as [MolView](https://molview.org/) - you can rotate molecules, zoom in to see bond details, and adjust rendering parameters like atom size and bond thickness. All the 3D model data (spheres for atoms, cylinders for bonds) gets embedded directly into the WASM binary during compilation, making it completely self-contained.
+
+I used stdweb for the browser integration and glam for 3D math operations. The build pipeline uses cargo-web to compile everything to WebAssembly, and there's even an npm package so you can easily embed molecular viewers in web applications with just a few lines of JavaScript.
+
+# Fighting Kilobytes
+
+Here's the thing about WebAssembly in 2019: it was fast. Memory passing between WASM and WebGL? Not a problem. The rendering performance was great right out of the gate.
+
+The actual problem was binary size.
+
+I was competing with JavaScript libraries that were only 300KB. Meanwhile, my Rust + WASM binary kept ballooning. I needed to get under 300KB to be competitive, but every time I added a feature or included a crate, the binary would explode in size.
+
+WASM binaries include a lot of overhead. Standard library functions, panic handlers, memory allocators - all that Rust infrastructure you get for free suddenly matters when you're shipping to browsers. A simple dependency could add 100KB.
+
+# The War on Bytes
+
+I spent a lot of time stripping out every unnecessary piece of code. I removed entire library dependencies and rewrote functionality by hand. Any complex parsing or computation that didn't absolutely need to happen in the browser got moved to a Python Flask service running RDKit.
+
+The Flask service handled the heavy molecular data processing - parsing .mol files, computing stereochemistry, generating atomic coordinates. The WASM binary just had to render what it received. This offloading strategy was crucial for keeping the client-side bundle small.
+
+I went through multiple rounds of optimization:
+
+- Stripped out debug symbols and panic strings
+- Used `opt-level = 'z'` for size optimization
+- Replaced dependencies with hand-rolled minimal implementations
+- Aggressively marked functions as `#[inline(never)]` to prevent code bloat
+- Used wasm-opt with every aggressive flag I could find
+
+Final result? 726KB.
+
+Not under my 300KB target, but close enough to ship. The performance was excellent, the rendering was smooth, and the viewer worked. But I learned a hard lesson: when you're competing with JavaScript on bundle size, you're fighting an uphill battle with WASM.
+
+This project taught me that WebAssembly's real strength isn't performance at all - it's bringing systems-level programming practices to the browser. Memory safety, zero-cost abstractions, and fearless concurrency make building complex browser applications feel more like writing native code than wrestling with JavaScript's quirks. Plus, there's something deeply satisfying about rendering molecules in a language named after oxidized iron.

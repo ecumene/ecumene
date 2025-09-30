@@ -1,0 +1,44 @@
+---
+title: "Faber.gg"
+description: "Create 3D models in seconds using AI"
+link: "https://faber.gg/"
+technologies: "Vercel, Typescript, Runpod"
+pubDate: "Jan 2022"
+video: "/videos/faber.webm"
+---
+
+# Building AI-Powered 3D Generation Before It Was Cool
+
+I built Faber.gg in early 2022, way before everyone and their dog was talking about AI generation. The idea was simple: upload an image, get a 3D model. I built it using TypeScript for the frontend, deployed on Vercel, and used RunPod for the GPU compute.
+
+# What I Built
+
+Faber.gg was a web application that used AI to generate 3D models from 2D images. Users could upload a photo and get back a 3D mesh they could download and use in their projects. The pipeline was: user uploads image → RunPod processes it with AI → mesh gets returned.
+
+But here's the thing - the raw output from the AI was borderline useless for actual game development. You'd get these insanely high-poly raymarched models with vertex colors but no proper textures. That's where the real engineering challenge began.
+
+# The Mesh Processing Problem
+
+The hardest part of this project wasn't the AI generation - RunPod handled that. The hardest part was making the meshes actually useful.
+
+I needed to convert these high-poly, vertex-colored raymarched models into decimated, properly textured assets that you could actually use in something like Unity. For that, I needed Blender. But where do you run Blender in a serverless architecture?
+
+I ended up running Blender in AWS Lambda. This led to a crucial discovery: Lambda memory is tied to CPU. When you're trying to process massive 3D meshes, this is a game-changer. More memory meant more CPU power, which meant I could actually decimate these models efficiently.
+
+# The Python Pipeline
+
+I wrote a Python script that orchestrated the entire mesh processing pipeline in Lambda:
+
+1. Take the raw high-poly raymarched model with vertex colors from the AI
+2. Load it into Blender programmatically
+3. Decimate the mesh to reduce polygon count
+4. Bake the vertex colors into proper UV-mapped textures
+5. Export a clean, game-ready asset
+
+The script had to handle all of this automatically, without any GUI, in a Lambda function. Getting Blender to run headless and perform these operations reliably took a lot of trial and error.
+
+# What I Learned
+
+This project taught me that the AI model is often the easiest part of an AI product. The real engineering is in making the output useful. You can have the best generation in the world, but if users can't actually use what you give them, it's worthless.
+
+I also learned a ton about serverless compute constraints and how to work around them. Running Blender in Lambda is not something AWS probably expected people to do, but it worked.
