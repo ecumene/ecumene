@@ -1,6 +1,6 @@
 import type { Project } from "../content/config";
 import { motion } from "framer-motion";
-import { useRef } from "react";
+import { useRef, useEffect, useState } from "react";
 
 export default function ProjectCard({
   slug,
@@ -10,15 +10,33 @@ export default function ProjectCard({
   project: Project;
 }) {
   const videoRef = useRef<HTMLVideoElement>(null);
+  const [isMobile, setIsMobile] = useState(false);
+
+  useEffect(() => {
+    const checkMobile = () => {
+      setIsMobile(window.innerWidth < 640); // sm breakpoint
+    };
+
+    checkMobile();
+    window.addEventListener("resize", checkMobile);
+
+    return () => window.removeEventListener("resize", checkMobile);
+  }, []);
+
+  useEffect(() => {
+    if (isMobile && videoRef.current) {
+      videoRef.current.play();
+    }
+  }, [isMobile]);
 
   const handleMouseEnter = () => {
-    if (videoRef.current) {
+    if (videoRef.current && !isMobile) {
       videoRef.current.play();
     }
   };
 
   const handleMouseLeave = () => {
-    if (videoRef.current) {
+    if (videoRef.current && !isMobile) {
       videoRef.current.pause();
       videoRef.current.currentTime = 0;
     }
@@ -27,7 +45,7 @@ export default function ProjectCard({
   return (
     <motion.a
       href={`/projects/${slug}`}
-      className="group cursor-pointer flex flex-row gap-4 p-6 rounded-lg border border-gray-200 hover:border-rose-800 overflow-hidden"
+      className="group cursor-pointer flex sm:flex-row flex-col sm:gap-4 p-6 rounded-lg border border-gray-200 hover:border-rose-800 overflow-hidden"
       whileHover={{
         scale: 1.03,
         boxShadow: "0 10px 25px rgba(0, 0, 0, 0.15)",
@@ -40,7 +58,7 @@ export default function ProjectCard({
       onMouseEnter={handleMouseEnter}
       onMouseLeave={handleMouseLeave}
     >
-      <div className="flex-shrink-0 w-48 h-32 overflow-hidden rounded-lg bg-gray-100 group-hover:-rotate-[5deg] group-hover:scale-150 transition-transform duration-300 ease-in-out">
+      <div className="flex-shrink-0 sm:w-48 sm:h-32 w-full h-48 overflow-hidden rounded-lg bg-gray-100 group-hover:-rotate-[5deg] group-hover:scale-150 transition-transform duration-300 ease-in-out">
         <video
           ref={videoRef}
           src={project.video}
