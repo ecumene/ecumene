@@ -1,6 +1,6 @@
 # [Mitchell Hynes](https://mitchellhynes.com)
 
-Full-Stack Developer at [Spellbook](https://spellbook.legal), Coach at [GetCoding](https://getcoding.ca)
+Full-Stack Developer at [Spellbook](https://spellbook.com), Coach at [GetCoding](https://getcoding.ca)
 
 Previously: [Jungle Scout](https://junglescout.com), [Colab Software](https://colabsoftware.com), [SiftMed](https://siftmed.ca)
 
