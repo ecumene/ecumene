@@ -48,7 +48,7 @@ export default function ImageGallery({
               loading="lazy"
             />
             {image.caption && (
-              <p className="text-sm text-gray-600 text-center group-hover:visible invisible">
+              <p className="text-xs md:text-sm text-gray-600 text-center mt-1 leading-snug">
                 {image.caption}
               </p>
             )}
@@ -70,7 +70,7 @@ export default function ImageGallery({
         render={{
           slideFooter: ({ slide }) =>
             slide.alt ? (
-              <div className="text-white text-center py-4 px-6 bg-black/50">
+              <div className="text-white text-center py-2 px-3 md:py-4 md:px-6 bg-black/50 text-xs md:text-sm leading-relaxed max-w-full break-words">
                 {slide.alt}
               </div>
             ) : null,
