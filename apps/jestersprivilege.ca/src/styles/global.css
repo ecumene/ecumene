@@ -72,6 +72,7 @@ pre > code {
 }
 blockquote {
 	@apply border-l-4 border-emerald-600 pl-5 m-0 text-base;
+	font-style: normal;
 }
 hr {
 	@apply my-6 border-t border-gray-300;

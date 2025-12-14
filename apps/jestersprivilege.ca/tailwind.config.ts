@@ -104,7 +104,16 @@ const config = {
       typography: {
         DEFAULT: {
           css: {
-            fontFamily: ['EB Garamond', 'serif'].join(', '),
+            fontFamily: ["EB Garamond", "serif"].join(", "),
+            blockquote: {
+              fontStyle: "normal",
+            },
+            "blockquote p:first-of-type::before": {
+              content: "none",
+            },
+            "blockquote p:last-of-type::after": {
+              content: "none",
+            },
           },
         },
       },
