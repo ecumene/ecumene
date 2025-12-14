@@ -3,7 +3,7 @@
 # Check for EXIF data in staged image files
 # Requires exiftool: brew install exiftool
 
-STAGED_IMAGES=$(git diff --cached --name-only --diff-filter=ACM | grep -iE '\.(jpg|jpeg|png|webp|tiff|heic)$' || true)
+STAGED_IMAGES=$(git diff --cached --name-only --diff-filter=ACM | grep -iE '\.(jpg|jpeg|png|webp|tiff|heic)$')
 
 if [ -z "$STAGED_IMAGES" ]; then
   exit 0

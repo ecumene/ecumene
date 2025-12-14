@@ -1,70 +1,56 @@
 ---
 import type { CollectionEntry } from "astro:content";
-import BaseHead from "../components/BaseHead.astro";
 import Footer from "../components/Footer.astro";
 import FormattedDate from "../components/FormattedDate.astro";
+import Layout from "./layout.astro";
 import Header from "../components/Header.astro";
-import { ClientRouter } from "astro:transitions";
 
 type Props = CollectionEntry<"blog">["data"];
 
-const { title, description, pubDate, updatedDate, heroImage } = Astro.props;
+const { title, pubDate, updatedDate, heroImage } = Astro.props;
 ---
 
-<!doctype html>
-<html lang="en">
-  <head>
-    <BaseHead title={title} description={description} image={heroImage} />
-    <meta property="og:type" content="article" />
-    <meta property="article:published_time" content={pubDate.toISOString()} />
-    {
-      updatedDate && (
-        <meta
-          property="article:modified_time"
-          content={updatedDate.toISOString()}
-        />
-      )
-    }
-    <ClientRouter />
-  </head>
-  <body>
-    <Header />
-    <main class="w-[calc(100%-2em)] max-w-full m-0">
-      <article>
-        <div class="w-full">
-          {
-            heroImage && (
-              <img
-                width={1020}
-                height={410}
-                src={heroImage}
-                alt=""
-                class="block mx-auto shadow-lg max-h-[410px] object-cover"
-              />
-            )
-          }
-        </div>
-        <div class="w-[720px] max-w-[calc(100%-2em)] mx-auto p-4 text-gray-900">
-          <div class="mb-4 py-4 text-center leading-none">
-            <div class="mb-2 text-gray-600">
-              <FormattedDate date={pubDate} />
-              {
-                updatedDate && (
-                  <div class="italic">
-                    Last updated on <FormattedDate date={updatedDate} />
-                  </div>
-                )
-              }
-            </div>
-            <h1 class="mb-2">{title}</h1>
-            <hr />
+<Layout>
+  <Header />
+  <main class="md:w-[calc(100%-2em)] max-w-full m-0">
+    <article>
+      <div class="w-full">
+        {
+          heroImage && (
+            <img
+              width={1020}
+              height={410}
+              src={heroImage}
+              alt=""
+              class="block mx-auto shadow-lg max-h-[410px] object-cover"
+            />
+          )
+        }
+      </div>
+      <div
+        class="md:w-[720px] md:max-w-[calc(100%-2em)] md:mx-auto md:p-4 text-gray-900"
+      >
+        <div class="mb-8 py-4 text-center leading-none">
+          <div class="mb-2 text-gray-600">
+            <FormattedDate date={pubDate} />
+            {
+              updatedDate && (
+                <div class="italic">
+                  Last updated on <FormattedDate date={updatedDate} />
+                </div>
+              )
+            }
           </div>
-          <div class="prose prose-xl">
-            <slot />
-          </div>
+          <h1 class="mb-2 font-serif">{title}</h1>
+          <hr />
         </div>
-      </article>
-    </main>
-    <Footer />
-  </body>
-</html>
+        <div
+          class="prose prose-sm sm:prose-base lg:prose-lg xl:prose-xl 2xl:prose-2xl mx-auto"
+        >
+          <slot />
+        </div>
+      </div>
+    </article>
+  </main>
+  <Footer />
+</Layout>

@@ -105,6 +105,33 @@ const config = {
         DEFAULT: {
           css: {
             fontFamily: ["EB Garamond", "serif"].join(", "),
+            h1: {
+              fontFamily: ["EB Garamond", "serif"].join(", "),
+              fontWeight: "inherit",
+            },
+            h2: {
+              fontFamily: ["EB Garamond", "serif"].join(", "),
+              fontWeight: "inherit",
+            },
+            h3: {
+              fontFamily: ["EB Garamond", "serif"].join(", "),
+              fontWeight: "inherit",
+            },
+            h4: {
+              fontFamily: ["EB Garamond", "serif"].join(", "),
+              fontWeight: "inherit",
+            },
+            h5: {
+              fontFamily: ["EB Garamond", "serif"].join(", "),
+              fontWeight: "inherit",
+            },
+            h6: {
+              fontFamily: ["EB Garamond", "serif"].join(", "),
+              fontWeight: "inherit",
+            },
+            strong: {
+              fontWeight: "inherit",
+            },
             blockquote: {
               fontStyle: "normal",
             },
