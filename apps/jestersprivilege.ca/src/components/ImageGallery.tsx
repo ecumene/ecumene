@@ -48,7 +48,7 @@ export default function ImageGallery({
               loading="lazy"
             />
             {image.caption && (
-              <p className="text-xs md:text-sm text-gray-600 text-center mt-1 leading-snug">
+              <p className="text-sm text-gray-600 text-center mt-1">
                 {image.caption}
               </p>
             )}
@@ -67,10 +67,27 @@ export default function ImageGallery({
         }))}
         controller={{ closeOnBackdropClick: true }}
         carousel={{ finite: images.length <= 1 }}
+        styles={{
+          container: { backgroundColor: "rgba(0, 0, 0, 0.9)" },
+        }}
         render={{
           slideFooter: ({ slide }) =>
             slide.alt ? (
-              <div className="text-white text-center py-2 px-3 md:py-4 md:px-6 bg-black/50 text-xs md:text-sm leading-relaxed max-w-full break-words">
+              <div
+                style={{
+                  position: "absolute",
+                  bottom: 0,
+                  left: 0,
+                  right: 0,
+                  padding: "16px",
+                  background: "rgba(0, 0, 0, 0.6)",
+                  color: "white",
+                  textAlign: "center",
+                  wordWrap: "break-word",
+                  overflowWrap: "break-word",
+                  whiteSpace: "normal",
+                }}
+              >
                 {slide.alt}
               </div>
             ) : null,
