@@ -8,7 +8,7 @@ body {
 	text-align: left;
 	word-wrap: break-word;
 	overflow-wrap: break-word;
-	@apply text-blue-100 text-lg leading-relaxed;
+	@apply text-blue-100 text-base leading-relaxed;
 }
 h1,
 h2,
@@ -49,6 +49,60 @@ p {
 .prose p {
 	@apply mb-8 indent-8;
 }
+.prose {
+	@apply text-base leading-relaxed;
+}
+.prose h1,
+.prose h2,
+.prose h3,
+.prose h4,
+.prose h5,
+.prose h6 {
+	@apply leading-tight;
+}
+.prose h1 {
+	@apply mt-10 mb-4 text-4xl;
+}
+.prose h2 {
+	@apply mt-8 mb-3 text-3xl;
+}
+.prose h3 {
+	@apply mt-6 mb-2 text-2xl;
+}
+.prose h4 {
+	@apply mt-4 mb-2 text-xl;
+}
+.prose h5 {
+	@apply mt-3 mb-2 text-lg;
+}
+.prose h6 {
+	@apply mt-2 mb-2 text-base;
+}
+/* Lists inside prose content (including blockquotes) */
+.prose ol {
+	list-style-type: decimal;
+	margin-left: 1.5rem;
+	margin-bottom: 1.5rem;
+}
+.prose ol li::marker {
+	@apply font-bold;
+}
+.prose ul {
+	list-style-type: disc;
+	margin-left: 1.5rem;
+	margin-bottom: 1.5rem;
+}
+.prose ol p,
+.prose ul p {
+	text-indent: 0;
+}
+.prose table p {
+	text-indent: 0;
+}
+blockquote ol,
+blockquote ul {
+	margin-top: 0.5rem;
+}
 textarea {
 	@apply w-full text-base;
 }
@@ -70,11 +124,17 @@ pre > code {
 	all: unset;
 }
 blockquote {
-	@apply border-l-4 border-emerald-600 pl-5 m-0 text-xl;
+	@apply border-l-4 border-emerald-600 pl-5 m-0 text-base;
+}
+.prose blockquote {
+	@apply text-base;
+}
+.prose blockquote p {
+	margin-top: 0;
+	text-indent: 0;
 }
 hr {
-	border: none;
-	@apply border-t border-gray-200;
+	@apply my-6 border-t border-gray-300;
 }
 @media (max-width: 720px) {
 	body {
