@@ -2,6 +2,201 @@
 title: "First Try at Building High-End Furniture"
 description: ""
 pubDate: "2025-12-14"
-heroImage: "/end-table.webp"
-draft: true
+heroImage: "/woodworking/end-table.webp"
 ---
+
+import ImageGallery from "../../components/ImageGallery.tsx";
+import Image from "../../components/Image.tsx";
+import SideBySide from "../../components/SideBySide.tsx";
+
+My first attempt at building a high-end piece of furniture.
+
+<SideBySide reverse>
+  <SideBySide.Media>
+    <Image
+      client:load
+      src="/woodworking/end-table-0.webp"
+      alt="Work in progress"
+    />
+  </SideBySide.Media>
+  <SideBySide.Content>
+    _October 2nd_
+    ### The only lumber yard in YYT
+
+    I began with some Walnut
+    Lumber I purchased from **Provincial Wood Products** in town. I don't have a
+    planer or jointer but chose rough boards and they charged $60 to mill it
+    for me.
+
+  </SideBySide.Content>
+</SideBySide>
+
+I used [CutList Optimizer](https://www.cutlistoptimizer.com/) to plan the cuts:
+
+<Image
+  client:load
+  src="/woodworking/end-table-cuts.webp"
+  alt="Walnut lumber cuts"
+/>
+
+Learning moment, I wish I had:
+
+- More closely matched the grain around the board
+- Was more careful copying the pattern and had a better way of doing that
+- Avoided knots somehow, but the software doesn't do that...
+
+## First cuts!
+
+This was super nerve-wracking. Every cut I was holding my breath because this wood is
+pricey. But after the first few rips were done, I built a cross-cutting jig and it got
+a lot more accurate then on.
+
+<ImageGallery
+  client:load
+  images={[
+    {
+      src: "/woodworking/end-table-1.webp",
+      alt: "Cross-Cut sled from the back. I built it using some old project pine + birch ply I had laying around.",
+      caption: "Cross-Cut sled from the back",
+    },
+    {
+      src: "/woodworking/end-table-2.webp",
+      alt: "Cross-Cut sled from the front. I bought these clamps from Amazon and I only regret not buying more. I would like to have jigs ready to go and reinstalling the claps from one to another is annoying.",
+      caption: "Cross-Cut sled from the front",
+    },
+    {
+      src: "/woodworking/end-table-3.webp",
+      alt: "You can see the little saw marks on the wood. This was my first time joining boards, and you'll see later why these are a problem if you don't deal with them.",
+      caption: "Some rough cuts",
+    },
+    {
+      src: "/woodworking/end-table-4.webp",
+      alt: "Jigs are incredible because you can make really accurate cuts with them, very quickly. You just line the empty space up with your mark and go!",
+      caption: "Cross-Cut sled loaded",
+    },
+  ]}
+  columns={2}
+/>
+
+## Gotta work with what you got
+
+_October 20th_
+
+This mistake / limitation cost me a good 3 weekend days of glueing, patching and fixing. But if I had a bigger table saw, it would have been less than a day and much more accurate.
+
+<SideBySide reverse>
+  <SideBySide.Content>
+    ### My hand-me-down tablesaw is small
+
+    The instructions say to glue the boards length-wise as shown and THEN make your horizontal width cuts at a 45, but I don't have a very big table saw.
+
+  </SideBySide.Content>
+  <SideBySide.Media>
+    <Image
+      client:load
+      src="/woodworking/end-table-20.webp"
+      alt="Pieces of walnut laid out like a flattened out box, not glued yet."
+    />
+  </SideBySide.Media>
+</SideBySide>
+
+<SideBySide reverse>
+  <SideBySide.Media>
+    <Image
+      client:load
+      src="/woodworking/end-table-21.webp"
+      alt="Pieces of walnut laid out like a flattened out box, not glued yet."
+    />
+  </SideBySide.Media>
+  <SideBySide.Content>
+    I had to cut each of these pieces INDIVIDUALLY then at a 45.
+
+    ### It took me days.
+
+    But if I was doing this for a nice end table, I would have went to Osmond's and saved time and money.
+
+  </SideBySide.Content>
+</SideBySide>
+
+## Glue is stronger than wood
+
+I could have left the boards at the length they were given to me, but glue is stronger than wood and the instructions used a different width of lumber so I wanted to follow.
+
+<ImageGallery
+  client:load
+  images={[
+    {
+      src: "/woodworking/end-table-18.webp",
+      alt: "Splurged on some bessy clamps because they're amazing.",
+      caption: "Glueing boards",
+    },
+    {
+      src: "/woodworking/end-table-17.webp",
+      alt: "It turned out okay. As I said, I don't have a jointer which would have really helped making these edges nicer. I also didn't have a hand plane at this point. That said, the other side was MUCH better so I just used that. I have a picture of this side because it was the worst of all of them for glue marks.",
+      caption: "Boards glued up",
+    },
+  ]}
+  columns={2}
+/>
+
+## My beautiful legs
+
+The legs were the trickiest part and I royally screwed up one of them, but I just used it for the back and nobody has noticed.
+
+<SideBySide reverse>
+  <SideBySide.Media>
+    <Image
+      client:load
+      src="/woodworking/end-table-13.webp"
+      alt="Pieces of walnut laid out like a flattened out box, not glued yet."
+    />
+  </SideBySide.Media>
+  <SideBySide.Content>
+    ### JIT: Jig in time?
+
+    I threw this jig together in ~30 mins. I lined up my cut lines from the bottom then clamped them.
+
+    It worked really well. It's not very fast but this completely replaces my need for a miter saw and it actually does more.
+
+    It's very safe, too. There's a rail on the bottom made of hardwood this time.
+
+  </SideBySide.Content>
+</SideBySide>
+
+<ImageGallery
+  client:load
+  images={[
+    {
+      src: "/woodworking/end-table-14.webp",
+      alt: "MY LEG!",
+      caption: "4 legs for the bottom",
+    },
+    {
+      src: "/woodworking/end-table-12.webp",
+      alt: "I cut some little pine blocks with sandpaper glued onto them to stop them from moving. Then, I used my parallel clamps on the pine blocks to tightly press it all together.",
+      caption: "Glueing blocks and the legs",
+    },
+  ]}
+  columns={2}
+/>
+
+### Much cleaner joints this time
+
+Because the tapering jig was well built the joints came out much nicer.
+
+<ImageGallery
+  client:load
+  images={[
+    {
+      src: "/woodworking/end-table-9.webp",
+      alt: "Don't look at the right side...",
+      caption: "Leg assembled",
+    },
+    {
+      src: "/woodworking/end-table-8.webp",
+      alt: "Miter's damn near perfect on this one! I'm still getting the hand of the sanding, so you can see the pigtails. I learned to not press so hard and to use clean disks every time.",
+      caption: "The miter joint, close up",
+    },
+  ]}
+  columns={2}
+/>

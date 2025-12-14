@@ -14,8 +14,10 @@
     "jestersprivilege.ca:build": "cd apps/jestersprivilege.ca && yarn build",
     "jestersprivilege.ca:start": "cd apps/jestersprivilege.ca && yarn start",
     "jestersprivilege.ca:dev": "cd apps/jestersprivilege.ca && yarn dev",
-    "jestersprivilege.ca:preview": "cd apps/jestersprivilege.ca && yarn preview"
+    "jestersprivilege.ca:preview": "cd apps/jestersprivilege.ca && yarn preview",
+    "prepare": "husky"
   },
-  "dependencies": {},
-  "devDependencies": {}
+  "devDependencies": {
+    "husky": "^9.1.7"
+  }
 }

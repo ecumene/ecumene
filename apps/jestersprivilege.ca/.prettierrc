@@ -1,0 +1,11 @@
+{
+  "proseWrap": "preserve",
+  "overrides": [
+    {
+      "files": ["*.mdx", "*.md"],
+      "options": {
+        "proseWrap": "preserve"
+      }
+    }
+  ]
+}

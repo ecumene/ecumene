@@ -1,0 +1,57 @@
+#!/bin/sh
+
+# Check for EXIF data in staged image files
+# Requires exiftool: brew install exiftool
+
+STAGED_IMAGES=$(git diff --cached --name-only --diff-filter=ACM | grep -iE '\.(jpg|jpeg|png|webp|tiff|heic)$')
+
+if [ -z "$STAGED_IMAGES" ]; then
+  exit 0
+fi
+
+echo "🔍 Checking staged images for EXIF data..."
+
+FAILED=0
+
+for file in $STAGED_IMAGES; do
+  if [ -f "$file" ]; then
+    # Check if exiftool is installed
+    if ! command -v exiftool &> /dev/null; then
+      echo "❌ exiftool is not installed. Install with: brew install exiftool"
+      exit 1
+    fi
+
+    # Check for GPS/location data specifically (most privacy-sensitive)
+    GPS_DATA=$(exiftool -gps:all -q "$file" 2>/dev/null)
+    
+    # Check for other identifying EXIF data
+    EXIF_DATA=$(exiftool -DateTimeOriginal -Make -Model -Software -Artist -Copyright -q "$file" 2>/dev/null)
+
+    if [ -n "$GPS_DATA" ]; then
+      echo "❌ $file contains GPS/location data!"
+      echo "$GPS_DATA"
+      FAILED=1
+    fi
+
+    if [ -n "$EXIF_DATA" ]; then
+      echo "⚠️  $file contains EXIF metadata:"
+      echo "$EXIF_DATA"
+      echo "   Run: exiftool -all= \"$file\" to strip it"
+      FAILED=1
+    fi
+  fi
+done
+
+if [ $FAILED -eq 1 ]; then
+  echo ""
+  echo "💡 To strip all EXIF data from images, run:"
+  echo "   exiftool -all= <file>"
+  echo ""
+  echo "   Or to strip from all staged images:"
+  echo "   git diff --cached --name-only | grep -iE '\\.(jpg|jpeg|png|webp)$' | xargs exiftool -all="
+  echo ""
+  exit 1
+fi
+
+echo "✅ No EXIF data found in staged images"
+exit 0
