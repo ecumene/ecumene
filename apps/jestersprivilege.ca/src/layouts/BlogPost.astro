@@ -5,12 +5,18 @@ import FormattedDate from "../components/FormattedDate.astro";
 import Layout from "./layout.astro";
 import Header from "../components/Header.astro";
 
-type Props = CollectionEntry<"blog">["data"];
+type Props = CollectionEntry<"blog">["data"] & { slug?: string };
 
-const { title, pubDate, updatedDate, heroImage } = Astro.props;
+const { title, description, pubDate, updatedDate, heroImage, slug } =
+  Astro.props;
+const ogImage = slug ? `/og/${slug}.png` : undefined;
 ---
 
-<Layout>
+<Layout
+  title={title}
+  description={description}
+  {...ogImage ? { image: ogImage } : {}}
+>
   <Header />
   <main class="md:w-[calc(100%-2em)] max-w-full m-0">
     <article>
