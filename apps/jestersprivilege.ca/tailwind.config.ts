@@ -130,7 +130,7 @@ const config = {
               fontWeight: "inherit",
             },
             strong: {
-              fontWeight: "inherit",
+              fontWeight: "700",
             },
             blockquote: {
               fontStyle: "normal",
