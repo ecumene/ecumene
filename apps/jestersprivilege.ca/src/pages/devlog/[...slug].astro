@@ -15,7 +15,6 @@ const devlog = Astro.props;
 const { Content } = await devlog.render();
 ---
 
-<DevlogPost {...devlog.data} slug={devlog.slug}>
+<DevlogPost {...devlog.data}>
   <Content />
 </DevlogPost>
-
