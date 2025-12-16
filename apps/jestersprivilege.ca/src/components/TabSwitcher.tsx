@@ -11,7 +11,9 @@ export default function TabSwitcher({
   defaultTab,
   onTabChange,
 }: TabSwitcherProps) {
-  const [activeTab, setActiveTab] = useState(defaultTab || tabs[0]?.id);
+  const [activeTab, setActiveTab] = useState<string>(
+    defaultTab || tabs[0]?.id || "",
+  );
   const [indicatorStyle, setIndicatorStyle] = useState({ left: 0, width: 0 });
   const tabRefs = useRef<Map<string, HTMLButtonElement>>(new Map());
   const containerRef = useRef<HTMLDivElement>(null);

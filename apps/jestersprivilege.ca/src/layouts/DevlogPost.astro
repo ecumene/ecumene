@@ -5,10 +5,9 @@ import FormattedDate from "../components/FormattedDate.astro";
 import Layout from "./layout.astro";
 import Header from "../components/Header.astro";
 
-type Props = CollectionEntry<"devlogs">["data"] & { slug?: string };
+type Props = CollectionEntry<"devlogs">["data"];
 
-const { title, description, pubDate, updatedDate, heroVideo, slug } =
-  Astro.props;
+const { title, description, pubDate, updatedDate, heroVideo } = Astro.props;
 ---
 
 <Layout title={title} description={description}>
