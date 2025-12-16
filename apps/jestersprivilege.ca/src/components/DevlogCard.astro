@@ -1,0 +1,31 @@
+---
+interface Props {
+  title: string;
+  date: Date;
+  description: string;
+  slug: string;
+  video: string;
+}
+
+const { title, date, video, description, slug } = Astro.props;
+---
+
+<a
+  href={`/devlog/${slug}`}
+  class="block grayscale brightness-100 hover:grayscale-0 hover:brightness-100 transition duration-300 border-l-4 border-emerald-600 pl-4"
+>
+  <video
+    src={video}
+    class="w-full h-64 object-cover"
+    muted
+    loop
+    playsinline
+    preload="metadata"
+    onmouseenter="this.play()"
+    onmouseleave="this.pause(); this.currentTime = 0;"
+  ></video>
+  <h2 class="text-2xl font-bold mt-4">{title}</h2>
+  <p class="text-gray-500">{date.toLocaleDateString()}</p>
+  <p class="mt-2">{description}</p>
+</a>
+

@@ -1,0 +1,53 @@
+---
+import type { CollectionEntry } from "astro:content";
+import Footer from "../components/Footer.astro";
+import FormattedDate from "../components/FormattedDate.astro";
+import Layout from "./layout.astro";
+import Header from "../components/Header.astro";
+
+type Props = CollectionEntry<"devlogs">["data"] & { slug?: string };
+
+const { title, description, pubDate, updatedDate, heroVideo, slug } =
+  Astro.props;
+---
+
+<Layout title={title} description={description}>
+  <Header />
+  <main class="max-w-4xl mx-auto px-4">
+    <article>
+      <div class="w-full aspect-video bg-black rounded-lg overflow-hidden shadow-lg">
+        <video
+          src={heroVideo}
+          controls
+          autoplay
+          muted
+          loop
+          playsinline
+          class="w-full h-full object-contain"
+        ></video>
+      </div>
+      <div class="mt-6 text-gray-900">
+        <div class="mb-8 leading-none">
+          <h1 class="text-3xl mb-2 font-serif">{title}</h1>
+          <div class="text-blue-100/70 italic">
+            <FormattedDate date={pubDate} />
+            {
+              updatedDate && (
+                <span>
+                  · Last updated <FormattedDate date={updatedDate} />
+                </span>
+              )
+            }
+          </div>
+        </div>
+        <hr class="mb-6" />
+        <div
+          class="prose prose-sm sm:prose-base lg:prose-lg mx-auto"
+        >
+          <slot />
+        </div>
+      </div>
+    </article>
+  </main>
+  <Footer />
+</Layout>

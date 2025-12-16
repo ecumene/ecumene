@@ -7,6 +7,9 @@ import { getCollection } from "astro:content";
 const posts = (await getCollection("blog", ({ data }) => !data.draft)).sort(
   (a, b) => b.data.pubDate.valueOf() - a.data.pubDate.valueOf()
 );
+const devlogs = (
+  await getCollection("devlogs", ({ data }) => !data.draft)
+).sort((a, b) => b.data.pubDate.valueOf() - a.data.pubDate.valueOf());
 import Layout from "../layouts/layout.astro";
 ---
 
@@ -27,24 +30,131 @@ import Layout from "../layouts/layout.astro";
       >By Mitchell Hynes</a
     >
   </main>
-  <div class="max-w-screen-sm mx-auto my-12 flex flex-col gap-12">
-    {
-      posts.length === 0 ? (
-        <p class="text-center text-gray-500 italic">
-          No posts yet. Check back soon!
-        </p>
-      ) : (
-        posts.map((post) => (
-          <EssayCard
-            title={post.data.title}
-            description={post.data.description}
-            date={post.data.pubDate}
-            slug={post.slug}
-            image={post.data.heroImage}
-          />
-        ))
-      )
-    }
+
+  <div class="max-w-screen-sm mx-auto my-12">
+    <div class="tabs">
+      <button type="button" data-tab="posts" class="tab-btn active"
+        >Posts</button
+      >
+      <button type="button" data-tab="devlogs" class="tab-btn">Devlogs</button>
+    </div>
+
+    <div id="posts-panel" class="tab-panel flex flex-col gap-12">
+      {
+        posts.length === 0 ? (
+          <p class="text-center text-gray-500 italic">
+            No posts yet. Check back soon!
+          </p>
+        ) : (
+          posts.map((post) => (
+            <EssayCard
+              title={post.data.title}
+              description={post.data.description}
+              date={post.data.pubDate}
+              slug={post.slug}
+              image={post.data.heroImage}
+            />
+          ))
+        )
+      }
+    </div>
+
+    <div id="devlogs-panel" class="tab-panel hidden">
+      {
+        devlogs.length === 0 ? (
+          <p class="text-center italic">No devlogs yet. Check back soon!</p>
+        ) : (
+          <div class="flex flex-col gap-12">
+            {devlogs.map((devlog, i) => (
+              <a
+                href={`/devlog/${devlog.slug}`}
+                class="devlog-item group block grayscale brightness-110 hover:grayscale-0 hover:brightness-100 transition duration-300"
+              >
+                <div class="relative w-full aspect-video overflow-hidden">
+                  <video
+                    src={devlog.data.heroVideo}
+                    class="devlog-video w-full h-full object-cover"
+                    muted
+                    loop
+                    playsinline
+                    preload="metadata"
+                  />
+                  <div class="absolute inset-0 bg-gradient-to-t from-blue-100 via-blue-100/20 to-transparent pointer-events-none" />
+
+                  <div class="absolute bottom-0 left-0 right-0 px-4 pb-4">
+                    <span class="text-gold-50 text-sm italic">
+                      Log #{devlogs.length - i}
+                    </span>
+                    <h3 class="text-3xl text-cream-50 leading-tight font-serif">
+                      {devlog.data.title}
+                    </h3>
+                  </div>
+                </div>
+
+                <div class="border-l-4 border-emerald-600 pl-4 mt-3">
+                  <p class="text-blue-100/70 italic">
+                    {devlog.data.pubDate.toLocaleDateString("en-US", {
+                      month: "long",
+                      day: "numeric",
+                      year: "numeric",
+                    })}
+                  </p>
+                  <p class="mt-1 text-blue-100">{devlog.data.description}</p>
+                </div>
+              </a>
+            ))}
+          </div>
+        )
+      }
+    </div>
   </div>
   <Footer />
 </Layout>
+
+<script>
+  function initTabs() {
+    const tabButtons = document.querySelectorAll(".tab-btn");
+    const postsPanel = document.getElementById("posts-panel");
+    const devlogsPanel = document.getElementById("devlogs-panel");
+
+    tabButtons.forEach((btn) => {
+      btn.addEventListener("click", () => {
+        const tab = btn.getAttribute("data-tab");
+
+        tabButtons.forEach((b) => b.classList.remove("active"));
+        btn.classList.add("active");
+
+        if (tab === "posts") {
+          postsPanel?.classList.remove("hidden");
+          devlogsPanel?.classList.add("hidden");
+        } else {
+          postsPanel?.classList.add("hidden");
+          devlogsPanel?.classList.remove("hidden");
+        }
+      });
+    });
+  }
+
+  function initVideoHovers() {
+    const devlogItems = document.querySelectorAll(".devlog-item");
+    devlogItems.forEach((item) => {
+      const video = item.querySelector(".devlog-video") as HTMLVideoElement;
+      if (video) {
+        item.addEventListener("mouseenter", () => {
+          video.play();
+        });
+        item.addEventListener("mouseleave", () => {
+          video.pause();
+          video.currentTime = 0;
+        });
+      }
+    });
+  }
+
+  initTabs();
+  initVideoHovers();
+  document.addEventListener("astro:after-swap", () => {
+    initTabs();
+    initVideoHovers();
+  });
+</script>

@@ -14,4 +14,16 @@ const blog = defineCollection({
 	}),
 });
 
-export const collections = { blog };
+const devlogs = defineCollection({
+	type: 'content',
+	schema: z.object({
+		title: z.string(),
+		description: z.string(),
+		pubDate: z.coerce.date(),
+		updatedDate: z.coerce.date().optional(),
+		heroVideo: z.string(), // mp4 video path
+		draft: z.boolean().optional(),
+	}),
+});
+
+export const collections = { blog, devlogs };
