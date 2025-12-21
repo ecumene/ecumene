@@ -6,15 +6,30 @@ heroVideo: "/piranesi/piranesi-log-1.mp4"
 ---
 
 import Image from "../../components/Image.tsx";
+import SideBySide from "../../components/SideBySide.tsx";
 
-# Piranesi
+<SideBySide reverse>
+  <SideBySide.Media>
+    <Image
+      client:load
+      src="/piranesi-cover.jpg"
+      alt="The cover of the book Piranesi by Susanna Clarke"
+      caption="The cover of ‘Piranesi’ by Susanna Clarke"
+      description="I couldn't put this down, I read it on a work trip, and the Hilton began to feel like halls of a Labyrinth."
+    />
+  </SideBySide.Media>
+  <SideBySide.Content>
+    # Piranesi
 
-My (soon to be) brother-in-law lent me a book he loved called Piranesi.
+    My (soon to be) brother-in-law lent me a book he loved called Piranesi.
 
-## Labyrinths
+    ## Labyrinths
 
-It's about a man "trapped" in a labyrinth. The man refers to it as **the House**, which itself
-contains halls upon halls of statues where no two are the same except in a mysterious room.
+    It's about a man "trapped" in a labyrinth. The man refers to it as **the House**, which itself
+    contains halls upon halls of statues where no two are the same except in a mysterious room.
+
+  </SideBySide.Content>
+</SideBySide>
 
 ## Forbidden Knowledge
 
