@@ -1,0 +1,58 @@
+---
+title: "Piranesi #2"
+description: "Animating and programming hunting"
+pubDate: "2025-12-28"
+heroVideo: "/piranesi/piranesi-log-2.mp4"
+---
+
+import Image from "../../components/Image.tsx";
+import SideBySide from "../../components/SideBySide.tsx";
+
+# Gameplay
+
+For this to be a survival game, the player needs to feel like they are surviving against all odds. The player is human,
+and mortal, so it's important from a realism perspective that they have some way to eat.
+
+## The Player and the Heron
+
+I coded these Herons to sit around unless startled or bored. I also made these spears that you can pick up and chuck
+at them. When they're hit with the spear, they have a simple falling and death animation.
+
+<Image
+    client:load
+    src="/piranesi/heron-side-view.png"
+    alt="A screenshot of blender with a picture of a heron on one side and the heron I modeled on the other"
+    caption="The Heron I modeled, it took around 50 mins of fiddling while watching Christmas movies"
+    description="This is the heron I modeled. It took me a while to get the topology looking good enough (for me). If you're going to model a bird like this, make sure you pick a reference that has the wings spread out."
+/>
+
+
+## Starting from an image
+
+This is the first time I've modeled a bird from an image like this. Since birds are symmetrical, you can model one
+side of them and mirror it to the other.
+
+Then, I made animations for:
+
+ - Sitting _(Idling)_
+ - Idle 1 _(Flapping its wings)_
+ - Idle 2 _(Looking around)_
+ - Idle 3 _(Scratching under its wing)_
+ - Flying
+ - Falling
+ - Dying _(Hitting the ground)_
+
+<Image
+    client:load
+    src="/piranesi/heron-animation.png"
+    alt="A screenshot of blender with the Heron animated falling down"
+    caption="The Heron's falling animation"
+    description="The Heron's falling animation. Blender is incredible because you can animate these in the Timeline editor, then put them together in the NLA (Non-Linear Animation) editor and see how they combine in-engine."
+/>
+
+
+## Next Steps...
+
+I'm going to implement a really simple hunger system next. You should be able to starve to death, and be able to eat the
+food you have ([raw and wrrrigggling](https://www.youtube.com/watch?v=WOF6iqHYksU)). I also want there to be a really
+simple fishing mechanic - but you would have to go really low to find them which is dangerous.
