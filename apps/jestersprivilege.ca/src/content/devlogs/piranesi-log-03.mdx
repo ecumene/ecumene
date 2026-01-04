@@ -1,0 +1,163 @@
+---
+title: "Piranesi #3"
+description: "Building a procedural labyrinth generator - the hard way"
+pubDate: "2026-01-04"
+heroVideo: "/piranesi/piranesi-log-3.mp4"
+---
+
+import Image from "../../components/Image.tsx";
+import ImageGallery from "../../components/ImageGallery.tsx";
+import SideBySide from "../../components/SideBySide.tsx";
+
+# How to build tools for Unity
+
+Unity is an incredibly powerful game engine, but building custom editor UIs can be a real pain.
+
+<SideBySide>
+  <SideBySide.Media>
+    <Image
+      client:load
+      src="/piranesi/labyrinth-component.png"
+      alt="A screenshot showing the labyrinth generator component UI"
+      caption="My custom labyrinth editor - built in the browser, imported as JSON."
+      description="Instead of building a full UI in Unity (which can be a pain!), I built the labyrinth in a browser using Javascript, exported the data, and imported it into Unity as a JSON file. This made iteration incredibly fast."
+    />
+  </SideBySide.Media>
+  <SideBySide.Content>
+    ## A webapp
+
+    I decided to try a data-driven approach: vibe-code the labyrinth generator
+    in Javascript, export the map as JSON, and import it into Unity.
+
+    ## A component
+
+    The Unity component reads the JSON and places objects accordingly.
+    It also decides which doors to block or show, so I don't have to design
+    a million pieces. Stole that idea from Lethal Company's facility doors.
+
+  </SideBySide.Content>
+</SideBySide>
+
+# MST Algorithm
+
+An MST (Minimum Spanning Tree) algorithm finds the cheapest way to connect all nodes in a graph without creating cycles. Think of it like connecting cities with roads using the least amount of pavement possible.
+
+## Nodes-First
+
+I start by placing rooms on a grid, then use MST to figure out _which_ rooms should connect. But MST only tells me what to connect—not _how_ to draw the hallways between them. That's where A\* pathfinding comes in.
+
+Here's the process:
+
+1. Place rooms on the grid
+2. Use MST to determine which rooms connect
+3. Use A\* to draw actual hallways between them
+
+<Image
+  client:load
+  src="/piranesi/labyrinth-mst-a-star.png"
+  alt="A diagram showing how MST connects nodes and A* draws paths between them"
+  caption="MST decides connections, A* draws the hallways."
+  description="Dungeon generators like this are a great example of working backwards from a solved problem to a more complex and interesting one."
+/>
+
+## "Connectedness" slider
+
+I modified the MST algorithm with a slider that controls how "expensive" connections can be:
+
+- **100%** = Rooms connect to their nearest neighbors (cheap, compact)
+- **0%** = Rooms connect to distant nodes (expensive, sprawling)
+
+This creates a problem: sometimes hallways need to pass _through_ other rooms. That's impossible with flat geometry... unless I add verticality.
+
+## Deadly Stairs
+
+The only enemy in the labyrinth is **the tide**—rising water that floods the lower levels. I wanted to make some areas more dangerous by forcing players into confined, maze-like spaces below ground level.
+
+When the water rises, you need to find high ground (a room) to survive.
+
+<ImageGallery
+  client:load
+  images={[
+    {
+      src: "/piranesi/labyrinth-depth.png",
+      alt: "A screenshot of my labyrinth tool in 3D showing stairways connecting underneath rooms",
+      caption: "My labyrinth tool",
+      description:
+        "I originally wanted ramps, but spiral staircases are more of a challenge to climb—which is exactly what I wanted.",
+    },
+    {
+      src: "/piranesi/labyrinth-depth-unity.png",
+      alt: "A screenshot of my labyrinth being rendered in Unity",
+      caption: "The same layout in Unity",
+      description:
+        "Each level is separated vertically, so stairs let paths cross without actually overlapping. Problem solved!",
+    },
+  ]}
+  columns={2}
+/>
+
+## Piecing together a seamless labyrinth
+
+Placing rooms, running pathfinding—that's the easy part. The hard part is making a seamless interior that feels cohesive, not like a bunch of disconnected pieces.
+
+This was **the most important step**: measuring everything precisely so I could stylize it later without gaps or overlaps.
+
+<ImageGallery
+  client:load
+  images={[
+    {
+      src: "/piranesi/labyrinth-seamless-room.png",
+      alt: "A screenshot showing a seamless labyrinth room",
+      caption: "A room on one level",
+      description:
+        "Each room has blockable entrances, enforcing cross-shaped pathways and avoiding gaps between pieces.",
+    },
+    {
+      src: "/piranesi/labyrinth-seamless.png",
+      alt: "A seamless labyrinth interior with a stairway at the end of a long hallway",
+      caption: "The hallways beneath",
+      description:
+        "The trick was making every hallway a cross-shape, then blocking off the directions I don't need.",
+    },
+  ]}
+  columns={2}
+/>
+
+## Filling out the rooms
+
+### Fish, statues, urns, and journals
+
+I vibe-coded a "Room Designer" tool—an infinite canvas where I can drag objects around and preview what gets placed in-engine.
+
+There are four things that generate randomly:
+
+- **Statues** — the photo-snappable objectives
+- **Urns** — decorative fakes to throw you off
+- **Journals** — mysterious lore books
+- **Fish** — food (you gotta eat something)
+
+<Image
+  client:load
+  src="/piranesi/labyrinth-designer.png"
+  alt="Screenshot of the custom Room Designer tool with draggable objects on an infinite canvas"
+  caption="The Room Designer"
+  description="Drag statues, urns, journals, and fish around to preview how rooms will be populated during gameplay."
+/>
+
+### Making them prefabs
+
+I added prefabs for each object type, wrote some JSON parsing, and... voilà:
+
+<Image
+  client:load
+  src="/piranesi/labyrinth-designer-unity.png"
+  alt="Screenshot of Unity Editor with generated statues, urns, journals, and fish spawned in a labyrinth room"
+  caption="Generated room in Unity"
+  description="The spawning system populates Unity scenes exactly as previewed in the Room Designer. Pretty satisfying to see it work."
+/>
+
+## Next steps
+
+There's still a lot to do with just the labyrinth alone—not to mention the hunger mechanic, the shopkeeper, multiplayer (someday), and the tide itself. Making games is hard!
+
+I need to steel myself and stop polishing the labyrinth until I have a hunger system working. Gotta get my head out of the gutter.
