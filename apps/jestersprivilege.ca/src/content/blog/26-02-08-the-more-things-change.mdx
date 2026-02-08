@@ -1,0 +1,53 @@
+---
+title: "The More Things Change…"
+description: "The more they stay the same."
+pubDate: "2026-02-08"
+heroImage: "/blog/the-more-things-change-hero.jpg"
+---
+
+![A tweet by Gary Basin: "Experiencing the growing realization that none of these AI developer environments or GUIs are the right shape. Humans will not be looking at code or tests or tasks or command lines or agent chats."](/blog/the-more-things-change.png)
+
+# Why are lawyers paid so much?
+
+Think about it. Why are lawyers paid so much, for doing so little? All they do is read contracts, talk to clients, attend meetings, copy+paste from other Word docs. Surely this is something AI can replace 100% in the future, right? I challenge you tomorrow to pitch this to anyone who needs a lawyer in their life:
+
+- Buying a home
+- Starting a business
+- Getting money from someone who harmed them
+
+See what expression is on their face after. Is it interested and excited? Or is it confusion, leaning disgusted? Many AI builders learn this lesson the hard way: AI cannot replace the human touch where it's most important: understanding and communicating risk.
+
+# You should learn to manage risk
+
+Why are CEOs paid over 200 to nearly 400 times the typical worker's pay? They effectively manage risk. When you're steering a ship of 50,000-100,000 people moving very quickly, a slight misdirection could cost the business billions in growth. Even worse, think of the mass layoffs that come after poor decisions, the hard to read apologies after. This is not so dissimilar from watching a lawyer get disbarred, never to practice again.
+
+This is the real reason developers are so valuable. It's not because you can code really well, or that you know how to do it right or fast. It's 100% because you know right from wrong. The average junior would look at this block of code and ship it:
+
+## What's wrong with this code?
+
+Read this code. Do not read ahead until you've found the problem. This was AI generated and 100% has a serious problem. If you can't get it: **think about what could happen if a user double-clicks a button.**
+
+```jsx
+async function processUserPayment(userId, amount) {
+  const user = await db.users.findOne({ id: userId });
+  if (user.balance > amount) {
+    await db.transactions.insert({ userId, amount, timestamp: Date.now() });
+    return { success: true };
+  }
+  return { success: false, error: "Insufficient funds" };
+}
+```
+
+This is a race condition: the balance check and transaction insert aren't atomic. If the user clicks a "BUY" button twice, really fast, two requests would both check the balance at the same time, and subtract. Putting this into a Database Transaction would lock the rows you are modifying. This slows down one request significantly, but it would correctly make the other fail. This behaviour is only ~1-2 more lines of code.
+
+## Scar tissue
+
+The only way to notice this issue easily is to make mistakes. If you didn't see it, it's not because you're dumb and incapable, it's because you "haven't been there". You need to make a lot of mistakes, at scale. If you make enough mistakes, you'll learn very quickly to see the code above and wince. The same way lawyers will look at some termination clauses and wince. This is also why post-mortems, code review, doc writing, and overall any context sharing in a company is so important: **engineers manage risk.**
+
+---
+
+The other day, the best engineer I've ever worked with took down prod for 20 minutes with a very subtle change because the AI did the complete opposite of what he said but it was hard to see it because he was unfamiliar with firewall rules. He posted an apology (which is unnecessary - others reviewed the code) and admitted he wasn't sure how to do something so he asked AI. Once the problem was spotted, we reverted quickly and everything resolved. We did a post-mortem and we all learned as a team how this worked. Next time we deal with firewall rules we're going to be a lot more knowledgeable.
+
+---
+
+**Don't be afraid to get scar tissue. Don't stop learning, diving deep, understanding risk. That's what makes you an engineer and not a programmer.**
