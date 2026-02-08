@@ -44,7 +44,7 @@ This is a race condition: the balance check and transaction insert aren't atomic
 
 ---
 
-The other day, the best engineer I've ever worked with took down prod for 20 minutes with a very subtle change because some AI written code did the complete opposite of what he asked, but it was hard to see it because he was unfamiliar with firewall rules. He posted an apology (which is unnecessary - others reviewed the code) and admitted he wasn't sure how to do something so he asked AI. Once the problem was spotted, we reverted quickly and everything resolved. We'll do a post-mortem and learn as a team. I myself have been responsible for a couple of these, but I'm thankful for the lessons: Next time we deal with firewall rules we're going to be a lot more knowledgeable.
+The other day, the best engineer I've ever worked with shipped a subtle change to production. He'd asked AI to help with some firewall rules since he wasn't deeply familiar and the generated code did the complete opposite of what he intended. It passed code review too. Production went down for 20 minutes. He posted an apology to the team (unnecessary), admitting he'd leaned on AI for something he didn't fully understand. Once the problem was identified, we reverted quickly and everything resolved. We did a post-mortem and learned as a team how it all worked. I myself have been responsible for a couple of these, but I'm actually thankful for the lessons. Next time any of us touch firewall rules, we'll be a lot more knowledgeable.
 
 ---
 
