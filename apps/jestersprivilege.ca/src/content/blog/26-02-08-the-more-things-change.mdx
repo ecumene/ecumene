@@ -42,12 +42,12 @@ This is a race condition: the balance check and transaction insert aren't atomic
 
 ## Scar tissue
 
-The only way to notice this issue easily is to make mistakes. If you didn't see it, it's not because you're dumb and incapable, it's because you "haven't been there". You need to make a lot of mistakes, at scale. If you make enough mistakes, you'll learn very quickly to see the code above and wince. The same way lawyers will look at some termination clauses and wince. This is also why post-mortems, code review, doc writing, and overall any context sharing in a company is so important: **engineers manage risk.**
-
 ---
 
 The other day, the best engineer I've ever worked with took down prod for 20 minutes with a very subtle change because some AI written code did the complete opposite of what he asked, but it was hard to see it because he was unfamiliar with firewall rules. He posted an apology (which is unnecessary - others reviewed the code) and admitted he wasn't sure how to do something so he asked AI. Once the problem was spotted, we reverted quickly and everything resolved. We'll do a post-mortem and learn as a team. I myself have been responsible for a couple of these, but I'm thankful for the lessons: Next time we deal with firewall rules we're going to be a lot more knowledgeable.
 
 ---
+
+The only way to notice this issue easily is to make mistakes. If you didn't see it, it's not because you're dumb and incapable, it's because you "haven't been there". You need to make a lot of mistakes, at scale. If you make enough mistakes, you'll learn very quickly to see the code above and wince. The same way lawyers will look at some termination clauses and wince. This is also why post-mortems, code review, doc writing, and overall any context sharing in a company is so important: **engineers manage risk.**
 
 **Don't be afraid to get scar tissue. Don't stop learning, diving deep, understanding risk. That's what makes you an engineer and not a programmer.**
