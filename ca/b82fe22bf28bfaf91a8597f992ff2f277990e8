@@ -1,0 +1,100 @@
+.oxfmtrc.json
+  s_49e993a86afdcf::t_8d4d0729bfe2dd 1-13
+.vscode/settings.json
+  s_49e993a86afdcf::t_ab7e3b5fa379d4 2-3
+apps/jestersprivilege.ca/src/components/Image.tsx
+  s_49e993a86afdcf::t_ab7e3b5fa379d4 3,14
+apps/mitchellhynes.com/src/content/projects/reviewgpt.mdx
+  s_49e993a86afdcf::t_ab7e3b5fa379d4 21,24,30,35,44
+package.json
+  s_49e993a86afdcf::t_8d4d0729bfe2dd 18-21,25-27
+  s_49e993a86afdcf::t_c87f02c1beeff2 28-29
+apps/jestersprivilege.ca/src/content.config.ts
+  s_49e993a86afdcf::t_ab7e3b5fa379d4 3
+packages/ui/tsconfig.json
+  s_49e993a86afdcf::t_ab7e3b5fa379d4 9
+apps/mitchellhynes.com/src/components/CardFan.tsx
+  s_49e993a86afdcf::t_ab7e3b5fa379d4 2
+apps/jestersprivilege.ca/src/components/ImageGallery.tsx
+  s_49e993a86afdcf::t_ab7e3b5fa379d4 3,18
+apps/jestersprivilege.ca/README.md
+  s_49e993a86afdcf::t_c53ec1ca2cbe35 4
+  s_49e993a86afdcf::t_e44fae3d8e4e13 53-60
+.yarnrc.yml
+  s_49e993a86afdcf::t_f54d9bd652c1b5 4-12
+  s_49e993a86afdcf::t_3c5bbf69f5fd3f 1-2
+  s_49e993a86afdcf::t_de34feda4d8aee 3
+apps/jestersprivilege.ca/src/pages/og/[...slug].ts
+  s_49e993a86afdcf::t_ab7e3b5fa379d4 2,6,38
+apps/mitchellhynes.com/src/styles/global.css
+  s_49e993a86afdcf::t_ab7e3b5fa379d4 1,6,11,14,17,20,23,26,29,32,35,37,40,44,47,50,53,56,59,62,65,68,72,124
+apps/mitchellhynes.com/src/pages/rss.xml.js
+  s_49e993a86afdcf::t_ab7e3b5fa379d4 3
+apps/mitchellhynes.com/src/content.config.ts
+  s_49e993a86afdcf::t_ab7e3b5fa379d4 3
+apps/jestersprivilege.ca/astro.config.mjs
+  s_49e993a86afdcf::t_ab7e3b5fa379d4 2,5-6
+packages/ui/src/ui/AnimatedJesterButton.tsx
+  s_49e993a86afdcf::t_ab7e3b5fa379d4 27
+.oxlintrc.json
+  s_49e993a86afdcf::t_8d4d0729bfe2dd 2-6
+  s_49e993a86afdcf::t_9cb928a87ec3a1 7,10-12
+apps/jestersprivilege.ca/src/components/HeaderLink.astro
+  s_49e993a86afdcf::t_9cb928a87ec3a1 9,15
+apps/mitchellhynes.com/tsconfig.json
+  s_49e993a86afdcf::t_ab7e3b5fa379d4 14
+.gitignore
+  s_49e993a86afdcf::t_c53ec1ca2cbe35 2
+apps/mitchellhynes.com/src/content/posts/fullstack-course.mdx
+  s_49e993a86afdcf::t_ab7e3b5fa379d4 497,515,521-525,686-687,914-918,997,1021-1023,1039,1071,1142-1146,1150,1156,1162
+apps/jestersprivilege.ca/src/pages/rss.xml.js
+  s_49e993a86afdcf::t_ab7e3b5fa379d4 1-4,7-16
+apps/mitchellhynes.com/astro.config.mjs
+  s_49e993a86afdcf::t_ab7e3b5fa379d4 2,5
+apps/mitchellhynes.com/tailwind.config.ts
+  s_49e993a86afdcf::t_ab7e3b5fa379d4 3-6
+packages/ui/package.json
+  s_49e993a86afdcf::t_8d4d0729bfe2dd 17-20,41
+  s_49e993a86afdcf::t_ab7e3b5fa379d4 25,27,38-39
+apps/jestersprivilege.ca/src/content/devlogs/piranesi-log-02.mdx
+  s_49e993a86afdcf::t_ab7e3b5fa379d4 22-26,36-42,45-49,56
+apps/jestersprivilege.ca/src/styles/global.css
+  s_49e993a86afdcf::t_ab7e3b5fa379d4 6-13,21,24,27,30,33,36,40,43,46,49,53,56,59,62,65-66,69-70,73,76-77,80,83-88,92-106
+apps/mitchellhynes.com/src/components/ProjectCard.tsx
+  s_49e993a86afdcf::t_ab7e3b5fa379d4 3,6,67-68
+apps/mitchellhynes.com/src/components/HeaderLink.astro
+  s_49e993a86afdcf::t_9cb928a87ec3a1 9
+apps/mitchellhynes.com/package.json
+  s_49e993a86afdcf::t_ab7e3b5fa379d4 4,19
+apps/jestersprivilege.ca/src/components/TabSwitcher.tsx
+  s_49e993a86afdcf::t_ab7e3b5fa379d4 9-10,45
+apps/jestersprivilege.ca/src/components/SideBySide.tsx
+  s_49e993a86afdcf::t_ab7e3b5fa379d4 14,19,24
+apps/jestersprivilege.ca/src/content/blog/25-11-25-ideaspace.mdx
+  s_49e993a86afdcf::t_ab7e3b5fa379d4 102,119-121,182-187
+apps/mitchellhynes.com/src/vectorDisplays/MyHead.tsx
+  s_49e993a86afdcf::t_ab7e3b5fa379d4 3
+apps/jestersprivilege.ca/package.json
+  s_49e993a86afdcf::t_c53ec1ca2cbe35 29-31
+  s_49e993a86afdcf::t_ab7e3b5fa379d4 4
+apps/jestersprivilege.ca/src/components/DevlogCard.tsx
+  s_49e993a86afdcf::t_ab7e3b5fa379d4 54
+yarn.lock
+  s_49e993a86afdcf::t_12de8eb4a45c19 1-6778
+---
+{
+  "schema_version": "authorship/3.0.0",
+  "git_ai_version": "1.6.13",
+  "base_commit_sha": "cab82fe22bf28bfaf91a8597f992ff2f277990e8",
+  "prompts": {},
+  "sessions": {
+    "s_49e993a86afdcf": {
+      "agent_id": {
+        "tool": "codex",
+        "id": "019f5d97-8270-7c42-8ba3-4f2932d33986",
+        "model": "gpt-5.5"
+      },
+      "human_author": "Mitchell Hynes <mitch@spellbook.legal>"
+    }
+  }
+}
