@@ -11,27 +11,17 @@ interface ItemProps {
   className?: string;
 }
 
-function SideBySide({
-  children,
-  reverse = false,
-  gap = "md",
-}: SideBySideProps) {
+function SideBySide({ children, reverse = false, gap = "md" }: SideBySideProps) {
   const gapClass = { sm: "gap-2", md: "gap-6", lg: "gap-10" }[gap];
   const direction = reverse ? "md:flex-row-reverse" : "md:flex-row";
 
   return (
-    <div className={`flex flex-col ${direction} ${gapClass} my-6 items-start`}>
-      {children}
-    </div>
+    <div className={`flex flex-col ${direction} ${gapClass} my-6 items-start`}>{children}</div>
   );
 }
 
 function Media({ children, className }: ItemProps) {
-  return (
-    <div className={`w-full md:w-1/2 shrink-0 ${className ?? ""}`}>
-      {children}
-    </div>
-  );
+  return <div className={`w-full md:w-1/2 shrink-0 ${className ?? ""}`}>{children}</div>;
 }
 
 function Content({ children, className }: ItemProps) {

@@ -6,14 +6,8 @@ interface TabSwitcherProps {
   onTabChange?: (tabId: string) => void;
 }
 
-export default function TabSwitcher({
-  tabs,
-  defaultTab,
-  onTabChange,
-}: TabSwitcherProps) {
-  const [activeTab, setActiveTab] = useState<string>(
-    defaultTab || tabs[0]?.id || "",
-  );
+export default function TabSwitcher({ tabs, defaultTab, onTabChange }: TabSwitcherProps) {
+  const [activeTab, setActiveTab] = useState<string>(defaultTab || tabs[0]?.id || "");
   const [indicatorStyle, setIndicatorStyle] = useState({ left: 0, width: 0 });
   const tabRefs = useRef<Map<string, HTMLButtonElement>>(new Map());
   const containerRef = useRef<HTMLDivElement>(null);
@@ -48,10 +42,7 @@ export default function TabSwitcher({
   };
 
   return (
-    <div
-      ref={containerRef}
-      className="relative inline-flex items-center rounded-full p-1"
-    >
+    <div ref={containerRef} className="relative inline-flex items-center rounded-full p-1">
       {/* Sliding background indicator with double border */}
       <div
         className="absolute top-1 bottom-1 rounded-full p-[1px] shadow-md transition-all duration-300 ease-out border border-emerald-700/60"

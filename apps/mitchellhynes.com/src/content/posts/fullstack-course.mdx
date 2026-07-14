@@ -494,9 +494,7 @@ app.use(
 app.post("/login", async (req, res) => {
   const { email, password } = req.body;
 
-  const [user] = await connection.query("SELECT * FROM users WHERE email = ?", [
-    email,
-  ]);
+  const [user] = await connection.query("SELECT * FROM users WHERE email = ?", [email]);
 
   if (!user) {
     return res.status(400).json({ message: "User not found" });
@@ -514,18 +512,17 @@ app.post("/login", async (req, res) => {
 app.post("/register", async (req, res) => {
   const { name, email, password } = req.body;
 
-  const [user] = await connection.query("SELECT * FROM users WHERE email = ?", [
-    email,
-  ]);
+  const [user] = await connection.query("SELECT * FROM users WHERE email = ?", [email]);
 
   if (user) {
     return res.status(400).json({ message: "User already exists" });
   }
 
-  await connection.query(
-    "INSERT INTO users (name, email, password) VALUES (?, ?, ?)",
-    [name, email, password]
-  );
+  await connection.query("INSERT INTO users (name, email, password) VALUES (?, ?, ?)", [
+    name,
+    email,
+    password,
+  ]);
 
   req.session.user = user;
 
@@ -686,16 +683,8 @@ function App() {
 
   return (
     <>
-      <input
-        type="email"
-        value={email}
-        onChange={(e) => setEmail(e.target.value)}
-      />
-      <input
-        type="password"
-        value={password}
-        onChange={(e) => setPassword(e.target.value)}
-      />
+      <input type="email" value={email} onChange={(e) => setEmail(e.target.value)} />
+      <input type="password" value={password} onChange={(e) => setPassword(e.target.value)} />
       <button onClick={handleSubmit}>Login</button>
     </>
   );
@@ -922,10 +911,11 @@ app.post("/todo", async (req, res) => {
 
   const { title, body } = req.body;
 
-  await connection.query(
-    "INSERT INTO todo (title, body, user_id) VALUES (?, ?, ?)",
-    [title, body, req.session.user.id]
-  );
+  await connection.query("INSERT INTO todo (title, body, user_id) VALUES (?, ?, ?)", [
+    title,
+    body,
+    req.session.user.id,
+  ]);
 
   res.json({ message: "Created todo" });
 });
@@ -1004,9 +994,7 @@ app.get("/todo/:id", async (req, res) => {
     return res.status(401).json({ message: "Unauthorized" });
   }
 
-  const [todo] = await connection.query("SELECT * FROM todo WHERE id = ?", [
-    req.params.id,
-  ]);
+  const [todo] = await connection.query("SELECT * FROM todo WHERE id = ?", [req.params.id]);
 
   if (!todo) {
     return res.status(404).json({ message: "Todo not found" });
@@ -1030,10 +1018,9 @@ app.get("/todos", async (req, res) => {
     return res.status(401).json({ message: "Unauthorized" });
   }
 
-  const [todos] = await connection.query(
-    "SELECT * FROM todo WHERE user_id = ?",
-    [req.session.user.id]
-  );
+  const [todos] = await connection.query("SELECT * FROM todo WHERE user_id = ?", [
+    req.session.user.id,
+  ]);
 
   res.json(todos);
 });
@@ -1049,9 +1036,7 @@ app.put("/todo/:id", async (req, res) => {
     return res.status(401).json({ message: "Unauthorized" });
   }
 
-  const [todo] = await connection.query("SELECT * FROM todo WHERE id = ?", [
-    req.params.id,
-  ]);
+  const [todo] = await connection.query("SELECT * FROM todo WHERE id = ?", [req.params.id]);
 
   if (!todo) {
     return res.status(404).json({ message: "Todo not found" });
@@ -1083,9 +1068,7 @@ app.delete("/todo/:id", async (req, res) => {
     return res.status(401).json({ message: "Unauthorized" });
   }
 
-  const [todo] = await connection.query("SELECT * FROM todo WHERE id = ?", [
-    req.params.id,
-  ]);
+  const [todo] = await connection.query("SELECT * FROM todo WHERE id = ?", [req.params.id]);
 
   if (!todo) {
     return res.status(404).json({ message: "Todo not found" });
@@ -1156,35 +1139,27 @@ const connection = require("../connection");
 
 class ToDoService {
   async create(title, body, userId) {
-    await connection.query(
-      "INSERT INTO todo (title, body, user_id) VALUES (?, ?, ?)",
-      [title, body, userId]
-    );
+    await connection.query("INSERT INTO todo (title, body, user_id) VALUES (?, ?, ?)", [
+      title,
+      body,
+      userId,
+    ]);
   }
 
   async get(id) {
-    const [todo] = await connection.query("SELECT * FROM todo WHERE id = ?", [
-      id,
-    ]);
+    const [todo] = await connection.query("SELECT * FROM todo WHERE id = ?", [id]);
 
     return todo;
   }
 
   async getAll(userId) {
-    const [todos] = await connection.query(
-      "SELECT * FROM todo WHERE user_id = ?",
-      [userId]
-    );
+    const [todos] = await connection.query("SELECT * FROM todo WHERE user_id = ?", [userId]);
 
     return todos;
   }
 
   async update(id, title, body) {
-    await connection.query("UPDATE todo SET title = ?, body = ? WHERE id = ?", [
-      title,
-      body,
-      id,
-    ]);
+    await connection.query("UPDATE todo SET title = ?, body = ? WHERE id = ?", [title, body, id]);
   }
 
   async delete(id) {

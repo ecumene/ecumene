@@ -1,14 +1,9 @@
 import { motion } from "framer-motion";
 import { useRef, useEffect, useState } from "react";
+
 import type { Project } from "../content.config";
 
-export default function ProjectCard({
-  slug,
-  project,
-}: {
-  slug: string;
-  project: Project;
-}) {
+export default function ProjectCard({ slug, project }: { slug: string; project: Project }) {
   const videoRef = useRef<HTMLVideoElement>(null);
   const [isMobile, setIsMobile] = useState(false);
 
@@ -69,12 +64,8 @@ export default function ProjectCard({
         />
       </div>
       <div className="flex flex-col gap-2 flex-1 group-hover:translate-x-16 transition-transform duration-300 ease-in-out">
-        <div className="text-sm text-gray-500">
-          {project.pubDate.toLocaleDateString()}
-        </div>
-        <div className="text-xl font-bold group-hover:text-rose-800">
-          {project.title}
-        </div>
+        <div className="text-sm text-gray-500">{project.pubDate.toLocaleDateString()}</div>
+        <div className="text-xl font-bold group-hover:text-rose-800">{project.title}</div>
         <div className="text-gray-700">{project.description}</div>
         <div className="flex flex-wrap gap-2 ">
           {project.technologies.split(",").map((tech) => (

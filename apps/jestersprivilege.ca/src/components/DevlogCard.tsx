@@ -51,9 +51,7 @@ export default function DevlogCard({
 
         <div className="absolute bottom-0 left-0 right-0 px-4 pb-4">
           <span className="text-gold-50 text-sm italic">Log #{logNumber}</span>
-          <h3 className="text-3xl text-cream-50 leading-tight font-serif">
-            {title}
-          </h3>
+          <h3 className="text-3xl text-cream-50 leading-tight font-serif">{title}</h3>
         </div>
       </div>
 
@@ -70,4 +68,3 @@ export default function DevlogCard({
     </a>
   );
 }
-

@@ -1,11 +1,9 @@
-import { getCollection } from "astro:content";
 import { OGImageRoute } from "astro-og-canvas";
+import { getCollection } from "astro:content";
 
 const blogEntries = await getCollection("blog");
 
-const pages = Object.fromEntries(
-  blogEntries.map(({ id, data }) => [id, data]),
-);
+const pages = Object.fromEntries(blogEntries.map(({ id, data }) => [id, data]));
 
 export const { getStaticPaths, GET } = await OGImageRoute({
   pages,
@@ -37,8 +35,6 @@ export const { getStaticPaths, GET } = await OGImageRoute({
         size: 36,
       },
     },
-    fonts: [
-      "https://cdn.jsdelivr.net/fontsource/fonts/eb-garamond@latest/latin-400-normal.ttf",
-    ],
+    fonts: ["https://cdn.jsdelivr.net/fontsource/fonts/eb-garamond@latest/latin-400-normal.ttf"],
   }),
 });

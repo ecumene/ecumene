@@ -1,5 +1,6 @@
 import { useState } from "react";
 import Lightbox from "yet-another-react-lightbox";
+
 import "yet-another-react-lightbox/styles.css";
 
 export interface GalleryImage {
@@ -14,10 +15,7 @@ interface ImageGalleryProps {
   columns?: 2 | 3 | 4;
 }
 
-export default function ImageGallery({
-  images,
-  columns = 3,
-}: ImageGalleryProps) {
+export default function ImageGallery({ images, columns = 3 }: ImageGalleryProps) {
   const [open, setOpen] = useState(false);
   const [index, setIndex] = useState(0);
 

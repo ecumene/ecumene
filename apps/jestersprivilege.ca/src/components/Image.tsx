@@ -1,5 +1,6 @@
 import { useState } from "react";
 import Lightbox from "yet-another-react-lightbox";
+
 import "yet-another-react-lightbox/styles.css";
 
 interface ImageProps {
@@ -10,13 +11,7 @@ interface ImageProps {
   className?: string;
 }
 
-export default function Image({
-  src,
-  alt,
-  caption,
-  description,
-  className,
-}: ImageProps) {
+export default function Image({ src, alt, caption, description, className }: ImageProps) {
   const [open, setOpen] = useState(false);
 
   return (

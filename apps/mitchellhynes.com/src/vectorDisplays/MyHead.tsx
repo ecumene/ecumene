@@ -1,11 +1,6 @@
 export default function MyHead(props: React.SVGAttributes<SVGElement>) {
   return (
-    <svg
-      {...props}
-      viewBox="0 0 2316 3088"
-      fill="none"
-      xmlns="http://www.w3.org/2000/svg"
-    >
+    <svg {...props} viewBox="0 0 2316 3088" fill="none" xmlns="http://www.w3.org/2000/svg">
       <path
         fillRule="evenodd"
         clipRule="evenodd"

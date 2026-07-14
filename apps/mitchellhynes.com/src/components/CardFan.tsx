@@ -1,5 +1,5 @@
-import { motion } from "framer-motion";
 import { Card } from "@ecumene/ui";
+import { motion } from "framer-motion";
 
 const cards = [
   "heart_5",

@@ -1,7 +1,7 @@
 {
   "name": "jestersprivilege.ca",
-  "type": "module",
   "version": "0.0.1",
+  "type": "module",
   "scripts": {
     "dev": "astro dev",
     "start": "astro dev",
@@ -26,6 +26,8 @@
     "yet-another-react-lightbox": "^3.32.1"
   },
   "devDependencies": {
-    "@tailwindcss/typography": "^0.5.20"
+    "@tailwindcss/typography": "^0.5.20",
+    "@types/react": "19.2.17",
+    "@types/react-dom": "19.2.3"
   }
 }

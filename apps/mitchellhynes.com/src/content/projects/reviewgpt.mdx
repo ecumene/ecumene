@@ -18,21 +18,21 @@ believe the Github Comment section is for human discussion not AI slop.
 ![Diagram of code review pain points](/reviewgpt-brainstorm.png)
 
 When code is free, how can we make actually shipping it faster? Well it's not AI code review, it's something else.
-More of a Copilot for Reviews. 
+More of a Copilot for Reviews.
 
 This was such a fun idea and I sprinted to creating a product out of it. I knew it needed:
+
 - A desktop app (for notifications)
 - Github PAT based auth so it can act as you without approval from the org owner
 
 ## My first Electron app
 
-At Spellbook I use a service to build our desktop app, notarize it, and update it on users machines. It's great 
+At Spellbook I use a service to build our desktop app, notarize it, and update it on users machines. It's great
 and I wouldn't have done it another way but it's expensive ($100/mo). So I got Claude to set this up with Github
 Actions instead.
 
 It works great - the infra CD includes an S3 bucket and the desktop build CD pushes to it. Waiting for notorization
-to complete took _actual days_. But it finished eventually. Probably because 1. it was the first time running it and
-2. the sheer quantity of apps being shipped today is eyewatering (I am contributing to this!).
+to complete took _actual days_. But it finished eventually. Probably because 1. it was the first time running it and 2. the sheer quantity of apps being shipped today is eyewatering (I am contributing to this!).
 
 ## Feedback!
 

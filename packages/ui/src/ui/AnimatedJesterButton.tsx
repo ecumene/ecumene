@@ -24,10 +24,7 @@ export default function JestersPrivilege() {
       animate="rest"
       whileHover="hover"
     >
-      <motion.div
-        className="relative"
-        variants={{ hover: { y: -20, scale: 1.1 }, rest: { y: 0 } }}
-      >
+      <motion.div className="relative" variants={{ hover: { y: -20, scale: 1.1 }, rest: { y: 0 } }}>
         Read Jester's Privilege
       </motion.div>
       <motion.svg

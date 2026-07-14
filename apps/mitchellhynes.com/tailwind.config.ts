@@ -1,6 +1,9 @@
 /** @type {import('tailwindcss').Config} */
 const config = {
-  content: ["./src/**/*.{astro,html,js,jsx,md,mdx,svelte,ts,tsx,vue}", "../../node_modules/@ecumene/ui/**/*.{js,ts,jsx,tsx}"],
+  content: [
+    "./src/**/*.{astro,html,js,jsx,md,mdx,svelte,ts,tsx,vue}",
+    "../../node_modules/@ecumene/ui/**/*.{js,ts,jsx,tsx}",
+  ],
   theme: {
     fontFamily: {
       serif: ["EB Garamond", "serif"],
