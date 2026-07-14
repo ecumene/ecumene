@@ -1,5 +1,5 @@
-import React from "react";
 import { X } from "lucide-react";
+import React from "react";
 
 type Props = {
   address: string;
@@ -25,7 +25,7 @@ export default function Webpage({ children, address, language }: Props) {
               <X width={16} />
             </div>
           </div>
-          <span className="border-dashed border-black border rounded-sm text-sm px-1 my-auto">
+          <span className="border-dashed border-black border rounded-xs text-sm px-1 my-auto">
             {language}
           </span>
         </span>

@@ -24,7 +24,7 @@ export default function Image({
       <figure className="not-prose">
         <button
           onClick={() => setOpen(true)}
-          className="group block w-full overflow-hidden rounded-lg cursor-pointer border-0 p-0 bg-transparent focus:outline-none focus:ring-2 focus:ring-emerald-600 transition-transform hover:scale-[1.01]"
+          className="group block w-full overflow-hidden rounded-lg cursor-pointer border-0 p-0 bg-transparent focus:outline-hidden focus:ring-2 focus:ring-emerald-600 transition-transform hover:scale-[1.01]"
           aria-label={`View ${alt}`}
         >
           <img

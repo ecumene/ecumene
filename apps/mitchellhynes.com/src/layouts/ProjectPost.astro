@@ -31,7 +31,7 @@ const { title, description, pubDate, technologies, video, link } = Astro.props;
                 technologies
                   .split(",")
                   .map((tech) => (
-                    <span class="px-2 py-1 bg-rose-100 rounded text-sm text-rose-800 font-bold">
+                    <span class="px-2 py-1 bg-rose-100 rounded-sm text-sm text-rose-800 font-bold">
                       {tech.trim()}
                     </span>
                   ))

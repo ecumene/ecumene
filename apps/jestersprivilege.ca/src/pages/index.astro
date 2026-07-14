@@ -57,7 +57,7 @@ import Layout from "../layouts/layout.astro";
               title={post.data.title}
               description={post.data.description}
               date={post.data.pubDate}
-              slug={post.slug}
+              slug={post.id}
               image={post.data.heroImage}
             />
           ))
@@ -77,7 +77,7 @@ import Layout from "../layouts/layout.astro";
                 title={devlog.data.title}
                 description={devlog.data.description}
                 date={devlog.data.pubDate}
-                slug={devlog.slug}
+                slug={devlog.id}
                 video={devlog.data.heroVideo}
                 logNumber={devlogs.length - i}
               />

@@ -1,18 +1,18 @@
 ---
-import { type CollectionEntry, getCollection } from "astro:content";
+import { type CollectionEntry, getCollection, render } from "astro:content";
 import DevlogPost from "../../layouts/DevlogPost.astro";
 
 export async function getStaticPaths() {
   const devlogs = await getCollection("devlogs");
   return devlogs.map((devlog) => ({
-    params: { slug: devlog.slug },
+    params: { slug: devlog.id },
     props: devlog,
   }));
 }
 type Props = CollectionEntry<"devlogs">;
 
 const devlog = Astro.props;
-const { Content } = await devlog.render();
+const { Content } = await render(devlog);
 ---
 
 <DevlogPost {...devlog.data}>

@@ -92,7 +92,7 @@ const posts = (await getCollection("posts")).sort(
         {
           posts.map((post) => (
             <div class="max-w-md mx-auto px-4">
-              <a href={`/posts/${post.slug}/`}>
+              <a href={`/posts/${post.id}/`}>
                 <div class="flex flex-col md:flex-row items-start">
                   <svg
                     class="w-12 md:w-48 mr-4"

@@ -28,7 +28,7 @@ function SideBySide({
 
 function Media({ children, className }: ItemProps) {
   return (
-    <div className={`w-full md:w-1/2 flex-shrink-0 ${className ?? ""}`}>
+    <div className={`w-full md:w-1/2 shrink-0 ${className ?? ""}`}>
       {children}
     </div>
   );

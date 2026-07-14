@@ -1,6 +1,6 @@
-import type { Project } from "../content/config";
 import { motion } from "framer-motion";
 import { useRef, useEffect, useState } from "react";
+import type { Project } from "../content.config";
 
 export default function ProjectCard({
   slug,
@@ -58,7 +58,7 @@ export default function ProjectCard({
       onMouseEnter={handleMouseEnter}
       onMouseLeave={handleMouseLeave}
     >
-      <div className="flex-shrink-0 sm:w-48 sm:h-32 w-full h-48 overflow-hidden rounded-lg bg-gray-100 group-hover:-rotate-[5deg] group-hover:scale-150 transition-transform duration-300 ease-in-out">
+      <div className="shrink-0 sm:w-48 sm:h-32 w-full h-48 overflow-hidden rounded-lg bg-gray-100 group-hover:-rotate-[5deg] group-hover:scale-150 transition-transform duration-300 ease-in-out">
         <video
           ref={videoRef}
           src={project.video}
@@ -80,7 +80,7 @@ export default function ProjectCard({
           {project.technologies.split(",").map((tech) => (
             <span
               key={tech}
-              className="px-2 py-1 bg-rose-100 rounded text-sm group-hover:bg-rose-800 group-hover:text-white font-bold"
+              className="px-2 py-1 bg-rose-100 rounded-sm text-sm group-hover:bg-rose-800 group-hover:text-white font-bold"
             >
               {tech.trim()}
             </span>

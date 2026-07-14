@@ -39,7 +39,7 @@ export default function ImageGallery({
           <button
             key={i}
             onClick={() => handleImageClick(i)}
-            className="group overflow-hidden rounded-lg cursor-pointer border-0 p-0 bg-transparent focus:outline-none focus:ring-2 focus:ring-emerald-600 transition-transform hover:scale-[1.02] flex flex-row lg:flex-col"
+            className="group overflow-hidden rounded-lg cursor-pointer border-0 p-0 bg-transparent focus:outline-hidden focus:ring-2 focus:ring-emerald-600 transition-transform hover:scale-[1.02] flex flex-row lg:flex-col"
             aria-label={`View ${image.alt}`}
           >
             <img

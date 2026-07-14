@@ -2,6 +2,7 @@
   "extends": "astro/tsconfigs/strictest",
   "compilerOptions": {
     "baseUrl": ".",
+    "ignoreDeprecations": "6.0",
     "paths": {
       "@components/*": ["src/components/*"],
       "@ecumene/ui": ["../../packages/ui/src/index.tsx"],

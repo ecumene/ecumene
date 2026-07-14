@@ -1,3 +1,7 @@
+@import "tailwindcss";
+@config "../../tailwind.config.ts";
+@source "../../../../packages/ui/src";
+
 body {
 	font-family: "EB Garamond", serif;
 	font-weight: 400;
