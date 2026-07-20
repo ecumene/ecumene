@@ -1,0 +1,277 @@
+---
+import MyHead from "../vectorDisplays/MyHead";
+---
+
+<section
+  id="home"
+  class="home-hero"
+  aria-labelledby="home-hero-title"
+  style="background: radial-gradient(circle at 72% 44%, rgb(167 43 72 / 3%), transparent 30%), hsl(28 25% 98.5%);"
+>
+  <div class="home-hero__inner">
+    <div class="home-hero__copy">
+      <p class="home-hero__eyebrow">Hey, I’m</p>
+      <h1 id="home-hero-title">Mitchell Hynes.</h1>
+      <p class="home-hero__role">
+        Computing law at <a href="https://spellbook.com">Spellbook</a>
+      </p>
+    </div>
+  </div>
+
+  <div
+    class="home-hero__portrait"
+    aria-hidden="true"
+    style="right: clamp(-4rem, calc(24vw - 13rem), 7rem); width: clamp(22rem, 31vw, 26rem);"
+  >
+    <MyHead className="home-hero__portrait-drawing" />
+  </div>
+
+  <svg
+    class="home-hero__curve"
+    viewBox="0 0 1440 608"
+    preserveAspectRatio="none"
+    aria-hidden="true"
+    style="position: absolute; inset: 0; z-index: 2; display: block; width: 100%; height: 100%; pointer-events: none;"
+  >
+    <defs>
+      <linearGradient
+        id="home-hero-curve-stroke"
+        x1="0"
+        y1="0"
+        x2="1440"
+        y2="0"
+        gradientUnits="userSpaceOnUse"
+      >
+        <stop offset="0" stop-color="#915c69" stop-opacity="0.02"></stop>
+        <stop offset="0.2" stop-color="#915c69" stop-opacity="0.14"></stop>
+        <stop offset="0.5" stop-color="#915c69" stop-opacity="0.32"></stop>
+        <stop offset="0.8" stop-color="#915c69" stop-opacity="0.14"></stop>
+        <stop offset="1" stop-color="#915c69" stop-opacity="0.02"></stop>
+      </linearGradient>
+    </defs>
+    <path
+      class="home-hero__curve-mask home-hero__curve-path--desktop"
+      data-hero-curve="desktop"
+      d="M 0 602 C 220 602 470 505 650 470 C 830 435 960 420 1080 410 C 1240 396 1360 350 1440 260 L 1440 608 L 0 608 Z"
+      style="fill: hsl(var(--background)); stroke: none;"
+    ></path>
+    <path
+      class="home-hero__curve-line home-hero__curve-path--desktop"
+      data-hero-curve="desktop"
+      d="M 0 602 C 220 602 470 505 650 470 C 830 435 960 420 1080 410 C 1240 396 1360 350 1440 260"
+      style="fill: none; stroke: url(#home-hero-curve-stroke); stroke-width: 1px; vector-effect: non-scaling-stroke;"
+    ></path>
+    <path
+      class="home-hero__curve-mask home-hero__curve-path--compact"
+      data-hero-curve="compact"
+      d="M 0 604 C 300 604 560 530 760 500 C 960 470 1120 452 1200 445 C 1300 436 1390 400 1440 340 L 1440 608 L 0 608 Z"
+      style="display: none; fill: hsl(var(--background)); stroke: none;"
+    ></path>
+    <path
+      class="home-hero__curve-line home-hero__curve-path--compact"
+      data-hero-curve="compact"
+      d="M 0 604 C 300 604 560 530 760 500 C 960 470 1120 452 1200 445 C 1300 436 1390 400 1440 340"
+      style="display: none; fill: none; stroke: url(#home-hero-curve-stroke); stroke-width: 1px; vector-effect: non-scaling-stroke;"
+    ></path>
+  </svg>
+</section>
+
+<script is:inline>
+  (() => {
+    const compactLayout = window.matchMedia("(max-width: 63.999rem)");
+    const tabletPortraitLayout = window.matchMedia("(min-width: 48rem)");
+    const extraLargeLayout = window.matchMedia("(min-width: 90rem)");
+    const ultraWideLayout = window.matchMedia("(min-width: 120rem)");
+    const desktopCurve = document.querySelectorAll(
+      '#home [data-hero-curve="desktop"]'
+    );
+    const compactCurve = document.querySelectorAll(
+      '#home [data-hero-curve="compact"]'
+    );
+    const portrait = document.querySelector("#home .home-hero__portrait");
+
+    const updateCurve = () => {
+      desktopCurve.forEach((path) => {
+        path.style.display = compactLayout.matches ? "none" : "inline";
+      });
+      compactCurve.forEach((path) => {
+        path.style.display = compactLayout.matches ? "inline" : "none";
+      });
+
+      if (portrait instanceof HTMLElement) {
+        portrait.style.top = compactLayout.matches
+          ? tabletPortraitLayout.matches
+            ? "clamp(7.25rem, calc(11.25rem - 6vw), 10.25rem)"
+            : "clamp(8rem, calc(12rem - 6vw), 11rem)"
+          : ultraWideLayout.matches
+            ? "clamp(0rem, calc(32rem - 25vw), 2rem)"
+          : extraLargeLayout.matches
+            ? "clamp(2rem, calc(22rem - 20vw), 3.25rem)"
+            : "clamp(3.25rem, calc(9.25rem - 7.5vw), 4.25rem)";
+      }
+    };
+
+    updateCurve();
+    compactLayout.addEventListener("change", updateCurve);
+    tabletPortraitLayout.addEventListener("change", updateCurve);
+    extraLargeLayout.addEventListener("change", updateCurve);
+    ultraWideLayout.addEventListener("change", updateCurve);
+  })();
+</script>
+
+<style>
+  .home-hero {
+    position: relative;
+    min-height: 38rem;
+    overflow: hidden;
+    background:
+      radial-gradient(circle at 72% 44%, rgb(167 43 72 / 3%), transparent 30%),
+      hsl(28 25% 98.5%);
+    isolation: isolate;
+  }
+
+  .home-hero__inner {
+    position: relative;
+    z-index: 4;
+    display: flex;
+    width: min(calc(100% - 6rem), 64rem);
+    min-height: 35.5rem;
+    align-items: center;
+    margin: 0 auto;
+    padding-bottom: 2.5rem;
+  }
+
+  .home-hero__copy {
+    width: min(100%, 22rem);
+    margin-left: clamp(0rem, 6vw, 5rem);
+  }
+
+  .home-hero__eyebrow {
+    margin: 0 0 0.125rem;
+    color: hsl(var(--foreground));
+    font-size: clamp(1.5rem, 2.25vw, 1.875rem);
+    font-weight: 500;
+    line-height: 1.15;
+  }
+
+  .home-hero h1 {
+    margin: 0;
+    color: hsl(var(--brand));
+    font-size: clamp(2.5rem, 4vw, 3rem);
+    font-weight: 700;
+    letter-spacing: -0.025em;
+    line-height: 1.05;
+  }
+
+  .home-hero__role {
+    margin: 1.25rem 0 0;
+    color: hsl(var(--muted-foreground));
+    font-size: 1.125rem;
+    line-height: 1.45;
+  }
+
+  .home-hero__role a {
+    color: hsl(var(--brand));
+    font-weight: 600;
+    text-decoration: underline;
+    text-decoration-thickness: 1px;
+    text-underline-offset: 0.2em;
+  }
+
+  .home-hero__role a:focus-visible {
+    border-radius: 0.125rem;
+    outline: 2px solid hsl(var(--brand));
+    outline-offset: 3px;
+  }
+
+  .home-hero__portrait {
+    position: absolute;
+    top: clamp(3.25rem, calc(9.25rem - 7.5vw), 4.25rem);
+    right: clamp(-4rem, calc(24vw - 13rem), 7rem);
+    z-index: 1;
+    width: clamp(22rem, 31vw, 26rem);
+    opacity: 0.2;
+    filter: grayscale(1) sepia(0.45) saturate(0.5);
+    mix-blend-mode: multiply;
+    pointer-events: none;
+  }
+
+  .home-hero__portrait :global(.home-hero__portrait-drawing) {
+    display: block;
+    width: 100%;
+    height: auto;
+  }
+
+  .home-hero__curve {
+    position: absolute;
+    inset: 0;
+    z-index: 2;
+    display: block;
+    width: 100%;
+    height: 100%;
+    pointer-events: none;
+  }
+
+  .home-hero__curve-mask {
+    fill: hsl(var(--background));
+    stroke: none;
+  }
+
+  .home-hero__curve-line {
+    fill: none;
+    stroke: url("#home-hero-curve-stroke");
+    stroke-width: 1;
+    vector-effect: non-scaling-stroke;
+  }
+
+  .home-hero__curve-path--compact {
+    display: none;
+  }
+
+  @media (max-width: 63.999rem) {
+    .home-hero {
+      min-height: 40rem;
+    }
+
+    .home-hero__inner {
+      width: min(calc(100% - 2rem), 42rem);
+      min-height: 38rem;
+      align-items: flex-start;
+      padding-top: 8rem;
+    }
+
+    .home-hero__copy {
+      margin-left: clamp(0.5rem, 8vw, 3.5rem);
+    }
+
+    .home-hero__portrait {
+      top: clamp(8rem, calc(12rem - 6vw), 11rem);
+    }
+
+    .home-hero__curve-path--desktop {
+      display: none;
+    }
+
+    .home-hero__curve-path--compact {
+      display: inline;
+    }
+  }
+
+  @media (min-width: 48rem) and (max-width: 63.999rem) {
+    .home-hero__portrait {
+      top: clamp(7.25rem, calc(11.25rem - 6vw), 10.25rem);
+    }
+  }
+
+  @media (min-width: 90rem) {
+    .home-hero__portrait {
+      top: clamp(2rem, calc(22rem - 20vw), 3.25rem);
+    }
+  }
+
+  @media (min-width: 120rem) {
+    .home-hero__portrait {
+      top: clamp(0rem, calc(32rem - 25vw), 2rem);
+    }
+  }
+</style>

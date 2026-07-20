@@ -1,0 +1,205 @@
+<section class="about-page" aria-labelledby="about-title">
+  <div class="about-page__layout">
+    <div class="about-page__copy">
+      <div class="about-page__intro">
+        <p class="about-page__label">About</p>
+
+        <h1 id="about-title">I build things<br />that last<span>.</span></h1>
+      </div>
+
+      <div class="about-page__stories">
+        <p>
+          I make furniture to connect with the grandpas in my life. I love
+          making things with walnut and birch.
+        </p>
+        <p>
+          Gamedev got me into programming, but I quickly fell in love with game
+          engines instead, which led me to web development and finally AI.
+        </p>
+        <p>
+          I believe understanding culture is how you understand people better
+          than politics, which seeks to divide us.
+        </p>
+      </div>
+    </div>
+
+    <figure class="about-page__portrait">
+      <img
+        src="/about-beach.png"
+        alt="Mitchell Hynes smiling on a beach and holding up a peace sign"
+        width="1447"
+        height="1087"
+        loading="eager"
+        decoding="async"
+      />
+    </figure>
+  </div>
+</section>
+
+<style>
+  .about-page {
+    min-height: 100vh;
+    background:
+      radial-gradient(circle at 67% 38%, rgb(167 43 72 / 2%), transparent 28%),
+      hsl(28 25% 98.5%);
+    color: hsl(var(--foreground));
+    padding: 3.5rem 1.25rem 4rem;
+  }
+
+  .about-page__layout {
+    display: grid;
+    width: min(100%, 70rem);
+    margin: 0 auto;
+    grid-template-areas:
+      "intro"
+      "portrait"
+      "stories";
+  }
+
+  .about-page__copy {
+    display: contents;
+  }
+
+  .about-page__intro {
+    grid-area: intro;
+    min-width: 0;
+    font-family: system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
+  }
+
+  .about-page__label {
+    width: fit-content;
+    margin: 0;
+    color: hsl(var(--brand));
+    font-size: 0.8125rem;
+    font-weight: 700;
+    letter-spacing: 0.06em;
+    line-height: 1;
+    text-transform: uppercase;
+  }
+
+  .about-page__label,
+  .about-page__stories p {
+    font-family: system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
+  }
+
+  .about-page__label::after {
+    display: block;
+    width: 3.5rem;
+    height: 0.125rem;
+    margin-top: 1rem;
+    background: hsl(var(--brand));
+    content: "";
+  }
+
+  .about-page h1 {
+    margin: clamp(2.75rem, 7vh, 5rem) 0 0;
+    font-family: "EB Garamond", serif;
+    font-size: clamp(3rem, 5vw, 3.75rem);
+    font-weight: 400;
+    letter-spacing: -0.025em;
+    line-height: 0.98;
+  }
+
+  .about-page h1 span {
+    color: hsl(var(--brand));
+  }
+
+  .about-page__stories {
+    grid-area: stories;
+    margin-top: 2.5rem;
+  }
+
+  .about-page__stories p {
+    max-width: 21rem;
+    margin: 0;
+    border-top: 1px solid hsl(var(--border));
+    color: hsl(20 6% 27%);
+    padding: 1.5rem 0;
+    font-size: 1rem;
+    line-height: 1.75;
+  }
+
+  .about-page__portrait {
+    position: relative;
+    grid-area: portrait;
+    min-height: 0;
+    aspect-ratio: 4 / 3;
+    margin: 2.5rem 0 0;
+    overflow: hidden;
+    border-radius: clamp(1rem, 2vw, 1.5rem);
+    background: hsl(var(--muted));
+    box-shadow: 0 1.5rem 4rem rgb(65 43 36 / 7%);
+    isolation: isolate;
+  }
+
+  .about-page__portrait img {
+    position: absolute;
+    inset: -5%;
+    display: block;
+    width: 110%;
+    height: 110%;
+    max-width: none;
+    object-fit: cover;
+    object-position: 52% center;
+  }
+
+  @media (min-width: 48rem) {
+    .about-page {
+      padding: clamp(4rem, 10vh, 6rem) clamp(2rem, 2.625vw, 4rem)
+        clamp(4rem, 8vh, 6.5rem);
+    }
+
+    .about-page__layout {
+      grid-template-areas: "copy portrait";
+      grid-template-columns:
+        minmax(16rem, clamp(18rem, 30vw, 22.75rem))
+        minmax(16rem, 1fr);
+      align-items: start;
+      gap: clamp(2rem, 5vw, 6rem);
+    }
+
+    .about-page__copy {
+      display: block;
+      grid-area: copy;
+      min-width: 0;
+      font-family: system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
+    }
+
+    .about-page__stories {
+      margin-top: clamp(2.75rem, 4.5vh, 3rem);
+    }
+
+    .about-page__stories p {
+      padding: clamp(2rem, 4vh, 2.75rem) 0;
+    }
+
+    .about-page__portrait {
+      aspect-ratio: 0.93;
+      margin-top: 3.5rem;
+    }
+  }
+
+  @media (min-width: 64rem) {
+    .about-page {
+      padding-top: clamp(5rem, 13.5vh, 8.5rem);
+    }
+  }
+
+  @media (min-width: 90rem) {
+    .about-page__layout {
+      gap: 6rem;
+      margin-right: auto;
+      margin-left: 0;
+    }
+  }
+
+  @media (max-width: 39.999rem) {
+    .about-page h1 {
+      font-size: clamp(2.75rem, 14vw, 3.5rem);
+    }
+
+    .about-page__stories p {
+      max-width: none;
+    }
+  }
+</style>

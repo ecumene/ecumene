@@ -1,9 +1,12 @@
+import typography from "@tailwindcss/typography";
+
 /** @type {import('tailwindcss').Config} */
 const config = {
   content: [
     "./src/**/*.{astro,html,js,jsx,md,mdx,svelte,ts,tsx,vue}",
     "../../node_modules/@ecumene/ui/**/*.{js,ts,jsx,tsx}",
   ],
+  plugins: [typography],
   theme: {
     fontFamily: {
       serif: ["EB Garamond", "serif"],
@@ -71,6 +74,58 @@ const config = {
       animation: {
         "accordion-down": "accordion-down 0.2s ease-out",
         "accordion-up": "accordion-up 0.2s ease-out",
+      },
+      typography: {
+        DEFAULT: {
+          css: {
+            fontFamily: ["EB Garamond", "serif"].join(", "),
+            h1: {
+              fontFamily: ["EB Garamond", "serif"].join(", "),
+              fontWeight: "700",
+              letterSpacing: "-0.025em",
+            },
+            h2: {
+              fontFamily: ["EB Garamond", "serif"].join(", "),
+              fontWeight: "700",
+              letterSpacing: "-0.02em",
+            },
+            h3: {
+              fontFamily: ["EB Garamond", "serif"].join(", "),
+              fontWeight: "700",
+              letterSpacing: "-0.015em",
+            },
+            h4: {
+              fontFamily: ["EB Garamond", "serif"].join(", "),
+              fontWeight: "700",
+            },
+            strong: {
+              fontWeight: "700",
+            },
+            code: {
+              fontFamily: ["Inconsolata", "monospace"].join(", "),
+              fontWeight: "500",
+            },
+            pre: {
+              fontFamily: ["Inconsolata", "monospace"].join(", "),
+              fontWeight: "400",
+            },
+            "code::before": {
+              content: "none",
+            },
+            "code::after": {
+              content: "none",
+            },
+            blockquote: {
+              fontStyle: "normal",
+            },
+            "blockquote p:first-of-type::before": {
+              content: "none",
+            },
+            "blockquote p:last-of-type::after": {
+              content: "none",
+            },
+          },
+        },
       },
     },
   },

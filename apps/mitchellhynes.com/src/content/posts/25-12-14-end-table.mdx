@@ -1,0 +1,302 @@
+---
+title: "First Try at Building High-End Furniture"
+description: "I vow to never stain again - let's build something with walnut"
+pubDate: "2025-12-14"
+heroImage: "/woodworking/end-table.webp"
+---
+
+import ImageGallery from "../../components/ImageGallery.tsx";
+import Image from "../../components/Image.tsx";
+import SideBySide from "../../components/SideBySide.tsx";
+
+# I hereby vow to never stain again
+
+<SideBySide reverse>
+  <SideBySide.Media>
+    <Image
+      client:load
+      src="/woodworking/blanket-holder.webp"
+      alt="Pine blanket holder with stain blotches"
+      caption="The blanket holder"
+      description="A pine blanket holder with visible stain blotches from uneven sanding. The stain made the imperfections much more noticeable."
+    />
+  </SideBySide.Media>
+  <SideBySide.Content>
+    _June 29th_
+
+    I made this blanket holder. It's really cute, I spent a lot of time on it. Then, I stained it and all my hard work
+    looked like crap. I didn't have a mechanical sander so this is what I got and there was no easy way to go back.
+
+  </SideBySide.Content>
+</SideBySide>
+
+# Let's use actual hardwood instead
+
+My first attempt at building a high-end piece of furniture.
+
+<SideBySide reverse>
+  <SideBySide.Media>
+    <Image
+      client:load
+      src="/woodworking/end-table-0.webp"
+      alt="Rough walnut boards freshly milled"
+      caption="The walnut lumber"
+      description="Walnut boards from Provincial Wood Products. Something about holding the boards in my hands feels like an accomplishment already. I had to find these, calculate how many I need, pick them out, load 9' of lumber in my car."
+    />
+  </SideBySide.Media>
+  <SideBySide.Content>
+    _October 2nd_
+    ### The only lumber yard in YYT
+
+    I began with some walnut lumber I purchased from **Provincial Wood Products** in town. I don't have a
+    planer or jointer but chose rough boards and they charged $60 to mill it for me. It was surprisingly easy to
+    fit this in my little Corolla
+
+  </SideBySide.Content>
+</SideBySide>
+
+I used [CutList Optimizer](https://www.cutlistoptimizer.com/) to plan the cuts:
+
+<Image
+  client:load
+  src="/woodworking/end-table-cuts.webp"
+  alt="CutList Optimizer diagram for walnut boards"
+  caption="The cut plan"
+  description="CutList Optimizer diagram showing how to lay out all the pieces on the walnut boards. Wish I had matched the grain better and avoided the knots!"
+/>
+
+Learning moment, I wish I had:
+
+- Matched the grain more closely around the board
+- Been more careful copying the pattern and had a better way of doing that
+- Avoided knots somehow, but the software doesn't do that...
+
+## First cuts!
+
+This was super nerve-wracking. Every cut I was holding my breath because this wood is
+pricey. But after the first few rips were done, I built a cross-cutting jig and it got
+a lot more accurate from then on.
+
+<ImageGallery
+  client:load
+  images={[
+    {
+      src: "/woodworking/end-table-1.webp",
+      alt: "Cross-cut sled rear view",
+      caption: "Sled from the back",
+      description:
+        "Cross-cut sled from the back. I built it using some old project pine + birch ply I had lying around.",
+    },
+    {
+      src: "/woodworking/end-table-2.webp",
+      alt: "Cross-cut sled front view with clamps",
+      caption: "Sled from the front",
+      description:
+        "Cross-cut sled from the front. I bought these clamps from Amazon and I only regret not buying more. I would like to have jigs ready to go and reinstalling the clamps from one to another is annoying.",
+    },
+    {
+      src: "/woodworking/end-table-3.webp",
+      alt: "Walnut boards with saw marks",
+      caption: "Some rough cuts",
+      description:
+        "You can see the little saw marks on the wood. This was my first time joining boards, and you'll see later why these are a problem if you don't deal with them.",
+    },
+    {
+      src: "/woodworking/end-table-4.webp",
+      alt: "Cross-cut sled with wood loaded",
+      caption: "Sled loaded up",
+      description:
+        "Jigs are incredible because you can make really accurate cuts with them, very quickly. You just line the empty space up with your mark and go!",
+    },
+  ]}
+  columns={2}
+/>
+
+## Gotta work with what you got
+
+_October 20th_
+
+This mistake/limitation cost me a good 3 weekend days of gluing, patching, and fixing. But if I had a bigger table saw, it would have been less than a day and much more accurate.
+
+<SideBySide reverse>
+  <SideBySide.Content>
+    ### My hand-me-down table saw is small
+
+    The instructions say to glue the boards length-wise as shown and THEN make your horizontal width cuts at a 45, but I don't have a very big table saw.
+
+  </SideBySide.Content>
+  <SideBySide.Media>
+    <Image
+      client:load
+      src="/woodworking/end-table-20.webp"
+      alt="Walnut pieces laid out flat"
+      caption="The flat layout"
+      description="Walnut pieces laid out flat like an unfolded box. The instructions say to glue these together first, then cut the 45° miters—but my table saw was too small for that."
+    />
+  </SideBySide.Media>
+</SideBySide>
+
+<SideBySide reverse>
+  <SideBySide.Media>
+    <Image
+      client:load
+      src="/woodworking/end-table-21.webp"
+      alt="Individual walnut pieces cut at 45 degrees"
+      caption="Cut individually"
+      description="Each walnut piece had to be cut individually at a 45° angle. It took days, but it worked with my small table saw."
+    />
+  </SideBySide.Media>
+  <SideBySide.Content>
+    I had to cut each of these pieces INDIVIDUALLY, then at a 45.
+
+    ### It took me days.
+
+    But if I just wanted a nice end table fast, I would have gone to Osmond's and saved time and money.
+
+  </SideBySide.Content>
+</SideBySide>
+
+## Glue is stronger than wood
+
+I could have left the boards at the length they were given to me, but glue is stronger than wood and the instructions used a different width of lumber so I wanted to follow along.
+
+<ImageGallery
+  client:load
+  images={[
+    {
+      src: "/woodworking/end-table-18.webp",
+      alt: "Walnut boards clamped with Bessey clamps",
+      caption: "Gluing boards",
+      description: "Splurged on some Bessey clamps because they're amazing.",
+    },
+    {
+      src: "/woodworking/end-table-17.webp",
+      alt: "Glued walnut boards with visible glue marks",
+      caption: "Boards glued up",
+      description:
+        "It turned out okay. As I said, I don't have a jointer which would have really helped make these edges nicer. I also didn't have a hand plane at this point. That said, the other side was MUCH better so I just used that. I have a picture of this side because it was the worst of all of them for glue marks.",
+    },
+  ]}
+  columns={2}
+/>
+
+## My beautiful legs
+
+_November 21st_
+
+The legs were the trickiest part and I royally screwed up one of them, but I just used it for the back and nobody has noticed.
+
+It's beginning to get cold out and my shed doesn't have heating so this is now a race to finish before it starts snowing.
+
+<SideBySide reverse>
+  <SideBySide.Media>
+    <Image
+      client:load
+      src="/woodworking/end-table-13.webp"
+      alt="Homemade tapering jig on table saw"
+      caption="The tapering jig"
+      description="A quick tapering jig I threw together in 30 minutes. It completely replaces a miter saw and is much safer with the hardwood rail on the bottom."
+    />
+  </SideBySide.Media>
+  <SideBySide.Content>
+    ### JIT: Jig in time?
+
+    I threw this jig together in ~30 mins. I lined up my cut lines from the bottom then clamped them.
+
+    It worked really well. It's not very fast but this completely replaces my need for a miter saw and it actually does more.
+
+    It's very safe, too. There's a rail on the bottom made of hardwood this time.
+
+  </SideBySide.Content>
+</SideBySide>
+
+<ImageGallery
+  client:load
+  images={[
+    {
+      src: "/woodworking/end-table-14.webp",
+      alt: "Four tapered walnut legs",
+      caption: "The four legs",
+      description: "MY LEG! Four tapered walnut legs ready for assembly.",
+    },
+    {
+      src: "/woodworking/end-table-12.webp",
+      alt: "Legs being glued with pine blocks",
+      caption: "Gluing the legs",
+      description:
+        "I cut some little pine blocks with sandpaper glued onto them to stop them from moving. Then, I used my parallel clamps on the pine blocks to tightly press it all together.",
+    },
+  ]}
+  columns={2}
+/>
+
+### Much cleaner joints this time
+
+Because the tapering jig was well built, the joints came out much nicer.
+
+<ImageGallery
+  client:load
+  images={[
+    {
+      src: "/woodworking/end-table-7.webp",
+      alt: "Assembled leg with tapered skirt",
+      caption: "Leg assembled",
+      description: "Legs assembled with the tapered skirt as well.",
+    },
+    {
+      src: "/woodworking/end-table-8.webp",
+      alt: "Close-up of miter joint",
+      caption: "The miter joint",
+      description:
+        "Miter's damn near perfect on this one! I'm still getting the hang of sanding, so you can see the pigtails. I learned to not press so hard and to use clean disks every time.",
+    },
+  ]}
+  columns={2}
+/>
+
+## Sanding and Rounding
+
+_December 8th_
+
+This was my first time using polyurethane. After sanding, I used a tack cloth to clean up and some wiping rags from Home Depot. It's incredible how a little bit of finish makes it feel like furniture in your hands.
+
+<ImageGallery
+  client:load
+  images={[
+    {
+      src: "/woodworking/end-table-6.webp",
+      alt: "End table before sanding",
+      caption: "Before sanding",
+      description: "At this point it still felt like a woodworking project.",
+    },
+    {
+      src: "/woodworking/end-table-5.webp",
+      alt: "End table after sanding and rounding",
+      caption: "After sanding",
+      description:
+        "This is actually from BEFORE I attached the drawer front, so it looks like it doesn't fit but it does.",
+    },
+  ]}
+  columns={2}
+/>
+
+## All done!
+
+It looks great and smells great too. Fixing as many mistakes as I did, you barely notice them when it's all together. If you're a skilled woodworker you'll notice some glaring flaws but I really wanted to do this to prepare myself to make a bigger box on legs: A media console. Stay tuned!
+
+<Image
+  client:load
+  src="/woodworking/end-table-22.webp"
+  alt="Finished walnut end table with drawer"
+  caption="The finished piece"
+  description="The finished walnut end table with drawer. My first piece of high-end furniture—no stain, just polyurethane to let the natural wood shine."
+/>
+
+#### Learnings
+
+- Hard wood brings projects to another level of precision you can't get with soft woods. This makes me want to get better tools, be more careful and overall take the hobby more seriously.
+- I only had a borrowed router for the last rounding. If I had it for the rest I could have used a flushcut bit to joint the boards.
+- Make use of painter's tape when gluing. Use a wet rag to clean up squeezed-out glue. People online make it look easy to remove with a bench scraper, but it's not.
+- Take your time sanding. Silence the voices that you could tip the ROS and get rid of that glue faster. It just leaves bumps and pigtails that take twice as long to remove.
+- My drawer is sticking, probably because I didn't leave enough space between the drawer slides and the plywood drawer itself.
+- I need a plunge router if I'm ever going to do rabbeting again.

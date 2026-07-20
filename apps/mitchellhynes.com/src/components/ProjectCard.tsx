@@ -67,16 +67,6 @@ export default function ProjectCard({ slug, project }: { slug: string; project: 
         <div className="text-sm text-gray-500">{project.pubDate.toLocaleDateString()}</div>
         <div className="text-xl font-bold group-hover:text-rose-800">{project.title}</div>
         <div className="text-gray-700">{project.description}</div>
-        <div className="flex flex-wrap gap-2 ">
-          {project.technologies.split(",").map((tech) => (
-            <span
-              key={tech}
-              className="px-2 py-1 bg-rose-100 rounded-sm text-sm group-hover:bg-rose-800 group-hover:text-white font-bold"
-            >
-              {tech.trim()}
-            </span>
-          ))}
-        </div>
       </div>
     </motion.a>
   );

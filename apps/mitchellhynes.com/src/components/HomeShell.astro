@@ -1,0 +1,48 @@
+---
+import { getCollection } from "astro:content";
+import HomeSidebar from "./HomeSidebar.astro";
+
+const projects = (await getCollection("projects")).sort(
+  (a, b) => b.data.pubDate.valueOf() - a.data.pubDate.valueOf()
+);
+const posts = (await getCollection("posts"))
+  .filter((post) => !post.data.draft)
+  .sort((a, b) => b.data.pubDate.valueOf() - a.data.pubDate.valueOf());
+---
+
+<div class="home-shell">
+  <HomeSidebar projects={projects} posts={posts} />
+  <main class="home-shell__content relative">
+    <slot />
+  </main>
+</div>
+
+<style>
+  .home-shell {
+    --home-sidebar-width: 20.5rem;
+    --background: 28 33% 97%;
+    --foreground: 20 10% 14%;
+    --muted: 24 22% 94%;
+    --muted-foreground: 18 7% 47%;
+    --border: 24 17% 89%;
+    --accent: 350 24% 94%;
+    --brand: 343 76% 36%;
+
+    min-height: 100vh;
+    background: hsl(var(--background));
+    color: hsl(var(--foreground));
+  }
+
+  .home-shell__content {
+    min-width: 0;
+    min-height: 100vh;
+    overflow: clip;
+  }
+
+  @media (min-width: 64rem) {
+    .home-shell__content {
+      width: calc(100% - var(--home-sidebar-width));
+      margin-left: var(--home-sidebar-width);
+    }
+  }
+</style>

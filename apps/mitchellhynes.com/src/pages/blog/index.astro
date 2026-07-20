@@ -1,0 +1,23 @@
+---
+import { getCollection } from "astro:content";
+import BaseHead from "../../components/BaseHead.astro";
+import BlogDirectory from "../../components/BlogDirectory.astro";
+import HomeShell from "../../components/HomeShell.astro";
+import { SITE_DESCRIPTION, SITE_TITLE } from "../../consts";
+
+const posts = (await getCollection("posts"))
+  .filter((post) => !post.data.draft)
+  .sort((a, b) => b.data.pubDate.valueOf() - a.data.pubDate.valueOf());
+---
+
+<!doctype html>
+<html lang="en" class="scroll-smooth">
+  <head>
+    <BaseHead title={`Blog | ${SITE_TITLE}`} description={SITE_DESCRIPTION} />
+  </head>
+  <body>
+    <HomeShell>
+      <BlogDirectory posts={posts} />
+    </HomeShell>
+  </body>
+</html>
