@@ -1,0 +1,203 @@
+apps/mitchellhynes.com/src/components/Image.tsx
+  s_17ebc18a4b3c5c::t_1b253df69fcaa4 2
+  s_17ebc18a4b3c5c::t_c0ab46f5bf8872 13
+  s_17ebc18a4b3c5c::t_74c8fbbe1e8e55 19-20,32
+  s_17ebc18a4b3c5c::t_04152a87456cbb 22,24,29,33-37
+  s_17ebc18a4b3c5c::t_39b21b9e8c158a 4-12,15-17,23,25-28,30-31,38-39,41-43
+  s_17ebc18a4b3c5c::t_f52f4a4ebc22a8 1,3,14
+  s_17ebc18a4b3c5c::t_1032e60cf2757f 18
+  s_17ebc18a4b3c5c::t_d2a539646740f0 21
+  s_17ebc18a4b3c5c::t_6f29c2eefa782d 40
+apps/mitchellhynes.com/package.json
+  s_17ebc18a4b3c5c::t_b43b8a803fefd6 32-34
+  s_17ebc18a4b3c5c::t_2fdceda2650309 30-31
+apps/mitchellhynes.com/src/pages/blog/index.astro
+  s_17ebc18a4b3c5c::t_ccd70b7ad87617 1-23
+apps/mitchellhynes.com/src/styles/global.css
+  s_17ebc18a4b3c5c::t_c333f7f09d7526 280-285,291-292,296-297,422-425
+  s_17ebc18a4b3c5c::t_74c8fbbe1e8e55 170,172,181,185,193,352
+  s_17ebc18a4b3c5c::t_f52f4a4ebc22a8 168-169,171,174-180,182,184,191-192,194,199-221,223,234-246,329-351,353-412,415-417,438-439
+  s_17ebc18a4b3c5c::t_f9307de2cd37c2 7-10,274-279,286-290,293-295,298,301-328,418-421,426
+  s_17ebc18a4b3c5c::t_a6fed8b9acbd6c 13-14,16-17,25-26,34-35,84-85
+  s_17ebc18a4b3c5c::t_1922f087534299 173,183,186-190,195-198,222,224-233,413-414,427-437
+  s_17ebc18a4b3c5c::t_779bdcf801adf2 247-273,299-300
+apps/mitchellhynes.com/astro.config.mjs
+  s_17ebc18a4b3c5c::t_880a7c15c8b98c 11-15
+apps/mitchellhynes.com/src/pages/index.astro
+  s_17ebc18a4b3c5c::t_a42003e1a8de2e 14
+  s_17ebc18a4b3c5c::t_94a03ccc3d3c3b 3,15
+  s_17ebc18a4b3c5c::t_a6fed8b9acbd6c 4,16
+apps/mitchellhynes.com/src/components/AboutContent.astro
+  s_17ebc18a4b3c5c::t_ee5732ca580010 1-3,6,9-35,38-45,47-52,57-59,65-79,85-94,96,98-107,110-116,118-123,125,128-144,151-152,159-160,166-167,170-171,176-181,183,193,195,197-205
+  s_17ebc18a4b3c5c::t_0cfc32391d0557 36-37
+  s_17ebc18a4b3c5c::t_bcb44042d21eae 4-5,7-8,46,53-56,60-64,95,108-109,117,124,126-127,145-150,153-158,161-165,168-169,172-175,182,184-189,191-192,194,196
+  s_17ebc18a4b3c5c::t_886c05a310e1c1 80-84,97
+  s_17ebc18a4b3c5c::t_8fdff5f5ee6ca5 190
+apps/mitchellhynes.com/src/pages/posts/[...slug].astro
+  s_17ebc18a4b3c5c::t_5ca2552a9d28f3 14
+  s_17ebc18a4b3c5c::t_ccd70b7ad87617 2,5,11
+apps/mitchellhynes.com/src/utils/post-media.ts
+  s_17ebc18a4b3c5c::t_a6af98ae8b1f42 4
+  s_17ebc18a4b3c5c::t_3eb1afaadc96c1 1-3,5-6
+apps/mitchellhynes.com/src/components/HomeShell.astro
+  s_17ebc18a4b3c5c::t_a42003e1a8de2e 2,5-10,14
+  s_17ebc18a4b3c5c::t_a6fed8b9acbd6c 1,3,11-13,15-48
+  s_17ebc18a4b3c5c::t_bc20f1318dc13d 4
+apps/mitchellhynes.com/src/content/sheets/projects.csv
+  s_17ebc18a4b3c5c::t_c41176a1d1c4ac 1-7
+apps/mitchellhynes.com/src/content/posts/skate-log-05.mdx
+  s_17ebc18a4b3c5c::t_39b21b9e8c158a 1-8
+apps/mitchellhynes.com/src/content/posts/fullstack-course.mdx
+  s_17ebc18a4b3c5c::t_a6af98ae8b1f42 5
+apps/mitchellhynes.com/src/components/HomeHero.astro
+  s_17ebc18a4b3c5c::t_ec17a7c29287dc 54,60,66,68,72,74,78-81,85-90,92-99,112-115,119-120
+  s_17ebc18a4b3c5c::t_f4f29e3b1c25b1 34,52,56-58,63,215,217-221
+  s_17ebc18a4b3c5c::t_2e55737ab09195 83,108,117,257-259,266-267
+  s_17ebc18a4b3c5c::t_94a03ccc3d3c3b 1-4,11-14,17-20,26-28,77,121-127,130-165,168-172,175,179-180,183-188,191,193-204,206,209,212-214,225-226,231-247,275-277
+  s_17ebc18a4b3c5c::t_df224b46d9871e 15-16,29-33,35,76,166-167,173-174,176-178,181-182,205,207-208,210-211,216,223-224
+  s_17ebc18a4b3c5c::t_ae5e1035a8e7a0 36-51,53,59,62,64-65,69-71,75,128,222,227-230,249-256
+  s_17ebc18a4b3c5c::t_e2d2ce5395f7e2 55,61,67,73
+  s_17ebc18a4b3c5c::t_c333f7f09d7526 84,106-107,118,269-274
+  s_17ebc18a4b3c5c::t_03088ca8d8b222 91,100-102,111
+  s_17ebc18a4b3c5c::t_4428c33fc5cf27 24,82,103-105,109-110,116,189,260-265,268
+  s_17ebc18a4b3c5c::t_3cf28180ada067 5-8,10,21-23,25,190,192
+  s_17ebc18a4b3c5c::t_495f0304225ba7 248
+  s_17ebc18a4b3c5c::t_b4c853afec3792 9,129
+apps/mitchellhynes.com/src/components/MarkdownContent.astro
+  s_17ebc18a4b3c5c::t_880a7c15c8b98c 1-3,9-25,27,34,52,54,57-58,63,80-81,83-84,89-91,94-100,102,105
+  s_17ebc18a4b3c5c::t_1032e60cf2757f 68-77
+  s_17ebc18a4b3c5c::t_43d5b431f2a251 4-8,26,28-33,35-51,53,55-56,59-62,64-67,78-79,82,85-88,92-93,101,103-104,106-120
+apps/mitchellhynes.com/src/scripts/image-preview-transitions.ts
+  s_17ebc18a4b3c5c::t_d2a539646740f0 1-73
+apps/mitchellhynes.com/src/content/posts/skate-log-04.mdx
+  s_17ebc18a4b3c5c::t_39b21b9e8c158a 1-8
+apps/mitchellhynes.com/src/content/posts/using-mdx.mdx
+  s_17ebc18a4b3c5c::t_39b21b9e8c158a 1-55
+apps/mitchellhynes.com/src/pages/projects/[...slug].astro
+  s_17ebc18a4b3c5c::t_d9901740cd040e 18
+apps/mitchellhynes.com/src/content/posts/skate-log-08.mdx
+  s_17ebc18a4b3c5c::t_39b21b9e8c158a 1-8
+apps/mitchellhynes.com/src/components/ProjectDirectory.astro
+  s_17ebc18a4b3c5c::t_dd19e759d639c4 3,64-67,251,254-255,260-263,266-268
+  s_17ebc18a4b3c5c::t_260ccc11496945 1-2,4-63,68-250,252-253,256-259,264-265,269-328
+apps/mitchellhynes.com/src/components/Header.astro
+  s_17ebc18a4b3c5c::t_ccd70b7ad87617 16
+apps/mitchellhynes.com/src/content/posts/skate-log-02.mdx
+  s_17ebc18a4b3c5c::t_39b21b9e8c158a 1-8
+apps/mitchellhynes.com/src/pages/blog/[...slug].astro
+  s_17ebc18a4b3c5c::t_ccd70b7ad87617 1-21
+apps/mitchellhynes.com/src/pages/about.astro
+  s_17ebc18a4b3c5c::t_0cfc32391d0557 1-13,15-18
+  s_17ebc18a4b3c5c::t_a42003e1a8de2e 14
+apps/mitchellhynes.com/src/components/ImageGallery.tsx
+  s_17ebc18a4b3c5c::t_f52f4a4ebc22a8 1,3,18-19
+  s_17ebc18a4b3c5c::t_74c8fbbe1e8e55 31-32,44
+  s_17ebc18a4b3c5c::t_6f29c2eefa782d 59
+  s_17ebc18a4b3c5c::t_04152a87456cbb 21-22,24,28-30,34-43,46,48,50
+  s_17ebc18a4b3c5c::t_d269b8a3b188bf 54-58,60-74
+  s_17ebc18a4b3c5c::t_1b253df69fcaa4 2
+  s_17ebc18a4b3c5c::t_39b21b9e8c158a 4-17,20,23,25-27,45,47,49,51-53,75-77
+  s_17ebc18a4b3c5c::t_d2a539646740f0 33
+apps/mitchellhynes.com/src/pages/posts/index.astro
+  s_17ebc18a4b3c5c::t_ccd70b7ad87617 2
+apps/mitchellhynes.com/tailwind.config.ts
+  s_17ebc18a4b3c5c::t_880a7c15c8b98c 1-2,9,78-128
+  s_17ebc18a4b3c5c::t_1176309dbc195a 129
+apps/mitchellhynes.com/src/content/posts/piranesi-log-02.mdx
+  s_17ebc18a4b3c5c::t_39b21b9e8c158a 1-56
+apps/mitchellhynes.com/src/content/posts/skate-log-06.mdx
+  s_17ebc18a4b3c5c::t_39b21b9e8c158a 1-8
+apps/mitchellhynes.com/src/content/posts/25-11-25-ideaspace.mdx
+  s_17ebc18a4b3c5c::t_39b21b9e8c158a 1-194
+apps/mitchellhynes.com/src/components/HomeSidebar.astro
+  s_17ebc18a4b3c5c::t_a6fed8b9acbd6c 1,3,39-41,45-46,59-66,72-76,82-86,92-96,102-107,206-208,210,217-218,245-318,368-369,387-448,603-604,611-616,620,625-627
+  s_17ebc18a4b3c5c::t_260ccc11496945 16,25,87-91,109-112,114-122,124-130,132,134-136,138-160,202-205,213-215
+  s_17ebc18a4b3c5c::t_37bcecda49930a 38,123,131,133,137,219-244,476,495-499,502-511,519,539-602,605-610,618-619
+  s_17ebc18a4b3c5c::t_b979faa11587e8 512
+  s_17ebc18a4b3c5c::t_23e60904e76625 364-366
+  s_17ebc18a4b3c5c::t_d190b63eabf48a 327,345,352
+  s_17ebc18a4b3c5c::t_f9307de2cd37c2 113
+  s_17ebc18a4b3c5c::t_0cfc32391d0557 24,42,67-71,77-81,209,211-212
+  s_17ebc18a4b3c5c::t_6449b4053859c3 8,11,17,26-27,31-37,97-101,161-168,170-173,175-176,178-181,192-201,216,490-494,530-538
+  s_17ebc18a4b3c5c::t_dbbbe6cfc8ca2e 13-15
+  s_17ebc18a4b3c5c::t_1a54a76d4fd150 30
+  s_17ebc18a4b3c5c::t_c333f7f09d7526 169
+  s_17ebc18a4b3c5c::t_bc20f1318dc13d 2,5-7,9-10,12,29,108,449-475,477-489,500-501,513-518,520-529,617
+  s_17ebc18a4b3c5c::t_3fc13989fb3150 344
+  s_17ebc18a4b3c5c::t_3eb1afaadc96c1 4,28,177,182-191
+  s_17ebc18a4b3c5c::t_367880e855bf5e 18-23,174
+  s_17ebc18a4b3c5c::t_0d26610f34f0a7 43-44,47-58,319-326,328-343,346-351,353-363,367,370-386,621-624
+apps/mitchellhynes.com/src/content/posts/skate-log-01.mdx
+  s_17ebc18a4b3c5c::t_39b21b9e8c158a 1-8
+apps/mitchellhynes.com/src/content/posts/skate-log-09.mdx
+  s_17ebc18a4b3c5c::t_39b21b9e8c158a 1-8
+apps/mitchellhynes.com/src/content/posts/skate-log-03.mdx
+  s_17ebc18a4b3c5c::t_39b21b9e8c158a 1-8
+apps/mitchellhynes.com/src/content/posts/skate-log-10.mdx
+  s_17ebc18a4b3c5c::t_39b21b9e8c158a 1-8
+apps/mitchellhynes.com/src/pages/projects/index.astro
+  s_17ebc18a4b3c5c::t_a42003e1a8de2e 19
+  s_17ebc18a4b3c5c::t_260ccc11496945 1-18,20-23
+apps/mitchellhynes.com/src/content/posts/26-02-08-the-more-things-change.mdx
+  s_17ebc18a4b3c5c::t_39b21b9e8c158a 1-53
+apps/mitchellhynes.com/src/layouts/BlogPost.astro
+  s_17ebc18a4b3c5c::t_5ca2552a9d28f3 33
+  s_17ebc18a4b3c5c::t_d2a539646740f0 206-209
+  s_17ebc18a4b3c5c::t_ccd70b7ad87617 4-5,7-9,11-24,27-28,30-32,34,38-44,47-49,54-72,76,79-189,191-199,201,203-205
+  s_17ebc18a4b3c5c::t_ea85536969fc2e 190,200,202
+apps/mitchellhynes.com/src/pages/rss.xml.js
+  s_17ebc18a4b3c5c::t_ccd70b7ad87617 7,14
+apps/mitchellhynes.com/src/components/BlogDirectory.astro
+  s_17ebc18a4b3c5c::t_a8d1b171df7005 307,322,328,333-335,339,342,348,353,364-367
+  s_17ebc18a4b3c5c::t_26c8c9469aa434 150,153,164-165,194,202-203,216,270
+  s_17ebc18a4b3c5c::t_a049e2e09f3e49 71
+  s_17ebc18a4b3c5c::t_8b75a842bce045 53,55
+  s_17ebc18a4b3c5c::t_44dbf30c5179b3 18-23,35-45,47-52,54,56-66,68-70,72-73,75,83,85-102,109-142,208-215,217-256,259-267,271-274
+  s_17ebc18a4b3c5c::t_3eb1afaadc96c1 4,67,74,76-82,310
+  s_17ebc18a4b3c5c::t_a7f358a5367a14 372-373,376-379,387-392,395,397,402-413
+  s_17ebc18a4b3c5c::t_a658d84ce1191b 1-3,5-17,24-34,46,84,103-108,143-149,151-152,154-163,166-193,195-201,204-207,257-258,268-269,275-306,308-309,311-321,323-327,329-332,336-338,340-341,343-347,349-352,354-363,368-371,374-375,380,385-386,393-394,396,398-401,414-416
+  s_17ebc18a4b3c5c::t_cf98cd73f53764 381-384
+apps/mitchellhynes.com/src/layouts/ProjectPost.astro
+  s_17ebc18a4b3c5c::t_d0dc4bb9a26c47 6,30,71-73
+  s_17ebc18a4b3c5c::t_accca409fdc95a 18
+  s_17ebc18a4b3c5c::t_c41176a1d1c4ac 13
+  s_17ebc18a4b3c5c::t_d9901740cd040e 3,5,8-10,12,14-17,19-20,23-24,26,31-40,42-52,55-58,61,66-67,69-70,77,80-240
+apps/mitchellhynes.com/src/content/posts/25-12-14-end-table.mdx
+  s_17ebc18a4b3c5c::t_39b21b9e8c158a 1-302
+apps/mitchellhynes.com/src/components/ImagePreview.tsx
+  s_17ebc18a4b3c5c::t_1b253df69fcaa4 45
+  s_17ebc18a4b3c5c::t_74c8fbbe1e8e55 25,28-29,34,36-37,49-50,55,59-60,65
+  s_17ebc18a4b3c5c::t_f52f4a4ebc22a8 1-24,26-27,30-33,35,38-44,46-48,51-54,56-58,61-64,66-69
+apps/mitchellhynes.com/src/content/posts/piranesi-log-03.mdx
+  s_17ebc18a4b3c5c::t_a6af98ae8b1f42 5
+  s_17ebc18a4b3c5c::t_39b21b9e8c158a 1-4,6-163
+apps/mitchellhynes.com/src/components/SideBySide.tsx
+  s_17ebc18a4b3c5c::t_1032e60cf2757f 19-23,28-32,36-40
+  s_17ebc18a4b3c5c::t_39b21b9e8c158a 1-4,6-14,16-18,24-27,33-35,41-46
+  s_17ebc18a4b3c5c::t_04152a87456cbb 5,15
+apps/mitchellhynes.com/src/content/posts/skate-log-07.mdx
+  s_17ebc18a4b3c5c::t_39b21b9e8c158a 1-8
+apps/mitchellhynes.com/src/content.config.ts
+  s_17ebc18a4b3c5c::t_2fdceda2650309 13-14,16
+  s_17ebc18a4b3c5c::t_a6af98ae8b1f42 15
+apps/mitchellhynes.com/src/content/posts/piranesi-log-01.mdx
+  s_17ebc18a4b3c5c::t_39b21b9e8c158a 1-115
+yarn.lock
+  s_17ebc18a4b3c5c::t_f6c345c335d452 4705,4718,6744
+---
+{
+  "schema_version": "authorship/3.0.0",
+  "git_ai_version": "1.6.14",
+  "base_commit_sha": "efbf489c7d9a0a922ea9dcb79ea81a01dbb2f769",
+  "prompts": {},
+  "sessions": {
+    "s_17ebc18a4b3c5c": {
+      "agent_id": {
+        "tool": "codex",
+        "id": "019f5e49-09ad-79d2-9655-b02635ee8cb3",
+        "model": "gpt-5.6-sol"
+      },
+      "human_author": "Mitchell Hynes <mitch@spellbook.legal>"
+    }
+  }
+}
