@@ -1,0 +1,54 @@
+name: CI
+
+on:
+  pull_request:
+    paths:
+      - "apps/mitchellhynes.com/**"
+      - "packages/**"
+      - "package.json"
+      - "yarn.lock"
+      - ".yarnrc.yml"
+      - ".github/cloudfront/**"
+      - ".github/scripts/**"
+      - ".github/workflows/**"
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+concurrency:
+  group: ci-${{ github.workflow }}-${{ github.ref }}
+  cancel-in-progress: true
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Check out repository
+        uses: actions/checkout@v4
+
+      - name: Set up Node.js
+        uses: actions/setup-node@v4
+        with:
+          node-version: 22
+
+      - name: Enable Corepack
+        run: corepack enable
+
+      - name: Install dependencies
+        run: yarn install --immutable
+
+      - name: Lint
+        run: yarn lint
+
+      - name: Check formatting
+        run: yarn format
+
+      - name: Validate redirect deployment script
+        run: bash -n .github/scripts/deploy-jestersprivilege-redirect.sh
+
+      - name: Test legacy redirects
+        run: node --test .github/cloudfront/jestersprivilege-redirect.test.mjs
+
+      - name: Build mitchellhynes.com
+        run: yarn mitchellhynes.com:build

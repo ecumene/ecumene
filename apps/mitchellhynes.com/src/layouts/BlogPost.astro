@@ -3,13 +3,15 @@ import type { CollectionEntry } from "astro:content";
 import BaseHead from "../components/BaseHead.astro";
 import HomeShell from "../components/HomeShell.astro";
 import MarkdownContent from "../components/MarkdownContent.astro";
+import { getPostThumbnail } from "../utils/post-media";
 
 interface Props {
   post: CollectionEntry<"posts">;
 }
 
 const { post } = Astro.props;
-const { title, description, pubDate, updatedDate, heroImage, heroVideo } = post.data;
+const { kind, title, description, pubDate, updatedDate, heroImage, heroVideo } = post.data;
+const socialImage = getPostThumbnail(post);
 const formattedDate = pubDate.toLocaleDateString("en-US", {
   month: "short",
   day: "numeric",
@@ -30,7 +32,8 @@ const formattedUpdatedDate = updatedDate?.toLocaleDateString("en-US", {
     <BaseHead
       title={`${title} | Mitchell Hynes`}
       description={description}
-      {...(heroImage ? { image: heroImage } : {})}
+      type="article"
+      {...(socialImage ? { image: socialImage } : {})}
     />
   </head>
 
@@ -39,7 +42,7 @@ const formattedUpdatedDate = updatedDate?.toLocaleDateString("en-US", {
       <article class="blog-post">
         <div class="blog-post__inner">
           <header class="blog-post__header">
-            <p class="blog-post__label">Blog</p>
+            <p class="blog-post__label">{kind === "devlog" ? "Dev log" : "Blog"}</p>
             <div class="blog-post__date">
               <time datetime={pubDate.toISOString()}>{formattedDate}</time>
               {

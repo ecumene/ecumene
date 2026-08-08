@@ -15,11 +15,17 @@ const formatPostDate = (date: Date) =>
     year: "numeric",
     timeZone: "UTC",
   });
-const isDevlog = (post: CollectionEntry<"posts">) =>
-  /^(piranesi|skate)-log-/.test(post.id);
 const postGroups = [
-  { id: "blog", label: "Blog", posts: posts.filter((post) => !isDevlog(post)) },
-  { id: "devlog", label: "Dev log", posts: posts.filter(isDevlog) },
+  {
+    id: "blog",
+    label: "Blog",
+    posts: posts.filter((post) => post.data.kind === "blog"),
+  },
+  {
+    id: "devlog",
+    label: "Dev log",
+    posts: posts.filter((post) => post.data.kind === "devlog"),
+  },
 ];
 ---
 
