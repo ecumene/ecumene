@@ -1,0 +1,49 @@
+name: Route jestersprivilege.ca to mitchellhynes.com
+
+on:
+  workflow_run:
+    workflows: ["Deploy mitchellhynes.com to AWS"]
+    types: [completed]
+  workflow_dispatch:
+
+permissions:
+  contents: read
+  id-token: write
+
+concurrency:
+  group: jestersprivilege-ca-production
+  cancel-in-progress: false
+
+env:
+  AWS_ROLE_ARN: ${{ secrets.AWS_ROLE_ARN }}
+
+jobs:
+  redirect:
+    if: ${{ github.event_name == 'workflow_dispatch' || github.event.workflow_run.conclusion == 'success' }}
+    runs-on: ubuntu-latest
+    steps:
+      - name: Check out repository
+        uses: actions/checkout@v4
+        with:
+          ref: ${{ github.event.workflow_run.head_sha || github.sha }}
+
+      - name: Configure AWS credentials with OIDC
+        if: ${{ env.AWS_ROLE_ARN != '' }}
+        uses: aws-actions/configure-aws-credentials@v4
+        with:
+          role-to-assume: ${{ env.AWS_ROLE_ARN }}
+          role-session-name: github-actions-jestersprivilege-ca
+          aws-region: us-east-1
+
+      - name: Configure AWS credentials with access keys
+        if: ${{ env.AWS_ROLE_ARN == '' }}
+        uses: aws-actions/configure-aws-credentials@v4
+        with:
+          aws-access-key-id: ${{ secrets.AWS_ACCESS_KEY_ID }}
+          aws-secret-access-key: ${{ secrets.AWS_SECRET_ACCESS_KEY }}
+          aws-region: us-east-1
+
+      - name: Publish and attach redirect function
+        env:
+          JP_DISTRIBUTION_ID: ${{ secrets.JP_DISTRIBUTION_ID }}
+        run: .github/scripts/deploy-jestersprivilege-redirect.sh

@@ -1,0 +1,820 @@
+<section class="about-page" aria-labelledby="about-title">
+  <div class="about-page__layout">
+    <div class="about-page__copy">
+      <div class="about-page__intro">
+        <p class="about-page__label">About</p>
+
+        <h1 id="about-title">I build things<br />that last<span>.</span></h1>
+
+        <a class="about-page__read-more" href="#about-stories">
+          Read more
+          <svg
+            viewBox="0 0 20 20"
+            aria-hidden="true"
+            width="20"
+            height="20"
+          >
+            <path d="M10 3v13m0 0 5-5m-5 5-5-5"></path>
+          </svg>
+        </a>
+      </div>
+
+      <div class="about-page__stories" id="about-stories">
+        <p class="about-page__deck-instruction" id="about-card-instruction">
+          <span class="about-page__deck-instruction-icon" aria-hidden="true"
+            >↻</span
+          >
+          <span class="about-page__deck-instruction-copy--touch">
+            Tap any card to flip it.
+          </span>
+          <span class="about-page__deck-instruction-copy--pointer">
+            Click any card to flip it.
+          </span>
+        </p>
+
+        <ul class="about-page__deck" aria-labelledby="about-card-instruction">
+          <li>
+            <button
+              class="about-page__fact"
+              type="button"
+              aria-pressed="false"
+              aria-label="Making things. I make furniture to connect with the grandpas in my life. I love making things with walnut and birch. Flip to show a workshop photo."
+              data-flip-card
+            >
+              <span class="about-page__fact-inner">
+                <span class="about-page__fact-face about-page__fact-front">
+                  <span class="about-page__fact-corner">
+                    <span class="about-page__fact-number">01</span>
+                    <span class="about-page__fact-suit" aria-hidden="true">♣</span>
+                  </span>
+                  <span
+                    class="about-page__fact-title"
+                    role="heading"
+                    aria-level="2"
+                    data-card-title
+                  >
+                    Making things
+                  </span>
+                  <span class="about-page__fact-story" data-card-story>
+                    I make furniture to connect with the grandpas in my life. I
+                    love making things with walnut and birch.
+                  </span>
+                  <span class="about-page__fact-watermark" aria-hidden="true"
+                    >♣</span
+                  >
+                  <span class="about-page__fact-hint">
+                    View photo <span aria-hidden="true">↻</span>
+                  </span>
+                </span>
+
+                <span
+                  class="about-page__fact-face about-page__fact-back"
+                  aria-hidden="true"
+                >
+                  <img
+                    src="/woodworking/end-table-22.webp"
+                    alt="A finished walnut end table"
+                    width="1584"
+                    height="2112"
+                    loading="lazy"
+                    decoding="async"
+                  />
+                  <span class="about-page__fact-back-copy">
+                    <span class="about-page__fact-caption" data-card-caption>
+                      The finished walnut end table.
+                    </span>
+                    <span class="about-page__fact-hint" data-card-return>
+                      Back to story <span aria-hidden="true">↻</span>
+                    </span>
+                  </span>
+                </span>
+              </span>
+            </button>
+          </li>
+
+          <li>
+            <button
+              class="about-page__fact"
+              type="button"
+              aria-pressed="false"
+              aria-label="How I got here. Gamedev got me into programming, but I quickly fell in love with game engines instead, which led me to web development and finally AI. Flip to show a game I made."
+              data-flip-card
+            >
+              <span class="about-page__fact-inner">
+                <span class="about-page__fact-face about-page__fact-front">
+                  <span class="about-page__fact-corner">
+                    <span class="about-page__fact-number">02</span>
+                    <span class="about-page__fact-suit" aria-hidden="true">♦</span>
+                  </span>
+                  <span
+                    class="about-page__fact-title"
+                    role="heading"
+                    aria-level="2"
+                    data-card-title
+                  >
+                    How I got here
+                  </span>
+                  <span class="about-page__fact-story" data-card-story>
+                    Gamedev got me into programming, but I quickly fell in love
+                    with game engines instead, which led me to web development
+                    and finally AI.
+                  </span>
+                  <span class="about-page__fact-watermark" aria-hidden="true"
+                    >♦</span
+                  >
+                  <span class="about-page__fact-hint">
+                    View video <span aria-hidden="true">↻</span>
+                  </span>
+                </span>
+
+                <span
+                  class="about-page__fact-face about-page__fact-back"
+                  aria-hidden="true"
+                >
+                  <video
+                    src="/skate/skate-log-10.mp4"
+                    poster="/blog-thumbnails/skate-log-10.jpg"
+                    preload="metadata"
+                    muted
+                    loop
+                    playsinline
+                    tabindex="-1"
+                    aria-hidden="true"
+                  ></video>
+                  <span class="about-page__fact-back-copy">
+                    <span class="about-page__fact-caption" data-card-caption>
+                      A skateboard game prototype I made in Unity.
+                    </span>
+                    <span class="about-page__fact-hint" data-card-return>
+                      Back to story <span aria-hidden="true">↻</span>
+                    </span>
+                  </span>
+                </span>
+              </span>
+            </button>
+          </li>
+
+          <li>
+            <button
+              class="about-page__fact"
+              type="button"
+              aria-pressed="false"
+              aria-label="Culture. I’m interested in culture—books, music, food, and the things people make. I like learning how people live and make sense of the world. Flip to show an artwork I love."
+              data-flip-card
+            >
+              <span class="about-page__fact-inner">
+                <span class="about-page__fact-face about-page__fact-front">
+                  <span class="about-page__fact-corner">
+                    <span class="about-page__fact-number">03</span>
+                    <span class="about-page__fact-suit" aria-hidden="true">♥</span>
+                  </span>
+                  <span
+                    class="about-page__fact-title"
+                    role="heading"
+                    aria-level="2"
+                    data-card-title
+                  >
+                    Culture
+                  </span>
+                  <span class="about-page__fact-story" data-card-story>
+                    I’m interested in culture—books, music, food, and the things
+                    people make. I like learning how people live and make sense
+                    of the world.
+                  </span>
+                  <span class="about-page__fact-watermark" aria-hidden="true"
+                    >♥</span
+                  >
+                  <span class="about-page__fact-hint">
+                    View photo <span aria-hidden="true">↻</span>
+                  </span>
+                </span>
+
+                <span
+                  class="about-page__fact-face about-page__fact-back"
+                  aria-hidden="true"
+                >
+                  <img
+                    src="/the-round-tower.jpg"
+                    alt="Giovanni Battista Piranesi’s etching The Round Tower"
+                    width="1549"
+                    height="2000"
+                    loading="lazy"
+                    decoding="async"
+                  />
+                  <span class="about-page__fact-back-copy">
+                    <span class="about-page__fact-caption" data-card-caption>
+                      Piranesi’s <em>The Round Tower</em>—one of those images I
+                      keep coming back to.
+                    </span>
+                    <span class="about-page__fact-hint" data-card-return>
+                      Back to story <span aria-hidden="true">↻</span>
+                    </span>
+                  </span>
+                </span>
+              </span>
+            </button>
+          </li>
+        </ul>
+      </div>
+    </div>
+
+    <figure class="about-page__portrait">
+      <img
+        src="/about-beach.png"
+        alt="Mitchell Hynes smiling on a beach and holding up a peace sign"
+        width="1447"
+        height="1087"
+        loading="eager"
+        decoding="async"
+      />
+    </figure>
+  </div>
+</section>
+
+<script>
+  const prefersReducedMotion = window.matchMedia(
+    "(prefers-reduced-motion: reduce)"
+  );
+
+  document.querySelectorAll(".about-page__deck").forEach((deck) => {
+    if (!(deck instanceof HTMLUListElement) || deck.dataset.stackReady) return;
+
+    const cards = Array.from(
+      deck.querySelectorAll<HTMLButtonElement>("[data-flip-card]")
+    );
+
+    const setFlipped = (card: HTMLButtonElement, flipped: boolean) => {
+      const front = card.querySelector(".about-page__fact-front");
+      const back = card.querySelector(".about-page__fact-back");
+      const title = card.querySelector("[data-card-title]")?.textContent?.trim();
+      const story = card.querySelector("[data-card-story]")?.textContent?.trim();
+      const caption = card.querySelector("[data-card-caption]")?.textContent?.trim();
+      const video = card.querySelector("video");
+
+      if (!(front instanceof HTMLElement) || !(back instanceof HTMLElement)) {
+        return;
+      }
+
+      card.classList.toggle("is-flipped", flipped);
+      card.setAttribute("aria-pressed", String(flipped));
+      front.setAttribute("aria-hidden", String(flipped));
+      back.setAttribute("aria-hidden", String(!flipped));
+      card.setAttribute(
+        "aria-label",
+        flipped
+          ? `${video ? "Video" : "Photo"}: ${caption} Flip to return to ${title}.`
+          : `${title}. ${story} Flip to show the back of the card.`
+      );
+
+      if (!(video instanceof HTMLVideoElement)) return;
+
+      if (flipped && !prefersReducedMotion.matches) {
+        void video.play().catch(() => undefined);
+      } else {
+        video.pause();
+        video.currentTime = 0;
+      }
+    };
+
+    cards.forEach((card, index) => {
+      const returnControl = card.querySelector<HTMLElement>(
+        "[data-card-return]"
+      );
+
+      setFlipped(card, false);
+
+      returnControl?.addEventListener("click", (event) => {
+        event.stopPropagation();
+        setFlipped(card, false);
+      });
+
+      card.addEventListener("click", () => {
+        setFlipped(card, card.getAttribute("aria-pressed") !== "true");
+      });
+
+      card.addEventListener("keydown", (event) => {
+        if (event.key === "Escape") {
+          event.preventDefault();
+          setFlipped(card, false);
+          return;
+        }
+
+        if (event.key !== "ArrowLeft" && event.key !== "ArrowRight") return;
+
+        event.preventDefault();
+        const direction = event.key === "ArrowRight" ? 1 : -1;
+        const nextIndex = (index + direction + cards.length) % cards.length;
+        cards[nextIndex]?.focus();
+      });
+    });
+
+    deck.dataset.stackReady = "true";
+  });
+</script>
+
+<style>
+  .about-page {
+    min-height: 100vh;
+    background:
+      radial-gradient(circle at 67% 38%, rgb(167 43 72 / 2%), transparent 28%),
+      hsl(28 25% 98.5%);
+    color: hsl(var(--foreground));
+    padding: 3.5rem 1.25rem 4rem;
+    font-family: var(--font-body);
+  }
+
+  .about-page__layout {
+    display: grid;
+    width: min(100%, 70rem);
+    margin: 0 auto;
+    grid-template-areas:
+      "intro"
+      "portrait"
+      "stories";
+  }
+
+  .about-page__copy {
+    display: contents;
+  }
+
+  .about-page__intro {
+    grid-area: intro;
+    min-width: 0;
+    font-family: var(--font-body);
+  }
+
+  .about-page__label {
+    width: fit-content;
+    margin: 0;
+    color: hsl(var(--brand));
+    font-size: 0.8125rem;
+    font-weight: 700;
+    letter-spacing: 0.06em;
+    line-height: 1;
+    text-transform: uppercase;
+  }
+
+  .about-page__label,
+  .about-page__fact-number {
+    font-family: var(--font-body);
+  }
+
+  .about-page__label::after {
+    display: block;
+    width: 3.5rem;
+    height: 0.125rem;
+    margin-top: 1rem;
+    background: hsl(var(--brand));
+    content: "";
+  }
+
+  .about-page h1 {
+    margin: clamp(2.75rem, 7vh, 5rem) 0 0;
+    font-family: var(--font-display);
+    font-size: clamp(3rem, 5vw, 3.75rem);
+    font-weight: 400;
+    letter-spacing: -0.025em;
+    line-height: 0.98;
+  }
+
+  .about-page h1 span {
+    color: hsl(var(--brand));
+  }
+
+  .about-page__read-more {
+    display: inline-flex;
+    width: fit-content;
+    margin-top: 2rem;
+    align-items: center;
+    gap: 0.5rem;
+    border-bottom: 1px solid hsl(var(--brand) / 0.28);
+    color: hsl(var(--brand));
+    font-size: 0.8125rem;
+    font-weight: 700;
+    letter-spacing: 0.035em;
+    line-height: 1.8;
+    text-decoration: none;
+    text-transform: uppercase;
+    transition: border-color 200ms ease;
+  }
+
+  .about-page__read-more svg {
+    width: 1rem;
+    height: 1rem;
+    fill: none;
+    stroke: currentColor;
+    stroke-linecap: round;
+    stroke-linejoin: round;
+    stroke-width: 1.5;
+    transition: transform 300ms cubic-bezier(0.22, 1, 0.36, 1);
+  }
+
+  .about-page__read-more:hover {
+    border-color: hsl(var(--brand));
+  }
+
+  .about-page__read-more:hover svg {
+    transform: translateY(0.2rem);
+  }
+
+  .about-page__read-more:focus-visible {
+    border-radius: 0.25rem;
+    outline: 3px solid hsl(var(--brand));
+    outline-offset: 0.3rem;
+  }
+
+  .about-page__stories {
+    grid-area: stories;
+    margin-top: 2.5rem;
+    scroll-margin-top: 2rem;
+  }
+
+  .about-page__deck-instruction {
+    display: flex;
+    margin: 0;
+    align-items: center;
+    gap: 0.5rem;
+    color: hsl(var(--muted-foreground));
+    font-size: 0.8125rem;
+    line-height: 1.4;
+  }
+
+  .about-page__deck-instruction-icon {
+    color: hsl(var(--brand));
+    font-family: var(--font-display);
+    font-size: 1.125rem;
+  }
+
+  .about-page__deck-instruction-copy--pointer {
+    display: none;
+  }
+
+  .about-page__deck {
+    display: grid;
+    width: 100%;
+    margin: 1rem 0 0;
+    padding: 0;
+    grid-template-columns: 1fr;
+    gap: 1rem;
+    list-style: none;
+  }
+
+  .about-page__deck li {
+    min-width: 0;
+  }
+
+  .about-page__fact {
+    width: 100%;
+    aspect-ratio: 5 / 7;
+    border: 0;
+    background: transparent;
+    color: hsl(var(--foreground));
+    cursor: pointer;
+    padding: 0;
+    perspective: 70rem;
+    text-align: left;
+    transition:
+      filter 360ms cubic-bezier(0.22, 1, 0.36, 1),
+      transform 420ms cubic-bezier(0.22, 1, 0.36, 1);
+  }
+
+  .about-page__fact-inner {
+    position: relative;
+    display: block;
+    width: 100%;
+    height: 100%;
+    transform-style: preserve-3d;
+    transition: transform 560ms cubic-bezier(0.22, 1, 0.36, 1);
+  }
+
+  .about-page__fact.is-flipped .about-page__fact-inner {
+    transform: rotateY(180deg);
+  }
+
+  .about-page__fact-face {
+    position: absolute;
+    inset: 0;
+    display: flex;
+    overflow: hidden;
+    border: 1px solid hsl(var(--border));
+    border-radius: 0.875rem;
+    box-shadow: 0 0.65rem 1.75rem rgb(65 43 36 / 7%);
+    -webkit-backface-visibility: hidden;
+    backface-visibility: hidden;
+  }
+
+  .about-page__fact-front {
+    background:
+      radial-gradient(circle at 100% 0%, hsl(var(--brand) / 0.07), transparent 35%),
+      color-mix(in srgb, hsl(var(--background)) 82%, white);
+    padding: 1.25rem 1.25rem 1.125rem;
+    flex-direction: column;
+  }
+
+  .about-page__fact-watermark {
+    position: absolute;
+    right: 1rem;
+    bottom: 2.5rem;
+    color: hsl(var(--brand) / 0.045);
+    font-family: var(--font-display);
+    font-size: 6rem;
+    line-height: 1;
+    pointer-events: none;
+  }
+
+  .about-page__fact-corner {
+    display: flex;
+    align-items: center;
+    gap: 0.4rem;
+  }
+
+  .about-page__fact-number {
+    color: hsl(var(--muted-foreground));
+    font-size: 0.6875rem;
+    font-weight: 700;
+    letter-spacing: 0.08em;
+  }
+
+  .about-page__fact-suit {
+    color: hsl(var(--brand));
+    font-family: var(--font-display);
+    font-size: 1.125rem;
+    line-height: 1;
+  }
+
+  .about-page__fact-title {
+    position: relative;
+    z-index: 1;
+    display: block;
+    margin-top: clamp(2.75rem, 7vh, 4.25rem);
+    color: hsl(var(--foreground));
+    font-family: var(--font-display);
+    font-size: clamp(1.5rem, 3vw, 1.75rem);
+    font-weight: 700;
+    letter-spacing: -0.02em;
+    line-height: 1.05;
+  }
+
+  .about-page__fact-story {
+    position: relative;
+    z-index: 1;
+    display: block;
+    margin-top: 1rem;
+    color: hsl(20 6% 27%);
+    font-family: var(--font-body);
+    font-size: 0.9375rem;
+    line-height: 1.55;
+  }
+
+  .about-page__fact-hint {
+    position: relative;
+    z-index: 1;
+    display: flex;
+    margin-top: auto;
+    align-items: center;
+    justify-content: space-between;
+    gap: 0.75rem;
+    color: hsl(var(--brand));
+    font-family: var(--font-body);
+    font-size: 0.75rem;
+    font-weight: 700;
+    letter-spacing: 0.035em;
+    text-transform: uppercase;
+  }
+
+  .about-page__fact-hint > span {
+    font-family: var(--font-display);
+    font-size: 1.15rem;
+    font-weight: 400;
+    transition: transform 320ms cubic-bezier(0.22, 1, 0.36, 1);
+  }
+
+  .about-page__fact-back {
+    background: hsl(20 9% 13%);
+    transform: rotateY(180deg);
+  }
+
+  .about-page__fact-back::after {
+    position: absolute;
+    inset: 35% 0 0;
+    background: linear-gradient(to bottom, transparent, rgb(22 16 14 / 88%));
+    content: "";
+    pointer-events: none;
+  }
+
+  .about-page__fact-back img,
+  .about-page__fact-back video {
+    position: absolute;
+    inset: 0;
+    display: block;
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+  }
+
+  .about-page__deck li:nth-child(2) .about-page__fact-back video {
+    object-position: 52% center;
+  }
+
+  .about-page__fact-back-copy {
+    position: relative;
+    z-index: 1;
+    display: flex;
+    width: 100%;
+    padding: 1.25rem;
+    flex-direction: column;
+    justify-content: flex-end;
+  }
+
+  .about-page__fact-caption {
+    display: block;
+    margin-bottom: 1.125rem;
+    color: white;
+    font-family: var(--font-display);
+    font-size: 1.25rem;
+    font-weight: 700;
+    line-height: 1.15;
+    text-shadow: 0 1px 1rem rgb(0 0 0 / 45%);
+  }
+
+  .about-page__fact-back .about-page__fact-hint {
+    margin-top: 0;
+    color: rgb(255 255 255 / 88%);
+  }
+
+  .about-page__fact:focus-visible {
+    border-radius: 0.875rem;
+    outline: 3px solid hsl(var(--brand));
+    outline-offset: 0.25rem;
+  }
+
+  @media (hover: hover) and (pointer: fine) {
+    .about-page__deck-instruction-copy--touch {
+      display: none;
+    }
+
+    .about-page__deck-instruction-copy--pointer {
+      display: inline;
+    }
+
+    .about-page__fact:hover {
+      transform: translateY(-0.25rem);
+      filter: drop-shadow(0 0.75rem 1rem rgb(65 43 36 / 8%));
+    }
+
+    .about-page__fact:hover .about-page__fact-hint > span {
+      transform: rotate(40deg);
+    }
+  }
+
+  .about-page__portrait {
+    position: relative;
+    grid-area: portrait;
+    min-height: 0;
+    aspect-ratio: 4 / 3;
+    margin: 2.5rem 0 0;
+    overflow: hidden;
+    border-radius: clamp(1rem, 2vw, 1.5rem);
+    background: hsl(var(--muted));
+    box-shadow: 0 1.5rem 4rem rgb(65 43 36 / 7%);
+    isolation: isolate;
+  }
+
+  .about-page__portrait img {
+    position: absolute;
+    inset: -5%;
+    display: block;
+    width: 110%;
+    height: 110%;
+    max-width: none;
+    object-fit: cover;
+    object-position: 52% center;
+  }
+
+  @media (min-width: 48rem) {
+    .about-page {
+      padding: clamp(4rem, 10vh, 6rem) clamp(2rem, 2.625vw, 4rem)
+        clamp(4rem, 8vh, 6.5rem);
+    }
+
+    .about-page__layout {
+      grid-template-areas:
+        "intro portrait"
+        "stories stories";
+      grid-template-columns:
+        minmax(17rem, clamp(18rem, 29vw, 22rem))
+        minmax(0, 1fr);
+      align-items: start;
+      column-gap: clamp(2.5rem, 5vw, 5.5rem);
+      row-gap: 0;
+    }
+
+    .about-page__copy {
+      display: contents;
+    }
+
+    .about-page__stories {
+      position: relative;
+      z-index: 2;
+      margin-top: clamp(-7rem, -8vw, -4.5rem);
+    }
+
+    .about-page__portrait {
+      aspect-ratio: 0.93;
+      margin-top: 3.5rem;
+    }
+
+    .about-page__deck {
+      grid-template-columns: repeat(
+        auto-fit,
+        minmax(min(100%, 14rem), 1fr)
+      );
+    }
+
+    .about-page__fact {
+      aspect-ratio: 5 / 7;
+    }
+
+    .about-page__fact-front {
+      padding: 1rem 1.125rem;
+    }
+
+    .about-page__fact-title {
+      margin-top: clamp(2rem, 4vh, 3rem);
+      font-size: clamp(1.4rem, 1.75vw, 1.6rem);
+    }
+
+    .about-page__fact-story {
+      margin-top: 0.75rem;
+      font-size: 0.875rem;
+      line-height: 1.45;
+    }
+
+    .about-page__fact-watermark {
+      bottom: 2rem;
+      font-size: 5rem;
+    }
+
+    .about-page__fact-hint {
+      font-size: 0.675rem;
+    }
+
+  }
+
+  @media (min-width: 64rem) {
+    .about-page {
+      padding-top: clamp(5rem, 13.5vh, 8.5rem);
+    }
+  }
+
+  @media (min-width: 90rem) {
+    .about-page__layout {
+      gap: 6rem;
+      margin-right: auto;
+      margin-left: 0;
+    }
+  }
+
+  @media (max-width: 39.999rem) {
+    .about-page h1 {
+      font-size: clamp(2.75rem, 14vw, 3.5rem);
+    }
+
+    .about-page__fact-front {
+      padding: 1rem 1.125rem;
+    }
+
+    .about-page__fact-title {
+      margin-top: 2.25rem;
+      font-size: 1.55rem;
+    }
+
+    .about-page__fact-story {
+      margin-top: 0.875rem;
+      font-size: 0.9375rem;
+      line-height: 1.5;
+    }
+
+    .about-page__fact-watermark {
+      bottom: 2.25rem;
+      font-size: 5.5rem;
+    }
+  }
+
+  @media (prefers-reduced-motion: reduce) {
+    .about-page__deck li,
+    .about-page__fact,
+    .about-page__fact-inner,
+    .about-page__fact-hint > span {
+      transition: none;
+    }
+
+    .about-page__fact {
+      transform: none;
+    }
+
+    .about-page__fact.is-flipped .about-page__fact-inner {
+      transform: rotateY(180deg);
+    }
+  }
+</style>

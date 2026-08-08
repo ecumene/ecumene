@@ -1,0 +1,628 @@
+---
+import type { CollectionEntry } from "astro:content";
+import { Feather, Folder, Home, UserRound } from "lucide-react";
+import { getPostThumbnail } from "../utils/post-media";
+
+interface Props {
+  projects: CollectionEntry<"projects">[];
+  posts: CollectionEntry<"posts">[];
+}
+
+const { projects, posts } = Astro.props;
+const recentProjects = projects.slice(0, 5);
+const currentPath = Astro.url.pathname.replace(/\/$/, "") || "/";
+const isHome = currentPath === "/";
+const isAbout = currentPath === "/about";
+const isProjects = currentPath === "/projects" || currentPath.startsWith("/projects/");
+const isBlog = currentPath === "/blog" || currentPath.startsWith("/blog/");
+const selectedPost = posts.find((post) => currentPath === `/blog/${post.id}`);
+const recentPosts = posts.slice(0, 5);
+const sidebarPosts =
+  selectedPost && !recentPosts.some((post) => post.id === selectedPost.id)
+    ? [...recentPosts.slice(0, 4), selectedPost]
+    : recentPosts;
+const homeHref = isHome ? "#home" : "/#home";
+const projectsHref = "/projects";
+const blogHref = "/blog";
+const showRecentProjects = !isBlog && currentPath !== "/projects";
+const showRecentPosts = isBlog && currentPath !== "/blog";
+const formatProjectDate = (date: Date) =>
+  date.toLocaleDateString("en-US", { timeZone: "America/Toronto" });
+const formatPostDate = (date: Date) =>
+  date.toLocaleDateString("en-US", {
+    month: "short",
+    day: "numeric",
+    year: "numeric",
+    timeZone: "UTC",
+  });
+const getProjectPoster = (slug: string) => `/project-thumbnails/${slug}.jpg`;
+---
+
+<aside class="home-sidebar" aria-label="Site navigation">
+  <a class="home-sidebar__identity" href={homeHref} aria-label="Mitchell Hynes, home">
+    <span
+      class:list={["home-sidebar__card", { "home-sidebar__card--blog": isBlog }]}
+      aria-hidden="true"
+    >
+      <span class="home-sidebar__card-inner">
+        <span class="home-sidebar__card-face home-sidebar__card-face--portrait">
+          <img src="/profile.jpeg" alt="" width="668" height="668" />
+        </span>
+        <span class="home-sidebar__card-face home-sidebar__card-face--joker">
+          <svg viewBox="0 0 169.075 244.64">
+            <use href="/cards.svg#joker_red"></use>
+          </svg>
+        </span>
+      </span>
+    </span>
+    <span class="home-sidebar__identity-copy">
+      <strong>Mitchell Hynes</strong>
+      <small>Full-Stack Developer</small>
+    </span>
+  </a>
+
+  <nav class="home-sidebar__nav" aria-label="Primary navigation">
+    <ul>
+      <li>
+        <a
+          class="home-sidebar__link"
+          href={homeHref}
+          aria-current={isHome ? "page" : "false"}
+        >
+          <Home className="home-sidebar__icon" size={19} strokeWidth={1.7} />
+          <span>Home</span>
+        </a>
+      </li>
+      <li>
+        <a
+          class="home-sidebar__link"
+          href="/about"
+          aria-current={isAbout ? "page" : "false"}
+        >
+          <UserRound className="home-sidebar__icon" size={19} strokeWidth={1.7} />
+          <span>About</span>
+        </a>
+      </li>
+      <li>
+        <a
+          class="home-sidebar__link"
+          href={projectsHref}
+          aria-current={isProjects ? "page" : "false"}
+        >
+          <Folder className="home-sidebar__icon" size={19} strokeWidth={1.7} />
+          <span>Projects</span>
+        </a>
+      </li>
+      <li>
+        <a
+          class="home-sidebar__link"
+          href={blogHref}
+          aria-current={isBlog ? "page" : "false"}
+        >
+          <Feather className="home-sidebar__icon" size={19} strokeWidth={1.7} />
+          <span>Blog</span>
+        </a>
+      </li>
+    </ul>
+  </nav>
+
+  {
+    showRecentProjects && (
+      <section
+        id="projects"
+        class="home-sidebar__projects home-sidebar__recent-projects"
+        aria-labelledby="recent-projects-title"
+      >
+        <h2 id="recent-projects-title">Recent Projects</h2>
+        <ul>
+          {recentProjects.map((project) => (
+            <li class="home-sidebar__project" data-project-preview>
+              <a
+                href={`/projects/${project.id}`}
+                aria-describedby={`project-preview-${project.id}`}
+              >
+                <img
+                  class="home-sidebar__project-poster"
+                  src={getProjectPoster(project.id)}
+                  alt=""
+                  width="192"
+                  height="192"
+                  loading="lazy"
+                />
+                <span class="home-sidebar__project-copy">
+                  <strong>{project.data.title}</strong>
+                  <time datetime={project.data.pubDate.toISOString()}>
+                    {formatProjectDate(project.data.pubDate)}
+                  </time>
+                </span>
+                <span
+                  id={`project-preview-${project.id}`}
+                  class="home-sidebar__project-popover"
+                  role="tooltip"
+                >
+                  <video
+                    src={project.data.video}
+                    poster={getProjectPoster(project.id)}
+                    preload="none"
+                    muted
+                    loop
+                    playsinline
+                    tabindex="-1"
+                    aria-hidden="true"
+                  />
+                  <span class="home-sidebar__popover-copy">
+                    <strong>{project.data.title}</strong>
+                    <span>{project.data.description}</span>
+                  </span>
+                </span>
+              </a>
+            </li>
+          ))}
+        </ul>
+      </section>
+    )
+  }
+
+  {
+    showRecentPosts && (
+      <section
+        class="home-sidebar__projects home-sidebar__posts home-sidebar__recent-posts"
+        aria-labelledby="recent-posts-title"
+      >
+        <h2 id="recent-posts-title">Recent Posts</h2>
+        <ul>
+          {sidebarPosts.map((post) => {
+            const postPath = `/blog/${post.id}`;
+            const isCurrentPost = currentPath === postPath;
+            const thumbnail = getPostThumbnail(post);
+
+            return (
+              <li>
+                <a href={postPath} aria-current={isCurrentPost ? "page" : "false"}>
+                  {thumbnail && (
+                    <img
+                      class="home-sidebar__project-poster"
+                      src={thumbnail}
+                      alt=""
+                      width="192"
+                      height="192"
+                      loading="lazy"
+                    />
+                  )}
+                  <span class="home-sidebar__project-copy">
+                    <strong>{post.data.title}</strong>
+                    <time datetime={post.data.pubDate.toISOString()}>
+                      {formatPostDate(post.data.pubDate)}
+                    </time>
+                  </span>
+                </a>
+              </li>
+            );
+          })}
+        </ul>
+      </section>
+    )
+  }
+</aside>
+
+<header class="home-mobile-header">
+  <a class="home-mobile-header__identity" href={homeHref}>Mitchell Hynes</a>
+  <nav aria-label="Primary navigation">
+    <a href={homeHref} aria-current={isHome ? "page" : "false"}>Home</a>
+    <a href="/about" aria-current={isAbout ? "page" : "false"}>About</a>
+    <a href={projectsHref} aria-current={isProjects ? "page" : "false"}
+      >Projects</a
+    >
+    <a href={blogHref} aria-current={isBlog ? "page" : "false"}>Blog</a>
+  </nav>
+</header>
+
+<script>
+  const prefersReducedMotion = window.matchMedia(
+    "(prefers-reduced-motion: reduce)"
+  );
+
+  document.querySelectorAll("[data-project-preview]").forEach((project) => {
+    const video = project.querySelector("video");
+    if (!(video instanceof HTMLVideoElement)) return;
+
+    const playPreview = () => {
+      if (prefersReducedMotion.matches) return;
+      void video.play().catch(() => undefined);
+    };
+
+    const stopPreview = () => {
+      video.pause();
+      video.currentTime = 0;
+    };
+
+    project.addEventListener("pointerenter", playPreview);
+    project.addEventListener("pointerleave", stopPreview);
+    project.addEventListener("focusin", playPreview);
+    project.addEventListener("focusout", stopPreview);
+  });
+</script>
+
+<style>
+  .home-sidebar {
+    display: none;
+  }
+
+  .home-mobile-header {
+    position: sticky;
+    top: 0;
+    z-index: 60;
+    display: flex;
+    min-height: 4rem;
+    align-items: center;
+    justify-content: space-between;
+    gap: 1rem;
+    border-bottom: 1px solid hsl(var(--border));
+    background: color-mix(in srgb, hsl(var(--background)) 94%, transparent);
+    padding: 0.75rem 1rem;
+    font-family: var(--font-body);
+    backdrop-filter: blur(12px);
+  }
+
+  .home-mobile-header__identity {
+    color: hsl(var(--foreground));
+    font-weight: 650;
+    text-decoration: none;
+    white-space: nowrap;
+  }
+
+  .home-mobile-header nav {
+    display: flex;
+    align-items: center;
+    gap: 0.75rem;
+    overflow-x: auto;
+  }
+
+  .home-mobile-header nav a {
+    color: hsl(var(--muted-foreground));
+    font-size: 0.875rem;
+    text-decoration: none;
+    white-space: nowrap;
+  }
+
+  .home-mobile-header nav a[aria-current="page"] {
+    color: hsl(var(--foreground));
+  }
+
+  @media (min-width: 64rem) {
+    .home-sidebar {
+      position: fixed;
+      inset: 0 auto 0 0;
+      z-index: 70;
+      display: flex;
+      width: var(--home-sidebar-width);
+      flex-direction: column;
+      border-right: 1px solid hsl(var(--border));
+      background: hsl(var(--background));
+      padding: 2.25rem 1.25rem;
+      font-family: var(--font-body);
+    }
+
+    .home-sidebar__identity {
+      display: flex;
+      align-items: center;
+      gap: 1rem;
+      color: hsl(var(--foreground));
+      padding: 0 0.625rem;
+      text-decoration: none;
+    }
+
+    .home-sidebar__card {
+      width: 3.125rem;
+      height: 4.5rem;
+      flex: none;
+      perspective: 28rem;
+    }
+
+    .home-sidebar__card-inner {
+      position: relative;
+      display: block;
+      width: 100%;
+      height: 100%;
+      -webkit-transform-style: preserve-3d;
+      transform-style: preserve-3d;
+      transition: transform 560ms cubic-bezier(0.22, 1, 0.36, 1);
+    }
+
+    .home-sidebar__card--blog .home-sidebar__card-inner {
+      animation: home-sidebar-card-flip 560ms cubic-bezier(0.22, 1, 0.36, 1)
+        both;
+      transform: rotateY(180deg);
+    }
+
+    .home-sidebar__card-face {
+      position: absolute;
+      inset: 0;
+      display: block;
+      overflow: hidden;
+      border-radius: 0.25rem;
+      box-shadow: 0 1px 1px rgb(44 31 28 / 8%);
+      -webkit-backface-visibility: hidden;
+      backface-visibility: hidden;
+    }
+
+    .home-sidebar__card-face--portrait {
+      border: 1px solid hsl(var(--border));
+      background: hsl(var(--muted));
+      transform: rotateY(0deg);
+    }
+
+    .home-sidebar__card-face--portrait img {
+      display: block;
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      object-position: center 24%;
+    }
+
+    .home-sidebar__card-face--joker {
+      overflow: visible;
+      border-radius: 0;
+      box-shadow: none;
+      transform: rotateY(180deg);
+    }
+
+    .home-sidebar__card-face--joker svg {
+      display: block;
+      width: 100%;
+      height: 100%;
+    }
+
+    @keyframes home-sidebar-card-flip {
+      from {
+        transform: rotateY(0deg);
+      }
+
+      to {
+        transform: rotateY(180deg);
+      }
+    }
+
+    .home-sidebar__identity-copy {
+      display: flex;
+      min-width: 0;
+      flex-direction: column;
+      gap: 0.25rem;
+    }
+
+    .home-sidebar__identity strong {
+      font-size: 0.9375rem;
+      font-weight: 700;
+      letter-spacing: -0.01em;
+    }
+
+    .home-sidebar__identity small {
+      color: hsl(var(--muted-foreground));
+      font-size: 0.8125rem;
+    }
+
+    .home-sidebar__nav {
+      margin-top: 2.5rem;
+      border-bottom: 1px solid hsl(var(--border));
+      padding-bottom: 1.25rem;
+    }
+
+    .home-sidebar__nav ul {
+      display: flex;
+      margin: 0;
+      padding: 0;
+      flex-direction: column;
+      gap: 0.25rem;
+      list-style: none;
+    }
+
+    .home-sidebar__link {
+      display: flex;
+      min-height: 2.75rem;
+      align-items: center;
+      gap: 1rem;
+      border-radius: 0.5rem;
+      color: hsl(var(--foreground));
+      padding: 0.625rem 0.75rem;
+      font-size: 0.875rem;
+      text-decoration: none;
+      transition:
+        background-color 160ms ease,
+        color 160ms ease;
+    }
+
+    .home-sidebar__link:hover {
+      background: hsl(var(--muted));
+    }
+
+    .home-sidebar__link[aria-current="page"] {
+      background: hsl(var(--accent));
+    }
+
+    .home-sidebar__link :global(.home-sidebar__icon) {
+      flex: none;
+      color: hsl(var(--muted-foreground));
+    }
+
+    .home-sidebar__link[aria-current="page"] :global(.home-sidebar__icon) {
+      color: hsl(var(--brand));
+    }
+
+    .home-sidebar__projects {
+      margin-top: 1.75rem;
+      padding: 0 0.625rem;
+    }
+
+    .home-sidebar__projects h2 {
+      margin: 0 0 1.125rem;
+      color: hsl(var(--muted-foreground));
+      font-family: inherit;
+      font-size: 0.6875rem;
+      font-weight: 500;
+      letter-spacing: 0.055em;
+      text-transform: uppercase;
+    }
+
+    .home-sidebar__projects ul {
+      display: flex;
+      margin: 0;
+      padding: 0;
+      flex-direction: column;
+      gap: 0.625rem;
+      list-style: none;
+    }
+
+    .home-sidebar__projects a {
+      position: relative;
+      display: flex;
+      align-items: center;
+      gap: 0.875rem;
+      margin: 0 -0.375rem;
+      border-radius: 0.5rem;
+      color: hsl(var(--foreground));
+      padding: 0.25rem 0.375rem;
+      text-decoration: none;
+      transition: background-color 160ms ease;
+    }
+
+    .home-sidebar__projects a:hover {
+      background: hsl(var(--muted));
+    }
+
+    .home-sidebar__projects a[aria-current="page"] {
+      background: hsl(var(--accent));
+      color: hsl(var(--brand));
+    }
+
+    .home-sidebar__projects a:focus-visible {
+      outline: 2px solid hsl(var(--brand));
+      outline-offset: 2px;
+    }
+
+    .home-sidebar__project-poster {
+      width: 2.625rem;
+      height: 2.625rem;
+      flex: none;
+      border: 1px solid hsl(var(--border));
+      border-radius: 0.375rem;
+      background: white;
+      object-fit: cover;
+    }
+
+    .home-sidebar__project-copy {
+      display: flex;
+      min-width: 0;
+      flex-direction: column;
+      gap: 0.2rem;
+    }
+
+    .home-sidebar__project-copy > strong {
+      overflow: hidden;
+      font-size: 0.8125rem;
+      font-weight: 500;
+      text-overflow: ellipsis;
+      white-space: nowrap;
+    }
+
+    .home-sidebar__projects time {
+      color: hsl(var(--muted-foreground));
+      font-size: 0.6875rem;
+    }
+
+    .home-sidebar__posts a {
+      min-height: 3rem;
+      padding: 0.45rem 0.6rem;
+    }
+
+    .home-sidebar__posts .home-sidebar__project-copy {
+      width: 100%;
+    }
+
+    .home-sidebar__project-popover {
+      position: absolute;
+      top: 50%;
+      left: calc(100% + 1rem);
+      z-index: 100;
+      display: block;
+      width: min(20rem, calc(100vw - var(--home-sidebar-width) - 2rem));
+      overflow: hidden;
+      border: 1px solid hsl(var(--border));
+      border-radius: 0.75rem;
+      background: hsl(var(--background));
+      box-shadow: 0 1rem 2.5rem rgb(62 44 39 / 16%);
+      opacity: 0;
+      pointer-events: none;
+      transform: translate(-0.5rem, -50%);
+      visibility: hidden;
+      transition:
+        opacity 160ms ease,
+        transform 160ms ease,
+        visibility 160ms ease;
+    }
+
+    .home-sidebar__project:nth-last-child(-n + 2) .home-sidebar__project-popover {
+      top: auto;
+      bottom: 0;
+      transform: translateX(-0.5rem);
+    }
+
+    .home-sidebar__project:hover .home-sidebar__project-popover,
+    .home-sidebar__project:focus-within .home-sidebar__project-popover {
+      opacity: 1;
+      transform: translate(0, -50%);
+      visibility: visible;
+    }
+
+    .home-sidebar__project:nth-last-child(-n + 2):hover
+      .home-sidebar__project-popover,
+    .home-sidebar__project:nth-last-child(-n + 2):focus-within
+      .home-sidebar__project-popover {
+      transform: translateX(0);
+    }
+
+    .home-sidebar__project-popover video {
+      display: block;
+      width: 100%;
+      aspect-ratio: 16 / 9;
+      background: #171514;
+      object-fit: cover;
+    }
+
+    .home-sidebar__popover-copy {
+      display: flex;
+      flex-direction: column;
+      gap: 0.375rem;
+      padding: 0.875rem 1rem 1rem;
+      font-family: var(--font-body);
+    }
+
+    .home-sidebar__popover-copy strong {
+      color: hsl(var(--brand));
+      font-family: var(--font-display);
+      font-size: 1.125rem;
+      line-height: 1.2;
+    }
+
+    .home-sidebar__popover-copy > span {
+      color: hsl(var(--muted-foreground));
+      font-size: 0.9375rem;
+      line-height: 1.4;
+    }
+
+    .home-mobile-header {
+      display: none;
+    }
+  }
+
+  @media (prefers-reduced-motion: reduce) {
+    .home-sidebar__link,
+    .home-sidebar__projects a,
+    .home-sidebar__project-popover {
+      transition: none;
+    }
+
+    .home-sidebar__card--blog .home-sidebar__card-inner {
+      animation: none;
+    }
+  }
+</style>

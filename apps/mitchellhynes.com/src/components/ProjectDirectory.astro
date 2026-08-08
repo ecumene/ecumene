@@ -1,0 +1,330 @@
+---
+import type { CollectionEntry } from "astro:content";
+import { ArrowRight } from "lucide-react";
+
+interface Props {
+  projects: CollectionEntry<"projects">[];
+}
+
+const { projects } = Astro.props;
+const formatProjectDate = (date: Date) =>
+  date.toLocaleDateString("en-US", {
+    month: "long",
+    year: "numeric",
+    timeZone: "America/Toronto",
+  });
+const getProjectPoster = (slug: string) => `/project-thumbnails/${slug}.jpg`;
+---
+
+<section class="project-directory" aria-labelledby="project-directory-title">
+  <div class="project-directory__layout">
+    <header class="project-directory__intro">
+      <p class="project-directory__label">Projects</p>
+      <h1 id="project-directory-title">
+        Things I’ve built<span>.</span>
+      </h1>
+      <p>
+        A small directory of products, games, tools, and experiments from the
+        last few years.
+      </p>
+    </header>
+
+    <div class="project-directory__list" aria-label="Project directory">
+      {
+        projects.map((project) => (
+          <article class="project-directory__card" data-project-directory-card>
+            <a href={`/projects/${project.id}`}>
+              <span class="project-directory__media" aria-hidden="true">
+                <img
+                  src={getProjectPoster(project.id)}
+                  alt=""
+                  width="640"
+                  height="360"
+                  loading="lazy"
+                />
+                <video
+                  src={project.data.video}
+                  poster={getProjectPoster(project.id)}
+                  preload="none"
+                  muted
+                  loop
+                  playsinline
+                  tabindex="-1"
+                />
+              </span>
+
+              <span class="project-directory__copy">
+                <span class="project-directory__meta">
+                  <time datetime={project.data.pubDate.toISOString()}>
+                    {formatProjectDate(project.data.pubDate)}
+                  </time>
+                </span>
+                <strong>{project.data.title}</strong>
+                <span>{project.data.description}</span>
+                <span class="project-directory__action">
+                  Open project
+                  <ArrowRight size={16} strokeWidth={1.9} aria-hidden="true" />
+                </span>
+              </span>
+            </a>
+          </article>
+        ))
+      }
+    </div>
+  </div>
+</section>
+
+<script>
+  const prefersReducedMotion = window.matchMedia(
+    "(prefers-reduced-motion: reduce)"
+  );
+
+  document
+    .querySelectorAll("[data-project-directory-card]")
+    .forEach((project) => {
+      const video = project.querySelector("video");
+      if (!(video instanceof HTMLVideoElement)) return;
+
+      const playPreview = () => {
+        if (prefersReducedMotion.matches) return;
+        void video.play().catch(() => undefined);
+      };
+
+      const stopPreview = () => {
+        video.pause();
+        video.currentTime = 0;
+      };
+
+      project.addEventListener("pointerenter", playPreview);
+      project.addEventListener("pointerleave", stopPreview);
+      project.addEventListener("focusin", playPreview);
+      project.addEventListener("focusout", stopPreview);
+    });
+</script>
+
+<style>
+  .project-directory {
+    min-height: 100vh;
+    background:
+      radial-gradient(circle at 72% 28%, rgb(167 43 72 / 3%), transparent 30%),
+      hsl(28 25% 98.5%);
+    color: hsl(var(--foreground));
+    padding: 3.5rem 1.25rem 4rem;
+    font-family: var(--font-body);
+  }
+
+  .project-directory__layout {
+    display: grid;
+    width: min(100%, 70rem);
+    margin: 0 auto;
+    gap: 3rem;
+  }
+
+  .project-directory__intro {
+    max-width: 37rem;
+    min-width: 0;
+  }
+
+  .project-directory__label {
+    width: fit-content;
+    margin: 0;
+    color: hsl(var(--brand));
+    font-family: var(--font-body);
+    font-size: 0.8125rem;
+    font-weight: 700;
+    letter-spacing: 0.06em;
+    line-height: 1;
+    text-transform: uppercase;
+  }
+
+  .project-directory__label::after {
+    display: block;
+    width: 3.5rem;
+    height: 0.125rem;
+    margin-top: 1rem;
+    background: hsl(var(--brand));
+    content: "";
+  }
+
+  .project-directory h1 {
+    margin: clamp(2.5rem, 6vh, 4.5rem) 0 0;
+    font-family: var(--font-display);
+    font-size: clamp(3rem, 6vw, 4.875rem);
+    font-weight: 400;
+    letter-spacing: -0.025em;
+    line-height: 0.98;
+  }
+
+  .project-directory h1 span {
+    color: hsl(var(--brand));
+  }
+
+  .project-directory__intro > p:last-child {
+    max-width: 28rem;
+    margin: 1.5rem 0 0;
+    color: hsl(var(--muted-foreground));
+    font-size: 1.125rem;
+    line-height: 1.55;
+  }
+
+  .project-directory__list {
+    display: grid;
+    gap: 1rem;
+  }
+
+  .project-directory__card {
+    border-top: 1px solid hsl(var(--border));
+  }
+
+  .project-directory__card:last-child {
+    border-bottom: 1px solid hsl(var(--border));
+  }
+
+  .project-directory__card a {
+    display: grid;
+    gap: 1.25rem;
+    border-radius: 0.5rem;
+    color: inherit;
+    padding: 1.25rem 0;
+    text-decoration: none;
+  }
+
+  .project-directory__card a:focus-visible {
+    outline: 2px solid hsl(var(--brand));
+    outline-offset: 6px;
+  }
+
+  .project-directory__media {
+    position: relative;
+    display: block;
+    overflow: hidden;
+    aspect-ratio: 16 / 9;
+    border: 1px solid hsl(var(--border));
+    border-radius: 0.5rem;
+    background: hsl(var(--muted));
+    box-shadow: 0 1rem 2.5rem rgb(65 43 36 / 6%);
+  }
+
+  .project-directory__media img,
+  .project-directory__media video {
+    position: absolute;
+    inset: 0;
+    display: block;
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+  }
+
+  .project-directory__media video {
+    opacity: 0;
+    transition: opacity 180ms ease;
+  }
+
+  .project-directory__copy {
+    display: flex;
+    min-width: 0;
+    flex-direction: column;
+    align-self: center;
+    gap: 0.625rem;
+  }
+
+  .project-directory__meta {
+    color: hsl(var(--muted-foreground));
+    font-family: var(--font-body);
+    font-size: 0.8125rem;
+  }
+
+  .project-directory__copy strong {
+    color: hsl(var(--foreground));
+    font-family: var(--font-display);
+    font-size: clamp(1.65rem, 4vw, 2.35rem);
+    font-weight: 700;
+    line-height: 1.05;
+  }
+
+  .project-directory__copy > span:not(.project-directory__meta):not(.project-directory__action) {
+    max-width: 31rem;
+    color: hsl(20 6% 31%);
+    font-size: 1rem;
+    line-height: 1.6;
+  }
+
+  .project-directory__action {
+    display: inline-flex;
+    width: fit-content;
+    margin-top: 0.25rem;
+    align-items: center;
+    gap: 0.4rem;
+    color: hsl(var(--brand));
+    font-family: var(--font-body);
+    font-size: 0.875rem;
+    font-weight: 700;
+  }
+
+  .project-directory__action :global(svg) {
+    transition: transform 160ms ease;
+  }
+
+  .project-directory__card a:hover .project-directory__action :global(svg),
+  .project-directory__card a:focus-visible .project-directory__action :global(svg) {
+    transform: translateX(0.18rem);
+  }
+
+  .project-directory__card a:hover .project-directory__media video,
+  .project-directory__card a:focus-visible .project-directory__media video {
+    opacity: 1;
+  }
+
+  .project-directory__card a:hover .project-directory__copy strong {
+    color: hsl(var(--brand));
+  }
+
+  @media (min-width: 48rem) {
+    .project-directory {
+      padding: clamp(4rem, 10vh, 6rem) clamp(2rem, 2.625vw, 4rem)
+        clamp(4rem, 8vh, 6.5rem);
+    }
+
+    .project-directory__card a {
+      grid-template-columns: minmax(13rem, 18rem) minmax(0, 1fr);
+      gap: clamp(1.5rem, 4vw, 3rem);
+      padding: 1.5rem 0;
+    }
+  }
+
+  @media (min-width: 64rem) {
+    .project-directory {
+      padding-top: clamp(5rem, 13.5vh, 8.5rem);
+    }
+  }
+
+  @media (min-width: 80rem) {
+    .project-directory__layout {
+      grid-template-columns: minmax(17rem, 24rem) minmax(0, 1fr);
+      align-items: start;
+      gap: clamp(4rem, 7vw, 7rem);
+    }
+
+    .project-directory__intro {
+      position: sticky;
+      top: 7rem;
+    }
+
+    .project-directory__list {
+      padding-top: 0.75rem;
+    }
+  }
+
+  @media (min-width: 90rem) {
+    .project-directory__layout {
+      margin-right: auto;
+      margin-left: 0;
+    }
+  }
+
+  @media (prefers-reduced-motion: reduce) {
+    .project-directory__media video {
+      transition: none;
+    }
+  }
+</style>

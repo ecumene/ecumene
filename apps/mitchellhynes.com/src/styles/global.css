@@ -4,13 +4,37 @@
 @config "../../tailwind.config.ts";
 @source "../../../../packages/ui/src";
 
+@font-face {
+  font-family: "Atkinson Hyperlegible";
+  src: url("/fonts/atkinson-regular.woff") format("woff");
+  font-style: normal;
+  font-weight: 400;
+  font-display: swap;
+}
+
+@font-face {
+  font-family: "Atkinson Hyperlegible";
+  src: url("/fonts/atkinson-bold.woff") format("woff");
+  font-style: normal;
+  font-weight: 700;
+  font-display: swap;
+}
+
+@view-transition {
+  navigation: auto;
+}
+
 @layer base {
   :root {
-    --background: 32.5833333 31% 94%;
-    --foreground: 2text-white;
+    --font-display: "EB Garamond", "Iowan Old Style", "Palatino Linotype", Georgia, serif;
+    --font-body: "Atkinson Hyperlegible", -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
+    --font-mono: "Inconsolata", "SFMono-Regular", Consolas, monospace;
 
-    --muted: 210 40% 96.1%;
-    --muted-foreground: 215.4 16.3% 46.9%;
+    --background: 28 33% 97%;
+    --foreground: 20 10% 14%;
+
+    --muted: 24 22% 94%;
+    --muted-foreground: 18 7% 47%;
 
     --popover: 0 0% 100%;
     --popover-foreground: 222.2 84% 4.9%;
@@ -18,8 +42,8 @@
     --card: 0 0% 100%;
     --card-foreground: 222.2 84% 4.9%;
 
-    --border: 214.3 31.8% 91.4%;
-    --input: 214.3 31.8% 91.4%;
+    --border: 24 17% 89%;
+    --input: 24 17% 89%;
 
     --primary: 222.2 47.4% 11.2%;
     --primary-foreground: 210 40% 98%;
@@ -27,8 +51,8 @@
     --secondary: 210 40% 96.1%;
     --secondary-foreground: 222.2 47.4% 11.2%;
 
-    --accent: 210 40% 96.1%;
-    --accent-foreground: 222.2 47.4% 11.2%;
+    --accent: 350 24% 94%;
+    --accent-foreground: 20 10% 14%;
 
     --destructive: 0 84.2% 60.2%;
     --destructive-foreground: 210 40% 98%;
@@ -73,10 +97,58 @@
 @layer base {
   * {
     @apply border-border;
-    @apply font-serif;
   }
+
+  html {
+    /* Keep route transitions scoped to explicitly named UI instead of flashing a
+       full-page snapshot during navigation. */
+    view-transition-name: none;
+    font-family: var(--font-body);
+    font-size: 100%;
+    font-kerning: normal;
+    text-rendering: optimizeLegibility;
+  }
+
   body {
     @apply bg-background text-foreground;
+    min-height: 100vh;
+    overflow-x: hidden;
+    font-family: var(--font-body);
+    line-height: 1.6;
+    -webkit-font-smoothing: antialiased;
+  }
+
+  button,
+  input,
+  select,
+  textarea {
+    font: inherit;
+  }
+
+  h1,
+  h2,
+  h3,
+  h4,
+  h5,
+  h6 {
+    font-family: var(--font-display);
+    text-wrap: balance;
+  }
+
+  p,
+  li {
+    text-wrap: pretty;
+  }
+
+  code,
+  kbd,
+  pre,
+  samp {
+    font-family: var(--font-mono);
+  }
+
+  time {
+    font-variant-numeric: tabular-nums;
   }
 }
 
@@ -158,4 +230,273 @@
 
 .excalidraw-background-hack svg rect {
   display: none;
+}
+
+.image-preview {
+  position: fixed;
+  inset: 0;
+  z-index: 1000;
+  display: grid;
+  width: 100vw;
+  max-width: none;
+  height: 100dvh;
+  max-height: none;
+  margin: 0;
+  overflow: hidden;
+  border: 0;
+  background: rgb(20 15 14 / 90%);
+  color: white;
+  opacity: 0;
+  padding: clamp(1rem, 3vw, 2.5rem);
+  backdrop-filter: blur(0.25rem);
+  pointer-events: none;
+  transition:
+    opacity 240ms ease,
+    visibility 0s linear 240ms;
+  visibility: hidden;
+}
+
+.image-preview:target {
+  place-items: center;
+  opacity: 1;
+  pointer-events: auto;
+  transition-delay: 0s;
+  visibility: visible;
+}
+
+.image-preview__backdrop {
+  position: absolute;
+  inset: 0;
+  z-index: 0;
+  width: 100%;
+  height: 100%;
+  cursor: zoom-out;
+  border: 0;
+  background: transparent;
+}
+
+.image-preview__figure {
+  position: relative;
+  z-index: 1;
+  display: flex;
+  width: min(100%, 90rem);
+  height: min(100%, 65rem);
+  margin: 0;
+  align-items: center;
+  flex-direction: column;
+  justify-content: center;
+  opacity: 0;
+  pointer-events: none;
+  transform: translateY(0.75rem) scale(0.965);
+  transform-origin: center;
+  transition:
+    opacity 240ms ease,
+    transform 320ms cubic-bezier(0.22, 1, 0.36, 1);
+}
+
+.image-preview:target .image-preview__figure {
+  opacity: 1;
+  transform: translateY(0) scale(1);
+}
+
+.image-preview__image {
+  display: block;
+  width: auto;
+  max-width: 100%;
+  height: auto;
+  max-height: calc(100dvh - 8rem);
+  border-radius: 0.5rem;
+  box-shadow: 0 1.5rem 4rem rgb(0 0 0 / 35%);
+  object-fit: contain;
+}
+
+.image-preview:target .image-preview__image {
+  view-transition-name: image-preview-shared;
+}
+
+.has-image-preview-transitions .image-preview,
+.has-image-preview-transitions .image-preview__figure {
+  transition: none;
+}
+
+::view-transition-group(image-preview-shared) {
+  z-index: 1001;
+  animation-duration: 480ms;
+  animation-timing-function: cubic-bezier(0.22, 1, 0.36, 1);
+}
+
+::view-transition-old(image-preview-shared),
+::view-transition-new(image-preview-shared) {
+  height: 100%;
+  animation-duration: 480ms;
+  mix-blend-mode: normal;
+  object-fit: contain;
+}
+
+.home-sidebar__recent-projects {
+  view-transition-name: sidebar-recent-projects;
+}
+
+.home-sidebar__recent-posts {
+  view-transition-name: sidebar-recent-posts;
+}
+
+::view-transition-group(sidebar-recent-projects),
+::view-transition-group(sidebar-recent-posts) {
+  transform-origin: top left;
+  animation: none;
+}
+
+::view-transition-old(sidebar-recent-projects),
+::view-transition-new(sidebar-recent-projects),
+::view-transition-old(sidebar-recent-posts),
+::view-transition-new(sidebar-recent-posts) {
+  animation: none;
+  mix-blend-mode: normal;
+}
+
+::view-transition-new(sidebar-recent-projects):only-child,
+::view-transition-new(sidebar-recent-posts):only-child {
+  animation: sidebar-projects-in 320ms cubic-bezier(0.22, 1, 0.36, 1) both;
+}
+
+::view-transition-old(sidebar-recent-projects):only-child,
+::view-transition-old(sidebar-recent-posts):only-child {
+  animation: sidebar-projects-out 210ms cubic-bezier(0.4, 0, 1, 1) both;
+}
+
+@keyframes sidebar-projects-in {
+  from {
+    opacity: 0;
+    transform: translateY(-0.35rem);
+  }
+
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+@keyframes sidebar-projects-out {
+  from {
+    opacity: 1;
+    transform: translateY(0);
+  }
+
+  to {
+    opacity: 0;
+    transform: translateY(-0.25rem);
+  }
+}
+
+.image-preview__caption {
+  max-width: 48rem;
+  margin-top: 0.875rem;
+  color: rgb(255 255 255 / 88%);
+  font-family: var(--font-body);
+  font-size: clamp(0.95rem, 1.5vw, 1.1rem);
+  line-height: 1.45;
+  text-align: center;
+}
+
+.image-preview__close,
+.image-preview__navigation {
+  position: absolute;
+  z-index: 2;
+  display: grid;
+  width: 2.75rem;
+  height: 2.75rem;
+  place-items: center;
+  border: 1px solid rgb(255 255 255 / 20%);
+  border-radius: 999px;
+  background: rgb(20 15 14 / 66%);
+  color: white;
+  cursor: pointer;
+  text-decoration: none;
+  transition:
+    background-color 160ms ease,
+    transform 160ms ease;
+}
+
+.image-preview__close:hover,
+.image-preview__navigation:hover {
+  background: rgb(20 15 14 / 90%);
+  transform: scale(1.04);
+}
+
+.image-preview__close:focus-visible,
+.image-preview__navigation:focus-visible {
+  outline: 2px solid white;
+  outline-offset: 3px;
+}
+
+.image-preview__close {
+  top: 1.25rem;
+  right: 1.25rem;
+}
+
+.image-preview__navigation {
+  top: 50%;
+  transform: translateY(-50%);
+}
+
+.image-preview__navigation:hover {
+  transform: translateY(-50%) scale(1.04);
+}
+
+.image-preview__navigation--previous {
+  left: 1.25rem;
+}
+
+.image-preview__navigation--next {
+  right: 1.25rem;
+}
+
+@media (max-width: 40rem) {
+  .image-preview {
+    padding: 3.75rem 0.75rem 5rem;
+  }
+
+  .image-preview__image {
+    max-height: calc(100dvh - 10rem);
+  }
+
+  .image-preview__navigation {
+    top: auto;
+    bottom: 1rem;
+    transform: none;
+  }
+
+  .image-preview__navigation:hover {
+    transform: scale(1.04);
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .image-preview,
+  .image-preview__figure,
+  .image-preview__close,
+  .image-preview__navigation {
+    transition: none;
+  }
+
+  ::view-transition-group(sidebar-recent-projects),
+  ::view-transition-new(sidebar-recent-projects),
+  ::view-transition-old(sidebar-recent-projects),
+  ::view-transition-group(sidebar-recent-posts),
+  ::view-transition-new(sidebar-recent-posts),
+  ::view-transition-old(sidebar-recent-posts) {
+    animation: none;
+  }
+}
+
+@starting-style {
+  .image-preview:target {
+    opacity: 0;
+  }
+
+  .image-preview:target .image-preview__figure {
+    opacity: 0;
+    transform: translateY(0.75rem) scale(0.965);
+  }
 }

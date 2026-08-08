@@ -6,27 +6,59 @@ on:
     paths:
       - "apps/mitchellhynes.com/**"
       - "packages/**"
+      - "package.json"
+      - "yarn.lock"
+      - ".yarnrc.yml"
+      - ".github/workflows/mitchellhynes-com-deploy.yml"
   workflow_dispatch:
+
+permissions:
+  contents: read
+  id-token: write
+
+concurrency:
+  group: mitchellhynes-com-production
+  cancel-in-progress: false
+
+env:
+  AWS_ROLE_ARN: ${{ secrets.AWS_ROLE_ARN }}
 
 jobs:
   deploy:
     runs-on: ubuntu-latest
     steps:
-      - name: Checkout your repository using git
+      - name: Check out repository
         uses: actions/checkout@v4
 
-      - name: Configure AWS Credentials
-        uses: aws-actions/configure-aws-credentials@v1
+      - name: Set up Node.js
+        uses: actions/setup-node@v4
+        with:
+          node-version: 22
+
+      - name: Enable Corepack
+        run: corepack enable
+
+      - name: Install dependencies
+        run: yarn install --immutable
+
+      - name: Build site
+        run: yarn mitchellhynes.com:build
+
+      - name: Configure AWS credentials with OIDC
+        if: ${{ env.AWS_ROLE_ARN != '' }}
+        uses: aws-actions/configure-aws-credentials@v4
+        with:
+          role-to-assume: ${{ env.AWS_ROLE_ARN }}
+          role-session-name: github-actions-mitchellhynes-com
+          aws-region: us-east-1
+
+      - name: Configure AWS credentials with access keys
+        if: ${{ env.AWS_ROLE_ARN == '' }}
+        uses: aws-actions/configure-aws-credentials@v4
         with:
           aws-access-key-id: ${{ secrets.AWS_ACCESS_KEY_ID }}
           aws-secret-access-key: ${{ secrets.AWS_SECRET_ACCESS_KEY }}
           aws-region: us-east-1
-
-      - name: Install, build, and upload your site
-        uses: withastro/action@v2
-        with:
-          path: ./apps/mitchellhynes.com
-          package-manager: yarn
 
       - name: Deploy to S3
         run: aws s3 sync --delete ./apps/mitchellhynes.com/dist/ s3://${{ secrets.MH_BUCKET_ID }}

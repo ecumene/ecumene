@@ -1,84 +1,213 @@
 ---
 import type { CollectionEntry } from "astro:content";
 import BaseHead from "../components/BaseHead.astro";
-import Header from "../components/Header.astro";
-import Footer from "../components/Footer.astro";
-import FormattedDate from "../components/FormattedDate.astro";
+import HomeShell from "../components/HomeShell.astro";
+import MarkdownContent from "../components/MarkdownContent.astro";
+import { getPostThumbnail } from "../utils/post-media";
 
-type Props = CollectionEntry<"posts">["data"];
+interface Props {
+  post: CollectionEntry<"posts">;
+}
 
-const { title, description, pubDate, updatedDate } = Astro.props;
+const { post } = Astro.props;
+const { kind, title, description, pubDate, updatedDate, heroImage, heroVideo } = post.data;
+const socialImage = getPostThumbnail(post);
+const formattedDate = pubDate.toLocaleDateString("en-US", {
+  month: "short",
+  day: "numeric",
+  year: "numeric",
+  timeZone: "UTC",
+});
+const formattedUpdatedDate = updatedDate?.toLocaleDateString("en-US", {
+  month: "short",
+  day: "numeric",
+  year: "numeric",
+  timeZone: "UTC",
+});
 ---
 
-<html lang="en">
+<!doctype html>
+<html lang="en" class="scroll-smooth">
   <head>
-    <BaseHead title={title} description={description} />
-    <style>
-      main {
-        width: calc(100% - 2em);
-        max-width: 100%;
-        margin: 0;
-      }
-      .hero-image {
-        width: 100%;
-      }
-      .hero-image img {
-        display: block;
-        margin: 0 auto;
-        border-radius: 12px;
-        box-shadow: var(--box-shadow);
-      }
-      .prose {
-        width: 720px;
-        max-width: calc(100% - 2em);
-        margin: auto;
-        padding: 1em;
-        color: rgb(var(--gray-dark));
-      }
-      .title {
-        margin-bottom: 1em;
-        padding: 1em 0;
-        text-align: center;
-        line-height: 1;
-      }
-      .title h1 {
-        margin: 0 0 0.5em 0;
-      }
-      .date {
-        margin-bottom: 0.5em;
-        color: rgb(var(--gray));
-      }
-      .last-updated-on {
-        font-style: italic;
-      }
-    </style>
+    <BaseHead
+      title={`${title} | Mitchell Hynes`}
+      description={description}
+      type="article"
+      {...(socialImage ? { image: socialImage } : {})}
+    />
   </head>
 
   <body>
-    <Header />
-    <main>
-      <article>
-        <div class="prose">
-          <div class="title">
-            <div class="date">
-              <FormattedDate date={pubDate} />
+    <HomeShell>
+      <article class="blog-post">
+        <div class="blog-post__inner">
+          <header class="blog-post__header">
+            <p class="blog-post__label">{kind === "devlog" ? "Dev log" : "Blog"}</p>
+            <div class="blog-post__date">
+              <time datetime={pubDate.toISOString()}>{formattedDate}</time>
               {
                 updatedDate && (
-                  <div class="last-updated-on">
-                    Last updated on <FormattedDate date={updatedDate} />
-                  </div>
+                  <span>
+                    Updated <time datetime={updatedDate.toISOString()}>{formattedUpdatedDate}</time>
+                  </span>
                 )
               }
             </div>
             <h1>{title}</h1>
-            <hr />
-          </div>
-          <div class="post-content">
-            <slot />
+            <p class="blog-post__description">{description}</p>
+          </header>
+
+          {
+            (heroImage || heroVideo) && (
+              <div class="blog-post__media">
+                {heroImage ? (
+                  <img src={heroImage} alt="" width="1020" height="574" />
+                ) : (
+                  <video src={heroVideo} controls autoplay muted loop playsinline />
+                )}
+              </div>
+            )
+          }
+
+          <div class="blog-post__body">
+            <MarkdownContent>
+              <slot />
+            </MarkdownContent>
           </div>
         </div>
       </article>
-    </main>
-    <Footer />
+    </HomeShell>
   </body>
 </html>
+
+<style>
+  .blog-post {
+    min-height: 100vh;
+    background:
+      radial-gradient(circle at 74% 18%, rgb(167 43 72 / 2.5%), transparent 31%),
+      hsl(28 25% 98.5%);
+    color: hsl(var(--foreground));
+    padding: 3.5rem 1.25rem 5rem;
+    font-family: var(--font-body);
+  }
+
+  .blog-post__inner {
+    width: min(100%, 60rem);
+    margin: 0 auto;
+  }
+
+  .blog-post__header {
+    max-width: 54rem;
+  }
+
+  .blog-post__label {
+    width: fit-content;
+    margin: 0;
+    color: hsl(var(--brand));
+    font-family: var(--font-body);
+    font-size: 0.8125rem;
+    font-weight: 700;
+    letter-spacing: 0.055em;
+    line-height: 1;
+    text-transform: uppercase;
+  }
+
+  .blog-post__label::after {
+    display: block;
+    width: 3.5rem;
+    height: 0.125rem;
+    margin-top: 0.75rem;
+    background: hsl(var(--brand));
+    content: "";
+  }
+
+  .blog-post__date {
+    display: flex;
+    margin-top: 1.75rem;
+    flex-wrap: wrap;
+    gap: 0.4rem 1rem;
+    color: hsl(var(--muted-foreground));
+    font-size: 1rem;
+  }
+
+  .blog-post__date span {
+    color: hsl(20 6% 57%);
+    font-style: italic;
+  }
+
+  .blog-post__header h1 {
+    margin: 1.25rem 0 0;
+    font-family: var(--font-display);
+    font-size: clamp(3rem, 6.8vw, 4.75rem);
+    font-weight: 400;
+    letter-spacing: -0.035em;
+    line-height: 0.98;
+  }
+
+  .blog-post__description {
+    max-width: 45rem;
+    margin: 1.25rem 0 0;
+    color: hsl(var(--muted-foreground));
+    font-size: clamp(1.125rem, 2.2vw, 1.35rem);
+    line-height: 1.45;
+  }
+
+  .blog-post__media {
+    overflow: hidden;
+    aspect-ratio: 16 / 7.2;
+    margin-top: 2rem;
+    border: 1px solid hsl(var(--border));
+    border-radius: 0.75rem;
+    background: hsl(var(--muted));
+    box-shadow: 0 1.25rem 3rem rgb(53 39 34 / 9%);
+  }
+
+  .blog-post__media img,
+  .blog-post__media video {
+    display: block;
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+  }
+
+  .blog-post__media video {
+    background: hsl(20 10% 10%);
+    object-fit: contain;
+  }
+
+  .blog-post__body {
+    margin-top: 2.5rem;
+  }
+
+  @media (max-width: 35rem) {
+    .blog-post__header h1 {
+      font-size: clamp(2.7rem, 13vw, 3.6rem);
+    }
+
+    .blog-post__media {
+      aspect-ratio: 16 / 9;
+    }
+  }
+
+  @media (min-width: 48rem) {
+    .blog-post {
+      padding: clamp(4rem, 10vh, 6rem) 3rem 6rem;
+    }
+  }
+
+  @media (min-width: 64rem) and (max-width: 79.999rem) {
+    .blog-post {
+      padding-inline: 2.25rem;
+    }
+  }
+
+  @media (min-width: 64rem) {
+    .blog-post {
+      padding-top: clamp(5rem, 13.5vh, 8.5rem);
+    }
+  }
+</style>
+
+<script>
+  import "../scripts/image-preview-transitions";
+</script>
