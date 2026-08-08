@@ -1,0 +1,34 @@
+.github/workflows/jestersprivilege-ca-redirect.yml
+  s_17ebc18a4b3c5c::t_e553d1e9fa91eb 30-34,51-54,56,58
+docs/jestersprivilege-cutover.md
+  s_17ebc18a4b3c5c::t_e553d1e9fa91eb 7,23,25,31
+.github/workflows/ci.yml
+  s_17ebc18a4b3c5c::t_e553d1e9fa91eb 47,50
+.github/scripts/build-jestersprivilege-redirects.mjs
+  s_17ebc18a4b3c5c::t_3b4f5ccf3db334 16-18,80-87
+  s_17ebc18a4b3c5c::t_e553d1e9fa91eb 1-5,7-15,19-58,60-79,88-107
+  s_17ebc18a4b3c5c::t_6479a8e5499022 6,59
+.github/scripts/deploy-jestersprivilege-redirects.sh
+  s_17ebc18a4b3c5c::t_e553d1e9fa91eb 5,8-9,11-12,16-17,19-23,25-29,31-33,36
+  s_17ebc18a4b3c5c::t_3b4f5ccf3db334 18,24
+.github/scripts/build-jestersprivilege-redirects.test.mjs
+  s_17ebc18a4b3c5c::t_3b4f5ccf3db334 14,16,18-19,23,27,31-33
+  s_17ebc18a4b3c5c::t_6479a8e5499022 17
+  s_17ebc18a4b3c5c::t_e553d1e9fa91eb 2-4,7-13,15,20-22,24-26,28-30,34-39
+---
+{
+  "schema_version": "authorship/3.0.0",
+  "git_ai_version": "1.6.21",
+  "base_commit_sha": "0d4d1b4b94cdc91f37120102a7772f695f11e01b",
+  "prompts": {},
+  "sessions": {
+    "s_17ebc18a4b3c5c": {
+      "agent_id": {
+        "tool": "codex",
+        "id": "019f5e49-09ad-79d2-9655-b02635ee8cb3",
+        "model": "gpt-5.6-sol"
+      },
+      "human_author": "Mitchell Hynes <mitch@spellbook.legal>"
+    }
+  }
+}
