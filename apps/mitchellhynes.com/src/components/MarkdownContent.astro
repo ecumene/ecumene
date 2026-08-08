@@ -1,5 +1,5 @@
 <div
-  class="markdown-content prose prose-stone prose-sm max-w-none sm:prose-base lg:prose-lg xl:prose-xl"
+  class="markdown-content prose prose-stone max-w-none lg:prose-lg"
 >
   <slot />
 </div>
@@ -23,9 +23,9 @@
     --tw-prose-th-borders: hsl(var(--border));
     --tw-prose-td-borders: hsl(var(--border));
 
-    max-width: 47rem;
+    max-width: 46rem;
     color: var(--tw-prose-body);
-    font-family: "EB Garamond", serif;
+    font-family: var(--font-body);
   }
 
   .markdown-content :global(h1) {
@@ -52,6 +52,8 @@
     border-left-width: 0.2rem;
     background: color-mix(in srgb, hsl(var(--accent)) 52%, transparent);
     padding: 0.75em 1em;
+    font-family: var(--font-display);
+    font-size: 1.08em;
   }
 
   .markdown-content :global(img),
@@ -95,7 +97,7 @@
   .markdown-content :global(code *),
   .markdown-content :global(pre),
   .markdown-content :global(pre *) {
-    font-family: "Inconsolata", monospace !important;
+    font-family: var(--font-mono) !important;
   }
 
   .markdown-content :global(pre code) {

@@ -31,7 +31,7 @@ export default function Image({ src, alt, caption, description, className }: Ima
           />
         </a>
         {caption && (
-          <figcaption className="mt-2 text-center font-serif text-sm leading-snug text-stone-500">
+          <figcaption className="mt-2 text-center font-sans text-sm leading-snug text-stone-500">
             {caption}
           </figcaption>
         )}

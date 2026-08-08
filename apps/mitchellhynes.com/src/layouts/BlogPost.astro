@@ -85,6 +85,7 @@ const formattedUpdatedDate = updatedDate?.toLocaleDateString("en-US", {
       hsl(28 25% 98.5%);
     color: hsl(var(--foreground));
     padding: 3.5rem 1.25rem 5rem;
+    font-family: var(--font-body);
   }
 
   .blog-post__inner {
@@ -100,7 +101,7 @@ const formattedUpdatedDate = updatedDate?.toLocaleDateString("en-US", {
     width: fit-content;
     margin: 0;
     color: hsl(var(--brand));
-    font-family: system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
+    font-family: var(--font-body);
     font-size: 0.8125rem;
     font-weight: 700;
     letter-spacing: 0.055em;
@@ -133,7 +134,7 @@ const formattedUpdatedDate = updatedDate?.toLocaleDateString("en-US", {
 
   .blog-post__header h1 {
     margin: 1.25rem 0 0;
-    font-family: "EB Garamond", serif;
+    font-family: var(--font-display);
     font-size: clamp(3rem, 6.8vw, 4.75rem);
     font-weight: 400;
     letter-spacing: -0.035em;

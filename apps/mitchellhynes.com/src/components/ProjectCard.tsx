@@ -65,7 +65,9 @@ export default function ProjectCard({ slug, project }: { slug: string; project: 
       </div>
       <div className="flex flex-col gap-2 flex-1 group-hover:translate-x-16 transition-transform duration-300 ease-in-out">
         <div className="text-sm text-gray-500">{project.pubDate.toLocaleDateString()}</div>
-        <div className="text-xl font-bold group-hover:text-rose-800">{project.title}</div>
+        <div className="font-serif text-xl font-bold group-hover:text-rose-800">
+          {project.title}
+        </div>
         <div className="text-gray-700">{project.description}</div>
       </div>
     </motion.a>

@@ -127,6 +127,7 @@ import MyHead from "../vectorDisplays/MyHead";
     background:
       radial-gradient(circle at 72% 44%, rgb(167 43 72 / 3%), transparent 30%),
       hsl(28 25% 98.5%);
+    font-family: var(--font-body);
     isolation: isolate;
   }
 
@@ -149,14 +150,16 @@ import MyHead from "../vectorDisplays/MyHead";
   .home-hero__eyebrow {
     margin: 0 0 0.125rem;
     color: hsl(var(--foreground));
+    font-family: var(--font-display);
     font-size: clamp(1.5rem, 2.25vw, 1.875rem);
-    font-weight: 500;
+    font-weight: 400;
     line-height: 1.15;
   }
 
   .home-hero h1 {
     margin: 0;
     color: hsl(var(--brand));
+    font-family: var(--font-display);
     font-size: clamp(2.5rem, 4vw, 3rem);
     font-weight: 700;
     letter-spacing: -0.025em;
@@ -166,13 +169,14 @@ import MyHead from "../vectorDisplays/MyHead";
   .home-hero__role {
     margin: 1.25rem 0 0;
     color: hsl(var(--muted-foreground));
+    font-family: var(--font-display);
     font-size: 1.125rem;
     line-height: 1.45;
   }
 
   .home-hero__role a {
     color: hsl(var(--brand));
-    font-weight: 600;
+    font-weight: 700;
     text-decoration: underline;
     text-decoration-thickness: 1px;
     text-underline-offset: 0.2em;

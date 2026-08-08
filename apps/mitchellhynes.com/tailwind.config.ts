@@ -9,8 +9,9 @@ const config = {
   plugins: [typography],
   theme: {
     fontFamily: {
-      serif: ["EB Garamond", "serif"],
-      mono: ["Inconsolata", "monospace"],
+      sans: ["var(--font-body)"],
+      serif: ["var(--font-display)"],
+      mono: ["var(--font-mono)"],
       sms: ["Helvetica Neue", "Helvetica", "Arial", "sans-serif"],
     },
     container: {
@@ -78,35 +79,35 @@ const config = {
       typography: {
         DEFAULT: {
           css: {
-            fontFamily: ["EB Garamond", "serif"].join(", "),
+            fontFamily: "var(--font-body)",
             h1: {
-              fontFamily: ["EB Garamond", "serif"].join(", "),
+              fontFamily: "var(--font-display)",
               fontWeight: "700",
               letterSpacing: "-0.025em",
             },
             h2: {
-              fontFamily: ["EB Garamond", "serif"].join(", "),
+              fontFamily: "var(--font-display)",
               fontWeight: "700",
               letterSpacing: "-0.02em",
             },
             h3: {
-              fontFamily: ["EB Garamond", "serif"].join(", "),
+              fontFamily: "var(--font-display)",
               fontWeight: "700",
               letterSpacing: "-0.015em",
             },
             h4: {
-              fontFamily: ["EB Garamond", "serif"].join(", "),
+              fontFamily: "var(--font-display)",
               fontWeight: "700",
             },
             strong: {
               fontWeight: "700",
             },
             code: {
-              fontFamily: ["Inconsolata", "monospace"].join(", "),
+              fontFamily: "var(--font-mono)",
               fontWeight: "500",
             },
             pre: {
-              fontFamily: ["Inconsolata", "monospace"].join(", "),
+              fontFamily: "var(--font-mono)",
               fontWeight: "400",
             },
             "code::before": {

@@ -43,7 +43,7 @@ export default function ImageGallery({ images, columns = 3 }: ImageGalleryProps)
               />
             </a>
             {image.caption && (
-              <figcaption className="mt-2 text-center font-serif text-sm leading-snug text-stone-500">
+              <figcaption className="mt-2 text-center font-sans text-sm leading-snug text-stone-500">
                 {image.caption}
               </figcaption>
             )}
