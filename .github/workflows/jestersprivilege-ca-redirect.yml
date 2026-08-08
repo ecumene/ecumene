@@ -27,6 +27,11 @@ jobs:
         with:
           ref: ${{ github.event.workflow_run.head_sha || github.sha }}
 
+      - name: Set up Node.js
+        uses: actions/setup-node@v4
+        with:
+          node-version: 22
+
       - name: Configure AWS credentials with OIDC
         if: ${{ env.AWS_ROLE_ARN != '' }}
         uses: aws-actions/configure-aws-credentials@v4
@@ -43,7 +48,11 @@ jobs:
           aws-secret-access-key: ${{ secrets.AWS_SECRET_ACCESS_KEY }}
           aws-region: us-east-1
 
-      - name: Publish and attach redirect function
+      - name: Build redirect objects
+        run: node .github/scripts/build-jestersprivilege-redirects.mjs "${{ runner.temp }}/jester-redirects"
+
+      - name: Upload redirect objects
         env:
+          JP_BUCKET_ID: ${{ secrets.JP_BUCKET_ID }}
           JP_DISTRIBUTION_ID: ${{ secrets.JP_DISTRIBUTION_ID }}
-        run: .github/scripts/deploy-jestersprivilege-redirect.sh
+        run: .github/scripts/deploy-jestersprivilege-redirects.sh "${{ runner.temp }}/jester-redirects"

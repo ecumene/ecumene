@@ -8,7 +8,6 @@ on:
       - "package.json"
       - "yarn.lock"
       - ".yarnrc.yml"
-      - ".github/cloudfront/**"
       - ".github/scripts/**"
       - ".github/workflows/**"
   workflow_dispatch:
@@ -45,10 +44,10 @@ jobs:
         run: yarn format
 
       - name: Validate redirect deployment script
-        run: bash -n .github/scripts/deploy-jestersprivilege-redirect.sh
+        run: bash -n .github/scripts/deploy-jestersprivilege-redirects.sh
 
       - name: Test legacy redirects
-        run: node --test .github/cloudfront/jestersprivilege-redirect.test.mjs
+        run: node --test .github/scripts/build-jestersprivilege-redirects.test.mjs
 
       - name: Build mitchellhynes.com
         run: yarn mitchellhynes.com:build
