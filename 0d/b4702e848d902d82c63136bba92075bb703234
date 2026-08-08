@@ -1,0 +1,19 @@
+apps/mitchellhynes.com/src/components/AboutContent.astro
+  s_17ebc18a4b3c5c::t_5bdf3993da7bb6 162,197-200,206
+---
+{
+  "schema_version": "authorship/3.0.0",
+  "git_ai_version": "1.6.21",
+  "base_commit_sha": "0db4702e848d902d82c63136bba92075bb703234",
+  "prompts": {},
+  "sessions": {
+    "s_17ebc18a4b3c5c": {
+      "agent_id": {
+        "tool": "codex",
+        "id": "019f5e49-09ad-79d2-9655-b02635ee8cb3",
+        "model": "gpt-5.6-sol"
+      },
+      "human_author": "Mitchell Hynes <mitch@spellbook.legal>"
+    }
+  }
+}
