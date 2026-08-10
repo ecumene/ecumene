@@ -1,0 +1,41 @@
+apps/mitchellhynes.com/src/layouts/ProjectPost.astro
+  s_17ebc18a4b3c5c::t_3af863533a4fad 26-31
+apps/mitchellhynes.com/src/pages/index.astro
+  s_17ebc18a4b3c5c::t_3af863533a4fad 11
+apps/mitchellhynes.com/src/pages/about.astro
+  s_17ebc18a4b3c5c::t_3af863533a4fad 11-15
+apps/mitchellhynes.com/src/components/BaseHead.astro
+  s_17ebc18a4b3c5c::t_3af863533a4fad 10,16-17,56-66,73-80
+apps/mitchellhynes.com/src/pages/projects/index.astro
+  s_17ebc18a4b3c5c::t_3af863533a4fad 16-20
+apps/mitchellhynes.com/src/pages/blog/index.astro
+  s_17ebc18a4b3c5c::t_3af863533a4fad 16-20
+apps/mitchellhynes.com/src/layouts/BlogPost.astro
+  s_17ebc18a4b3c5c::t_3af863533a4fad 13,35
+apps/mitchellhynes.com/src/components/AboutContent.astro
+  s_17ebc18a4b3c5c::t_560af1aecada3a 473,486,488,493,507-512,521-529,612-620
+  s_17ebc18a4b3c5c::t_ee10caab1862b3 834
+apps/mitchellhynes.com/package.json
+  s_17ebc18a4b3c5c::t_3af863533a4fad 23
+apps/mitchellhynes.com/src/pages/og/[...slug].ts
+  s_17ebc18a4b3c5c::t_a71a52ce7df17d 42,52
+  s_17ebc18a4b3c5c::t_3af863533a4fad 1-41,43-51,53-96
+yarn.lock
+  s_17ebc18a4b3c5c::t_2fb4f5172054aa 2422,4710
+---
+{
+  "schema_version": "authorship/3.0.0",
+  "git_ai_version": "1.6.21",
+  "base_commit_sha": "eed21bfd33caa767e75dc74c5ef755b116dc1b14",
+  "prompts": {},
+  "sessions": {
+    "s_17ebc18a4b3c5c": {
+      "agent_id": {
+        "tool": "codex",
+        "id": "019f5e49-09ad-79d2-9655-b02635ee8cb3",
+        "model": "gpt-5.6-sol"
+      },
+      "human_author": "Mitchell Hynes <mitch@spellbook.legal>"
+    }
+  }
+}
