@@ -13,7 +13,11 @@ const projects = (await getCollection("projects")).sort(
 <!doctype html>
 <html lang="en" class="scroll-smooth">
   <head>
-    <BaseHead title={`Projects | ${SITE_TITLE}`} description={SITE_DESCRIPTION} />
+    <BaseHead
+      title={`Projects | ${SITE_TITLE}`}
+      description={SITE_DESCRIPTION}
+      image="/og/projects.png"
+    />
   </head>
   <body>
     <HomeShell>

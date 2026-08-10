@@ -13,7 +13,11 @@ const posts = (await getCollection("posts"))
 <!doctype html>
 <html lang="en" class="scroll-smooth">
   <head>
-    <BaseHead title={`Blog | ${SITE_TITLE}`} description={SITE_DESCRIPTION} />
+    <BaseHead
+      title={`Blog | ${SITE_TITLE}`}
+      description={SITE_DESCRIPTION}
+      image="/og/blog.png"
+    />
   </head>
   <body>
     <HomeShell>

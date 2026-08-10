@@ -23,7 +23,12 @@ const poster = `/project-thumbnails/${project.id}.jpg`;
 <!doctype html>
 <html lang="en" class="scroll-smooth">
   <head>
-    <BaseHead title={title} description={description} image={poster} />
+    <BaseHead
+      title={`${title} | Mitchell Hynes`}
+      description={description}
+      image={`/og/projects/${project.id}.png`}
+      type="article"
+    />
   </head>
 
   <body>

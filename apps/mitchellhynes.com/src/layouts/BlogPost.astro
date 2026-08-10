@@ -3,7 +3,6 @@ import type { CollectionEntry } from "astro:content";
 import BaseHead from "../components/BaseHead.astro";
 import HomeShell from "../components/HomeShell.astro";
 import MarkdownContent from "../components/MarkdownContent.astro";
-import { getPostThumbnail } from "../utils/post-media";
 
 interface Props {
   post: CollectionEntry<"posts">;
@@ -11,7 +10,7 @@ interface Props {
 
 const { post } = Astro.props;
 const { kind, title, description, pubDate, updatedDate, heroImage, heroVideo } = post.data;
-const socialImage = getPostThumbnail(post);
+const socialImage = `/og/blog/${post.id}.png`;
 const formattedDate = pubDate.toLocaleDateString("en-US", {
   month: "short",
   day: "numeric",
@@ -33,7 +32,7 @@ const formattedUpdatedDate = updatedDate?.toLocaleDateString("en-US", {
       title={`${title} | Mitchell Hynes`}
       description={description}
       type="article"
-      {...(socialImage ? { image: socialImage } : {})}
+      image={socialImage}
     />
   </head>
 
