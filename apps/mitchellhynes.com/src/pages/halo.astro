@@ -1,0 +1,24 @@
+---
+const gameUrl = "https://halo-web.otherness-bugs.workers.dev/";
+---
+
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width" />
+    <meta name="robots" content="noindex" />
+    <meta http-equiv="refresh" content={`0;url=${gameUrl}`} />
+    <link rel="canonical" href="https://mitchellhynes.com/halo" />
+    <title>Opening Halo…</title>
+    <script is:inline define:vars={{ gameUrl }}>
+      const destination = new URL(gameUrl);
+      destination.search = window.location.search;
+      destination.hash = window.location.hash;
+      window.location.replace(destination.toString());
+    </script>
+  </head>
+  <body>
+    <p>Opening <a href={gameUrl}>Halo in your browser</a>…</p>
+  </body>
+</html>
