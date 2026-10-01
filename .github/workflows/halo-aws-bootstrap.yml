@@ -73,7 +73,7 @@ jobs:
           )
           upload = client.generate_presigned_post(
               Bucket=os.environ["MH_BUCKET_ID"],
-              Key=f"{os.environ['HALO_PREFIX']}/${{filename}}",
+              Key=f"{os.environ['HALO_PREFIX']}/" + "$" + "{filename}",
               Fields={"Cache-Control": "public, max-age=0, must-revalidate"},
               Conditions=[
                   ["content-length-range", 1, 220 * 1024 * 1024],
