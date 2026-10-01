@@ -58,7 +58,7 @@ jobs:
 
           client = boto3.client(
               "s3",
-              region_name="us-east-1",
+              region_name="ca-central-1",
               config=Config(signature_version="s3v4"),
           )
           upload = client.generate_presigned_post(
