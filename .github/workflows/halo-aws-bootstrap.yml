@@ -54,8 +54,13 @@ jobs:
           import json
           import os
           import boto3
+          from botocore.config import Config
 
-          client = boto3.client("s3", region_name="us-east-1")
+          client = boto3.client(
+              "s3",
+              region_name="us-east-1",
+              config=Config(signature_version="s3v4"),
+          )
           upload = client.generate_presigned_post(
               Bucket=os.environ["MH_BUCKET_ID"],
               Key="halo-preview/${filename}",
