@@ -18,6 +18,9 @@ jobs:
   publish:
     runs-on: ubuntu-latest
     steps:
+      - name: Check out repository
+        uses: actions/checkout@v4
+
       - name: Configure AWS credentials with OIDC
         if: ${{ env.AWS_ROLE_ARN != '' }}
         uses: aws-actions/configure-aws-credentials@v4
@@ -33,6 +36,16 @@ jobs:
           aws-access-key-id: ${{ secrets.AWS_ACCESS_KEY_ID }}
           aws-secret-access-key: ${{ secrets.AWS_SECRET_ACCESS_KEY }}
           aws-region: us-east-1
+
+      - name: Route the canonical Halo URL to the AWS build
+        run: >-
+          aws s3api put-object
+          --bucket "${{ secrets.MH_BUCKET_ID }}"
+          --key "halo/index.html"
+          --body ".github/scripts/halo-aws-index.html"
+          --content-type "text/html; charset=utf-8"
+          --cache-control "public, max-age=0, must-revalidate"
+          --no-cli-pager
 
       - name: Publish the Halo route
         run: >-
