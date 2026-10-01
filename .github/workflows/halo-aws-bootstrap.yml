@@ -1,7 +1,16 @@
-name: Prepare Halo AWS preview upload
+name: Prepare Halo AWS upload
 
 on:
   workflow_dispatch:
+    inputs:
+      target:
+        description: Upload destination
+        required: true
+        default: preview
+        type: choice
+        options:
+          - preview
+          - production
 
 permissions:
   contents: read
@@ -44,10 +53,11 @@ jobs:
             echo "Deployment user cannot inspect CloudFront configuration; continuing with scoped upload access."
           fi
 
-      - name: Create temporary preview upload policy
+      - name: Create temporary upload policy
         shell: bash
         env:
           MH_BUCKET_ID: ${{ secrets.MH_BUCKET_ID }}
+          HALO_PREFIX: ${{ inputs.target == 'production' && 'halo' || 'halo-preview' }}
         run: |
           set -euo pipefail
           python - <<'PY'
@@ -63,7 +73,7 @@ jobs:
           )
           upload = client.generate_presigned_post(
               Bucket=os.environ["MH_BUCKET_ID"],
-              Key="halo-preview/${filename}",
+              Key=f"{os.environ['HALO_PREFIX']}/${{filename}}",
               Fields={"Cache-Control": "public, max-age=0, must-revalidate"},
               Conditions=[
                   ["content-length-range", 1, 220 * 1024 * 1024],
@@ -72,14 +82,14 @@ jobs:
               ],
               ExpiresIn=3600,
           )
-          with open("/tmp/halo-preview-upload.json", "w", encoding="utf-8") as output:
+          with open("/tmp/halo-upload.json", "w", encoding="utf-8") as output:
               json.dump(upload, output)
           PY
 
       - name: Publish temporary upload policy
         uses: actions/upload-artifact@v4
         with:
-          name: halo-preview-upload
-          path: /tmp/halo-preview-upload.json
+          name: halo-${{ inputs.target }}-upload
+          path: /tmp/halo-upload.json
           retention-days: 1
           if-no-files-found: error
