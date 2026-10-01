@@ -1,0 +1,23 @@
+.github/scripts/upload-halo-static.mjs
+  s_f22d08b6c8b199::t_4494e7bb8dfd87 1-79
+.github/workflows/halo-aws-bootstrap.yml
+  s_f22d08b6c8b199::t_46ac49e04a1dd3 1,10,20,22-24,27-41,43-52,54-62,64-68,70-76
+.github/workflows/mitchellhynes-com-deploy.yml
+  s_f22d08b6c8b199::t_46ac49e04a1dd3 64-69
+---
+{
+  "schema_version": "authorship/3.0.0",
+  "git_ai_version": "1.7.4",
+  "base_commit_sha": "cf31edce92403ffe6076e77d7acf46f8a144a7a2",
+  "prompts": {},
+  "sessions": {
+    "s_f22d08b6c8b199": {
+      "agent_id": {
+        "tool": "codex",
+        "id": "01a0e8b0-b1ec-7102-b6d0-61553656454c",
+        "model": "gpt-5.6-sol"
+      },
+      "human_author": "Mitchell Hynes <mitch@spellbook.legal>"
+    }
+  }
+}
