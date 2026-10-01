@@ -61,7 +61,12 @@ jobs:
           aws-region: us-east-1
 
       - name: Deploy to S3
-        run: aws s3 sync --delete ./apps/mitchellhynes.com/dist/ s3://${{ secrets.MH_BUCKET_ID }}
+        run: >-
+          aws s3 sync --delete
+          --exclude "halo/*"
+          --exclude "halo-preview/*"
+          ./apps/mitchellhynes.com/dist/
+          s3://${{ secrets.MH_BUCKET_ID }}
 
       - name: Create CloudFront invalidation
         run: aws cloudfront create-invalidation --distribution-id ${{ secrets.MH_DISTRIBUTION_ID }} --paths "/*"

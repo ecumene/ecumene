@@ -1,4 +1,4 @@
-name: Bootstrap Halo AWS preview access
+name: Prepare Halo AWS preview upload
 
 on:
   workflow_dispatch:
@@ -7,7 +7,7 @@ permissions:
   contents: read
 
 jobs:
-  bootstrap:
+  prepare:
     runs-on: ubuntu-latest
     steps:
       - name: Configure personal-site AWS credentials
@@ -17,68 +17,60 @@ jobs:
           aws-secret-access-key: ${{ secrets.AWS_SECRET_ACCESS_KEY }}
           aws-region: us-east-1
 
-      - name: Create read-only Halo preview role
+      - name: Inspect personal-site origin
         shell: bash
+        env:
+          MH_BUCKET_ID: ${{ secrets.MH_BUCKET_ID }}
+          MH_DISTRIBUTION_ID: ${{ secrets.MH_DISTRIBUTION_ID }}
         run: |
           set -euo pipefail
+          aws sts get-caller-identity --query '{Account:Account,Arn:Arn}' --output json
+          aws s3api get-bucket-location --bucket "${MH_BUCKET_ID}" --output json
+          aws cloudfront get-distribution-config \
+            --id "${MH_DISTRIBUTION_ID}" \
+            --output json > /tmp/halo-distribution.json
+          jq '{
+            aliases: .DistributionConfig.Aliases.Items,
+            origins: [.DistributionConfig.Origins.Items[] | {
+              id: .Id,
+              domain: .DomainName,
+              path: .OriginPath
+            }],
+            defaultRootObject: .DistributionConfig.DefaultRootObject,
+            customErrors: .DistributionConfig.CustomErrorResponses.Items
+          }' /tmp/halo-distribution.json
 
-          role_name="HaloBackupDeployer"
-          trusted_role="arn:aws:iam::821814520706:role/AWSReservedSSO_AdministratorAccess_f33f82885bcc3cea"
+      - name: Create temporary preview upload policy
+        shell: bash
+        env:
+          MH_BUCKET_ID: ${{ secrets.MH_BUCKET_ID }}
+        run: |
+          set -euo pipefail
+          python - <<'PY'
+          import json
+          import os
+          import boto3
 
-          cat > /tmp/halo-trust-policy.json <<JSON
-          {
-            "Version": "2012-10-17",
-            "Statement": [{
-              "Effect": "Allow",
-              "Principal": {"AWS": "${trusted_role}"},
-              "Action": "sts:AssumeRole"
-            }]
-          }
-          JSON
-
-          if aws iam get-role --role-name "${role_name}" >/dev/null 2>&1; then
-            aws iam update-assume-role-policy \
-              --role-name "${role_name}" \
-              --policy-document file:///tmp/halo-trust-policy.json
-          else
-            aws iam create-role \
-              --role-name "${role_name}" \
-              --description "Cross-account role for staging the Halo static-site backup" \
-              --assume-role-policy-document file:///tmp/halo-trust-policy.json
-          fi
-
-          cat > /tmp/halo-read-policy.json <<'JSON'
-          {
-            "Version": "2012-10-17",
-            "Statement": [{
-              "Sid": "InspectPersonalSiteInfrastructure",
-              "Effect": "Allow",
-              "Action": [
-                "acm:DescribeCertificate",
-                "acm:ListCertificates",
-                "cloudfront:GetDistribution",
-                "cloudfront:GetDistributionConfig",
-                "cloudfront:ListCachePolicies",
-                "cloudfront:ListDistributions",
-                "cloudfront:ListFunctions",
-                "cloudfront:ListOriginRequestPolicies",
-                "cloudfront:ListResponseHeadersPolicies",
-                "route53:ListHostedZones",
-                "route53:ListResourceRecordSets",
-                "s3:GetBucketLocation",
-                "s3:ListAllMyBuckets",
-                "s3:ListBucket",
-                "sts:GetCallerIdentity"
+          client = boto3.client("s3", region_name="us-east-1")
+          upload = client.generate_presigned_post(
+              Bucket=os.environ["MH_BUCKET_ID"],
+              Key="halo-preview/${filename}",
+              Fields={"Cache-Control": "public, max-age=0, must-revalidate"},
+              Conditions=[
+                  ["content-length-range", 1, 35 * 1024 * 1024],
+                  ["starts-with", "$Content-Type", ""],
+                  {"Cache-Control": "public, max-age=0, must-revalidate"},
               ],
-              "Resource": "*"
-            }]
-          }
-          JSON
+              ExpiresIn=3600,
+          )
+          with open("/tmp/halo-preview-upload.json", "w", encoding="utf-8") as output:
+              json.dump(upload, output)
+          PY
 
-          aws iam put-role-policy \
-            --role-name "${role_name}" \
-            --policy-name "HaloPreviewReadOnly" \
-            --policy-document file:///tmp/halo-read-policy.json
-
-          account_id="$(aws sts get-caller-identity --query Account --output text)"
-          echo "Created arn:aws:iam::${account_id}:role/${role_name}"
+      - name: Publish temporary upload policy
+        uses: actions/upload-artifact@v4
+        with:
+          name: halo-preview-upload
+          path: /tmp/halo-preview-upload.json
+          retention-days: 1
+          if-no-files-found: error
