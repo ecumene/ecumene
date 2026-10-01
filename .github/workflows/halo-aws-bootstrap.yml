@@ -1,0 +1,84 @@
+name: Bootstrap Halo AWS preview access
+
+on:
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+jobs:
+  bootstrap:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Configure personal-site AWS credentials
+        uses: aws-actions/configure-aws-credentials@v4
+        with:
+          aws-access-key-id: ${{ secrets.AWS_ACCESS_KEY_ID }}
+          aws-secret-access-key: ${{ secrets.AWS_SECRET_ACCESS_KEY }}
+          aws-region: us-east-1
+
+      - name: Create read-only Halo preview role
+        shell: bash
+        run: |
+          set -euo pipefail
+
+          role_name="HaloBackupDeployer"
+          trusted_role="arn:aws:iam::821814520706:role/AWSReservedSSO_AdministratorAccess_f33f82885bcc3cea"
+
+          cat > /tmp/halo-trust-policy.json <<JSON
+          {
+            "Version": "2012-10-17",
+            "Statement": [{
+              "Effect": "Allow",
+              "Principal": {"AWS": "${trusted_role}"},
+              "Action": "sts:AssumeRole"
+            }]
+          }
+          JSON
+
+          if aws iam get-role --role-name "${role_name}" >/dev/null 2>&1; then
+            aws iam update-assume-role-policy \
+              --role-name "${role_name}" \
+              --policy-document file:///tmp/halo-trust-policy.json
+          else
+            aws iam create-role \
+              --role-name "${role_name}" \
+              --description "Cross-account role for staging the Halo static-site backup" \
+              --assume-role-policy-document file:///tmp/halo-trust-policy.json
+          fi
+
+          cat > /tmp/halo-read-policy.json <<'JSON'
+          {
+            "Version": "2012-10-17",
+            "Statement": [{
+              "Sid": "InspectPersonalSiteInfrastructure",
+              "Effect": "Allow",
+              "Action": [
+                "acm:DescribeCertificate",
+                "acm:ListCertificates",
+                "cloudfront:GetDistribution",
+                "cloudfront:GetDistributionConfig",
+                "cloudfront:ListCachePolicies",
+                "cloudfront:ListDistributions",
+                "cloudfront:ListFunctions",
+                "cloudfront:ListOriginRequestPolicies",
+                "cloudfront:ListResponseHeadersPolicies",
+                "route53:ListHostedZones",
+                "route53:ListResourceRecordSets",
+                "s3:GetBucketLocation",
+                "s3:ListAllMyBuckets",
+                "s3:ListBucket",
+                "sts:GetCallerIdentity"
+              ],
+              "Resource": "*"
+            }]
+          }
+          JSON
+
+          aws iam put-role-policy \
+            --role-name "${role_name}" \
+            --policy-name "HaloPreviewReadOnly" \
+            --policy-document file:///tmp/halo-read-policy.json
+
+          account_id="$(aws sts get-caller-identity --query Account --output text)"
+          echo "Created arn:aws:iam::${account_id}:role/${role_name}"
