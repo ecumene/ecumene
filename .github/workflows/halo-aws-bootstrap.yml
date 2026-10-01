@@ -25,20 +25,24 @@ jobs:
         run: |
           set -euo pipefail
           aws sts get-caller-identity --query '{Account:Account,Arn:Arn}' --output json
-          aws s3api get-bucket-location --bucket "${MH_BUCKET_ID}" --output json
-          aws cloudfront get-distribution-config \
+          aws s3api get-bucket-location --bucket "${MH_BUCKET_ID}" --output json || \
+            echo "Deployment user cannot inspect bucket metadata; continuing with scoped upload access."
+          if aws cloudfront get-distribution-config \
             --id "${MH_DISTRIBUTION_ID}" \
-            --output json > /tmp/halo-distribution.json
-          jq '{
-            aliases: .DistributionConfig.Aliases.Items,
-            origins: [.DistributionConfig.Origins.Items[] | {
-              id: .Id,
-              domain: .DomainName,
-              path: .OriginPath
-            }],
-            defaultRootObject: .DistributionConfig.DefaultRootObject,
-            customErrors: .DistributionConfig.CustomErrorResponses.Items
-          }' /tmp/halo-distribution.json
+            --output json > /tmp/halo-distribution.json; then
+            jq '{
+              aliases: .DistributionConfig.Aliases.Items,
+              origins: [.DistributionConfig.Origins.Items[] | {
+                id: .Id,
+                domain: .DomainName,
+                path: .OriginPath
+              }],
+              defaultRootObject: .DistributionConfig.DefaultRootObject,
+              customErrors: .DistributionConfig.CustomErrorResponses.Items
+            }' /tmp/halo-distribution.json
+          else
+            echo "Deployment user cannot inspect CloudFront configuration; continuing with scoped upload access."
+          fi
 
       - name: Create temporary preview upload policy
         shell: bash
