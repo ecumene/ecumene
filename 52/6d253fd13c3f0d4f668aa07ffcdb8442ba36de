@@ -1,0 +1,36 @@
+.github/scripts/retired-game-serviceworker.js
+  s_c89cec5a4006a1::t_8643168ef2f2bc 1-26
+.github/scripts/combat-lab-deployment.md
+  s_c89cec5a4006a1::t_8643168ef2f2bc 1-13,17-37
+  s_c89cec5a4006a1::t_313f9d6c2febd8 14-16
+.github/scripts/publish-combat-lab.sh
+  s_c89cec5a4006a1::t_8643168ef2f2bc 1-18,25-26,37-77
+  s_c89cec5a4006a1::t_313f9d6c2febd8 27-36
+  s_c89cec5a4006a1::t_7781a334e48edc 19-24
+.github/scripts/combat-lab-redirect.html
+  s_c89cec5a4006a1::t_24ceee3030897d 7-9,11,18
+.github/workflows/halo-aws-bootstrap.yml
+  s_c89cec5a4006a1::t_d661a6001640b5 1,9,12-13,41,51,60,69-72,80,89,96-97
+.github/workflows/halo-aws-publish.yml
+  s_c89cec5a4006a1::t_af1a5fede7082b 1,29,40-44
+.github/workflows/mitchellhynes-com-deploy.yml
+  s_c89cec5a4006a1::t_2f5b1fc19ecd10 13-15,69,71,73-76,80-84
+apps/mitchellhynes.com/src/pages/halo.astro
+  s_c89cec5a4006a1::t_696cb16df0a790 2,12-13,15,22
+---
+{
+  "schema_version": "authorship/3.0.0",
+  "git_ai_version": "1.7.5",
+  "base_commit_sha": "526d253fd13c3f0d4f668aa07ffcdb8442ba36de",
+  "prompts": {},
+  "sessions": {
+    "s_c89cec5a4006a1": {
+      "agent_id": {
+        "tool": "codex",
+        "id": "01a12b2f-62a4-7be3-ab5c-ab5a183da720",
+        "model": "gpt-6-astra"
+      },
+      "human_author": "Mitchell Hynes <mitch@spellbook.legal>"
+    }
+  }
+}
