@@ -1,0 +1,28 @@
+.github/scripts/verify-combat-lab.py
+  s_c89cec5a4006a1::t_450043447f1a21 118-124,127
+  s_c89cec5a4006a1::t_5203ab9378076d 1-117,125-126,128-146
+.github/scripts/publish-combat-lab.sh
+  s_c89cec5a4006a1::t_5203ab9378076d 19,73-74,76-88,90-96
+.github/scripts/upload-halo-static.mjs
+  s_c89cec5a4006a1::t_0e0666cd538bfa 79
+.github/workflows/mitchellhynes-com-deploy.yml
+  s_c89cec5a4006a1::t_0e0666cd538bfa 16
+.github/scripts/combat-lab-deployment.md
+  s_c89cec5a4006a1::t_5203ab9378076d 19-33
+---
+{
+  "schema_version": "authorship/3.0.0",
+  "git_ai_version": "1.7.5",
+  "base_commit_sha": "9ec2c729462f0463b43cb519c94f47d38568db3c",
+  "prompts": {},
+  "sessions": {
+    "s_c89cec5a4006a1": {
+      "agent_id": {
+        "tool": "codex",
+        "id": "01a12b2f-62a4-7be3-ab5c-ab5a183da720",
+        "model": "gpt-6-astra"
+      },
+      "human_author": "Mitchell Hynes <mitch@spellbook.legal>"
+    }
+  }
+}
