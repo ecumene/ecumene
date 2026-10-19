@@ -1,0 +1,19 @@
+.github/scripts/publish-combat-lab.sh
+  s_c89cec5a4006a1::t_4b5440c8946ff2 51
+---
+{
+  "schema_version": "authorship/3.0.0",
+  "git_ai_version": "1.7.5",
+  "base_commit_sha": "367ac3596b92d30966e1a28db4fb3afbc8cf0d97",
+  "prompts": {},
+  "sessions": {
+    "s_c89cec5a4006a1": {
+      "agent_id": {
+        "tool": "codex",
+        "id": "01a12b2f-62a4-7be3-ab5c-ab5a183da720",
+        "model": "gpt-6-astra"
+      },
+      "human_author": "Mitchell Hynes <mitch@spellbook.legal>"
+    }
+  }
+}
