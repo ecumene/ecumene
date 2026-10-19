@@ -48,7 +48,7 @@ for prefix in halo halo-preview; do
       --body "${script_directory}/combat-lab-redirect.html" \
       --content-type "text/html; charset=utf-8" \
       --cache-control "public, max-age=0, must-revalidate" \
-      --website-redirect-location "/combat-lab/" \
+      --website-redirect-location "https://mitchellhynes.com/combat-lab/" \
       --no-cli-pager >/dev/null
   done
 
