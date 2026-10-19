@@ -1,4 +1,4 @@
-name: Publish Halo on mitchellhynes.com
+name: Publish Combat Lab on mitchellhynes.com
 
 on:
   workflow_dispatch:
@@ -26,7 +26,7 @@ jobs:
         uses: aws-actions/configure-aws-credentials@v4
         with:
           role-to-assume: ${{ env.AWS_ROLE_ARN }}
-          role-session-name: github-actions-halo-publish
+          role-session-name: github-actions-combat-lab-publish
           aws-region: us-east-1
 
       - name: Configure AWS credentials with access keys
@@ -37,18 +37,8 @@ jobs:
           aws-secret-access-key: ${{ secrets.AWS_SECRET_ACCESS_KEY }}
           aws-region: us-east-1
 
-      - name: Route the canonical Halo URL to the AWS build
-        run: >-
-          aws s3api put-object
-          --bucket "${{ secrets.MH_BUCKET_ID }}"
-          --key "halo/index.html"
-          --body ".github/scripts/halo-aws-index.html"
-          --content-type "text/html; charset=utf-8"
-          --cache-control "public, max-age=0, must-revalidate"
-          --no-cli-pager
-
-      - name: Publish the Halo route
-        run: >-
-          aws cloudfront create-invalidation
-          --distribution-id ${{ secrets.MH_DISTRIBUTION_ID }}
-          --paths "/halo" "/halo/*"
+      - name: Publish Combat Lab and retire the old game URLs
+        env:
+          MH_BUCKET_ID: ${{ secrets.MH_BUCKET_ID }}
+          MH_DISTRIBUTION_ID: ${{ secrets.MH_DISTRIBUTION_ID }}
+        run: bash .github/scripts/publish-combat-lab.sh

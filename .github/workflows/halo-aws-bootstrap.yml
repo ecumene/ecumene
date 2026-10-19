@@ -1,4 +1,4 @@
-name: Prepare Halo AWS upload
+name: Prepare Combat Lab AWS upload
 
 on:
   workflow_dispatch:
@@ -6,11 +6,11 @@ on:
       target:
         description: Upload destination
         required: true
-        default: preview
+        default: combat-lab-preview
         type: choice
         options:
-          - preview
-          - production
+          - combat-lab-preview
+          - combat-lab
 
 permissions:
   contents: read
@@ -38,7 +38,7 @@ jobs:
             echo "Deployment user cannot inspect bucket metadata; continuing with scoped upload access."
           if aws cloudfront get-distribution-config \
             --id "${MH_DISTRIBUTION_ID}" \
-            --output json > /tmp/halo-distribution.json; then
+            --output json > /tmp/combat-lab-distribution.json; then
             jq '{
               aliases: .DistributionConfig.Aliases.Items,
               origins: [.DistributionConfig.Origins.Items[] | {
@@ -48,7 +48,7 @@ jobs:
               }],
               defaultRootObject: .DistributionConfig.DefaultRootObject,
               customErrors: .DistributionConfig.CustomErrorResponses.Items
-            }' /tmp/halo-distribution.json
+            }' /tmp/combat-lab-distribution.json
           else
             echo "Deployment user cannot inspect CloudFront configuration; continuing with scoped upload access."
           fi
@@ -57,7 +57,7 @@ jobs:
         shell: bash
         env:
           MH_BUCKET_ID: ${{ secrets.MH_BUCKET_ID }}
-          HALO_PREFIX: ${{ inputs.target == 'production' && 'halo' || 'halo-preview' }}
+          UPLOAD_PREFIX: ${{ inputs.target }}
         run: |
           set -euo pipefail
           python - <<'PY'
@@ -66,6 +66,10 @@ jobs:
           import boto3
           from botocore.config import Config
 
+          prefix = os.environ["UPLOAD_PREFIX"]
+          if prefix not in ("combat-lab", "combat-lab-preview"):
+              raise ValueError("Unsupported upload destination")
+
           client = boto3.client(
               "s3",
               region_name="ca-central-1",
@@ -73,7 +77,7 @@ jobs:
           )
           upload = client.generate_presigned_post(
               Bucket=os.environ["MH_BUCKET_ID"],
-              Key=f"{os.environ['HALO_PREFIX']}/" + "$" + "{filename}",
+              Key=f"{prefix}/" + "$" + "{filename}",
               Fields={"Cache-Control": "public, max-age=0, must-revalidate"},
               Conditions=[
                   ["content-length-range", 1, 220 * 1024 * 1024],
@@ -82,14 +86,14 @@ jobs:
               ],
               ExpiresIn=3600,
           )
-          with open("/tmp/halo-upload.json", "w", encoding="utf-8") as output:
+          with open("/tmp/combat-lab-upload.json", "w", encoding="utf-8") as output:
               json.dump(upload, output)
           PY
 
       - name: Publish temporary upload policy
         uses: actions/upload-artifact@v4
         with:
-          name: halo-${{ inputs.target }}-upload
-          path: /tmp/halo-upload.json
+          name: ${{ inputs.target }}-upload
+          path: /tmp/combat-lab-upload.json
           retention-days: 1
           if-no-files-found: error

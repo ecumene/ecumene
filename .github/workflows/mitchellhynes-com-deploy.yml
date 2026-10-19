@@ -10,6 +10,9 @@ on:
       - "yarn.lock"
       - ".yarnrc.yml"
       - ".github/workflows/mitchellhynes-com-deploy.yml"
+      - ".github/scripts/publish-combat-lab.sh"
+      - ".github/scripts/combat-lab-redirect.html"
+      - ".github/scripts/retired-game-serviceworker.js"
   workflow_dispatch:
 
 permissions:
@@ -63,10 +66,19 @@ jobs:
       - name: Deploy to S3
         run: >-
           aws s3 sync --delete
+          --exclude "halo"
           --exclude "halo/*"
+          --exclude "halo-preview"
           --exclude "halo-preview/*"
+          --exclude "combat-lab"
+          --exclude "combat-lab/*"
+          --exclude "combat-lab-preview"
+          --exclude "combat-lab-preview/*"
           ./apps/mitchellhynes.com/dist/
           s3://${{ secrets.MH_BUCKET_ID }}
 
-      - name: Create CloudFront invalidation
-        run: aws cloudfront create-invalidation --distribution-id ${{ secrets.MH_DISTRIBUTION_ID }} --paths "/*"
+      - name: Preserve the game redirects and publish the website
+        env:
+          MH_BUCKET_ID: ${{ secrets.MH_BUCKET_ID }}
+          MH_DISTRIBUTION_ID: ${{ secrets.MH_DISTRIBUTION_ID }}
+        run: bash .github/scripts/publish-combat-lab.sh --all-site

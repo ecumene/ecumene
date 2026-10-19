@@ -1,5 +1,5 @@
 ---
-const gameUrl = "https://halo-web.otherness-bugs.workers.dev/";
+const gameUrl = "/combat-lab/";
 ---
 
 <!doctype html>
@@ -9,16 +9,16 @@ const gameUrl = "https://halo-web.otherness-bugs.workers.dev/";
     <meta name="viewport" content="width=device-width" />
     <meta name="robots" content="noindex" />
     <meta http-equiv="refresh" content={`0;url=${gameUrl}`} />
-    <link rel="canonical" href="https://mitchellhynes.com/halo" />
-    <title>Opening Halo…</title>
+    <link rel="canonical" href="https://mitchellhynes.com/combat-lab/" />
+    <title>Opening Combat Lab…</title>
     <script is:inline define:vars={{ gameUrl }}>
-      const destination = new URL(gameUrl);
+      const destination = new URL(gameUrl, window.location.origin);
       destination.search = window.location.search;
       destination.hash = window.location.hash;
       window.location.replace(destination.toString());
     </script>
   </head>
   <body>
-    <p>Opening <a href={gameUrl}>Halo in your browser</a>…</p>
+    <p>Opening <a href={gameUrl}>Combat Lab</a>…</p>
   </body>
 </html>
