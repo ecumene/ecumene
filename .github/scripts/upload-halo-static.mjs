@@ -76,4 +76,4 @@ async function worker() {
 }
 
 await Promise.all(Array.from({ length: Math.min(4, files.length) }, worker));
-console.log(`Uploaded ${files.length} Halo files.`);
+console.log(`Uploaded ${files.length} browser assets.`);

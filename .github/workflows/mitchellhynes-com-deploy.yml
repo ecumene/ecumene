@@ -13,6 +13,7 @@ on:
       - ".github/scripts/publish-combat-lab.sh"
       - ".github/scripts/combat-lab-redirect.html"
       - ".github/scripts/retired-game-serviceworker.js"
+      - ".github/scripts/verify-combat-lab.py"
   workflow_dispatch:
 
 permissions:

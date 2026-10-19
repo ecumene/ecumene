@@ -16,11 +16,21 @@ excludes those directories so it cannot delete the runtime.
    `combat-lab/`. Only then does it remove the old `halo/` and
    `halo-preview/` objects and install redirect entry points and worker cleanup.
 3. The script invalidates `/halo*`, `/halo-preview*`, and `/combat-lab*`, and
-   waits for CloudFront to finish. An ordinary website deployment runs the
-   same script with `--all-site`, also invalidating the rest of the website.
-4. Verify `/combat-lab/`, the legacy `/halo` and `/halo/halo.html` redirects,
-   their preview equivalents, and that old `.js`/`.wasm` runtime URLs are gone.
-   `coi-serviceworker.js` is intentionally retained as a cleanup script.
+   waits for CloudFront to finish. If the existing role specifically lacks
+   `cloudfront:GetInvalidation`, it reports that global completion cannot be
+   inspected and proceeds to public verification. Other waiter failures remain
+   failures; no additional IAM permission is required. An ordinary website
+   deployment uses `--all-site`, also invalidating the rest of the website.
+4. After either a successful wait or that specific permission denial,
+   `verify-combat-lab.py` retries public GET and HEAD checks for up to three
+   minutes: all eight legacy entry aliases must return 301 to the absolute
+   HTTPS Combat Lab URL, old JavaScript/WASM/menu art must return 404, and the
+   new runtime must return 200 with the correct types and page title. It also
+   checks the WASM header and exact cleanup-worker contents. A failing check
+   fails the job. Public verification does not prove invalidation completion
+   at every CloudFront location; that status remains explicitly unknown when
+   the waiter lacks permission. `coi-serviceworker.js` intentionally remains
+   at each legacy prefix to clean up installed workers.
 
 The script needs `MH_BUCKET_ID`, `MH_DISTRIBUTION_ID`, and configured AWS
 credentials. Existing workflows use `AWS_ROLE_ARN` when available, otherwise

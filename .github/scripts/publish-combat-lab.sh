@@ -16,7 +16,7 @@ if [[ $# -gt 1 ]]; then
   echo "Usage: $0 [--all-site]" >&2
   exit 2
 fi
-for source in combat-lab-redirect.html retired-game-serviceworker.js; do
+for source in combat-lab-redirect.html retired-game-serviceworker.js verify-combat-lab.py; do
   if [[ ! -s "${script_directory}/${source}" ]]; then
     echo "Missing deployment source: ${source}; nothing was removed." >&2
     exit 1
@@ -70,8 +70,27 @@ if [[ -z "${invalidation_id}" || "${invalidation_id}" == None ]]; then
   echo "CloudFront did not return an invalidation ID." >&2
   exit 1
 fi
-aws cloudfront wait invalidation-completed \
+invalidation_confirmed=false
+if wait_output="$(aws cloudfront wait invalidation-completed \
   --distribution-id "${MH_DISTRIBUTION_ID}" \
-  --id "${invalidation_id}" --no-cli-pager
+  --id "${invalidation_id}" --no-cli-pager 2>&1)"; then
+  invalidation_confirmed=true
+else
+  wait_status=$?
+  printf '%s\n' "${wait_output}" >&2
+  if [[ "${wait_output}" == *"(AccessDenied)"* ]] &&
+    [[ "${wait_output}" == *"cloudfront:GetInvalidation"* ||
+       "${wait_output}" == *"when calling the GetInvalidation operation"* ]]; then
+    echo "CloudFront invalidation was requested, but this role cannot inspect its global status. Checking public responses instead."
+  else
+    exit "${wait_status}"
+  fi
+fi
 
-echo "Combat Lab is published; legacy files are retired and CloudFront invalidation is complete."
+# Also verify the public responses when the invalidation waiter succeeds.
+python3 "${script_directory}/verify-combat-lab.py"
+if [[ "${invalidation_confirmed}" == true ]]; then
+  echo "Combat Lab public endpoints verified; CloudFront invalidation is complete."
+else
+  echo "Combat Lab public endpoints verified; CloudFront global invalidation status remains unknown."
+fi
