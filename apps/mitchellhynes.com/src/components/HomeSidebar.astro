@@ -1,6 +1,7 @@
 ---
 import type { CollectionEntry } from "astro:content";
-import { Feather, Folder, Home, UserRound } from "lucide-react";
+import { BriefcaseBusiness, Feather, Folder, Home, UserRound } from "lucide-react";
+import { career } from "../data/experience";
 import { getPostThumbnail } from "../utils/post-media";
 
 interface Props {
@@ -13,6 +14,7 @@ const recentProjects = projects.slice(0, 5);
 const currentPath = Astro.url.pathname.replace(/\/$/, "") || "/";
 const isHome = currentPath === "/";
 const isAbout = currentPath === "/about";
+const isExperience = currentPath === "/experience";
 const isProjects = currentPath === "/projects" || currentPath.startsWith("/projects/");
 const isBlog = currentPath === "/blog" || currentPath.startsWith("/blog/");
 const selectedPost = posts.find((post) => currentPath === `/blog/${post.id}`);
@@ -24,7 +26,7 @@ const sidebarPosts =
 const homeHref = isHome ? "#home" : "/#home";
 const projectsHref = "/projects";
 const blogHref = "/blog";
-const showRecentProjects = !isBlog && currentPath !== "/projects";
+const showRecentProjects = !isBlog && !isExperience && currentPath !== "/projects";
 const showRecentPosts = isBlog && currentPath !== "/blog";
 const formatProjectDate = (date: Date) =>
   date.toLocaleDateString("en-US", { timeZone: "America/Toronto" });
@@ -86,6 +88,20 @@ const getProjectPoster = (slug: string) => `/project-thumbnails/${slug}.jpg`;
       <li>
         <a
           class="home-sidebar__link"
+          href="/experience/"
+          aria-current={isExperience ? "page" : "false"}
+        >
+          <BriefcaseBusiness
+            className="home-sidebar__icon"
+            size={19}
+            strokeWidth={1.7}
+          />
+          <span>Experience</span>
+        </a>
+      </li>
+      <li>
+        <a
+          class="home-sidebar__link"
           href={projectsHref}
           aria-current={isProjects ? "page" : "false"}
         >
@@ -105,6 +121,31 @@ const getProjectPoster = (slug: string) => `/project-thumbnails/${slug}.jpg`;
       </li>
     </ul>
   </nav>
+
+  {
+    isExperience && (
+      <nav class="home-sidebar__career" aria-labelledby="career-navigation-title">
+        <h2 id="career-navigation-title">Career timeline</h2>
+        <ol>
+          {career.map((entry, index) => (
+            <li>
+              <a
+                href={`#${entry.id}`}
+                data-career-link
+                aria-current={index === 0 ? "location" : undefined}
+              >
+                <span class="home-sidebar__career-marker" aria-hidden="true" />
+                <span class="home-sidebar__career-copy">
+                  <strong>{entry.company}</strong>
+                  <span>{entry.shortPeriod}</span>
+                </span>
+              </a>
+            </li>
+          ))}
+        </ol>
+      </nav>
+    )
+  }
 
   {
     showRecentProjects && (
@@ -210,6 +251,9 @@ const getProjectPoster = (slug: string) => `/project-thumbnails/${slug}.jpg`;
   <nav aria-label="Primary navigation">
     <a href={homeHref} aria-current={isHome ? "page" : "false"}>Home</a>
     <a href="/about" aria-current={isAbout ? "page" : "false"}>About</a>
+    <a href="/experience/" aria-current={isExperience ? "page" : "false"}
+      >Experience</a
+    >
     <a href={projectsHref} aria-current={isProjects ? "page" : "false"}
       >Projects</a
     >
@@ -241,9 +285,78 @@ const getProjectPoster = (slug: string) => `/project-thumbnails/${slug}.jpg`;
     project.addEventListener("focusin", playPreview);
     project.addEventListener("focusout", stopPreview);
   });
+
+  const careerLinks = Array.from(
+    document.querySelectorAll<HTMLAnchorElement>("[data-career-link]")
+  );
+  const careerSections = Array.from(
+    new Set(careerLinks.map((link) => document.getElementById(link.hash.slice(1))))
+  ).filter((section): section is HTMLElement => section !== null);
+  const careerSelect = document.querySelector<HTMLSelectElement>("[data-career-select]");
+
+  if (careerSections.length) {
+    const selectCareer = (id: string) => {
+      careerLinks.forEach((link) => {
+        if (link.hash === `#${id}`) link.setAttribute("aria-current", "location");
+        else link.removeAttribute("aria-current");
+      });
+      if (careerSelect && document.activeElement !== careerSelect) {
+        careerSelect.value = id;
+      }
+    };
+
+    const updateCareer = () => {
+      let active = careerSections[0];
+      for (const section of careerSections) {
+        if (section.getBoundingClientRect().top <= 180) active = section;
+      }
+      if (
+        window.innerHeight + window.scrollY >=
+        document.documentElement.scrollHeight - 4
+      ) {
+        active = careerSections[careerSections.length - 1];
+      }
+      if (active) selectCareer(active.id);
+    };
+
+    const initialSection = careerSections.find(
+      (section) => `#${section.id}` === window.location.hash
+    );
+    if (initialSection) selectCareer(initialSection.id);
+    else updateCareer();
+
+    let scheduled = false;
+    window.addEventListener(
+      "scroll",
+      () => {
+        if (scheduled) return;
+        scheduled = true;
+        window.requestAnimationFrame(() => {
+          updateCareer();
+          scheduled = false;
+        });
+      },
+      { passive: true }
+    );
+    window.addEventListener("resize", updateCareer);
+    window.addEventListener("hashchange", () => {
+      const section = careerSections.find(
+        (entry) => `#${entry.id}` === window.location.hash
+      );
+      if (section) selectCareer(section.id);
+    });
+    careerSelect?.addEventListener("change", () => {
+      window.location.hash = careerSelect.value;
+    });
+    careerSelect?.addEventListener("blur", updateCareer);
+  }
 </script>
 
 <style>
+  :global(.home-shell) {
+    --mobile-header-height: 4rem;
+  }
+
   .home-sidebar {
     display: none;
   }
@@ -253,10 +366,12 @@ const getProjectPoster = (slug: string) => `/project-thumbnails/${slug}.jpg`;
     top: 0;
     z-index: 60;
     display: flex;
-    min-height: 4rem;
+    height: var(--mobile-header-height);
     align-items: center;
     justify-content: space-between;
     gap: 1rem;
+    min-width: 0;
+    max-width: 100%;
     border-bottom: 1px solid hsl(var(--border));
     background: color-mix(in srgb, hsl(var(--background)) 94%, transparent);
     padding: 0.75rem 1rem;
@@ -273,6 +388,7 @@ const getProjectPoster = (slug: string) => `/project-thumbnails/${slug}.jpg`;
 
   .home-mobile-header nav {
     display: flex;
+    min-width: 0;
     align-items: center;
     gap: 0.75rem;
     overflow-x: auto;
@@ -285,8 +401,34 @@ const getProjectPoster = (slug: string) => `/project-thumbnails/${slug}.jpg`;
     white-space: nowrap;
   }
 
+  .home-mobile-header a:focus-visible {
+    outline: 2px solid hsl(var(--brand));
+    outline-offset: 3px;
+  }
+
   .home-mobile-header nav a[aria-current="page"] {
-    color: hsl(var(--foreground));
+    color: hsl(var(--brand));
+  }
+
+  @media (max-width: 47.999rem) {
+    :global(.home-shell) {
+      --mobile-header-height: 6.25rem;
+    }
+
+    .home-mobile-header {
+      flex-wrap: wrap;
+      gap: 0.5rem;
+    }
+
+    .home-mobile-header__identity,
+    .home-mobile-header nav {
+      width: 100%;
+    }
+
+    .home-mobile-header nav {
+      gap: 1.1rem;
+      padding: 0.25rem 0;
+    }
   }
 
   @media (min-width: 64rem) {
@@ -305,6 +447,7 @@ const getProjectPoster = (slug: string) => `/project-thumbnails/${slug}.jpg`;
 
     .home-sidebar__identity {
       display: flex;
+      flex-shrink: 0;
       align-items: center;
       gap: 1rem;
       color: hsl(var(--foreground));
@@ -402,6 +545,7 @@ const getProjectPoster = (slug: string) => `/project-thumbnails/${slug}.jpg`;
     }
 
     .home-sidebar__nav {
+      flex-shrink: 0;
       margin-top: 2.5rem;
       border-bottom: 1px solid hsl(var(--border));
       padding-bottom: 1.25rem;
@@ -435,6 +579,11 @@ const getProjectPoster = (slug: string) => `/project-thumbnails/${slug}.jpg`;
       background: hsl(var(--muted));
     }
 
+    .home-sidebar__link:focus-visible {
+      outline: 2px solid hsl(var(--brand));
+      outline-offset: 2px;
+    }
+
     .home-sidebar__link[aria-current="page"] {
       background: hsl(var(--accent));
     }
@@ -446,6 +595,94 @@ const getProjectPoster = (slug: string) => `/project-thumbnails/${slug}.jpg`;
 
     .home-sidebar__link[aria-current="page"] :global(.home-sidebar__icon) {
       color: hsl(var(--brand));
+    }
+
+    .home-sidebar__career {
+      min-height: 0;
+      overflow-y: auto;
+      overscroll-behavior: contain;
+      margin-top: 1.75rem;
+      padding: 0 0.625rem 0.25rem;
+      scrollbar-width: thin;
+      scrollbar-color: hsl(var(--border)) transparent;
+    }
+
+    .home-sidebar__career h2 {
+      margin: 0 0 1.125rem;
+      color: hsl(var(--muted-foreground));
+      font-family: inherit;
+      font-size: 0.6875rem;
+      font-weight: 500;
+      letter-spacing: 0.055em;
+      text-transform: uppercase;
+    }
+
+    .home-sidebar__career ol {
+      margin: 0;
+      padding: 0;
+      list-style: none;
+    }
+
+    .home-sidebar__career a {
+      position: relative;
+      display: flex;
+      align-items: center;
+      gap: 0.875rem;
+      border-radius: 0.5rem;
+      color: hsl(var(--muted-foreground));
+      padding: 0.75rem 0.5rem;
+      text-decoration: none;
+      transition:
+        background-color 160ms ease,
+        color 160ms ease;
+    }
+
+    .home-sidebar__career a:hover {
+      background: hsl(var(--muted));
+      color: hsl(var(--foreground));
+    }
+
+    .home-sidebar__career a:focus-visible {
+      outline: 2px solid hsl(var(--brand));
+      outline-offset: -2px;
+    }
+
+    .home-sidebar__career a[aria-current="location"] {
+      background: hsl(var(--accent));
+      color: hsl(var(--brand));
+    }
+
+    .home-sidebar__career-marker {
+      width: 0.4375rem;
+      height: 0.4375rem;
+      flex: none;
+      border: 1px solid currentColor;
+      border-radius: 50%;
+      opacity: 0.65;
+    }
+
+    a[aria-current="location"] .home-sidebar__career-marker {
+      background: currentColor;
+      opacity: 1;
+    }
+
+    .home-sidebar__career-copy {
+      display: flex;
+      min-width: 0;
+      flex-direction: column;
+      gap: 0.25rem;
+    }
+
+    .home-sidebar__career-copy strong {
+      font-size: 0.8125rem;
+      font-weight: 500;
+      line-height: 1.35;
+    }
+
+    .home-sidebar__career-copy > span {
+      font-size: 0.6875rem;
+      font-variant-numeric: tabular-nums;
+      opacity: 0.8;
     }
 
     .home-sidebar__projects {
@@ -615,7 +852,12 @@ const getProjectPoster = (slug: string) => `/project-thumbnails/${slug}.jpg`;
   }
 
   @media (prefers-reduced-motion: reduce) {
+    :global(html.scroll-smooth) {
+      scroll-behavior: auto;
+    }
+
     .home-sidebar__link,
+    .home-sidebar__career a,
     .home-sidebar__projects a,
     .home-sidebar__project-popover {
       transition: none;

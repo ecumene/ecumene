@@ -1,0 +1,21 @@
+---
+import BaseHead from "../components/BaseHead.astro";
+import ExperienceContent from "../components/ExperienceContent.astro";
+import HomeShell from "../components/HomeShell.astro";
+import { SITE_TITLE } from "../consts";
+---
+
+<!doctype html>
+<html lang="en" class="scroll-smooth">
+  <head>
+    <BaseHead
+      title={`Experience | ${SITE_TITLE}`}
+      description="My work as a software developer, from CoLab’s product foundations to AI-native legal tools at Spellbook."
+    />
+  </head>
+  <body>
+    <HomeShell>
+      <ExperienceContent />
+    </HomeShell>
+  </body>
+</html>

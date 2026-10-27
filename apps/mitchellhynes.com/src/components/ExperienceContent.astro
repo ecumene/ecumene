@@ -1,0 +1,519 @@
+---
+import { ArrowUpRight, ArrowUp, Expand, X } from "lucide-react";
+import { career } from "../data/experience";
+---
+
+<div class="experience" id="experience-top">
+  <header class="experience__intro">
+    <h1>Experience<span>.</span></h1>
+    <a class="experience__profile" href="https://www.linkedin.com/in/mitchell-hynes/">
+      LinkedIn profile <ArrowUpRight size={15} aria-hidden="true" />
+    </a>
+  </header>
+
+  <div class="experience__mobile-navigation">
+    <label for="career-chapter">Jump to</label>
+    <select id="career-chapter" data-career-select>
+      {career.map((chapter) => (
+        <option value={chapter.id}>{chapter.company} · {chapter.shortPeriod}</option>
+      ))}
+    </select>
+  </div>
+
+  <div class="experience__chapters">
+    {career.map((chapter) => (
+      <section
+        id={chapter.id}
+        class:list={["career-chapter", { "career-chapter--featured": !!chapter.image }]}
+        aria-labelledby={`${chapter.id}-title`}
+        data-career-section
+      >
+        <div class="career-chapter__content">
+          <header class="career-chapter__heading">
+            <p class="career-chapter__period">{chapter.period}</p>
+            <h2 class="career-chapter__company" id={`${chapter.id}-title`}>
+              <a href={chapter.website}>
+                <span>{chapter.company}</span>
+                <ArrowUpRight size={22} strokeWidth={1.5} aria-hidden="true" />
+              </a>
+            </h2>
+            {chapter.roles ? (
+              <ul class="career-roles" aria-label={`Roles at ${chapter.company}`}>
+                {chapter.roles.map((role) => (
+                  <li><span>{role.title}</span><span>{role.period}</span></li>
+                ))}
+              </ul>
+            ) : (
+              <p class="career-chapter__role">{chapter.role}</p>
+            )}
+          </header>
+
+          <p class="career-chapter__focus">{chapter.focus}</p>
+          <div class="career-chapter__prose">
+            {chapter.paragraphs.map((paragraph) => <p>{paragraph}</p>)}
+          </div>
+
+          {chapter.image && (
+            <figure class:list={["career-image", `career-image--${chapter.id}`]}>
+              <a
+                class="career-image__open"
+                href={chapter.image.src}
+                data-experience-image
+                data-caption={chapter.image.caption}
+                aria-label={`Enlarge ${chapter.company} product screenshot`}
+              >
+                <img
+                  src={chapter.image.src}
+                  alt={chapter.image.alt}
+                  width={chapter.image.width}
+                  height={chapter.image.height}
+                  loading="lazy"
+                  decoding="async"
+                />
+                <span class="career-image__expand" aria-hidden="true"><Expand size={16} /> View larger</span>
+              </a>
+              <figcaption>
+                <span>{chapter.image.caption}</span>
+                <a href={chapter.image.source}>Public product view <ArrowUpRight size={13} aria-hidden="true" /></a>
+              </figcaption>
+            </figure>
+          )}
+
+          {chapter.highlights && (
+            <div class="career-chapter__highlights">
+              {chapter.highlights.map((highlight) => (
+                <div class="career-highlight">
+                  <h3>{highlight.title}</h3>
+                  <p>{highlight.text}</p>
+                </div>
+              ))}
+            </div>
+          )}
+
+        </div>
+      </section>
+    ))}
+  </div>
+
+  <footer class="experience__footer">
+    <span>St. John’s, Newfoundland & Labrador</span>
+    <a href="#experience-top">Back to top <ArrowUp size={15} aria-hidden="true" /></a>
+  </footer>
+</div>
+
+<dialog class="experience-lightbox" aria-labelledby="experience-image-caption">
+  <button class="experience-lightbox__close" type="button" aria-label="Close screenshot"><X size={24} aria-hidden="true" /></button>
+  <figure>
+    <img alt="" width="1120" height="640" />
+    <figcaption id="experience-image-caption"></figcaption>
+  </figure>
+</dialog>
+
+<script>
+  const lightbox = document.querySelector<HTMLDialogElement>(".experience-lightbox");
+  const previewImage = lightbox?.querySelector("img");
+  const previewCaption = lightbox?.querySelector("figcaption");
+  let previousOverflow = "";
+
+  if (lightbox && previewImage && previewCaption) {
+    document
+      .querySelectorAll<HTMLAnchorElement>("[data-experience-image]")
+      .forEach((link) => {
+        link.addEventListener("click", (event) => {
+          if (event.metaKey || event.ctrlKey || event.shiftKey || event.altKey) return;
+          const image = link.querySelector("img");
+          if (!image) return;
+          event.preventDefault();
+          previewImage.src = image.src;
+          previewImage.alt = image.alt;
+          previewImage.width = Number(image.getAttribute("width"));
+          previewImage.height = Number(image.getAttribute("height"));
+          previewCaption.textContent = link.dataset.caption ?? "";
+          previousOverflow = document.body.style.overflow;
+          document.body.style.overflow = "hidden";
+          lightbox.showModal();
+        });
+      });
+    lightbox.querySelector("button")?.addEventListener("click", () => lightbox.close());
+    lightbox.addEventListener("click", (event) => {
+      if (event.target === lightbox) lightbox.close();
+    });
+    lightbox.addEventListener("close", () => {
+      document.body.style.overflow = previousOverflow;
+    });
+  }
+</script>
+
+<style>
+  .experience {
+    width: min(calc(100% - 7rem), 57rem);
+    margin: 0 auto;
+    padding: 5.5rem 0 2rem;
+    font-family: var(--font-body);
+  }
+
+  .experience__intro {
+    padding: 0 0 2.25rem;
+  }
+  .experience h1 {
+    margin: 0 0 0.75rem;
+    font-size: clamp(1.75rem, 2.5vw, 2.25rem);
+    font-weight: 400;
+    letter-spacing: -0.025em;
+    line-height: 1.2;
+  }
+  .experience h1 > span {
+    color: hsl(var(--brand));
+  }
+  .experience__profile,
+  .experience__footer a {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.35rem;
+    font-size: 0.875rem;
+    text-decoration: none;
+  }
+  .experience__profile {
+    color: hsl(var(--brand));
+  }
+  .experience a:focus-visible,
+  .experience select:focus-visible {
+    outline: 2px solid hsl(var(--brand));
+    outline-offset: 5px;
+    border-radius: 3px;
+  }
+  .experience__profile:hover,
+  .experience__footer a:hover {
+    text-decoration: underline;
+    text-underline-offset: 4px;
+  }
+  .experience__mobile-navigation {
+    display: none;
+  }
+  .career-chapter {
+    scroll-margin-top: 2.5rem;
+  }
+  .career-chapter__content {
+    min-width: 0;
+    border-top: 1px solid hsl(var(--border));
+    padding: 2.2rem 0 3.5rem;
+  }
+  .career-chapter__period {
+    margin: 0 0 0.6rem;
+    color: hsl(var(--muted-foreground));
+    font-size: 0.8125rem;
+  }
+  .career-chapter h2 {
+    margin: 0;
+    font-size: clamp(2rem, 3vw, 2.875rem);
+    font-weight: 400;
+    letter-spacing: -0.03em;
+    line-height: 1.2;
+  }
+  .career-chapter__company a {
+    display: inline-flex;
+    align-items: center;
+    gap: 1rem;
+    max-width: 100%;
+    color: inherit;
+    text-decoration: none;
+  }
+  .career-chapter__company a :global(svg) {
+    flex-shrink: 0;
+    color: hsl(var(--muted-foreground));
+  }
+  .career-chapter__company a:hover,
+  .career-chapter__company a:hover :global(svg) {
+    color: hsl(var(--brand));
+  }
+  .career-chapter__role {
+    margin: 0.5rem 0 0;
+    color: #655d58;
+    font-size: 0.9375rem;
+  }
+  .career-chapter__focus {
+    margin: 1.85rem 0 0.65rem;
+    color: hsl(var(--brand));
+    font-size: 0.6875rem;
+    letter-spacing: 0.07em;
+    text-transform: uppercase;
+  }
+  .career-chapter__prose {
+    max-width: 45rem;
+  }
+  .career-chapter__prose p {
+    margin: 0 0 1rem;
+    font-size: 1.0625rem;
+    line-height: 1.8;
+  }
+  .career-image {
+    margin: 2rem 0 2.25rem;
+  }
+  .career-image__open {
+    position: relative;
+    display: block;
+    overflow: hidden;
+    border: 1px solid #e4d7dd;
+    border-radius: 0.625rem;
+    background: linear-gradient(135deg, #eae2ed, #f4e9e8 70%);
+    padding: clamp(1rem, 3vw, 2.5rem);
+    cursor: zoom-in;
+  }
+  .career-image--colab .career-image__open {
+    border-color: #d8dedb;
+    background: linear-gradient(135deg, #dce7e1, #edf0e8);
+  }
+  .career-image img {
+    display: block;
+    width: 100%;
+    height: auto;
+    border: 1px solid rgb(60 45 54 / 12%);
+    border-radius: 0.25rem;
+    box-shadow: 0 0.65rem 1.5rem rgb(54 37 51 / 12%);
+    transition: transform 250ms ease;
+  }
+  .career-image__open:hover img {
+    transform: translateY(-3px);
+  }
+  .career-image__expand {
+    position: absolute;
+    right: 0.75rem;
+    bottom: 0.75rem;
+    display: flex;
+    align-items: center;
+    gap: 0.375rem;
+    border: 1px solid rgb(60 45 54 / 12%);
+    border-radius: 0.3rem;
+    background: rgb(255 255 255 / 95%);
+    padding: 0.35rem 0.6rem;
+    color: #4c4048;
+    font-size: 0.6875rem;
+  }
+  .career-image figcaption {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: space-between;
+    gap: 0.5rem;
+    margin-top: 0.65rem;
+    color: hsl(var(--muted-foreground));
+    font-size: 0.75rem;
+  }
+  .career-image figcaption a {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.2rem;
+    text-underline-offset: 3px;
+  }
+  .career-image figcaption a:hover {
+    color: hsl(var(--brand));
+    text-decoration: underline;
+  }
+  .career-chapter__highlights {
+    display: grid;
+    gap: 1.25rem;
+    margin: 1.75rem 0;
+  }
+  .career-highlight {
+    padding: 0.15rem 0;
+  }
+  .career-highlight h3 {
+    margin: 0 0 0.35rem;
+    font-family: var(--font-body);
+    font-size: 0.9375rem;
+    font-weight: 700;
+  }
+  .career-highlight p {
+    max-width: 44rem;
+    margin: 0;
+    color: #655d58;
+    font-size: 0.9375rem;
+    line-height: 1.75;
+  }
+  .career-roles {
+    margin: 0.75rem 0 0;
+    padding: 0;
+    color: #655d58;
+    list-style: none;
+  }
+  .career-roles li {
+    --role-padding: 0.375rem;
+    --marker-top: calc(var(--role-padding) + 0.75em);
+    position: relative;
+    display: flex;
+    justify-content: space-between;
+    gap: 1rem;
+    padding: var(--role-padding) 0 var(--role-padding) 1.25rem;
+    font-size: 0.9375rem;
+    line-height: 1.5;
+  }
+  .career-roles li::before {
+    position: absolute;
+    top: var(--marker-top);
+    left: 0;
+    width: 5px;
+    height: 5px;
+    border-radius: 50%;
+    background: rgb(104 87 95 / 30%);
+    transform: translateY(-50%);
+    content: "";
+  }
+  .career-roles li:not(:last-child)::after {
+    position: absolute;
+    top: calc(var(--marker-top) + 2.5px);
+    bottom: calc(2.5px - var(--marker-top));
+    left: 2px;
+    width: 1px;
+    background: rgb(104 87 95 / 13%);
+    content: "";
+  }
+  .career-roles li span:last-child {
+    flex-shrink: 0;
+    color: hsl(var(--muted-foreground));
+    font-size: 0.8125rem;
+  }
+  .experience__footer {
+    display: flex;
+    flex-wrap: wrap;
+    align-items: center;
+    justify-content: space-between;
+    gap: 1rem;
+    border-top: 1px solid hsl(var(--border));
+    padding: 1.5rem 0;
+    color: hsl(var(--muted-foreground));
+    font-size: 0.75rem;
+  }
+  .experience-lightbox {
+    position: fixed;
+    inset: 0;
+    width: min(94vw, 90rem);
+    max-width: none;
+    max-height: 94dvh;
+    margin: auto;
+    border: 0;
+    border-radius: 0.625rem;
+    background: #f9f6f3;
+    padding: 3rem 1rem 1rem;
+    color: #463d38;
+  }
+  .experience-lightbox::backdrop {
+    background: rgb(25 18 23 / 80%);
+    backdrop-filter: blur(5px);
+  }
+  .experience-lightbox figure {
+    margin: 0;
+  }
+  .experience-lightbox img {
+    display: block;
+    width: 100%;
+    height: auto;
+    max-height: calc(94dvh - 7rem);
+    object-fit: contain;
+  }
+  .experience-lightbox figcaption {
+    margin-top: 1rem;
+    font-size: 0.875rem;
+    text-align: center;
+  }
+  .experience-lightbox__close {
+    position: absolute;
+    top: 0.4rem;
+    right: 0.5rem;
+    display: grid;
+    width: 2.25rem;
+    height: 2.25rem;
+    place-items: center;
+    border-radius: 50%;
+    cursor: pointer;
+  }
+  .experience-lightbox__close:hover {
+    background: #e9e2e4;
+  }
+  .experience-lightbox__close:focus-visible {
+    outline: 2px solid hsl(var(--brand));
+    outline-offset: 2px;
+  }
+  @media (max-width: 63.999rem) {
+    .experience {
+      width: min(calc(100% - 3rem), 44rem);
+      padding-top: 3.5rem;
+      scroll-margin-top: var(--mobile-header-height, 4rem);
+    }
+    .experience__intro {
+      padding: 0 0 2.5rem;
+    }
+    .experience__mobile-navigation {
+      position: sticky;
+      top: var(--mobile-header-height, 4rem);
+      z-index: 50;
+      display: flex;
+      align-items: center;
+      gap: 1rem;
+      margin: 0 -0.25rem 1rem;
+      border-block: 1px solid hsl(var(--border));
+      background: hsl(var(--background));
+      padding: 0.75rem 0.25rem;
+    }
+    .experience__mobile-navigation label {
+      flex-shrink: 0;
+      color: hsl(var(--muted-foreground));
+      font-size: 0.75rem;
+    }
+    .experience__mobile-navigation select {
+      width: 100%;
+      min-width: 0;
+      background: transparent;
+      color: hsl(var(--brand));
+      padding: 0.3rem;
+      font: inherit;
+      font-size: 0.875rem;
+    }
+    .career-chapter {
+      scroll-margin-top: calc(var(--mobile-header-height, 4rem) + 5rem);
+    }
+  }
+  @media (max-width: 39.999rem) {
+    .experience {
+      width: calc(100% - 2.5rem);
+      padding-top: 2.5rem;
+    }
+    .career-chapter__prose p {
+      font-size: 1rem;
+    }
+    .career-chapter__content {
+      padding-top: 1.75rem;
+      padding-bottom: 2.5rem;
+    }
+    .career-chapter h2 {
+      font-size: 2.125rem;
+    }
+    .career-roles li {
+      --role-padding: 0.5rem;
+      flex-direction: column;
+      gap: 0.15rem;
+    }
+    .career-image__open {
+      padding: 0.65rem;
+    }
+    .career-image__expand {
+      right: 0.5rem;
+      bottom: 0.5rem;
+      font-size: 0;
+      gap: 0;
+      padding: 0.4rem;
+    }
+    .career-image figcaption {
+      font-size: 0.6875rem;
+    }
+  }
+  @media (prefers-reduced-motion: reduce) {
+    :global(html.scroll-smooth) {
+      scroll-behavior: auto;
+    }
+    .career-image img {
+      transition: none;
+    }
+    .career-image__open:hover img {
+      transform: none;
+    }
+  }
+</style>

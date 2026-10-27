@@ -1,0 +1,397 @@
+---
+import { ArrowRight } from "lucide-react";
+import { career } from "../data/experience";
+
+const timeline = career.filter((chapter) =>
+  ["spellbook", "jungle-scout", "siftmed", "colab"].includes(chapter.id)
+);
+---
+
+<section class="home-experience" aria-label="Experience">
+  <div class="home-experience__inner">
+    <div class="home-experience__content">
+      <ol class="home-experience__timeline" role="list" aria-label="Career timeline">
+        {timeline.map((chapter) => (
+          <li>
+            <a
+              class="home-experience__role"
+              href={`/experience/#${chapter.id}`}
+              data-experience-preview={chapter.preview ? `experience-preview-${chapter.id}` : undefined}
+              aria-describedby={chapter.preview ? `experience-preview-${chapter.id}` : undefined}
+            >
+              <span class="home-experience__details">
+                <span class="home-experience__company">{chapter.company}</span>
+                <span class="home-experience__position">{chapter.role}</span>
+              </span>
+              <span class="home-experience__period">{chapter.shortPeriod}</span>
+            </a>
+            {chapter.preview && (
+              <div
+                id={`experience-preview-${chapter.id}`}
+                class="experience-preview"
+                popover="manual"
+                role="tooltip"
+              >
+                <video
+                  data-src={chapter.preview.video}
+                  poster={chapter.preview.poster}
+                  preload="none"
+                  muted
+                  loop
+                  playsinline
+                  tabindex="-1"
+                  aria-hidden="true"
+                />
+                <div class="experience-preview__copy">
+                  <strong>{chapter.company}</strong>
+                  <p>{chapter.preview.description}</p>
+                </div>
+              </div>
+            )}
+          </li>
+        ))}
+      </ol>
+      <a class="home-experience__link" href="/experience/">
+        <span>Read more</span>
+        <ArrowRight size={16} strokeWidth={1.6} aria-hidden="true" />
+      </a>
+    </div>
+  </div>
+</section>
+
+<script>
+  const reducedMotion = window.matchMedia("(prefers-reduced-motion: reduce)");
+  const hoverPointer = window.matchMedia("(hover: hover) and (pointer: fine)");
+  const triggers = document.querySelectorAll<HTMLAnchorElement>(
+    "[data-experience-preview]",
+  );
+  let active:
+    | { trigger: HTMLAnchorElement; card: HTMLElement; video: HTMLVideoElement }
+    | undefined;
+  let closeTimer: number | undefined;
+
+  const cancelClose = () => {
+    window.clearTimeout(closeTimer);
+    closeTimer = undefined;
+  };
+
+  const closePreview = () => {
+    cancelClose();
+    if (!active) return;
+    active.video.pause();
+    active.video.currentTime = 0;
+    if (typeof active.card.hidePopover === "function") active.card.hidePopover();
+    active.card.classList.remove("is-open");
+    active = undefined;
+  };
+
+  const scheduleClose = () => {
+    cancelClose();
+    closeTimer = window.setTimeout(() => {
+      if (!active) return;
+      if (
+        active.trigger.matches(":hover, :focus-visible") ||
+        active.card.matches(":hover")
+      )
+        return;
+      closePreview();
+    }, 120);
+  };
+
+  const playPreview = () => {
+    if (!active || reducedMotion.matches) return;
+    if (!active.video.getAttribute("src"))
+      active.video.src = active.video.dataset.src ?? "";
+    void active.video.play().catch(() => undefined);
+  };
+
+  const positionPreview = () => {
+    if (!active) return;
+    const { trigger, card } = active;
+    const row = trigger.getBoundingClientRect();
+    if (row.bottom <= 0 || row.top >= window.innerHeight) {
+      closePreview();
+      return;
+    }
+    const width = card.offsetWidth;
+    const height = card.offsetHeight;
+    const gutter = 16;
+    const gap = 14;
+    let left = row.right + gap;
+    let top = row.top + (row.height - height) / 2;
+    if (left + width > window.innerWidth - gutter) {
+      left = Math.max(
+        gutter,
+        Math.min(row.right - width, window.innerWidth - width - gutter),
+      );
+      top = row.top - height - gap;
+      if (top < gutter) top = row.bottom + gap;
+    }
+    card.style.left = `${left}px`;
+    card.style.top = `${Math.max(gutter, Math.min(top, window.innerHeight - height - gutter))}px`;
+  };
+
+  triggers.forEach((trigger) => {
+    const card = document.getElementById(trigger.dataset.experiencePreview ?? "");
+    const video = card?.querySelector("video");
+    if (!card || !(video instanceof HTMLVideoElement)) return;
+
+    const openPreview = () => {
+      cancelClose();
+      if (active?.trigger === trigger) return;
+      closePreview();
+      active = { trigger, card, video };
+      if (typeof card.showPopover === "function") card.showPopover();
+      card.classList.add("is-open");
+
+      positionPreview();
+      playPreview();
+    };
+
+    trigger.addEventListener("pointerenter", () => {
+      if (hoverPointer.matches) openPreview();
+    });
+    trigger.addEventListener("pointerleave", scheduleClose);
+    trigger.addEventListener("focus", () => {
+      if (trigger.matches(":focus-visible")) openPreview();
+    });
+    trigger.addEventListener("blur", scheduleClose);
+    trigger.addEventListener("click", closePreview);
+    card.addEventListener("pointerenter", cancelClose);
+    card.addEventListener("pointerleave", scheduleClose);
+  });
+
+  document.addEventListener("keydown", (event) => {
+    if (event.key === "Escape") closePreview();
+  });
+  let positionScheduled = false;
+  window.addEventListener("scroll", () => {
+    if (!active || positionScheduled) return;
+    positionScheduled = true;
+    window.requestAnimationFrame(() => {
+      positionPreview();
+      positionScheduled = false;
+    });
+  }, { passive: true });
+  window.addEventListener("resize", closePreview);
+  document.addEventListener("visibilitychange", () => {
+    if (document.hidden) closePreview();
+  });
+  reducedMotion.addEventListener("change", () => {
+    if (reducedMotion.matches) active?.video.pause();
+    else playPreview();
+  });
+</script>
+
+<style>
+  .home-experience {
+    position: relative;
+    padding: 0.25rem 0 7rem;
+    font-family: var(--font-body);
+  }
+
+  .home-experience__inner {
+    width: min(calc(100% - 6rem), 64rem);
+    margin: 0 auto;
+  }
+
+  .home-experience__content {
+    width: min(calc(100% - clamp(0rem, 6vw, 5rem)), 39rem);
+    margin-left: clamp(0rem, 6vw, 5rem);
+  }
+
+  .home-experience__timeline {
+    margin: 0;
+    padding: 0 0 1.25rem;
+    list-style: none;
+  }
+
+  .home-experience__timeline li {
+    position: relative;
+    padding-left: 1.25rem;
+  }
+
+  .home-experience__timeline li::before {
+    position: absolute;
+    top: 0.55rem;
+    left: 0;
+    z-index: 1;
+    width: 5px;
+    height: 5px;
+    border-radius: 50%;
+    background: rgb(104 87 95 / 30%);
+    pointer-events: none;
+    content: "";
+  }
+
+  .home-experience__timeline li:not(:last-child)::after {
+    position: absolute;
+    top: calc(0.55rem + 5px);
+    bottom: -0.55rem;
+    left: 2px;
+    width: 1px;
+    background: rgb(104 87 95 / 13%);
+    pointer-events: none;
+    content: "";
+  }
+
+  .home-experience__role {
+    display: flex;
+    align-items: baseline;
+    justify-content: space-between;
+    gap: 1.5rem;
+    padding: 0 0 1.375rem;
+    text-decoration: none;
+  }
+
+  .home-experience__timeline li:last-child .home-experience__role {
+    padding-bottom: 0;
+  }
+
+  .home-experience__details {
+    display: flex;
+    min-width: 0;
+    flex-direction: column;
+  }
+
+  .home-experience__company {
+    margin: 0;
+    color: hsl(var(--foreground));
+    font-size: 1rem;
+    line-height: 1.4;
+    transition: color 160ms ease;
+  }
+
+  .home-experience__position {
+    margin: 0.2rem 0 0;
+    color: hsl(var(--muted-foreground));
+    font-size: 0.8125rem;
+    line-height: 1.5;
+  }
+
+  .home-experience__period {
+    flex-shrink: 0;
+    color: hsl(var(--muted-foreground));
+    font-family: var(--font-mono);
+    font-size: 0.75rem;
+    white-space: nowrap;
+  }
+
+  .home-experience__role:hover .home-experience__company {
+    color: hsl(var(--brand));
+    text-decoration: underline;
+    text-decoration-thickness: 1px;
+    text-underline-offset: 0.2em;
+  }
+
+  .home-experience__link {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.4rem;
+    margin-top: 1.25rem;
+    color: hsl(var(--muted-foreground));
+    font-size: 0.875rem;
+    text-decoration: none;
+    transition: color 160ms ease;
+  }
+
+  .home-experience__link:hover {
+    color: hsl(var(--brand));
+  }
+
+  .home-experience__link:focus-visible,
+  .home-experience__role:focus-visible {
+    border-radius: 0.125rem;
+    outline: 2px solid hsl(var(--brand));
+    outline-offset: 5px;
+  }
+
+  .experience-preview {
+    position: fixed;
+    inset: auto;
+    z-index: 100;
+    display: none;
+    width: min(20rem, calc(100vw - 2rem));
+    max-height: calc(100dvh - 2rem);
+    margin: 0;
+    overflow: hidden;
+    border: 1px solid hsl(var(--border));
+    border-radius: 0.75rem;
+    background: hsl(var(--background));
+    color: hsl(var(--foreground));
+    padding: 0;
+    box-shadow: 0 1rem 2.5rem rgb(62 44 39 / 16%);
+    font-family: var(--font-body);
+  }
+
+  .experience-preview.is-open {
+    display: block;
+    animation: experience-preview-in 160ms ease both;
+  }
+
+  .experience-preview video {
+    display: block;
+    width: 100%;
+    aspect-ratio: 16 / 9;
+    background: white;
+    object-fit: contain;
+  }
+
+  .experience-preview__copy {
+    padding: 0.875rem 1rem 1rem;
+  }
+
+  .experience-preview__copy strong {
+    color: hsl(var(--brand));
+    font-family: var(--font-display);
+    font-size: 1.125rem;
+    font-weight: 700;
+    line-height: 1.2;
+  }
+
+  .experience-preview__copy p {
+    margin: 0.375rem 0 0;
+    color: hsl(var(--muted-foreground));
+    font-size: 0.9375rem;
+    line-height: 1.4;
+  }
+
+  @keyframes experience-preview-in {
+    from {
+      opacity: 0;
+      transform: translateY(0.25rem);
+    }
+    to {
+      opacity: 1;
+      transform: translateY(0);
+    }
+  }
+
+  @media (max-width: 35.999rem) {
+    .home-experience__role {
+      flex-direction: column;
+      gap: 0.25rem;
+    }
+  }
+
+  @media (max-width: 63.999rem) {
+    .home-experience__inner {
+      width: min(calc(100% - 2rem), 42rem);
+    }
+
+    .home-experience__content {
+      width: calc(100% - clamp(0.5rem, 8vw, 3.5rem) - 0.5rem);
+      margin-left: clamp(0.5rem, 8vw, 3.5rem);
+    }
+  }
+
+  @media (prefers-reduced-motion: reduce) {
+    .experience-preview.is-open {
+      animation: none;
+    }
+    .home-experience__link,
+    .home-experience__company {
+      transition: none;
+    }
+  }
+</style>
