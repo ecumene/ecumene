@@ -1,0 +1,131 @@
+projects/office/.gitignore
+  s_8bef709d4f1f12::t_0b35ad1a6a814d 1
+  s_8bef709d4f1f12::t_3a14185b4914f7 2-7
+.github/scripts/test_office_dns.py
+  s_8bef709d4f1f12::t_78dba844a0da7d 1-146
+projects/office/deploy/Caddyfile
+  s_8bef709d4f1f12::t_4154ebf863d9df 2-5
+  s_8bef709d4f1f12::t_5e586ba981a221 1,6-10
+projects/office/server/rooms.ts
+  s_8bef709d4f1f12::t_75cdc430cd034f 1-333,338-339
+  s_8bef709d4f1f12::t_79f480527cc748 334-337,340-640
+projects/office/deploy/README.md
+  s_8bef709d4f1f12::t_5e586ba981a221 1-61
+projects/office/tests/agent-config.test.ts
+  s_8bef709d4f1f12::t_3a14185b4914f7 1-52
+  s_8bef709d4f1f12::t_2a7df7481cf4a4 53-82
+projects/office/.env.example
+  s_8bef709d4f1f12::t_3a14185b4914f7 1-4
+projects/office/.dockerignore
+  s_8bef709d4f1f12::t_0b35ad1a6a814d 1-15
+projects/office/server/app.ts
+  s_8bef709d4f1f12::t_3a14185b4914f7 1-299,303-305
+  s_8bef709d4f1f12::t_719e4db2bcaf71 300-302,306-520
+.github/workflows/office-dns.yml
+  s_8bef709d4f1f12::t_78dba844a0da7d 1-36
+projects/office/README.md
+  s_8bef709d4f1f12::t_3a14185b4914f7 1-108
+projects/office/tests/persistence.test.ts
+  s_8bef709d4f1f12::t_75cdc430cd034f 1-23,25-26,28-46,48-68,70-71,73-80,82-95
+  s_8bef709d4f1f12::t_6a17560b7e5b73 24,27,47,69,72,81
+  s_8bef709d4f1f12::t_2673c3ebc4944c 96-119
+projects/office/deploy/compose.yaml
+  s_8bef709d4f1f12::t_4154ebf863d9df 31
+  s_8bef709d4f1f12::t_5e586ba981a221 1-30,32-52
+  s_8bef709d4f1f12::t_65fb45786bccba 53-58
+projects/office/VALIDATION.md
+  s_8bef709d4f1f12::t_3a14185b4914f7 1-27
+projects/office/deploy/.env.example
+  s_8bef709d4f1f12::t_5e586ba981a221 1-9
+projects/office/server/protocol.ts
+  s_8bef709d4f1f12::t_3a8869a4983195 2-3,11-14,21-24,40,47,64-68,74,82-85,88-95,112-114,116,124-131,136-137,141,150-151,164,183,190,192
+  s_8bef709d4f1f12::t_f84fb1eef775a2 1,4-10,15-20,25-39,41-46,48-63,69-73,75-81,86-87,96-111,115,117-123,132-135,138-140,142-149,152-163,165-182,184-189,191
+projects/office/GUIDE.md
+  s_8bef709d4f1f12::t_3a14185b4914f7 1-107
+  s_8bef709d4f1f12::t_730f30c3446406 108-118
+.github/scripts/office-dns.py
+  s_8bef709d4f1f12::t_78dba844a0da7d 1-160
+projects/office/server/agent-config.ts
+  s_8bef709d4f1f12::t_3a14185b4914f7 1-18
+  s_8bef709d4f1f12::t_cf5e2eddd647f7 19-23
+projects/office/deploy/.gitignore
+  s_8bef709d4f1f12::t_5e586ba981a221 1-6
+projects/office/.npmrc
+  s_8bef709d4f1f12::t_e1b812e0394a27 1-2
+projects/office/Dockerfile
+  s_8bef709d4f1f12::t_435e84f2ecab5b 1-26
+projects/office/docs/multiplayer.svg
+  s_8bef709d4f1f12::t_ce4e85bcf6cc5c 1-29
+projects/office/docs/reskin.svg
+  s_8bef709d4f1f12::t_8e552f879ec1ae 1-30
+projects/office/index.html
+  s_8bef709d4f1f12::t_d3d3356627db6b 1-13
+projects/office/package-lock.json
+  s_8bef709d4f1f12::t_efe8e6701e1624 1-3311
+projects/office/package.json
+  s_8bef709d4f1f12::t_54fde392813133 1-40
+projects/office/server/coworker.ts
+  s_8bef709d4f1f12::t_6cf44f99339132 1-464
+projects/office/server/document-executor.ts
+  s_8bef709d4f1f12::t_f25c56c9c8b292 1-233
+projects/office/server/document-tools.ts
+  s_8bef709d4f1f12::t_d3a7a3b3cb6418 1-797
+projects/office/server/index.ts
+  s_8bef709d4f1f12::t_d738a552543267 1-26
+projects/office/server/layout-tools.ts
+  s_8bef709d4f1f12::t_9a802ede0c6506 1-346
+projects/office/shared/agent.ts
+  s_8bef709d4f1f12::t_0c3880dcf6efcb 1-11
+projects/office/src/App.tsx
+  s_8bef709d4f1f12::t_7dd2f5dce8f54f 1-875
+projects/office/src/Messenger.tsx
+  s_8bef709d4f1f12::t_0797ef17e1c140 1-605
+projects/office/src/chat-types.ts
+  s_8bef709d4f1f12::t_6878112811fb03 1-29
+projects/office/src/collaboration.ts
+  s_8bef709d4f1f12::t_d8aeaccd34bcf9 1-317
+projects/office/src/main.tsx
+  s_8bef709d4f1f12::t_e594cac917f87b 1-8
+projects/office/src/messenger.css
+  s_8bef709d4f1f12::t_235766565dbfea 1-812
+projects/office/src/xp.css
+  s_8bef709d4f1f12::t_b36f18e86a3bde 1-1422
+projects/office/tests/agent-layout.test.ts
+  s_8bef709d4f1f12::t_57a88ae1109a6d 1-220
+projects/office/tests/agent-state.test.ts
+  s_8bef709d4f1f12::t_0d1d4ac003be04 1-340
+projects/office/tests/agent-tools.test.ts
+  s_8bef709d4f1f12::t_08949824dc5239 1-337
+projects/office/tests/chat.test.ts
+  s_8bef709d4f1f12::t_ec64eb4a37b526 1-377
+projects/office/tests/client-transport.test.ts
+  s_8bef709d4f1f12::t_79595bc2c8abae 1-389
+projects/office/tests/coworker-failures.test.ts
+  s_8bef709d4f1f12::t_ff68d475aa0c4f 1-348
+projects/office/tests/coworker.test.ts
+  s_8bef709d4f1f12::t_66dd6a18c89f10 1-239
+projects/office/tests/review.test.ts
+  s_8bef709d4f1f12::t_ab62f2b29fb700 1-253
+projects/office/tests/server.test.ts
+  s_8bef709d4f1f12::t_8d0c736571f5a9 1-305
+projects/office/tsconfig.json
+  s_8bef709d4f1f12::t_0de60cfed5b866 1-16
+projects/office/vite.config.ts
+  s_8bef709d4f1f12::t_f8fdf93a6e7567 1-8
+---
+{
+  "schema_version": "authorship/3.0.0",
+  "git_ai_version": "1.7.5",
+  "base_commit_sha": "6e7bf919f2aa6c75f827aedb8b1abc52cd6fc8e0",
+  "prompts": {},
+  "sessions": {
+    "s_8bef709d4f1f12": {
+      "agent_id": {
+        "tool": "codex",
+        "id": "01a1605e-b4b3-7ff0-bfc1-9419db8afd71",
+        "model": "gpt-6-astra"
+      },
+      "human_author": "Mitchell Hynes <mitch@spellbook.legal>"
+    }
+  }
+}
