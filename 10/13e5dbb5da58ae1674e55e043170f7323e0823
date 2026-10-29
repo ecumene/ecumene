@@ -1,0 +1,19 @@
+projects/office/deploy/README.md
+  s_8bef709d4f1f12::t_c4d8e74dcd64f0 62-72
+---
+{
+  "schema_version": "authorship/3.0.0",
+  "git_ai_version": "1.7.5",
+  "base_commit_sha": "1013e5dbb5da58ae1674e55e043170f7323e0823",
+  "prompts": {},
+  "sessions": {
+    "s_8bef709d4f1f12": {
+      "agent_id": {
+        "tool": "codex",
+        "id": "01a1605e-b4b3-7ff0-bfc1-9419db8afd71",
+        "model": "gpt-6-astra"
+      },
+      "human_author": "Mitchell Hynes <mitch@spellbook.legal>"
+    }
+  }
+}
