@@ -1,0 +1,19 @@
+projects/office/VALIDATION.md
+  s_8bef709d4f1f12::t_c30afa8904a1d2 31
+---
+{
+  "schema_version": "authorship/3.0.0",
+  "git_ai_version": "1.7.5",
+  "base_commit_sha": "d34e4ad9bbf6c1f2907a855f44255c09ee9cee1f",
+  "prompts": {},
+  "sessions": {
+    "s_8bef709d4f1f12": {
+      "agent_id": {
+        "tool": "codex",
+        "id": "01a1605e-b4b3-7ff0-bfc1-9419db8afd71",
+        "model": "gpt-6-astra"
+      },
+      "human_author": "Mitchell Hynes <mitch@spellbook.legal>"
+    }
+  }
+}
