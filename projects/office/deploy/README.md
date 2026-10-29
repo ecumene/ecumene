@@ -59,3 +59,14 @@ Enable daily Lightsail snapshots and periodically test a restore. For a separate
 For an update, load or privately pull a uniquely tagged image, update `OFFICE_IMAGE`, and run `docker compose up -d`. The saved room data stays in place; active Clippy tasks become interrupted and require an explicit new request. Keep the previous image for rollback. The pilot caps new rooms at ten; it does not expire them automatically. Monitor host memory and disk because saved rooms and history are loaded into memory.
 
 To rotate the site password, generate a new hash, change `.env`, and recreate Caddy with `docker compose up -d --force-recreate caddy`. This also closes existing WebSockets, forcing reconnects through the new login. To rotate the model key, update the private `app.env` and recreate the app with `docker compose up -d --force-recreate app`.
+
+## DNS
+
+The repository's existing GitHub deployment keys cannot manage Route 53. Use an authenticated AWS profile for the Ecumene account when running the constrained helper from the repository root:
+
+```sh
+AWS_PROFILE=ecumene-office python3 .github/scripts/office-dns.py
+AWS_PROFILE=ecumene-office python3 .github/scripts/office-dns.py --ipv4 YOUR_SERVER_STATIC_IP
+```
+
+The first command only inspects DNS. The second creates only the missing `office.mitchellhynes.com` A record after checking the authoritative zone's nameservers. It refuses to overwrite a different record.
