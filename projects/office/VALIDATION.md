@@ -24,4 +24,11 @@ The Clippy update was checked with Vercel AI SDK 7.0.156, Anthropic provider 4.0
 
 These checks establish the tested flows, not equivalence with Reducto's agent across arbitrary tasks. The tools expose a guarded subset of document operations. Rendering uses the SDK's final view and portable fonts; it does not establish Microsoft Word fidelity. Guest JavaScript bounds do not bound all host SDK memory or parsing time.
 
-The Docker recipe has not been built here. Portable fonts use the explicit 0.0.2 override described in README. This is a single-process prototype with link-based access, not an authenticated document service. These checks do not establish general DOCX fidelity or resolve the SDK formatting bugs found in the earlier fuzz campaign.
+## Deployment preparation — 29 October 2026
+
+- The standalone project passes 53/53 tests, including app-specific credential configuration and directory-sync durability. TypeScript, repository lint, and formatting checks pass.
+- The Linux amd64 Docker image builds successfully. All six page-tool tests pass inside the image with networking disabled, including native PNG rendering. The patched `sharp` 0.35.5 dependency audit reports zero vulnerabilities for this project.
+- Fourteen isolated Caddy/app checks pass: unauthenticated pages, APIs, downloads, fonts, and WebSocket handshakes return 401; authenticated room creation, download, join and reconnect work; cross-origin requests are rejected. The production-pinned Caddy image validates the configuration and Compose refuses missing credentials. Only ports 80/443 are published.
+- These are deployment preparation checks. The hosted domain, production TLS, browser login, and a new personal Anthropic key still require live launch verification.
+
+Portable fonts use the explicit 0.0.2 override described in README. The deployment is a single-process prototype behind a shared site login, without per-document accounts or permissions. These checks do not establish general DOCX fidelity or resolve the SDK formatting bugs found in the earlier fuzz campaign.
