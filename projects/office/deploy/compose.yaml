@@ -1,0 +1,58 @@
+name: office
+
+services:
+  app:
+    image: ${OFFICE_IMAGE:?Set OFFICE_IMAGE to a locally loaded or privately pulled image}
+    pull_policy: never
+    init: true
+    restart: unless-stopped
+    stop_grace_period: 30s
+    env_file:
+      - path: ${OFFICE_SECRETS_FILE:?Set OFFICE_SECRETS_FILE to a private host file}
+        required: true
+    environment:
+      NODE_ENV: production
+      HOST: 0.0.0.0
+      PORT: "3000"
+      DATA_DIR: /app/.data
+      MAX_ROOMS: "10"
+      MAX_UPLOAD_BYTES: "10485760"
+      MAX_ROOM_OPERATIONS: "10000"
+    volumes:
+      - office_data:/app/.data
+    healthcheck:
+      test:
+        [
+          "CMD",
+          "node",
+          "-e",
+          "fetch('http://127.0.0.1:3000/api/health').then(r => { if (!r.ok) process.exit(1); }).catch(() => process.exit(1));",
+        ]
+      interval: 30s
+      timeout: 5s
+      start_period: 20s
+      retries: 3
+
+  caddy:
+    image: caddy:2-alpine@sha256:eb4d35b7452d1ab6171fbdbe8d9275b2301dad6dad92115d91e19fb9b24d510f
+    restart: unless-stopped
+    environment:
+      OFFICE_PASSWORD_HASH: ${OFFICE_PASSWORD_HASH:?Set the bcrypt hash for the mitch login}
+    ports:
+      - "80:80"
+      - "443:443"
+    volumes:
+      - ./Caddyfile:/etc/caddy/Caddyfile:ro
+      - caddy_data:/data
+      - caddy_config:/config
+    depends_on:
+      app:
+        condition: service_healthy
+
+volumes:
+  office_data:
+    name: office-data
+  caddy_data:
+    name: office-caddy-data
+  caddy_config:
+    name: office-caddy-config

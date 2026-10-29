@@ -1,0 +1,10 @@
+office.mitchellhynes.com {
+	header {
+		Referrer-Policy no-referrer
+		X-Frame-Options DENY
+	}
+	basic_auth {
+		mitch {$OFFICE_PASSWORD_HASH}
+	}
+	reverse_proxy app:3000
+}

@@ -1,0 +1,30 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="820" height="284" viewBox="0 0 820 284" role="img" aria-labelledby="title desc">
+  <title id="title">Reskinning the Reducto editor</title>
+  <desc id="desc">Your React controls call EditorModel. The worker owns OOXML edits and layout; the canvas and input layer remain in the SDK.</desc>
+  <style>
+    .bg{fill:#f8fafc}.custom{fill:#e4efff;stroke:#3369b6}.sdk{fill:#e7f4ed;stroke:#3c8161}.line{fill:none;stroke:#596679;stroke-width:1.6}.title{font:600 16px system-ui,sans-serif;fill:#182434}.label{font:13px system-ui,sans-serif;fill:#425469}.small{font:12px system-ui,sans-serif;fill:#425469}.arrow{fill:#596679}
+    @media (prefers-color-scheme:dark){.bg{fill:#14202d}.custom{fill:#1f385a;stroke:#82b2fa}.sdk{fill:#203f34;stroke:#85cda8}.title{fill:#f1f5f9}.label,.small{fill:#c3d1e0}.line{stroke:#a2b5cb}.arrow{fill:#a2b5cb}}
+  </style>
+  <defs><marker id="a" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="6" markerHeight="6" orient="auto-start-reverse"><path class="arrow" d="M0 0 10 5 0 10z"/></marker></defs>
+  <rect class="bg" width="820" height="284" rx="10"/>
+  <rect class="custom" x="24" y="35" width="220" height="88" rx="8"/>
+  <text class="title" x="44" y="65">Your React controls</text>
+  <text class="label" x="44" y="88">XP toolbar, menus, CSS</text>
+  <text class="small" x="44" y="108">DocxEditor region props</text>
+  <rect class="sdk" x="300" y="35" width="220" height="88" rx="8"/>
+  <text class="title" x="320" y="65">EditorModel</text>
+  <text class="label" x="320" y="88">Selection, commands, state</text>
+  <text class="small" x="320" y="108">useObservable → React</text>
+  <rect class="sdk" x="576" y="35" width="220" height="88" rx="8"/>
+  <text class="title" x="596" y="65">Editor worker</text>
+  <text class="label" x="596" y="88">OOXML edits and layout</text>
+  <text class="small" x="596" y="108">Same document engine</text>
+  <path class="line" marker-start="url(#a)" marker-end="url(#a)" d="M250 79H294"/>
+  <path class="line" marker-start="url(#a)" marker-end="url(#a)" d="M526 79H570"/>
+  <rect class="sdk" x="300" y="177" width="220" height="74" rx="8"/>
+  <text class="title" x="320" y="206">Pages and input</text>
+  <text class="label" x="320" y="229">Canvas, caret, IME, clipboard</text>
+  <path class="line" marker-start="url(#a)" marker-end="url(#a)" d="M410 129V171"/>
+  <rect class="custom" x="25" y="219" width="11" height="11" rx="2"/><text class="small" x="44" y="229">Your interface</text>
+  <rect class="sdk" x="25" y="242" width="11" height="11" rx="2"/><text class="small" x="44" y="252">Reducto SDK</text>
+</svg>

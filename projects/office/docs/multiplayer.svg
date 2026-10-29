@@ -1,0 +1,29 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="820" height="310" viewBox="0 0 820 310" role="img" aria-labelledby="title desc">
+  <title id="title">WordPad Live multiplayer</title>
+  <desc id="desc">Each browser has its own EditorModel and worker. A Node WebSocket server orders and persists document edits and relays live presence. The SDK transforms cursor and selection positions in each browser.</desc>
+  <style>
+    .bg{fill:#f8fafc}.browser{fill:#e4efff;stroke:#3369b6}.server{fill:#fff1da;stroke:#b27723}.sdk{fill:#e7f4ed;stroke:#3c8161}.line{fill:none;stroke:#596679;stroke-width:1.6}.title{font:600 16px system-ui,sans-serif;fill:#182434}.label{font:13px system-ui,sans-serif;fill:#425469}.small{font:12px system-ui,sans-serif;fill:#425469}.arrow{fill:#596679}
+    @media (prefers-color-scheme:dark){.bg{fill:#14202d}.browser{fill:#1f385a;stroke:#82b2fa}.server{fill:#48351e;stroke:#deb67c}.sdk{fill:#203f34;stroke:#85cda8}.title{fill:#f1f5f9}.label,.small{fill:#c3d1e0}.line{stroke:#a2b5cb}.arrow{fill:#a2b5cb}}
+  </style>
+  <defs><marker id="a" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="6" markerHeight="6" orient="auto-start-reverse"><path class="arrow" d="M0 0 10 5 0 10z"/></marker></defs>
+  <rect class="bg" width="820" height="310" rx="10"/>
+  <rect class="browser" x="24" y="24" width="230" height="82" rx="8"/>
+  <text class="title" x="44" y="53">Your browser tab</text>
+  <text class="label" x="44" y="77">EditorModel + worker</text>
+  <text class="small" x="44" y="96">Local edits; peer overlays</text>
+  <rect class="browser" x="24" y="153" width="230" height="82" rx="8"/>
+  <text class="title" x="44" y="182">Another browser tab</text>
+  <text class="label" x="44" y="206">EditorModel + worker</text>
+  <text class="small" x="44" y="225">Local edits; peer overlays</text>
+  <rect class="server" x="466" y="67" width="330" height="124" rx="8"/>
+  <text class="title" x="486" y="96">One Node / WebSocket server</text>
+  <text class="label" x="486" y="120">Sequence and transform edits</text>
+  <text class="label" x="486" y="143">Persist DOCX + ordered history</text>
+  <text class="label" x="486" y="166">Relay live cursors and selections</text>
+  <path class="line" marker-start="url(#a)" marker-end="url(#a)" d="M260 65H354V100H460"/>
+  <path class="line" marker-start="url(#a)" marker-end="url(#a)" d="M260 194H354V160H460"/>
+  <text class="small" x="279" y="48">edits + presence</text>
+  <text class="small" x="279" y="218">edits + presence</text>
+  <rect class="sdk" x="24" y="260" width="772" height="33" rx="6"/>
+  <text class="label" x="42" y="282">Reducto SDK in each tab transforms remote cursor and selection positions through edits.</text>
+</svg>

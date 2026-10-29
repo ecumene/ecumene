@@ -1,0 +1,15 @@
+node_modules
+dist
+.data
+.git
+.env
+.env.*
+deploy/.env
+deploy/.env.*
+deploy/secrets/
+*.log
+coverage
+test-results
+playwright-report
+*.docx
+*.pdf

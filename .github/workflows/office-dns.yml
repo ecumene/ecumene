@@ -1,0 +1,36 @@
+name: Inspect or create Office DNS
+
+on:
+  workflow_dispatch:
+    inputs:
+      ipv4:
+        description: "Leave empty to inspect only; provide IPv4 to CREATE the missing office.mitchellhynes.com A record"
+        required: false
+        default: ""
+        type: string
+
+permissions:
+  contents: read
+
+concurrency:
+  group: office-dns
+  cancel-in-progress: false
+
+jobs:
+  office-dns:
+    runs-on: ubuntu-latest
+    timeout-minutes: 5
+    steps:
+      - uses: actions/checkout@v4
+      - name: Test DNS refusal and creation boundaries without AWS
+        run: python3 -m unittest discover -s .github/scripts -p 'test_office_dns.py' -v
+      - name: Configure existing DNS account credentials
+        uses: aws-actions/configure-aws-credentials@v4
+        with:
+          aws-access-key-id: ${{ secrets.AWS_ACCESS_KEY_ID }}
+          aws-secret-access-key: ${{ secrets.AWS_SECRET_ACCESS_KEY }}
+          aws-region: us-east-1
+      - name: Inspect or create the single approved DNS record
+        env:
+          OFFICE_IPV4: ${{ inputs.ipv4 }}
+        run: python3 .github/scripts/office-dns.py --ipv4 "$OFFICE_IPV4"
